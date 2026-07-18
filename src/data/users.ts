@@ -7,7 +7,7 @@ export const users: User[] = [
     age: 20,
     role: "admin",
     isActive: true,
-    email: ["Amirparsa_g@yahoo.com", "Amirparsa.g@aut.ac.ir"],
+    email: "Amirparsa_g@yahoo.com",
   },
   {
     ID: 2,
