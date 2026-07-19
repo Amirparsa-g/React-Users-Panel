@@ -29,9 +29,21 @@ function App() {
       alert("user removed seccessfully");
     } else alert("there are no users with this id");
   };
+  const ChangeStatusHandler = (id: number) => {
+    const toggleUser = UsersList.map((user) => {
+      if (user.ID === id) return { ...user, isActive: !user.isActive };
+      return user;
+    });
+    setUserList(toggleUser);
+  };
+
   return (
     <>
-      <UserList users={UsersList} onRemove={removeUserHandler} />
+      <UserList
+        users={UsersList}
+        onRemove={removeUserHandler}
+        changeStatus={ChangeStatusHandler}
+      />
       <button
         onClick={() => addUserHandler(newUser)}
         className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl"
