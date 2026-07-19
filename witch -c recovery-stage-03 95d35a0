@@ -1,0 +1,33 @@
+[33m0d2d26b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mstage-03/react-fundamentals[m[33m, [m[1;31morigin/stage-03/react-fundamentals[m[33m)[m HEAD@{0}: checkout: moving from 95d35a02d13399357a96a675be1e11693da03846 to stage-03/react-fundamentals
+[33m95d35a0[m HEAD@{1}: commit: test
+[33m006bcf6[m HEAD@{2}: commit: fix:added Searchinput fcomponent
+[33m0d2d26b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mstage-03/react-fundamentals[m[33m, [m[1;31morigin/stage-03/react-fundamentals[m[33m)[m refs/remotes/origin/stage-03/react-fundamentals@{0}: update by push
+[33m0cc2021[m HEAD@{3}: commit: feat : added search / it has empty search bar error
+[33m2fab603[m HEAD@{4}: commit: feat:tamrin 8 : Change Status Button
+[33mb24d3fc[m HEAD@{5}: commit: feat : tamrin 7: removing a user
+[33mfa4d107[m HEAD@{6}: commit: feat: Tamrin 5 , 6:Adding a new user/putting Users in state
+[33m6c05c31[m HEAD@{7}: commit: feat : tamrin 4: Added UserList
+[33md0598f3[m HEAD@{8}: commit: feat : tamrin3: added User Card
+[33m486edb8[m HEAD@{9}: commit: feat : Added mock data
+[33mf5885ee[m HEAD@{10}: checkout: moving from stage-03/react-fundamentals to f5885ee7dad90166ed5670a87c26cf9483fd0c6b
+[33m0d2d26b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mstage-03/react-fundamentals[m[33m, [m[1;31morigin/stage-03/react-fundamentals[m[33m)[m refs/heads/stage-03/react-fundamentals@{0}: commit: fixed: fixed imports and added style
+[33m0d2d26b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mstage-03/react-fundamentals[m[33m, [m[1;31morigin/stage-03/react-fundamentals[m[33m)[m HEAD@{11}: commit: fixed: fixed imports and added style
+[33m54b16f1[m refs/heads/stage-03/react-fundamentals@{1}: commit: fix:users email type fixed
+[33m54b16f1[m HEAD@{12}: commit: fix:users email type fixed
+[33m7bb313a[m[33m ([m[1;31morigin/week-01/javascript-review[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m refs/remotes/origin/main@{0}: fetch: storing head
+[33m8ea47a1[m refs/heads/stage-03/react-fundamentals@{2}: commit: feat : Building UserList
+[33m8ea47a1[m HEAD@{13}: commit: feat : Building UserList
+[33m0f829bc[m refs/heads/stage-03/react-fundamentals@{3}: commit: feat:building UserCards
+[33m0f829bc[m HEAD@{14}: commit: feat:building UserCards
+[33m7a3a39c[m refs/heads/stage-03/react-fundamentals@{4}: commit: feat : adding an Array with minimum 6 users at src/data/users.ts with appropriate types
+[33m7a3a39c[m HEAD@{15}: commit: feat : adding an Array with minimum 6 users at src/data/users.ts with appropriate types
+[33mf5885ee[m refs/heads/stage-03/react-fundamentals@{5}: commit: feat : tamrin 1: transfering UserRole and User types to src/types/user.ts
+[33mf5885ee[m HEAD@{16}: commit: feat : tamrin 1: transfering UserRole and User types to src/types/user.ts
+[33m7bb313a[m[33m ([m[1;31morigin/week-01/javascript-review[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m refs/remotes/origin/HEAD@{0}: fetch
+[33m7bb313a[m[33m ([m[1;31morigin/week-01/javascript-review[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m refs/remotes/origin/week-01/javascript-review@{0}: fetch: storing head
+[33md1c7c53[m[33m ([m[1;31morigin/week-02/typescript-basics[m[33m)[m refs/remotes/origin/week-02/typescript-basics@{0}: fetch: storing head
+[33ma887fdf[m refs/remotes/origin/stage-03/react-fundamentals@{1}: update by push
+[33ma887fdf[m refs/heads/stage-03/react-fundamentals@{6}: Branch: renamed refs/heads/master to refs/heads/stage-03/react-fundamentals
+[33ma887fdf[m HEAD@{17}: Branch: renamed refs/heads/master to refs/heads/stage-03/react-fundamentals
+[33ma887fdf[m refs/heads/stage-03/react-fundamentals@{7}: commit (initial): init project
+[33ma887fdf[m HEAD@{19}: commit (initial): init project
