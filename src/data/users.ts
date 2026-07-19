@@ -1,13 +1,12 @@
 import type { User } from "../types/user";
-
-export const users: User[] = [
+const users: User[] = [
   {
     ID: 1,
     fullName: "Parsa Gorji",
     age: 20,
     role: "admin",
     isActive: true,
-    email: "Amirparsa_g@yahoo.com",
+    email: "Amirparsa.g@aut.ac.ir",
   },
   {
     ID: 2,
@@ -47,3 +46,5 @@ export const users: User[] = [
     email: "Amirmohammsdi@outlook.com",
   },
 ];
+
+export default users;

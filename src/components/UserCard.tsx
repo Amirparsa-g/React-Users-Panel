@@ -1,16 +1,37 @@
+import React from "react";
 import type { User } from "../types/user";
-
-interface UserCardProps {
+const UserCard = ({
+  user,
+  onRemove,
+  changeStatus,
+}: {
   user: User;
-}
-export default function UserCard({ user }: UserCardProps) {
+  onRemove: (id: number) => void;
+  changeStatus: (id: number) => void;
+}) => {
   return (
-    <div className="flex  bg-zinc-900 text-slate-100 flex-col justify-center items-center p-5 mt-5 mb-5 border rounded-2xl">
-      <p className="p-2">name :{user.fullName}</p>
-      <p className="p-2">age :{user.age}</p>
-      <p className="p-2">role :{user.role}</p>
-      <p className="p-2">status :{user.isActive ? "Active" : "InActive"}</p>
-      {user.email ? <p>Email: {user.email}</p> : <p>ایمیل ثبت نشده است</p>}
+    <div className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200">
+      <p className="p-0.5">{user.fullName}</p>
+      <p className="p-0.5">{user.age}</p>
+      <p className="p-0.5">{user.role}</p>
+      {user.email ? <p>{user.email}</p> : <p>ایمیل ثبت نشده است</p>}
+      {user.isActive ? <p>Active</p> : <p>InActive</p>}
+      <div className="flex justify-center gap-4">
+        <button
+          onClick={() => onRemove(user.ID)}
+          className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
+        >
+          Remove
+        </button>
+        <button
+          onClick={() => changeStatus(user.ID)}
+          className="bg-purple-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-purple-700"
+        >
+          changeStatus
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default UserCard;
