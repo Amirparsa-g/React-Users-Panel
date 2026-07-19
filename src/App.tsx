@@ -4,9 +4,10 @@ import UserList from "./components/UserList";
 import type { User } from "./types/user";
 import users from "./data/users";
 import Searchinput from "./components/Searchinput";
+
 function App() {
   const [UsersList, setUserList] = useState<User[]>(users);
-
+  const [searchedTerm, setSearchTerm] = useState("");
   const newUser: User = {
     ID: 7,
     fullName: "کاربر آزمایشی",
@@ -39,22 +40,42 @@ function App() {
     setUserList(toggleUser);
   };
   const SearchUser = (searchTerm: string) => {
-    if (searchTerm.trim() === "") setUserList(UsersList);
+    setSearchTerm(searchTerm);
+    if (searchTerm.trim() === "") setUserList(users);
     else {
-      const searchedUser = UsersList.filter((user) =>
+      const searchedUser = users.filter((user) =>
         user.fullName.toLowerCase().includes(searchTerm.toLowerCase().trim()),
       );
+
       setUserList(searchedUser);
     }
   };
-  return (
-    <>
-      <Searchinput onSearchChange={SearchUser} />
+  let content;
+  if (UsersList.length === 0 && searchedTerm.trim() === "")
+    content = (
+      <div className="flex justify-center h-110 items-center text-5xl">
+        <p className="text-center">هنوز کاربری در لیست وجود ندارد</p>
+      </div>
+    );
+  else if (UsersList.length === 0) {
+    content = (
+      <div className="flex justify-center h-110 items-center text-5xl">
+        <p className="text-center">کاربری با این اسم پیدا نشده</p>
+      </div>
+    );
+  } else
+    content = (
       <UserList
         users={UsersList}
         onRemove={removeUserHandler}
         changeStatus={ChangeStatusHandler}
       />
+    );
+
+  return (
+    <>
+      <Searchinput onSearchChange={SearchUser} />
+      {content}
       <button
         onClick={() => addUserHandler(newUser)}
         className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3"
