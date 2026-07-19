@@ -21,9 +21,17 @@ function App() {
       alert("user Added Successfully");
     }
   };
+  const removeUserHandler = (id: number) => {
+    const UsersIds: number[] = UsersList.map((user) => user.ID);
+    if (UsersIds.includes(id)) {
+      const remainingUsers = UsersList.filter((user) => user.ID !== id);
+      setUserList(remainingUsers);
+      alert("user removed seccessfully");
+    } else alert("there are no users with this id");
+  };
   return (
     <>
-      <UserList users={UsersList} />
+      <UserList users={UsersList} onRemove={removeUserHandler} />
       <button
         onClick={() => addUserHandler(newUser)}
         className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl"
