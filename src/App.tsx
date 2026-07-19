@@ -3,8 +3,10 @@ import "./App.css";
 import UserList from "./components/UserList";
 import type { User } from "./types/user";
 import users from "./data/users";
+import Searchinput from "./components/Searchinput";
 function App() {
   const [UsersList, setUserList] = useState<User[]>(users);
+
   const newUser: User = {
     ID: 7,
     fullName: "کاربر آزمایشی",
@@ -36,9 +38,18 @@ function App() {
     });
     setUserList(toggleUser);
   };
-
+  const SearchUser = (searchTerm: string) => {
+    if (searchTerm.trim() === "") setUserList(UsersList);
+    else {
+      const searchedUser = UsersList.filter((user) =>
+        user.fullName.toLowerCase().includes(searchTerm.toLowerCase().trim()),
+      );
+      setUserList(searchedUser);
+    }
+  };
   return (
     <>
+      <Searchinput onSearchChange={SearchUser} />
       <UserList
         users={UsersList}
         onRemove={removeUserHandler}
@@ -46,7 +57,7 @@ function App() {
       />
       <button
         onClick={() => addUserHandler(newUser)}
-        className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl"
+        className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3"
       >
         Add New User
       </button>
