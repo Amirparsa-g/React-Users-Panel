@@ -4,6 +4,7 @@ import UserList from "./components/UserList";
 import type { User } from "./types/user";
 import users from "./data/users";
 import Searchinput from "./components/Searchinput";
+import UserStats from "./components/UserStats";
 
 function App() {
   const [UsersList, setUserList] = useState<User[]>(users);
@@ -50,6 +51,11 @@ function App() {
       setUserList(searchedUser);
     }
   };
+  const allUsers = UsersList.length;
+  const ActiveUsers = UsersList.filter((user) => user.isActive === true).length;
+  const InActiveUsers = UsersList.filter(
+    (user) => user.isActive === false,
+  ).length;
   let content;
   if (UsersList.length === 0 && searchedTerm.trim() === "")
     content = (
@@ -82,6 +88,11 @@ function App() {
       >
         Add New User
       </button>
+      <UserStats
+        allUsers={allUsers}
+        ActiveUsers={ActiveUsers}
+        InActiveUsers={InActiveUsers}
+      />
     </>
   );
 }
