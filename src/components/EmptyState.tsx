@@ -1,4 +1,3 @@
-import React from "react";
 import type { User } from "../types/user";
 import UserList from "./UserList";
 const EmptyState = ({
