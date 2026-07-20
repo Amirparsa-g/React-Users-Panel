@@ -30,12 +30,9 @@ function App() {
     }
   };
   const removeUserHandler = (id: number) => {
-    const UsersIds: number[] = UsersList.map((user) => user.ID);
-    if (UsersIds.includes(id)) {
-      const remainingUsers = UsersList.filter((user) => user.ID !== id);
-      setUserList(remainingUsers);
-      alert("user removed seccessfully");
-    } else alert("there are no users with this id");
+    const remainingUsers = UsersList.filter((user) => user.ID !== id);
+    setUserList(remainingUsers);
+    alert("user removed seccessfully");
   };
   const ChangeStatusHandler = (id: number) => {
     const toggleUser = UsersList.map((user) => {
