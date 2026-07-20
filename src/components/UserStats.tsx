@@ -11,7 +11,7 @@ const UserStats = ({
 }) => {
   return (
     <div className="m-10">
-      <table className="w-full text-sm text-left text-gray-500 rtl:text-right">
+      <table className="w-full text-sm text-left text-gray-500 rtl:text-right shadow-lg">
         <thead className="bg-slate-100 text-xs uppercase text-gray-700">
           <tr>
             <th
