@@ -1,18 +1,17 @@
 import { useState } from "react";
 import "./App.css";
-// import UserList from "./components/UserList";
+import UserList from "./components/UserList";
 import type { User } from "./types/user";
 import users from "./data/users";
 import Searchinput from "./components/Searchinput";
 import UserStats from "./components/UserStats";
 import EmptyState from "./components/EmptyState";
-import FullState from "./components/FullState";
 
+type Filters = "active" | "inactive" | "all";
 function App() {
   const [UsersList, setUserList] = useState<User[]>(users);
   const [searchedTerm, setSearchTerm] = useState("");
-  type filters = "active" | "inactive" | "all";
-  const [status, setUserStatus] = useState<filters>("all");
+  const [status, setUserStatus] = useState<Filters>("all");
   const newUser: User = {
     ID: 7,
     fullName: "کاربر آزمایشی",
@@ -45,11 +44,12 @@ function App() {
     setSearchTerm(searchTerm);
   };
   const allUsers = UsersList;
-  const ActiveUsers = UsersList.filter((user) => user.isActive === true);
-  const InActiveUsers = UsersList.filter((user) => user.isActive === false);
-  const searchedUsers = UsersList.filter((user) =>
-    user.fullName.toLowerCase().includes(searchedTerm.toLowerCase().trim()),
-  );
+  const ActiveUsers = UsersList.filter((user) => user.isActive);
+  const InActiveUsers = UsersList.filter((user) => user.isActive);
+  const searchedUsers = UsersList.filter((user) => {
+    const term = searchedTerm.toLowerCase().trim();
+    return user.fullName.toLowerCase().includes(term);
+  });
 
   const displayedUsers: User[] = searchedUsers.filter((user) => {
     if (status === "all") return true;
@@ -68,10 +68,10 @@ function App() {
     );
   else {
     content = (
-      <FullState
-        displayedUsers={displayedUsers}
-        removeUserHandler={removeUserHandler}
-        ChangeStatusHandler={ChangeStatusHandler}
+      <UserList
+        users={displayedUsers}
+        onRemove={removeUserHandler}
+        changeStatus={ChangeStatusHandler}
       />
     );
   }
