@@ -45,7 +45,7 @@ function App() {
   };
   const allUsers = UsersList;
   const ActiveUsers = UsersList.filter((user) => user.isActive);
-  const InActiveUsers = UsersList.filter((user) => user.isActive);
+  const InActiveUsers = UsersList.filter((user) => !user.isActive);
   const searchedUsers = UsersList.filter((user) => {
     const term = searchedTerm.toLowerCase().trim();
     return user.fullName.toLowerCase().includes(term);
@@ -77,7 +77,7 @@ function App() {
   }
   return (
     <>
-      <Searchinput onSearchChange={SearchUser} />
+      <Searchinput onSearchChange={SearchUser} value={searchedTerm} />
       {content}
       <button
         onClick={() => addUserHandler(newUser)}
