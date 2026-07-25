@@ -85,6 +85,7 @@ function App() {
         <AddUserForm
           setIsFormVisible={setIsFormVisible}
           addUserHandeler={addUserHandler}
+          UsersList={UsersList}
         />
       )}
       <div className="flex items-center">

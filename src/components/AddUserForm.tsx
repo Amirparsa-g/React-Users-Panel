@@ -2,14 +2,15 @@ import type { UserRole } from "../types/user";
 import type { FormPropType } from "../types/userForm";
 import { useState } from "react";
 import type { User } from "../types/user";
-import users from "../data/users";
 
 const AddUserForm = ({
   addUserHandeler,
   setIsFormVisible,
+  UsersList,
 }: {
   addUserHandeler: (newUser: User) => void;
   setIsFormVisible: (value: boolean) => void;
+  UsersList: User[];
 }) => {
   const [formData, setFormData] = useState<FormPropType>({
     fullName: "",
@@ -19,7 +20,7 @@ const AddUserForm = ({
     email: "",
   });
   const newUser: User = {
-    ID: (users.at(-1)?.ID ?? 0) + 1,
+    ID: (UsersList.at(-1)?.ID ?? 0) + 1,
     fullName: formData.fullName,
     age: parseInt(formData.age),
     role: formData.role,
