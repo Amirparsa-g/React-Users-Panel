@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import UserList from "./components/UserList";
 import { type User } from "./types/user";
@@ -52,6 +52,11 @@ function App() {
     else if (status === "inactive") return !user.isActive;
     return user.isActive;
   });
+
+  useEffect(() => {
+    document.title = `User Managment -${UsersList.length} Users`;
+  }, [UsersList.length]);
+
   let content;
   if (UsersList.length === 0 || displayedUsers.length === 0)
     content = (

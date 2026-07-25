@@ -69,6 +69,13 @@ const AddUserForm = ({
           return false;
         }
       }
+      const UserEmails = UsersList.map((user) =>
+        user.email?.toLowerCase().trim(),
+      );
+      if (UserEmails.includes(userEmail.toLowerCase().trim())) {
+        setEmailError("This email already exists");
+        return false;
+      }
     }
     return true;
   };
@@ -100,9 +107,10 @@ const AddUserForm = ({
               placeholder="Enter you full name"
               value={formData.fullName}
               // required
-              onChange={(e) =>
-                setFormData({ ...formData, fullName: e.target.value })
-              }
+              onChange={(e) => {
+                setFormData({ ...formData, fullName: e.target.value });
+                setNameError("");
+              }}
               className="w-full px-2 bg-gray-100 border border-purple-500 rounded-3xl"
             />
             {nameError !== "" && <p className="text-red-700">{nameError}</p>}
@@ -113,9 +121,10 @@ const AddUserForm = ({
               type="text"
               placeholder="age"
               value={formData.age}
-              onChange={(e) =>
-                setFormData({ ...formData, age: e.target.value })
-              }
+              onChange={(e) => {
+                setFormData({ ...formData, age: e.target.value });
+                setAgeError("");
+              }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
             />
             {ageError !== "" && <p className="text-red-700">{ageError}</p>}
@@ -126,9 +135,10 @@ const AddUserForm = ({
               name="role"
               id="role"
               value={formData.role}
-              onChange={(e) =>
-                setFormData({ ...formData, role: e.target.value as UserRole })
-              }
+              onChange={(e) => {
+                setFormData({ ...formData, role: e.target.value as UserRole });
+                setRoleError("");
+              }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
             >
               <option value=""></option>
@@ -166,9 +176,10 @@ const AddUserForm = ({
             <input
               type="text"
               value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
+              onChange={(e) => {
+                setFormData({ ...formData, email: e.target.value });
+                setEmailError("");
+              }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-sm"
             />
             {emailError !== "" && <p className="text-red-700">{emailError}</p>}
