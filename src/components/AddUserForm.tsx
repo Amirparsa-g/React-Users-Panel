@@ -30,7 +30,14 @@ const AddUserForm = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-        <form action="" className="flex flex-col w-full gap-3">
+        <form
+          action=""
+          className="flex flex-col w-full gap-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+            addUserHandeler(newUser);
+          }}
+        >
           <label htmlFor="">
             full name:
             <input
@@ -109,10 +116,6 @@ const AddUserForm = ({
           </label>
           <button
             type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              addUserHandeler(newUser);
-            }}
             className="bg-gray-100 border border-green-400 p-2 rounded-sm"
           >
             submit
