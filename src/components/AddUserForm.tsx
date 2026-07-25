@@ -19,13 +19,58 @@ const AddUserForm = ({
     isActive: true,
     email: "",
   });
-  const newUser: User = {
-    ID: (UsersList.at(-1)?.ID ?? 0) + 1,
-    fullName: formData.fullName,
-    age: parseInt(formData.age),
-    role: formData.role,
-    isActive: formData.isActive,
-    email: formData.email,
+
+  const [nameError, setNameError] = useState("");
+  const [ageError, setAgeError] = useState("");
+  const [roleError, setRoleError] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const Validation = () => {
+    const nameTrimmed = formData.fullName.trim();
+    if (nameTrimmed === "") {
+      setNameError("Please Enter your Name");
+      return false;
+    } else if (nameTrimmed.length < 3) {
+      setNameError("name should have at least 3 charachters");
+      return false;
+    }
+    if (formData.age.trim() === "") {
+      setAgeError("Enter your age");
+      return false;
+    }
+    const isNumeric = !Number.isNaN(Number(formData.age));
+    if (!isNumeric) {
+      setAgeError("your age must be a number");
+      return false;
+    } else if (isNumeric) {
+      const parsedAge = parseInt(formData.age);
+      if (parsedAge < 18) {
+        setAgeError("You must be 18 years ir older");
+        return false;
+      } else if (parsedAge > 80) {
+        setAgeError("You must e younger than 80");
+        return false;
+      }
+    }
+    if (formData.role === "") {
+      setRoleError("Choose the user's role");
+      return false;
+    }
+    if (formData.email?.trim() !== "") {
+      const userEmail = formData.email;
+      if (!userEmail?.includes("@")) {
+        setEmailError("Email should contain an @");
+        return false;
+      } else if (userEmail.includes("@")) {
+        const atIndex = userEmail.indexOf("@");
+        const slicedEmail = userEmail.slice(atIndex);
+        if (!slicedEmail.includes(".")) {
+          setEmailError("Email sjould contain a . after @");
+          return false;
+        }
+      }
+    }
+    return true;
   };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
@@ -35,6 +80,16 @@ const AddUserForm = ({
           className="flex flex-col w-full gap-3"
           onSubmit={(e) => {
             e.preventDefault();
+            const isValid = Validation();
+            if (!isValid) return;
+            const newUser: User = {
+              ID: (UsersList.at(-1)?.ID ?? 0) + 1,
+              fullName: formData.fullName,
+              age: parseInt(formData.age),
+              role: formData.role,
+              isActive: formData.isActive,
+              email: formData.email,
+            };
             addUserHandeler(newUser);
           }}
         >
@@ -44,12 +99,13 @@ const AddUserForm = ({
               type="text"
               placeholder="Enter you full name"
               value={formData.fullName}
-              required
+              // required
               onChange={(e) =>
                 setFormData({ ...formData, fullName: e.target.value })
               }
               className="w-full px-2 bg-gray-100 border border-purple-500 rounded-3xl"
             />
+            {nameError !== "" && <p className="text-red-700">{nameError}</p>}
           </label>
           <label htmlFor="">
             age
@@ -57,12 +113,12 @@ const AddUserForm = ({
               type="text"
               placeholder="age"
               value={formData.age}
-              required
               onChange={(e) =>
                 setFormData({ ...formData, age: e.target.value })
               }
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
             />
+            {ageError !== "" && <p className="text-red-700">{ageError}</p>}
           </label>
           <label htmlFor="">
             role :
@@ -70,17 +126,19 @@ const AddUserForm = ({
               name="role"
               id="role"
               value={formData.role}
-              required
               onChange={(e) =>
                 setFormData({ ...formData, role: e.target.value as UserRole })
               }
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
             >
+              <option value=""></option>
               <option value="admin">admin</option>
               <option value="operator">operator</option>
               <option value="customer">customer</option>
             </select>
+            {roleError !== "" && <p className="text-red-700">{roleError}</p>}
           </label>
+
           <label htmlFor="">Activity :</label>
           <label htmlFor="">
             Active
@@ -106,13 +164,14 @@ const AddUserForm = ({
           <label htmlFor="">
             email (optional)
             <input
-              type="email"
+              type="text"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-sm"
             />
+            {emailError !== "" && <p className="text-red-700">{emailError}</p>}
           </label>
           <button
             type="submit"
