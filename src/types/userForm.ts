@@ -7,9 +7,9 @@ export interface FormPropType {
   email?: string;
 }
 
-export interface formError {
-  nameError: string;
-  ageError: string;
-  roleError: string;
-  emailError: string;
+export interface FormError {
+  nameError?: string;
+  ageError?: string;
+  roleError?: string;
+  emailError?: string;
 }
