@@ -1,5 +1,5 @@
 import type { UserRole } from "../types/user";
-import type { FormPropType } from "../types/userForm";
+import type { formError, FormPropType } from "../types/userForm";
 import { useState } from "react";
 import type { User } from "../types/user";
 
@@ -21,65 +21,88 @@ const AddUserForm = ({
   });
 
   // todo change to one Error state with optional values in FormErrors type
-  const [nameError, setNameError] = useState("");
-  const [ageError, setAgeError] = useState("");
-  const [roleError, setRoleError] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [Error, setError] = useState<formError>({
+    nameError: "",
+    ageError: "",
+    roleError: "",
+    emailError: " ",
+  });
+  // const [ageError, setAgeError] = useState("");
+  // const [roleError, setRoleError] = useState("");
+  // const [emailError, setEmailError] = useState("");
 
   const Validation = () => {
+    let isValid = true;
+    let newError: formError = {
+      nameError: "",
+      ageError: "",
+      roleError: "",
+      emailError: " ",
+    };
     /*Todo show all errors together on Submit */
     const nameTrimmed = formData.fullName.trim();
     if (nameTrimmed === "") {
-      setNameError("Please Enter your Name");
-      return false;
+      console.log(Error);
+      newError = { ...newError, nameError: "Please Enter your Name" };
+      console.log(newError);
+      console.log("test");
+      isValid = false;
     } else if (nameTrimmed.length < 3) {
-      setNameError("name should have at least 3 charachters");
-      return false;
+      newError = {
+        ...newError,
+        nameError: "name should have at least 3 charachters",
+      };
+      isValid = false;
     }
     if (formData.age.trim() === "") {
-      setAgeError("Enter your age");
-      return false;
-    }
-    const isNumeric = !Number.isNaN(Number(formData.age));
-    if (!isNumeric) {
-      setAgeError("your age must be a number");
-      return false;
-    } else if (isNumeric) {
+      newError = { ...newError, ageError: "Enter your age" };
+      console.log(newError);
+      isValid = false;
+    } else if (formData.age.trim() !== "") {
       const parsedAge = parseInt(formData.age); //todo fix, it will make 18.5 to 18, only integer allowed
+      if (parsedAge.toString() !== formData.age) {
+        newError = { ...newError, ageError: "your age must be an integer" };
+        isValid = false;
+      }
       if (parsedAge < 18) {
-        setAgeError("You must be 18 years ir older");
-        return false;
+        newError = { ...newError, ageError: "You must be 18 years ir older" };
+        isValid = false;
       } else if (parsedAge > 80) {
-        setAgeError("You must be younger than 80");
-        return false;
+        newError = { ...newError, ageError: "You must be younger than 80" };
+        isValid = false;
       }
     }
+
     if (formData.role === "") {
-      setRoleError("Choose the user's role");
-      return false;
+      newError = { ...newError, roleError: "Choose the user's role" };
+      isValid = false;
     }
     if (formData.email?.trim() !== "") {
       const userEmail = formData.email;
       if (!userEmail?.includes("@")) {
-        setEmailError("Email should contain an @");
-        return false;
+        newError = { ...newError, emailError: "Email should contain an @" };
+        isValid = false;
       } else if (userEmail.includes("@")) {
         const atIndex = userEmail.indexOf("@");
         const slicedEmail = userEmail.slice(atIndex);
         if (!slicedEmail.includes(".")) {
-          setEmailError("Email sjould contain a . after @");
-          return false;
+          newError = {
+            ...newError,
+            emailError: "Email sjould contain a . after @",
+          };
+          isValid = false;
         }
       }
       const UserEmails = UsersList.map((user) =>
         user.email?.toLowerCase().trim(),
       );
-      if (UserEmails.includes(userEmail.toLowerCase().trim())) {
-        setEmailError("This email already exists");
-        return false;
+      if (UserEmails.includes(userEmail?.toLowerCase().trim())) {
+        newError = { ...newError, emailError: "This email already exists" };
+        isValid = false;
       }
     }
-    return true;
+    setError(newError);
+    return isValid;
   };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
@@ -90,6 +113,7 @@ const AddUserForm = ({
           onSubmit={(e) => {
             e.preventDefault();
             const isValid = Validation();
+            console.log(Error);
             if (!isValid) return;
             const newUser: User = {
               ID: (UsersList.at(-1)?.ID ?? 0) + 1,
@@ -111,25 +135,30 @@ const AddUserForm = ({
               // required
               onChange={(e) => {
                 setFormData({ ...formData, fullName: e.target.value });
-                setNameError("");
+                setError({ ...Error, nameError: "" });
               }}
               className="w-full px-2 bg-gray-100 border border-purple-500 rounded-3xl"
             />
-            {nameError !== "" && <p className="text-red-700">{nameError}</p>}
+            {Error.nameError !== "" && (
+              <p className="text-red-700">{Error.nameError}</p>
+            )}
           </label>
           <label htmlFor="">
             age
             <input
-              type="text" /*todo change to number*/
+              type="number" /*todo change to number*/
               placeholder="age"
               value={formData.age}
               onChange={(e) => {
+                console.log("fullName");
                 setFormData({ ...formData, age: e.target.value });
-                setAgeError("");
+                setError({ ...Error, ageError: "" });
               }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
             />
-            {ageError !== "" && <p className="text-red-700">{ageError}</p>}
+            {Error.ageError !== "" && (
+              <p className="text-red-700">{Error.ageError}</p>
+            )}
           </label>
           <label htmlFor="">
             role :
@@ -139,7 +168,7 @@ const AddUserForm = ({
               value={formData.role}
               onChange={(e) => {
                 setFormData({ ...formData, role: e.target.value as UserRole });
-                setRoleError("");
+                setError({ ...Error, roleError: "" });
               }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
             >
@@ -148,7 +177,9 @@ const AddUserForm = ({
               <option value="operator">operator</option>
               <option value="customer">customer</option>
             </select>
-            {roleError !== "" && <p className="text-red-700">{roleError}</p>}
+            {Error.roleError !== "" && (
+              <p className="text-red-700">{Error.roleError}</p>
+            )}
           </label>
 
           <label htmlFor="">Activity :</label>
@@ -180,11 +211,13 @@ const AddUserForm = ({
               value={formData.email}
               onChange={(e) => {
                 setFormData({ ...formData, email: e.target.value });
-                setEmailError("");
+                setError({ ...Error, emailError: "" });
               }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-sm"
             />
-            {emailError !== "" && <p className="text-red-700">{emailError}</p>}
+            {Error.emailError !== "" && (
+              <p className="text-red-700">{Error.emailError}</p>
+            )}
           </label>
           <button
             type="submit"
@@ -193,9 +226,10 @@ const AddUserForm = ({
             submit
           </button>
           <button
+            type="reset"
             onClick={() => setIsFormVisible(false)}
             className="bg-gray-100 border border-red-400 p-2 rounded-sm"
-              /* todo add type */
+            /* todo add type */
           >
             Cancel
           </button>
