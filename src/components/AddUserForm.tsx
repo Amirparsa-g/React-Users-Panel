@@ -48,7 +48,7 @@ const AddUserForm = ({
         setAgeError("You must be 18 years ir older");
         return false;
       } else if (parsedAge > 80) {
-        setAgeError("You must e younger than 80");
+        setAgeError("You must be younger than 80");
         return false;
       }
     }
