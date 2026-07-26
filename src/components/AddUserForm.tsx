@@ -20,12 +20,14 @@ const AddUserForm = ({
     email: "",
   });
 
+  // todo change to one Error state with optional values in FormErrors type
   const [nameError, setNameError] = useState("");
   const [ageError, setAgeError] = useState("");
   const [roleError, setRoleError] = useState("");
   const [emailError, setEmailError] = useState("");
 
   const Validation = () => {
+    /*Todo show all errors together on Submit */
     const nameTrimmed = formData.fullName.trim();
     if (nameTrimmed === "") {
       setNameError("Please Enter your Name");
@@ -43,7 +45,7 @@ const AddUserForm = ({
       setAgeError("your age must be a number");
       return false;
     } else if (isNumeric) {
-      const parsedAge = parseInt(formData.age);
+      const parsedAge = parseInt(formData.age); //todo fix, it will make 18.5 to 18, only integer allowed
       if (parsedAge < 18) {
         setAgeError("You must be 18 years ir older");
         return false;
@@ -118,7 +120,7 @@ const AddUserForm = ({
           <label htmlFor="">
             age
             <input
-              type="text"
+              type="text" /*todo change to number*/
               placeholder="age"
               value={formData.age}
               onChange={(e) => {
@@ -193,6 +195,7 @@ const AddUserForm = ({
           <button
             onClick={() => setIsFormVisible(false)}
             className="bg-gray-100 border border-red-400 p-2 rounded-sm"
+              /* todo add type */
           >
             Cancel
           </button>
