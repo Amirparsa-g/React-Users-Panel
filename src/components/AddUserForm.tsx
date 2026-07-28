@@ -7,17 +7,23 @@ const AddUserForm = ({
   addUserHandeler,
   setIsFormVisible,
   UsersList,
+  user,
+  editUserHandeler,
+  setSelectedUser,
 }: {
   addUserHandeler: (newUser: User) => void;
   setIsFormVisible: (value: boolean) => void;
   UsersList: User[];
+  user?: User | null;
+  editUserHandeler: (formData: FormPropType, id: number) => void;
+  setSelectedUser: (user: User | null) => void;
 }) => {
   const [formData, setFormData] = useState<FormPropType>({
-    fullName: "",
-    age: "",
-    role: "",
-    isActive: true,
-    email: "",
+    fullName: user?.fullName ?? "",
+    age: user?.age.toString() ?? "",
+    role: user?.role ?? "",
+    isActive: user?.isActive ?? true,
+    email: user?.email ?? "",
   });
   const [Error, setError] = useState<FormError>({
     nameError: "",
@@ -73,9 +79,15 @@ const AddUserForm = ({
           isValid = false;
         }
       }
-      const UserEmails = UsersList.map((user) =>
-        user.email?.toLowerCase().trim(),
-      );
+
+      const UserEmails = UsersList.map((User) => {
+        if (user) {
+          if (user.ID !== User.ID) return User.email?.toLowerCase().trim();
+        } else {
+          return User.email?.toLowerCase().trim();
+        }
+      });
+
       if (UserEmails.includes(userEmail?.toLowerCase().trim())) {
         newError.emailError = "This email already exists";
         isValid = false;
@@ -94,17 +106,25 @@ const AddUserForm = ({
             e.preventDefault();
             const isValid = Validation();
             if (!isValid) return;
-            const newUser: User = {
-              ID: (UsersList.at(-1)?.ID ?? 0) + 1,
-              fullName: formData.fullName,
-              age: parseInt(formData.age),
-              role: formData.role,
-              isActive: formData.isActive,
-              email: formData.email,
-            };
-            addUserHandeler(newUser);
+            if (!user) {
+              const newUser: User = {
+                ID: (UsersList.at(-1)?.ID ?? 0) + 1,
+                fullName: formData.fullName,
+                age: parseInt(formData.age),
+                role: formData.role,
+                isActive: formData.isActive,
+                email: formData.email,
+              };
+              addUserHandeler(newUser);
+            } else {
+              editUserHandeler(formData, user.ID);
+              setSelectedUser(null);
+            }
           }}
         >
+          <h1 className="text-center , text-xl ">
+            {user ? "Edit User" : "Add User"}
+          </h1>
           <label htmlFor="">
             full name:
             <input
@@ -204,7 +224,10 @@ const AddUserForm = ({
           </button>
           <button
             type="reset"
-            onClick={() => setIsFormVisible(false)}
+            onClick={() => {
+              setIsFormVisible(false);
+              setSelectedUser(null);
+            }}
             className="bg-gray-100 border border-red-400 p-2 rounded-sm"
           >
             Cancel

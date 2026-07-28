@@ -1,4 +1,5 @@
 import type { UserRole } from "../types/user";
+export type formType = "add" | "edit" | "invisible";
 export interface FormPropType {
   fullName: string;
   age: string;

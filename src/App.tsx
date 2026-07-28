@@ -8,9 +8,11 @@ import Searchinput from "./components/Searchinput";
 import UserStats from "./components/UserStats";
 import EmptyState from "./components/EmptyState";
 import AddUserForm from "./components/AddUserForm";
+import type { FormPropType } from "./types/userForm";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [UsersList, setUserList] = useState<User[]>(users);
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<Filters>("all");
@@ -39,6 +41,25 @@ function App() {
   const SearchUser = (searchTerm: string) => {
     setSearchTerm(searchTerm);
   };
+
+  const changeInfo = (formData: FormPropType, id: number) => {
+    const changedUsers = UsersList.map((user) => {
+      if (user.ID === id) {
+        return {
+          ...user,
+          fullName: formData.fullName,
+          age: parseInt(formData.age),
+          role: formData.role,
+          isActive: formData.isActive,
+          email: formData.email,
+        };
+      }
+      return user;
+    });
+    setUserList(changedUsers);
+    setIsFormVisible(false);
+  };
+
   const allUsers = UsersList;
   const ActiveUsers = UsersList.filter((user) => user.isActive);
   const InActiveUsers = UsersList.filter((user) => !user.isActive);
@@ -73,6 +94,8 @@ function App() {
         users={displayedUsers}
         onRemove={removeUserHandler}
         changeStatus={ChangeStatusHandler}
+        setSelectedUser={setSelectedUser}
+        setIsFormVisible={setIsFormVisible}
       />
     );
   }
@@ -91,6 +114,9 @@ function App() {
           setIsFormVisible={setIsFormVisible}
           addUserHandeler={addUserHandler}
           UsersList={UsersList}
+          editUserHandeler={changeInfo}
+          user={selectedUser}
+          setSelectedUser={setSelectedUser}
         />
       )}
       <div className="flex items-center">

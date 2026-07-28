@@ -3,10 +3,14 @@ const UserCard = ({
   user,
   onRemove,
   changeStatus,
+  setSelectedUser,
+  setIsFormVisible,
 }: {
   user: User;
   onRemove: (id: number) => void;
   changeStatus: (id: number) => void;
+  setSelectedUser: (user: User) => void;
+  setIsFormVisible: (status: boolean) => void;
 }) => {
   return (
     <div className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200">
@@ -27,6 +31,15 @@ const UserCard = ({
           className="bg-purple-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-purple-700"
         >
           changeStatus
+        </button>
+        <button
+          onClick={() => {
+            setSelectedUser(user);
+            setIsFormVisible(true);
+          }}
+          className="bg-orange-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-orange-700"
+        >
+          Edit
         </button>
       </div>
     </div>
