@@ -1,30 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import UserList from "./components/UserList";
-import type { User } from "./types/user";
+import { type User } from "./types/user";
+
 import users from "./data/users";
 import Searchinput from "./components/Searchinput";
 import UserStats from "./components/UserStats";
 import EmptyState from "./components/EmptyState";
+import AddUserForm from "./components/AddUserForm";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
   const [UsersList, setUserList] = useState<User[]>(users);
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<Filters>("all");
-  const newUser: User = {
-    ID: 7,
-    fullName: "کاربر آزمایشی",
-    age: 27,
-    role: "operator",
-    isActive: true,
-    email: "test.user@example.com",
-  };
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const addUserHandler = (newUser: User) => {
     const isAvailable = UsersList.find((user) => user.ID === newUser.ID);
     if (isAvailable) alert("you cant add the same user twice");
     else {
       setUserList([...UsersList, newUser]);
+      setIsFormVisible(false);
       alert("user Added Successfully");
     }
   };
@@ -56,6 +52,11 @@ function App() {
     else if (status === "inactive") return !user.isActive;
     return user.isActive;
   });
+
+  useEffect(() => {
+    document.title = `User Managment -${UsersList.length} Users`;
+  }, [UsersList.length]);
+
   let content;
   if (UsersList.length === 0 || displayedUsers.length === 0)
     content = (
@@ -80,11 +81,18 @@ function App() {
       <Searchinput onSearchChange={SearchUser} value={searchedTerm} />
       {content}
       <button
-        onClick={() => addUserHandler(newUser)}
+        onClick={() => setIsFormVisible(true)}
         className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
       >
         Add New User
       </button>
+      {isFormVisible && (
+        <AddUserForm
+          setIsFormVisible={setIsFormVisible}
+          addUserHandeler={addUserHandler}
+          UsersList={UsersList}
+        />
+      )}
       <div className="flex items-center">
         <button
           onClick={() => setUserStatus("active")}

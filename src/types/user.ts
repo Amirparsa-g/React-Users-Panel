@@ -1,10 +1,10 @@
-type UserRole = "admin" | "operator" | "customer";
+export type UserRole = "admin" | "operator" | "customer";
 
 export interface User {
   ID: number;
   fullName: string;
   age: number;
-  role: UserRole;
+  role: UserRole | "";
   isActive: boolean;
   email?: string;
 }
