@@ -2,6 +2,7 @@ import type { UserRole } from "../types/user";
 import type { FormError, FormPropType } from "../types/userForm";
 import { useState } from "react";
 import type { User } from "../types/user";
+import { useNavigate } from "react-router-dom";
 
 const AddUserForm = ({
   addUserHandeler,
@@ -11,13 +12,14 @@ const AddUserForm = ({
   editUserHandeler,
   setSelectedUser,
 }: {
-  addUserHandeler: (newUser: User) => void;
+  addUserHandeler?: (newUser: User) => void;
   setIsFormVisible: (value: boolean) => void;
   UsersList: User[];
   user?: User | null;
-  editUserHandeler: (formData: FormPropType, id: number) => void;
+  editUserHandeler?: (formData: FormPropType, id: number) => void | null;
   setSelectedUser: (user: User | null) => void;
 }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormPropType>({
     fullName: user?.fullName ?? "",
     age: user?.age.toString() ?? "",
@@ -106,7 +108,7 @@ const AddUserForm = ({
             e.preventDefault();
             const isValid = Validation();
             if (!isValid) return;
-            if (!user) {
+            if (!user && addUserHandeler) {
               const newUser: User = {
                 ID: (UsersList.at(-1)?.ID ?? 0) + 1,
                 fullName: formData.fullName,
@@ -116,10 +118,11 @@ const AddUserForm = ({
                 email: formData.email,
               };
               addUserHandeler(newUser);
-            } else {
+            } else if (editUserHandeler && user) {
               editUserHandeler(formData, user.ID);
-              setSelectedUser(null);
             }
+            navigate(user ? `/users/${user.ID}` : "/users");
+            setSelectedUser(null);
           }}
         >
           <h1 className="text-center , text-xl ">
@@ -227,6 +230,7 @@ const AddUserForm = ({
             onClick={() => {
               setIsFormVisible(false);
               setSelectedUser(null);
+              navigate(user ? `/users/${user.ID}` : "/users");
             }}
             className="bg-gray-100 border border-red-400 p-2 rounded-sm"
           >
