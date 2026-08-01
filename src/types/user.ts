@@ -4,7 +4,7 @@ export interface User {
   ID: number;
   fullName: string;
   age: number;
-  role: UserRole | "";
+  role: UserRole;
   isActive: boolean;
   email?: string;
 }

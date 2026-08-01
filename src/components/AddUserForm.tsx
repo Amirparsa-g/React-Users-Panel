@@ -23,7 +23,7 @@ const AddUserForm = ({
     nameError: "",
     ageError: "",
     roleError: "",
-    emailError: " ",
+    emailError: "",
   });
 
   const Validation = () => {
@@ -42,16 +42,16 @@ const AddUserForm = ({
       newError.ageError = "Enter your age";
       isValid = false;
     } else if (formData.age.trim() !== "") {
-      const parsedAge = parseInt(formData.age);
-      if (parsedAge.toString() !== formData.age) {
-        newError.ageError = "your age must be an integer";
+      const age = Number(formData.age);
+
+      if (formData.age.trim() === "") {
+        newError.ageError = "Enter your age";
         isValid = false;
-      }
-      if (parsedAge < 18) {
-        newError.ageError = "You must be 18 years ir older";
+      } else if (!Number.isFinite(age) || !Number.isInteger(age)) {
+        newError.ageError = "Your age must be an integer";
         isValid = false;
-      } else if (parsedAge > 80) {
-        newError.ageError = "You must be younger than 80";
+      } else if (age < 18 || age > 80) {
+        newError.ageError = "Age must be between 18 and 80";
         isValid = false;
       }
     }
@@ -94,13 +94,14 @@ const AddUserForm = ({
             e.preventDefault();
             const isValid = Validation();
             if (!isValid) return;
+            if (formData.role === "") return;
             const newUser: User = {
-              ID: (UsersList.at(-1)?.ID ?? 0) + 1,
-              fullName: formData.fullName,
-              age: parseInt(formData.age),
+              ID: Date.now(),
+              fullName: formData.fullName.trim(),
+              age: Number(formData.age),
               role: formData.role,
               isActive: formData.isActive,
-              email: formData.email,
+              email: formData.email.trim() || undefined,
             };
             addUserHandeler(newUser);
           }}
@@ -112,9 +113,16 @@ const AddUserForm = ({
               placeholder="Enter you full name"
               value={formData.fullName}
               onChange={(e) => {
-                setFormData({ ...formData, fullName: e.target.value });
-                setError({ ...Error, nameError: "" });
-              }}
+                setFormData({
+                  ...formData,
+                  fullName: e.target.value,
+                });
+
+                setError({
+                  ...Error,
+                  nameError: "",
+                });
+              }}  
               className="w-full px-2 bg-gray-100 border border-purple-500 rounded-3xl"
             />
             {Error.nameError !== "" && (
@@ -144,9 +152,16 @@ const AddUserForm = ({
               id="role"
               value={formData.role}
               onChange={(e) => {
-                setFormData({ ...formData, role: e.target.value as UserRole });
-                setError({ ...Error, roleError: "" });
-              }}
+                setFormData({
+                  ...formData,
+                  role: e.target.value as UserRole | "",
+                });
+
+                setError({
+                  ...Error,
+                  roleError: "",
+                });
+            }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
             >
               <option value=""></option>
