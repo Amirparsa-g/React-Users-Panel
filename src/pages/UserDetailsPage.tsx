@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import type { User } from "../types/user";
 import AddUserForm from "../components/AddUserForm";
 import type { FormPropType } from "../types/userForm";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const UserDetailsPage = ({
   UsersList,
@@ -28,13 +28,16 @@ const UserDetailsPage = ({
   const clickedUser: User | undefined = UsersList.find(
     (user) => user.ID === Number(id),
   );
-
+  const isDeleting = useRef(false);
   useEffect(() => {
-    if (!clickedUser) {
+    if (!clickedUser && !isDeleting.current) {
       alert("User Not found");
       navigate("/users");
     }
   }, [clickedUser, navigate]);
+  useEffect(() => {
+    document.title = "User Details | User Management";
+  }, []);
   if (!clickedUser) {
     return null;
   }
@@ -58,7 +61,11 @@ const UserDetailsPage = ({
         <p>{clickedUser.isActive ? "Active" : "inActive"}</p>
         <div className="flex justify-center gap-4">
           <button
-            onClick={() => onRemove(clickedUser.ID)}
+            onClick={() => {
+              isDeleting.current = true;
+              onRemove(clickedUser.ID);
+              navigate("/users");
+            }}
             className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
           >
             remove

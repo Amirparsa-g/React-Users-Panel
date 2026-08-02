@@ -52,8 +52,8 @@ const AppLayout = () => {
       <main>
         <Outlet />
       </main>
-      <footer>
-        <p>footer</p>
+      <footer className="border-t-2 border-purple-400 my-5 bg-slate-50 h-50">
+        <h2 className="text-center text-3xl text-cyan-400 ">Footer</h2>
       </footer>
     </>
   );

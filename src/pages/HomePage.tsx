@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import UserStats from "../components/UserStats";
 import type { User } from "../types/user";
+import { useEffect } from "react";
 
 const HomePage = ({ UsersList }: { UsersList: User[] }) => {
   const allUsers = UsersList;
   const ActiveUsers = UsersList.filter((user) => user.isActive);
   const InActiveUsers = UsersList.filter((user) => !user.isActive);
+  useEffect(() => {
+    document.title = "Home | User Management";
+  }, []);
   return (
     <>
       <h1 className="text-center">User Managment Project</h1>

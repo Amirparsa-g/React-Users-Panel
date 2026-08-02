@@ -50,8 +50,8 @@ const UserPage = ({
   });
 
   useEffect(() => {
-    document.title = `User Managment -${UsersList.length} Users`;
-  }, [UsersList.length]);
+    document.title = "Users | User Management";
+  }, []);
 
   let content;
   if (UsersList.length === 0 || displayedUsers.length === 0)

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import AddUserForm from "../components/AddUserForm";
 import type { User } from "../types/user";
 
@@ -13,6 +14,9 @@ const AddUserPage = ({
   user?: User | null;
   setSelectedUser: (user: User | null) => void;
 }) => {
+  useEffect(() => {
+    document.title = "Add User | User Management";
+  }, []);
   return (
     <AddUserForm
       setIsFormVisible={setIsFormVisible}

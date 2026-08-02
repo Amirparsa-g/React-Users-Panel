@@ -75,45 +75,47 @@ function App() {
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<HomePage UsersList={UsersList} />}></Route>
-          <Route
-            path="/users"
-            element={
-              <UserPage
-                UsersList={UsersList}
-                setUserList={setUserList}
-                searchedTerm={searchedTerm}
-                SearchUser={SearchUser}
-                status={status}
-                setUserStatus={setUserStatus}
-              />
-            }
-          ></Route>
-          <Route
-            path="/users/new"
-            element={
-              <AddUserPage
-                setSelectedUser={setSelectedUser}
-                addUserHandeler={addUserHandler}
-                UsersList={UsersList}
-                setIsFormVisible={setIsFormVisible}
-              />
-            }
-          ></Route>
-          <Route
-            path="/users/:id"
-            element={
-              <UserDetailsPage
-                UsersList={UsersList}
-                onRemove={removeUserHandler}
-                changeStatus={ChangeStatusHandler}
-                setSelectedUser={setSelectedUser}
-                setIsFormVisible={setIsFormVisible}
-                isFormVisible={isFormVisible}
-                selectedUser={selectedUser}
-                changeInfo={changeInfo}
-              />
-            }
-          ></Route>
+          <Route path="users">
+            <Route
+              index
+              element={
+                <UserPage
+                  UsersList={UsersList}
+                  setUserList={setUserList}
+                  searchedTerm={searchedTerm}
+                  SearchUser={SearchUser}
+                  status={status}
+                  setUserStatus={setUserStatus}
+                />
+              }
+            ></Route>
+            <Route
+              path="new"
+              element={
+                <AddUserPage
+                  setSelectedUser={setSelectedUser}
+                  addUserHandeler={addUserHandler}
+                  UsersList={UsersList}
+                  setIsFormVisible={setIsFormVisible}
+                />
+              }
+            ></Route>
+            <Route
+              path=":id"
+              element={
+                <UserDetailsPage
+                  UsersList={UsersList}
+                  onRemove={removeUserHandler}
+                  changeStatus={ChangeStatusHandler}
+                  setSelectedUser={setSelectedUser}
+                  setIsFormVisible={setIsFormVisible}
+                  isFormVisible={isFormVisible}
+                  selectedUser={selectedUser}
+                  changeInfo={changeInfo}
+                />
+              }
+            ></Route>
+          </Route>
 
           <Route path="/about" element={<AboutPage />}></Route>
           <Route path="*" element={<NotFoundPage />}></Route>
