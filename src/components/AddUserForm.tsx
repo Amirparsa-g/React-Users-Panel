@@ -6,14 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 const AddUserForm = ({
   addUserHandeler,
-  setIsFormVisible,
   UsersList,
   user,
   editUserHandeler,
   setSelectedUser,
 }: {
   addUserHandeler?: (newUser: User) => void;
-  setIsFormVisible: (value: boolean) => void;
   UsersList: User[];
   user?: User | null;
   editUserHandeler?: (formData: FormPropType, id: number) => void;
@@ -99,43 +97,43 @@ const AddUserForm = ({
     return isValid;
   };
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div className=" z-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
         <form
           action=""
           className="flex flex-col w-full gap-3"
           onSubmit={(e) => {
-  e.preventDefault();
+            e.preventDefault();
 
-  const isValid = Validation();
+            const isValid = Validation();
 
-  if (!isValid) return;
-  if (formData.role === "") return;
+            if (!isValid) return;
+            if (formData.role === "") return;
 
-  if (user) {
-    if (!editUserHandeler) return;
+            if (user) {
+              if (!editUserHandeler) return;
 
-    editUserHandeler(formData, user.ID);
-    setSelectedUser(null);
-    navigate(`/users/${user.ID}`);
+              editUserHandeler(formData, user.ID);
+              setSelectedUser(null);
+              navigate(`/users/${user.ID}`);
 
-    return;
-  }
+              return;
+            }
 
-  if (!addUserHandeler) return;
+            if (!addUserHandeler) return;
 
-  const newUser: User = {
-    ID: Date.now(),
-    fullName: formData.fullName.trim(),
-    age: Number(formData.age),
-    role: formData.role,
-    isActive: formData.isActive,
-    email: formData.email.trim() || undefined,
-  };
+            const newUser: User = {
+              ID: Date.now(),
+              fullName: formData.fullName.trim(),
+              age: Number(formData.age),
+              role: formData.role,
+              isActive: formData.isActive,
+              email: formData.email.trim() || undefined,
+            };
 
-  addUserHandeler(newUser);
-  navigate("/users");
-}}
+            addUserHandeler(newUser);
+            navigate("/users");
+          }}
         >
           <h1 className="text-center , text-xl ">
             {user ? "Edit User" : "Add User"}
@@ -156,7 +154,7 @@ const AddUserForm = ({
                   ...Error,
                   nameError: "",
                 });
-              }}  
+              }}
               className="w-full px-2 bg-gray-100 border border-purple-500 rounded-3xl"
             />
             {Error.nameError !== "" && (
@@ -195,7 +193,7 @@ const AddUserForm = ({
                   ...Error,
                   roleError: "",
                 });
-            }}
+              }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
             >
               <option value=""></option>
@@ -254,7 +252,6 @@ const AddUserForm = ({
           <button
             type="button"
             onClick={() => {
-              setIsFormVisible(false);
               setSelectedUser(null);
               navigate(user ? `/users/${user.ID}` : "/users");
             }}

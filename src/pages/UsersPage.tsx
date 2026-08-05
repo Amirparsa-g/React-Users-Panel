@@ -7,34 +7,24 @@ import UserStats from "../components/UserStats";
 
 import { Link } from "react-router-dom";
 type Filters = "active" | "inactive" | "all";
-const UserPage = ({
+const UsersPage = ({
   UsersList,
-  setUserList,
   status,
   setUserStatus,
   searchedTerm,
   SearchUser,
+  removeUserHandler,
+  ChangeStatusHandler,
 }: {
   UsersList: User[];
-  setUserList: (users: User[]) => void;
+
   status: Filters;
   setUserStatus: (filter: Filters) => void;
   searchedTerm: string;
   SearchUser: (term: string) => void;
+  removeUserHandler: (id: number) => void;
+  ChangeStatusHandler: (id: number) => void;
 }) => {
-  const removeUserHandler = (id: number) => {
-    const remainingUsers = UsersList.filter((user) => user.ID !== id);
-    setUserList(remainingUsers);
-    alert("user removed seccessfully");
-  };
-  const ChangeStatusHandler = (id: number) => {
-    const toggleUser = UsersList.map((user) => {
-      if (user.ID === id) return { ...user, isActive: !user.isActive };
-      return user;
-    });
-    setUserList(toggleUser);
-  };
-
   const allUsers = UsersList;
   const ActiveUsers = UsersList.filter((user) => user.isActive);
   const InActiveUsers = UsersList.filter((user) => !user.isActive);
@@ -111,4 +101,4 @@ const UserPage = ({
   );
 };
 
-export default UserPage;
+export default UsersPage;

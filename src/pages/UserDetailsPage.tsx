@@ -9,7 +9,6 @@ const UserDetailsPage = ({
   onRemove,
   changeStatus,
   setSelectedUser,
-  setIsFormVisible,
   changeInfo,
   isFormVisible,
   selectedUser,
@@ -20,13 +19,12 @@ const UserDetailsPage = ({
   onRemove: (id: number) => void;
   changeStatus: (id: number) => void;
   setSelectedUser: (user: User | null) => void;
-  setIsFormVisible: (status: boolean) => void;
   changeInfo: (formData: FormPropType, id: number) => void;
 }) => {
-  const { id } = useParams();
+  const { userId } = useParams();
   const navigate = useNavigate();
   const clickedUser: User | undefined = UsersList.find(
-    (user) => user.ID === Number(id),
+    (user) => user.ID === Number(userId),
   );
   const isDeleting = useRef(false);
   useEffect(() => {
@@ -46,7 +44,6 @@ const UserDetailsPage = ({
     <div className="flex flex-col gap-4 justify-center items-center">
       {isFormVisible && (
         <AddUserForm
-          setIsFormVisible={setIsFormVisible}
           UsersList={UsersList}
           editUserHandeler={changeInfo}
           user={selectedUser}
@@ -79,7 +76,6 @@ const UserDetailsPage = ({
           <button
             onClick={() => {
               setSelectedUser(clickedUser);
-              setIsFormVisible(true);
             }}
             className="bg-orange-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-orange-700"
           >

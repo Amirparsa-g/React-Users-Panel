@@ -9,7 +9,7 @@ import users from "./data/users";
 //import EmptyState from "./components/EmptyState";
 import type { FormPropType } from "./types/userForm";
 import { Routes, Route } from "react-router-dom";
-import UserPage from "./pages/UserPage";
+import UsersPage from "./pages/UsersPage";
 import AddUserPage from "./pages/AddUserPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -49,27 +49,27 @@ function App() {
   };
 
   const changeInfo = (formData: FormPropType, id: number) => {
-  const role = formData.role;
+    const role = formData.role;
 
-  if (role === "") return;
+    if (role === "") return;
 
-  const changedUsers: User[] = UsersList.map((user) => {
-    if (user.ID !== id) return user;
+    const changedUsers: User[] = UsersList.map((user) => {
+      if (user.ID !== id) return user;
 
-    return {
-      ...user,
-      fullName: formData.fullName.trim(),
-      age: Number(formData.age),
-      role,
-      isActive: formData.isActive,
-      email: formData.email.trim() || undefined,
-    };
-  });
+      return {
+        ...user,
+        fullName: formData.fullName.trim(),
+        age: Number(formData.age),
+        role,
+        isActive: formData.isActive,
+        email: formData.email.trim() || undefined,
+      };
+    });
 
-  setUserList(changedUsers);
-  setIsFormVisible(false);
-  setSelectedUser(null);
-};
+    setUserList(changedUsers);
+    setIsFormVisible(false);
+    setSelectedUser(null);
+  };
 
   useEffect(() => {
     document.title = `User Managment -${UsersList.length} Users`;
@@ -84,13 +84,14 @@ function App() {
             <Route
               index
               element={
-                <UserPage
+                <UsersPage
                   UsersList={UsersList}
-                  setUserList={setUserList}
                   searchedTerm={searchedTerm}
                   SearchUser={SearchUser}
                   status={status}
                   setUserStatus={setUserStatus}
+                  removeUserHandler={removeUserHandler}
+                  ChangeStatusHandler={ChangeStatusHandler}
                 />
               }
             ></Route>
@@ -101,19 +102,17 @@ function App() {
                   setSelectedUser={setSelectedUser}
                   addUserHandeler={addUserHandler}
                   UsersList={UsersList}
-                  setIsFormVisible={setIsFormVisible}
                 />
               }
             ></Route>
             <Route
-              path=":id"
+              path=":userId"
               element={
                 <UserDetailsPage
                   UsersList={UsersList}
                   onRemove={removeUserHandler}
                   changeStatus={ChangeStatusHandler}
                   setSelectedUser={setSelectedUser}
-                  setIsFormVisible={setIsFormVisible}
                   isFormVisible={isFormVisible}
                   selectedUser={selectedUser}
                   changeInfo={changeInfo}
