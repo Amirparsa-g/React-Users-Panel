@@ -16,7 +16,7 @@ const AddUserForm = ({
   setIsFormVisible: (value: boolean) => void;
   UsersList: User[];
   user?: User | null;
-  editUserHandeler?: (formData: FormPropType, id: number) => void | null;
+  editUserHandeler?: (formData: FormPropType, id: number) => void;
   setSelectedUser: (user: User | null) => void;
 }) => {
   const navigate = useNavigate();
@@ -105,20 +105,37 @@ const AddUserForm = ({
           action=""
           className="flex flex-col w-full gap-3"
           onSubmit={(e) => {
-            e.preventDefault();
-            const isValid = Validation();
-            if (!isValid) return;
-            if (formData.role === "") return;
-            const newUser: User = {
-              ID: Date.now(),
-              fullName: formData.fullName.trim(),
-              age: Number(formData.age),
-              role: formData.role,
-              isActive: formData.isActive,
-              email: formData.email.trim() || undefined,
-            };
-            addUserHandeler(newUser);
-          }}
+  e.preventDefault();
+
+  const isValid = Validation();
+
+  if (!isValid) return;
+  if (formData.role === "") return;
+
+  if (user) {
+    if (!editUserHandeler) return;
+
+    editUserHandeler(formData, user.ID);
+    setSelectedUser(null);
+    navigate(`/users/${user.ID}`);
+
+    return;
+  }
+
+  if (!addUserHandeler) return;
+
+  const newUser: User = {
+    ID: Date.now(),
+    fullName: formData.fullName.trim(),
+    age: Number(formData.age),
+    role: formData.role,
+    isActive: formData.isActive,
+    email: formData.email.trim() || undefined,
+  };
+
+  addUserHandeler(newUser);
+  navigate("/users");
+}}
         >
           <h1 className="text-center , text-xl ">
             {user ? "Edit User" : "Add User"}
@@ -235,7 +252,7 @@ const AddUserForm = ({
             submit
           </button>
           <button
-            type="reset"
+            type="button"
             onClick={() => {
               setIsFormVisible(false);
               setSelectedUser(null);

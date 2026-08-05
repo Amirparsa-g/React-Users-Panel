@@ -49,22 +49,27 @@ function App() {
   };
 
   const changeInfo = (formData: FormPropType, id: number) => {
-    const changedUsers = UsersList.map((user) => {
-      if (user.ID === id) {
-        return {
-          ...user,
-          fullName: formData.fullName,
-          age: parseInt(formData.age),
-          role: formData.role,
-          isActive: formData.isActive,
-          email: formData.email,
-        };
-      }
-      return user;
-    });
-    setUserList(changedUsers);
-    setIsFormVisible(false);
-  };
+  const role = formData.role;
+
+  if (role === "") return;
+
+  const changedUsers: User[] = UsersList.map((user) => {
+    if (user.ID !== id) return user;
+
+    return {
+      ...user,
+      fullName: formData.fullName.trim(),
+      age: Number(formData.age),
+      role,
+      isActive: formData.isActive,
+      email: formData.email.trim() || undefined,
+    };
+  });
+
+  setUserList(changedUsers);
+  setIsFormVisible(false);
+  setSelectedUser(null);
+};
 
   useEffect(() => {
     document.title = `User Managment -${UsersList.length} Users`;
