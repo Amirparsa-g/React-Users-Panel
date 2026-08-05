@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import UserList from "./components/UserList";
+//import UserList from "./components/UserList";
 import { type User } from "./types/user";
 
+import HomePage from "./pages/HomePage";
+
 import users from "./data/users";
-import Searchinput from "./components/Searchinput";
-import UserStats from "./components/UserStats";
-import EmptyState from "./components/EmptyState";
-import AddUserForm from "./components/AddUserForm";
+//import EmptyState from "./components/EmptyState";
+import type { FormPropType } from "./types/userForm";
+import { Routes, Route } from "react-router-dom";
+import UserPage from "./pages/UserPage";
+import AddUserPage from "./pages/AddUserPage";
+import UserDetailsPage from "./pages/UserDetailsPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import AboutPage from "./pages/AboutPage";
+import AppLayout from "./components/AppLayout";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [UsersList, setUserList] = useState<User[]>(users);
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<Filters>("all");
@@ -39,85 +47,80 @@ function App() {
   const SearchUser = (searchTerm: string) => {
     setSearchTerm(searchTerm);
   };
-  const allUsers = UsersList;
-  const ActiveUsers = UsersList.filter((user) => user.isActive);
-  const InActiveUsers = UsersList.filter((user) => !user.isActive);
-  const searchedUsers = UsersList.filter((user) => {
-    const term = searchedTerm.toLowerCase().trim();
-    return user.fullName.toLowerCase().includes(term);
-  });
 
-  const displayedUsers: User[] = searchedUsers.filter((user) => {
-    if (status === "all") return true;
-    else if (status === "inactive") return !user.isActive;
-    return user.isActive;
-  });
+  const changeInfo = (formData: FormPropType, id: number) => {
+    const changedUsers = UsersList.map((user) => {
+      if (user.ID === id) {
+        return {
+          ...user,
+          fullName: formData.fullName,
+          age: parseInt(formData.age),
+          role: formData.role,
+          isActive: formData.isActive,
+          email: formData.email,
+        };
+      }
+      return user;
+    });
+    setUserList(changedUsers);
+    setIsFormVisible(false);
+  };
 
   useEffect(() => {
     document.title = `User Managment -${UsersList.length} Users`;
   }, [UsersList.length]);
 
-  let content;
-  if (UsersList.length === 0 || displayedUsers.length === 0)
-    content = (
-      <EmptyState
-        UsersList={UsersList}
-        displayedUsers={displayedUsers}
-        status={status}
-        searchedTerm={searchedTerm}
-      />
-    );
-  else {
-    content = (
-      <UserList
-        users={displayedUsers}
-        onRemove={removeUserHandler}
-        changeStatus={ChangeStatusHandler}
-      />
-    );
-  }
   return (
     <>
-      <Searchinput onSearchChange={SearchUser} value={searchedTerm} />
-      {content}
-      <button
-        onClick={() => setIsFormVisible(true)}
-        className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-      >
-        Add New User
-      </button>
-      {isFormVisible && (
-        <AddUserForm
-          setIsFormVisible={setIsFormVisible}
-          addUserHandeler={addUserHandler}
-          UsersList={UsersList}
-        />
-      )}
-      <div className="flex items-center">
-        <button
-          onClick={() => setUserStatus("active")}
-          className="bg-slate-50 block m-auto mt-5 border border-green-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-        >
-          active
-        </button>
-        <button
-          onClick={() => setUserStatus("inactive")}
-          className="bg-slate-50 block m-auto mt-5 border border-red-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-        >
-          inactive
-        </button>
-        <button
-          onClick={() => setUserStatus("all")}
-          className="bg-slate-50 block m-auto mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-        >
-          all
-        </button>
-      </div>
-      <UserStats
-        allUsers={allUsers.length}
-        ActiveUsers={ActiveUsers.length}
-        InActiveUsers={InActiveUsers.length}
-      />
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<HomePage UsersList={UsersList} />}></Route>
+          <Route path="users">
+            <Route
+              index
+              element={
+                <UserPage
+                  UsersList={UsersList}
+                  setUserList={setUserList}
+                  searchedTerm={searchedTerm}
+                  SearchUser={SearchUser}
+                  status={status}
+                  setUserStatus={setUserStatus}
+                />
+              }
+            ></Route>
+            <Route
+              path="new"
+              element={
+                <AddUserPage
+                  setSelectedUser={setSelectedUser}
+                  addUserHandeler={addUserHandler}
+                  UsersList={UsersList}
+                  setIsFormVisible={setIsFormVisible}
+                />
+              }
+            ></Route>
+            <Route
+              path=":id"
+              element={
+                <UserDetailsPage
+                  UsersList={UsersList}
+                  onRemove={removeUserHandler}
+                  changeStatus={ChangeStatusHandler}
+                  setSelectedUser={setSelectedUser}
+                  setIsFormVisible={setIsFormVisible}
+                  isFormVisible={isFormVisible}
+                  selectedUser={selectedUser}
+                  changeInfo={changeInfo}
+                />
+              }
+            ></Route>
+          </Route>
+
+          <Route path="/about" element={<AboutPage />}></Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
+        </Route>
+      </Routes>
     </>
   );
 }

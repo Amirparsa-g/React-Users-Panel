@@ -2,22 +2,30 @@ import type { UserRole } from "../types/user";
 import type { FormError, FormPropType } from "../types/userForm";
 import { useState } from "react";
 import type { User } from "../types/user";
+import { useNavigate } from "react-router-dom";
 
 const AddUserForm = ({
   addUserHandeler,
   setIsFormVisible,
   UsersList,
+  user,
+  editUserHandeler,
+  setSelectedUser,
 }: {
-  addUserHandeler: (newUser: User) => void;
+  addUserHandeler?: (newUser: User) => void;
   setIsFormVisible: (value: boolean) => void;
   UsersList: User[];
+  user?: User | null;
+  editUserHandeler?: (formData: FormPropType, id: number) => void | null;
+  setSelectedUser: (user: User | null) => void;
 }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormPropType>({
-    fullName: "",
-    age: "",
-    role: "",
-    isActive: true,
-    email: "",
+    fullName: user?.fullName ?? "",
+    age: user?.age.toString() ?? "",
+    role: user?.role ?? "",
+    isActive: user?.isActive ?? true,
+    email: user?.email ?? "",
   });
   const [Error, setError] = useState<FormError>({
     nameError: "",
@@ -73,9 +81,15 @@ const AddUserForm = ({
           isValid = false;
         }
       }
-      const UserEmails = UsersList.map((user) =>
-        user.email?.toLowerCase().trim(),
-      );
+
+      const UserEmails = UsersList.map((User) => {
+        if (user) {
+          if (user.ID !== User.ID) return User.email?.toLowerCase().trim();
+        } else {
+          return User.email?.toLowerCase().trim();
+        }
+      });
+
       if (UserEmails.includes(userEmail?.toLowerCase().trim())) {
         newError.emailError = "This email already exists";
         isValid = false;
@@ -106,6 +120,9 @@ const AddUserForm = ({
             addUserHandeler(newUser);
           }}
         >
+          <h1 className="text-center , text-xl ">
+            {user ? "Edit User" : "Add User"}
+          </h1>
           <label htmlFor="">
             full name:
             <input
@@ -219,7 +236,11 @@ const AddUserForm = ({
           </button>
           <button
             type="reset"
-            onClick={() => setIsFormVisible(false)}
+            onClick={() => {
+              setIsFormVisible(false);
+              setSelectedUser(null);
+              navigate(user ? `/users/${user.ID}` : "/users");
+            }}
             className="bg-gray-100 border border-red-400 p-2 rounded-sm"
           >
             Cancel

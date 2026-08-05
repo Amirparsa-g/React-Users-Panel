@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { User } from "../types/user";
 const UserCard = ({
   user,
@@ -28,6 +29,13 @@ const UserCard = ({
         >
           changeStatus
         </button>
+
+        <Link
+          to={`/users/${user.ID}`}
+          className="bg-cyan-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-cyan-700"
+        >
+          Details
+        </Link>
       </div>
     </div>
   );
