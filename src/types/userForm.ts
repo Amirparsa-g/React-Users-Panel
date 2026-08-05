@@ -5,7 +5,7 @@ export interface FormPropType {
   age: string;
   role: UserRole | "";
   isActive: boolean;
-  email?: string;
+  email: string;
 }
 
 export interface FormError {
