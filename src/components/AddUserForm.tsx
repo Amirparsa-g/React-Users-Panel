@@ -143,15 +143,6 @@ const AddUserForm = ({
             }
 
             if (!addUserHandeler) return;
-
-            // const newUser: User = {
-            //   ID: Date.now(),
-            //   fullName: formData.fullName.trim(),
-            //   age: Number(formData.age),
-            //   role: formData.role,
-            //   isActive: formData.isActive,
-            //   email: formData.email.trim() || undefined,
-            // };
             const newUser = await addingApiUser();
             if (!newUser) return;
             addUserHandeler(newUser);
