@@ -15,6 +15,9 @@ const UsersPage = ({
   SearchUser,
   removeUserHandler,
   ChangeStatusHandler,
+  isLoading,
+  error,
+  LoadUser,
 }: {
   UsersList: User[];
 
@@ -24,6 +27,9 @@ const UsersPage = ({
   SearchUser: (term: string) => void;
   removeUserHandler: (id: number) => void;
   ChangeStatusHandler: (id: number) => void;
+  isLoading: boolean;
+  error: string | null;
+  LoadUser: () => void;
 }) => {
   const allUsers = UsersList;
   const ActiveUsers = UsersList.filter((user) => user.isActive);
@@ -44,24 +50,39 @@ const UsersPage = ({
   }, []);
 
   let content;
-  if (UsersList.length === 0 || displayedUsers.length === 0)
+  if (isLoading) {
     content = (
-      <EmptyState
-        UsersList={UsersList}
-        displayedUsers={displayedUsers}
-        status={status}
-        searchedTerm={searchedTerm}
-      />
+      <>
+        <h2 className="text-center text-3xl font-semibold">Loadin Users ...</h2>
+      </>
     );
-  else {
+  } else if (error) {
     content = (
-      <UserList
-        users={displayedUsers}
-        onRemove={removeUserHandler}
-        changeStatus={ChangeStatusHandler}
-      />
+      <h2 className="text-center text-3xl font-semibold text-red-600">
+        Failed to load the Users
+      </h2>
     );
+  } else {
+    if (UsersList.length === 0 || displayedUsers.length === 0)
+      content = (
+        <EmptyState
+          UsersList={UsersList}
+          displayedUsers={displayedUsers}
+          status={status}
+          searchedTerm={searchedTerm}
+        />
+      );
+    else {
+      content = (
+        <UserList
+          users={displayedUsers}
+          onRemove={removeUserHandler}
+          changeStatus={ChangeStatusHandler}
+        />
+      );
+    }
   }
+
   return (
     <>
       <Searchinput onSearchChange={SearchUser} value={searchedTerm} />
@@ -97,6 +118,12 @@ const UsersPage = ({
         ActiveUsers={ActiveUsers.length}
         InActiveUsers={InActiveUsers.length}
       />
+      <button
+        onClick={LoadUser}
+        className="bg-slate-50 block m-auto mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+      >
+        retry
+      </button>
     </>
   );
 };

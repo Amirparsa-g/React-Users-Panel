@@ -5,7 +5,7 @@ import { type User } from "./types/user";
 
 import HomePage from "./pages/HomePage";
 
-import users from "./data/users";
+// import users from "./data/users";
 //import EmptyState from "./components/EmptyState";
 import type { FormPropType } from "./types/userForm";
 import { Routes, Route } from "react-router-dom";
@@ -15,14 +15,43 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import AboutPage from "./pages/AboutPage";
 import AppLayout from "./components/AppLayout";
+import { getUsers } from "./services/userApi";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [UsersList, setUserList] = useState<User[]>(users);
+  const loadUsers = async () => {
+    try {
+      setIsLoading(true);
+      setError("");
+      const apiUsers = await getUsers();
+      setUsers(apiUsers);
+      setUserList(apiUsers);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unexpected Error");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    const load = async () => {
+      await loadUsers();
+    };
+    load();
+  }, []);
+
+  console.log(users);
+
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<Filters>("all");
   const [isFormVisible, setIsFormVisible] = useState(false);
+  console.log(UsersList);
   const addUserHandler = (newUser: User) => {
     const isAvailable = UsersList.find((user) => user.ID === newUser.ID);
     if (isAvailable) alert("you cant add the same user twice");
@@ -92,6 +121,9 @@ function App() {
                   setUserStatus={setUserStatus}
                   removeUserHandler={removeUserHandler}
                   ChangeStatusHandler={ChangeStatusHandler}
+                  isLoading={isLoading}
+                  error={error}
+                  LoadUser={loadUsers}
                 />
               }
             ></Route>
@@ -102,6 +134,10 @@ function App() {
                   setSelectedUser={setSelectedUser}
                   addUserHandeler={addUserHandler}
                   UsersList={UsersList}
+                  setIsLoading={setIsLoading}
+                  setError={setError}
+                  isLoading={isLoading}
+                  error={error}
                 />
               }
             ></Route>
@@ -116,6 +152,10 @@ function App() {
                   isFormVisible={isFormVisible}
                   selectedUser={selectedUser}
                   changeInfo={changeInfo}
+                  setError={setError}
+                  setIsLoading={setIsLoading}
+                  isLoading={isLoading}
+                  error={error}
                 />
               }
             ></Route>

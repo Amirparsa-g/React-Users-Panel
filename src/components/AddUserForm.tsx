@@ -3,6 +3,7 @@ import type { FormError, FormPropType } from "../types/userForm";
 import { useState } from "react";
 import type { User } from "../types/user";
 import { useNavigate } from "react-router-dom";
+import { addApiUser } from "../services/userApi";
 
 const AddUserForm = ({
   addUserHandeler,
@@ -10,12 +11,20 @@ const AddUserForm = ({
   user,
   editUserHandeler,
   setSelectedUser,
+  setIsLoading,
+  setError,
+  isLoading,
+  error,
 }: {
   addUserHandeler?: (newUser: User) => void;
   UsersList: User[];
   user?: User | null;
   editUserHandeler?: (formData: FormPropType, id: number) => void;
   setSelectedUser: (user: User | null) => void;
+  setIsLoading: (value: boolean) => void;
+  setError: (value: string | null) => void;
+  isLoading: boolean;
+  error: string | null;
 }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormPropType>({
@@ -25,7 +34,7 @@ const AddUserForm = ({
     isActive: user?.isActive ?? true,
     email: user?.email ?? "",
   });
-  const [Error, setError] = useState<FormError>({
+  const [FormError, setFormError] = useState<FormError>({
     nameError: "",
     ageError: "",
     roleError: "",
@@ -93,8 +102,20 @@ const AddUserForm = ({
         isValid = false;
       }
     }
-    setError(newError);
+    setFormError(newError);
     return isValid;
+  };
+  const addingApiUser = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      await addApiUser(formData);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unexpected Error");
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <div className=" z-50 flex items-center justify-center">
@@ -102,7 +123,7 @@ const AddUserForm = ({
         <form
           action=""
           className="flex flex-col w-full gap-3"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
 
             const isValid = Validation();
@@ -130,11 +151,21 @@ const AddUserForm = ({
               isActive: formData.isActive,
               email: formData.email.trim() || undefined,
             };
-
+            await addingApiUser();
             addUserHandeler(newUser);
             navigate("/users");
           }}
         >
+          {isLoading && (
+            <p className="text-center text-3xl m-2 font-semibold">
+              Loading ...
+            </p>
+          )}
+          {error && (
+            <p className="text-center text-xl m-2 font-semibold text-red-600">
+              {error}
+            </p>
+          )}
           <h1 className="text-center , text-xl ">
             {user ? "Edit User" : "Add User"}
           </h1>
@@ -150,15 +181,15 @@ const AddUserForm = ({
                   fullName: e.target.value,
                 });
 
-                setError({
-                  ...Error,
+                setFormError({
+                  ...FormError,
                   nameError: "",
                 });
               }}
               className="w-full px-2 bg-gray-100 border border-purple-500 rounded-3xl"
             />
-            {Error.nameError !== "" && (
-              <p className="text-red-700">{Error.nameError}</p>
+            {FormError.nameError !== "" && (
+              <p className="text-red-700">{FormError.nameError}</p>
             )}
           </label>
           <label htmlFor="">
@@ -169,12 +200,12 @@ const AddUserForm = ({
               value={formData.age}
               onChange={(e) => {
                 setFormData({ ...formData, age: e.target.value });
-                setError({ ...Error, ageError: "" });
+                setFormError({ ...FormError, ageError: "" });
               }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
             />
-            {Error.ageError !== "" && (
-              <p className="text-red-700">{Error.ageError}</p>
+            {FormError.ageError !== "" && (
+              <p className="text-red-700">{FormError.ageError}</p>
             )}
           </label>
           <label htmlFor="">
@@ -189,8 +220,8 @@ const AddUserForm = ({
                   role: e.target.value as UserRole | "",
                 });
 
-                setError({
-                  ...Error,
+                setFormError({
+                  ...FormError,
                   roleError: "",
                 });
               }}
@@ -201,8 +232,8 @@ const AddUserForm = ({
               <option value="operator">operator</option>
               <option value="customer">customer</option>
             </select>
-            {Error.roleError !== "" && (
-              <p className="text-red-700">{Error.roleError}</p>
+            {FormError.roleError !== "" && (
+              <p className="text-red-700">{FormError.roleError}</p>
             )}
           </label>
 
@@ -235,19 +266,20 @@ const AddUserForm = ({
               value={formData.email}
               onChange={(e) => {
                 setFormData({ ...formData, email: e.target.value });
-                setError({ ...Error, emailError: "" });
+                setFormError({ ...FormError, emailError: "" });
               }}
               className="w-full bg-gray-100 px-2 border border-purple-500 rounded-sm"
             />
-            {Error.emailError !== "" && (
-              <p className="text-red-700">{Error.emailError}</p>
+            {FormError.emailError !== "" && (
+              <p className="text-red-700">{FormError.emailError}</p>
             )}
           </label>
           <button
+            disabled={isLoading}
             type="submit"
             className="bg-gray-100 border border-green-400 p-2 rounded-sm"
           >
-            submit
+            {isLoading ? "saving ..." : "submit"}
           </button>
           <button
             type="button"
