@@ -1,6 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import type { User } from "../types/user";
-import AddUserForm from "../components/AddUserForm";
 import type { FormPropType } from "../types/userForm";
 import { useEffect, useRef, useState } from "react";
 import { getUserById } from "../services/userApi";
@@ -10,9 +9,6 @@ const UserDetailsPage = ({
   onRemove,
   changeStatus,
   setSelectedUser,
-  changeInfo,
-  isFormVisible,
-  selectedUser,
   isLoading,
   setIsLoading,
   error,
@@ -20,7 +16,6 @@ const UserDetailsPage = ({
 }: {
   UsersList: User[];
   isFormVisible: boolean;
-  selectedUser: User | null;
   onRemove: (id: number) => void;
   changeStatus: (user: User) => void;
   setSelectedUser: (user: User | null) => void;
@@ -37,7 +32,10 @@ const UserDetailsPage = ({
     try {
       setIsLoading(true);
       setError(null);
-      const user = await getUserById(Number(userId));
+      const userIds: number[] = UsersList.map((user: User) => user.ID);
+      const user = userIds.includes(Number(userId))
+        ? UsersList.find((user) => user.ID === Number(userId))
+        : await getUserById(Number(userId));
       setClickedUser(user);
       return user;
     } catch (error) {
@@ -75,18 +73,6 @@ const UserDetailsPage = ({
 
   return (
     <div className="flex flex-col gap-4 justify-center items-center">
-      {isFormVisible && (
-        <AddUserForm
-          UsersList={UsersList}
-          editUserHandeler={changeInfo}
-          user={selectedUser}
-          setSelectedUser={setSelectedUser}
-          isLoading={isLoading}
-          error={error}
-          setIsLoading={setIsLoading}
-          setError={setError}
-        />
-      )}
       {error && (
         <h2 className="text-red-600 text-3xl font-semibold">{error}</h2>
       )}
@@ -119,14 +105,15 @@ const UserDetailsPage = ({
             >
               change status
             </button>
-            <button
+            <Link
+              to={`/users/${userId}/edit`}
+              className="bg-orange-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-orange-700"
               onClick={() => {
                 setSelectedUser(clickedUser);
               }}
-              className="bg-orange-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-orange-700"
             >
               Edit
-            </button>
+            </Link>
           </div>
         </div>
       )}

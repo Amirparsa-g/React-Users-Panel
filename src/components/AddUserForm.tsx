@@ -27,6 +27,7 @@ const AddUserForm = ({
   error: string | null;
 }) => {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState<FormPropType>({
     fullName: user?.fullName ?? "",
     age: user?.age.toString() ?? "",
@@ -118,6 +119,7 @@ const AddUserForm = ({
       setIsLoading(false);
     }
   };
+  console.log(isLoading);
   return (
     <div className=" z-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
@@ -137,7 +139,7 @@ const AddUserForm = ({
 
               editUserHandeler(formData, user.ID);
               setSelectedUser(null);
-              navigate(`/users/${user.ID}`);
+              navigate(`/users`);
 
               return;
             }

@@ -17,7 +17,7 @@ export function mapApiUserToUser(apiUser: ApiUser): User {
     email: apiUser.email?.trim() || undefined,
   };
 }
-function splitFullName(fullName: string) {
+export function splitFullName(fullName: string) {
   const [firstName, ...rest] = fullName.trim().split(/\s+/);
   return {
     firstName,
@@ -25,7 +25,7 @@ function splitFullName(fullName: string) {
   };
 }
 
-function mapUserRoleToApiUserRole(userRole: UserRole | ""): ApiUserRole {
+export function mapUserRoleToApiUserRole(userRole: UserRole | ""): ApiUserRole {
   if (userRole === "operator") return "moderator";
   if (userRole === "customer") return "user";
   return "admin";

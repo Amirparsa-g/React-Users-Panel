@@ -1,4 +1,9 @@
-import { mapApiUserToUser, mapUserToApiUser } from "../mappers/userMappers";
+import {
+  mapApiUserToUser,
+  mapUserRoleToApiUserRole,
+  mapUserToApiUser,
+  splitFullName,
+} from "../mappers/userMappers";
 import type {
   ApiUser,
   DeletedUserResponse,
@@ -75,4 +80,26 @@ export const deleteApiUser = async (
   if (!response.ok) throw new Error(`User Not Found : ${response.status}`);
   const data = await response.json();
   return data;
+};
+
+export const sendEditedUser = async (FormData: FormPropType, id: number) => {
+  const { firstName, lastName } = splitFullName(FormData.fullName);
+  const response = await fetch(`${API_BASE_URL}/users/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      firstName,
+      lastName,
+      age: FormData.age,
+      role: mapUserRoleToApiUserRole(FormData.role),
+      email: FormData.email,
+      isActive: FormData.isActive,
+    }),
+  });
+  if (!response.ok) throw new Error("User Not found");
+  const data = await response.json();
+  const cleanData = mapApiUserToUser(data);
+  return cleanData;
 };

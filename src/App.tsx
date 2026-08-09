@@ -15,7 +15,13 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import AboutPage from "./pages/AboutPage";
 import AppLayout from "./components/AppLayout";
-import { deleteApiUser, editApiUserStatus, getUsers } from "./services/userApi";
+import {
+  deleteApiUser,
+  editApiUserStatus,
+  getUsers,
+  sendEditedUser,
+} from "./services/userApi";
+import EditUserPage from "./pages/EditUserPage";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
@@ -83,7 +89,11 @@ function App() {
       setError(null);
       const editedUser = await editApiUserStatus(ediitingUser);
       const toggleUser = UsersList.map((user) => {
-        if (user.ID === editedUser.ID) return editedUser;
+        if (user.ID === editedUser.ID)
+          return {
+            ...user,
+            isActive: editedUser.isActive,
+          };
         return user;
       });
       setUserList(toggleUser);
@@ -98,27 +108,34 @@ function App() {
     setSearchTerm(searchTerm);
   };
 
-  const changeInfo = (formData: FormPropType, id: number) => {
-    const role = formData.role;
+  const changeInfo = async (formData: FormPropType, id: number) => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const role = formData.role;
+      if (role === "") return;
+      await sendEditedUser(formData, id);
+      const changedUsers: User[] = UsersList.map((user) => {
+        if (user.ID !== id) return user;
 
-    if (role === "") return;
+        return {
+          ...user,
+          fullName: formData.fullName.trim(),
+          age: Number(formData.age),
+          role,
+          isActive: formData.isActive,
+          email: formData.email.trim() || undefined,
+        };
+      });
 
-    const changedUsers: User[] = UsersList.map((user) => {
-      if (user.ID !== id) return user;
-
-      return {
-        ...user,
-        fullName: formData.fullName.trim(),
-        age: Number(formData.age),
-        role,
-        isActive: formData.isActive,
-        email: formData.email.trim() || undefined,
-      };
-    });
-
-    setUserList(changedUsers);
-    setIsFormVisible(false);
-    setSelectedUser(null);
+      setUserList(changedUsers);
+      setSelectedUser(null);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unexpected Error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -171,12 +188,26 @@ function App() {
                   changeStatus={ChangeStatusHandler}
                   setSelectedUser={setSelectedUser}
                   isFormVisible={isFormVisible}
-                  selectedUser={selectedUser}
                   changeInfo={changeInfo}
                   setError={setError}
                   setIsLoading={setIsLoading}
                   isLoading={isLoading}
                   error={error}
+                />
+              }
+            ></Route>
+            <Route
+              path=":userId/edit"
+              element={
+                <EditUserPage
+                  UsersList={UsersList}
+                  changeInfo={changeInfo}
+                  selectedUser={selectedUser}
+                  setSelectedUser={setSelectedUser}
+                  isLoading={isLoading}
+                  error={error}
+                  setIsLoading={setIsLoading}
+                  setError={setError}
                 />
               }
             ></Route>
