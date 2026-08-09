@@ -109,7 +109,8 @@ const AddUserForm = ({
     try {
       setIsLoading(true);
       setError(null);
-      await addApiUser(formData);
+      const newUser = await addApiUser(formData);
+      return newUser;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
       else setError("Unexpected Error");
@@ -143,15 +144,16 @@ const AddUserForm = ({
 
             if (!addUserHandeler) return;
 
-            const newUser: User = {
-              ID: Date.now(),
-              fullName: formData.fullName.trim(),
-              age: Number(formData.age),
-              role: formData.role,
-              isActive: formData.isActive,
-              email: formData.email.trim() || undefined,
-            };
-            await addingApiUser();
+            // const newUser: User = {
+            //   ID: Date.now(),
+            //   fullName: formData.fullName.trim(),
+            //   age: Number(formData.age),
+            //   role: formData.role,
+            //   isActive: formData.isActive,
+            //   email: formData.email.trim() || undefined,
+            // };
+            const newUser = await addingApiUser();
+            if (!newUser) return;
             addUserHandeler(newUser);
             navigate("/users");
           }}

@@ -15,7 +15,7 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import AboutPage from "./pages/AboutPage";
 import AppLayout from "./components/AppLayout";
-import { getUsers } from "./services/userApi";
+import { deleteApiUser, editApiUserStatus, getUsers } from "./services/userApi";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
@@ -66,12 +66,33 @@ function App() {
     setUserList(remainingUsers);
     alert("user removed seccessfully");
   };
-  const ChangeStatusHandler = (id: number) => {
-    const toggleUser = UsersList.map((user) => {
-      if (user.ID === id) return { ...user, isActive: !user.isActive };
-      return user;
-    });
-    setUserList(toggleUser);
+  const removeApiUser = async (id: number) => {
+    try {
+      setError(null);
+      const deleteResponse = await deleteApiUser(id);
+      if (deleteResponse.isDeleted) removeUserHandler(id);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unexpected Error");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const ChangeStatusHandler = async (ediitingUser: User) => {
+    try {
+      setError(null);
+      const editedUser = await editApiUserStatus(ediitingUser);
+      const toggleUser = UsersList.map((user) => {
+        if (user.ID === editedUser.ID) return editedUser;
+        return user;
+      });
+      setUserList(toggleUser);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unexpected Error");
+    } finally {
+      setIsLoading(false);
+    }
   };
   const SearchUser = (searchTerm: string) => {
     setSearchTerm(searchTerm);
@@ -119,7 +140,7 @@ function App() {
                   SearchUser={SearchUser}
                   status={status}
                   setUserStatus={setUserStatus}
-                  removeUserHandler={removeUserHandler}
+                  removeUserHandler={removeApiUser}
                   ChangeStatusHandler={ChangeStatusHandler}
                   isLoading={isLoading}
                   error={error}
@@ -146,7 +167,7 @@ function App() {
               element={
                 <UserDetailsPage
                   UsersList={UsersList}
-                  onRemove={removeUserHandler}
+                  onRemove={removeApiUser}
                   changeStatus={ChangeStatusHandler}
                   setSelectedUser={setSelectedUser}
                   isFormVisible={isFormVisible}

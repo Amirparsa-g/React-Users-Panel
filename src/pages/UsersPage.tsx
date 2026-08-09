@@ -26,7 +26,7 @@ const UsersPage = ({
   searchedTerm: string;
   SearchUser: (term: string) => void;
   removeUserHandler: (id: number) => void;
-  ChangeStatusHandler: (id: number) => void;
+  ChangeStatusHandler: (user: User) => void;
   isLoading: boolean;
   error: string | null;
   LoadUser: () => void;
@@ -78,6 +78,8 @@ const UsersPage = ({
           users={displayedUsers}
           onRemove={removeUserHandler}
           changeStatus={ChangeStatusHandler}
+          isLoading={isLoading}
+          error={error}
         />
       );
     }

@@ -22,7 +22,7 @@ const UserDetailsPage = ({
   isFormVisible: boolean;
   selectedUser: User | null;
   onRemove: (id: number) => void;
-  changeStatus: (id: number) => void;
+  changeStatus: (user: User) => void;
   setSelectedUser: (user: User | null) => void;
   changeInfo: (formData: FormPropType, id: number) => void;
   setIsLoading: (value: boolean) => void;
@@ -81,6 +81,10 @@ const UserDetailsPage = ({
           editUserHandeler={changeInfo}
           user={selectedUser}
           setSelectedUser={setSelectedUser}
+          isLoading={isLoading}
+          error={error}
+          setIsLoading={setIsLoading}
+          setError={setError}
         />
       )}
       {error && (
@@ -95,9 +99,9 @@ const UserDetailsPage = ({
           <p>{clickedUser.isActive ? "Active" : "inActive"}</p>
           <div className="flex justify-center gap-4">
             <button
-              onClick={() => {
+              onClick={async () => {
                 isDeleting.current = true;
-                onRemove(clickedUser.ID);
+                await onRemove(clickedUser.ID);
                 navigate("/users");
               }}
               className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
@@ -105,7 +109,12 @@ const UserDetailsPage = ({
               remove
             </button>
             <button
-              onClick={() => changeStatus(clickedUser.ID)}
+              onClick={() => {
+                changeStatus(clickedUser);
+                setClickedUser((prev) =>
+                  prev ? { ...prev, isActive: !prev.isActive } : prev,
+                );
+              }}
               className="bg-purple-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-purple-700"
             >
               change status
