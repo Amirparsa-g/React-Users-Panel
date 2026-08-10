@@ -106,8 +106,6 @@ const UserDetailsPage = ({
             <button
               onClick={async () => {
                 setIsDeleting(true);
-                // await onRemove(clickedUser.ID);
-                // navigate("/users");
               }}
               className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
             >

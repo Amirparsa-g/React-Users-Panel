@@ -50,14 +50,12 @@ function App() {
     load();
   }, []);
 
-  console.log(users);
-
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<Filters>("all");
   const [isFormVisible, setIsFormVisible] = useState(false);
-  console.log(UsersList);
+
   const addUserHandler = (newUser: User) => {
     const isAvailable = UsersList.find((user) => user.ID === newUser.ID);
     if (isAvailable) alert("you cant add the same user twice");
