@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import EmptyState from "../components/EmptyState";
 import UserList from "../components/UserList";
 import type { User } from "../types/user";
@@ -6,6 +6,7 @@ import Searchinput from "../components/Searchinput";
 import UserStats from "../components/UserStats";
 
 import { Link } from "react-router-dom";
+import { serverSearch } from "../services/userApi";
 type Filters = "active" | "inactive" | "all";
 const UsersPage = ({
   UsersList,
@@ -16,7 +17,9 @@ const UsersPage = ({
   removeUserHandler,
   ChangeStatusHandler,
   isLoading,
+  setIsLoading,
   error,
+  setError,
   LoadUser,
 }: {
   UsersList: User[];
@@ -28,16 +31,39 @@ const UsersPage = ({
   removeUserHandler: (id: number) => void;
   ChangeStatusHandler: (user: User) => void;
   isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
+  setError: (value: string | null) => void;
   error: string | null;
   LoadUser: () => void;
 }) => {
   const allUsers = UsersList;
+  const [isServer, setIsServer] = useState<boolean>(false);
+  const [serverResult, setServerResult] = useState<User[]>([]);
   const ActiveUsers = UsersList.filter((user) => user.isActive);
   const InActiveUsers = UsersList.filter((user) => !user.isActive);
-  const searchedUsers = UsersList.filter((user) => {
-    const term = searchedTerm.toLowerCase().trim();
-    return user.fullName.toLowerCase().includes(term);
-  });
+  const term = searchedTerm.toLowerCase().trim();
+  useEffect(() => {
+    const fetchServerResult = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const serachedServerUsers: User[] = await serverSearch(term);
+        setServerResult(serachedServerUsers);
+      } catch (error) {
+        if (error instanceof Error) setError(error.message);
+        else {
+          setError("Unexpected Error");
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    void fetchServerResult();
+  }, [searchedTerm, isServer]);
+  const searchedUsers =
+    isServer && searchedTerm.trim() !== ""
+      ? serverResult
+      : UsersList.filter((user) => user.fullName.toLowerCase().includes(term));
 
   const displayedUsers: User[] = searchedUsers.filter((user) => {
     if (status === "all") return true;
@@ -87,7 +113,12 @@ const UsersPage = ({
 
   return (
     <>
-      <Searchinput onSearchChange={SearchUser} value={searchedTerm} />
+      <Searchinput
+        onSearchChange={SearchUser}
+        value={searchedTerm}
+        isServer={isServer}
+        setIsServer={setIsServer}
+      />
       {content}
       <Link
         to="/users/new"

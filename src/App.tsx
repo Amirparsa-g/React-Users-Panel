@@ -160,6 +160,8 @@ function App() {
                   isLoading={isLoading}
                   error={error}
                   LoadUser={loadUsers}
+                  setIsLoading={setIsLoading}
+                  setError={setError}
                 />
               }
             ></Route>

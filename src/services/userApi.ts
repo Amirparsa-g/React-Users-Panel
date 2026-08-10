@@ -64,10 +64,10 @@ export const editApiUserStatus = async (user: User): Promise<User> => {
   });
   if (!response.ok) throw new Error(`User Not Found : ${response.status}`);
   const data = await response.json();
-  console.log(data);
+
   const editedUser = mapApiUserToUser(data);
   editedUser.isActive = !user.isActive;
-  console.log(editedUser);
+
   return editedUser;
 };
 
@@ -101,5 +101,17 @@ export const sendEditedUser = async (FormData: FormPropType, id: number) => {
   if (!response.ok) throw new Error("User Not found");
   const data = await response.json();
   const cleanData = mapApiUserToUser(data);
+  return cleanData;
+};
+export const serverSearch = async (searchTerm: string): Promise<User[]> => {
+  const response = await fetch(
+    `${API_BASE_URL}/users/search?q=${encodeURIComponent(searchTerm)}`,
+  );
+  if (!response.ok) {
+    throw new Error("User Not Found");
+  }
+  const data: UserApiResponse = await response.json();
+  const dataToUsers = data.users;
+  const cleanData = dataToUsers.map((user) => mapApiUserToUser(user));
   return cleanData;
 };
