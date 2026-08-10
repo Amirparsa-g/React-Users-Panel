@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import type { User } from "../types/user";
 import type { FormPropType } from "../types/userForm";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getUserById } from "../services/userApi";
 
 const UserDetailsPage = ({
@@ -46,7 +46,7 @@ const UserDetailsPage = ({
       setIsLoading(false);
     }
   };
-  const isDeleting = useRef(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
   useEffect(() => {
     const settingUser = async () => {
       const fetchedUser = await setUser();
@@ -70,7 +70,26 @@ const UserDetailsPage = ({
   if (!clickedUser) {
     return null;
   }
-
+  if (isDeleting) {
+    return (
+      <div className="bg-black/50 backdrop-blur-md h-screen w-full flex justify-center items-center">
+        <div className="bg-white w-md fixed border border-black rounded-md h-6/12">
+          <h2 className="text-center mt-7 font-semibold text-xl">
+            Are you sure you want to continue this action?
+          </h2>
+          <button
+            className="block mx-auto mt-20 border border-green-400 p-3 rounded-md"
+            onClick={async () => {
+              await onRemove(clickedUser.ID);
+              navigate("/users");
+            }}
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-4 justify-center items-center">
       {error && (
@@ -86,9 +105,9 @@ const UserDetailsPage = ({
           <div className="flex justify-center gap-4">
             <button
               onClick={async () => {
-                isDeleting.current = true;
-                await onRemove(clickedUser.ID);
-                navigate("/users");
+                setIsDeleting(true);
+                // await onRemove(clickedUser.ID);
+                // navigate("/users");
               }}
               className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
             >
