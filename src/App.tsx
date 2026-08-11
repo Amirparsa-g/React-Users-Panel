@@ -1,30 +1,67 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import UserList from "./components/UserList";
-import type { User } from "./types/user";
-import users from "./data/users";
-import Searchinput from "./components/Searchinput";
-import UserStats from "./components/UserStats";
-import EmptyState from "./components/EmptyState";
+//import UserList from "./components/UserList";
+import { type User } from "./types/user";
+
+import HomePage from "./pages/HomePage";
+
+// import users from "./data/users";
+//import EmptyState from "./components/EmptyState";
+import type { FormPropType } from "./types/userForm";
+import { Routes, Route } from "react-router-dom";
+import UsersPage from "./pages/UsersPage";
+import AddUserPage from "./pages/AddUserPage";
+import UserDetailsPage from "./pages/UserDetailsPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import AboutPage from "./pages/AboutPage";
+import AppLayout from "./components/AppLayout";
+import {
+  deleteApiUser,
+  editApiUserStatus,
+  getUsers,
+  sendEditedUser,
+} from "./services/userApi";
+import EditUserPage from "./pages/EditUserPage";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [UsersList, setUserList] = useState<User[]>(users);
+  const loadUsers = async () => {
+    try {
+      setIsLoading(true);
+      setError("");
+      const apiUsers = await getUsers();
+      setUsers(apiUsers);
+      setUserList(apiUsers);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unexpected Error");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    const load = async () => {
+      await loadUsers();
+    };
+    load();
+  }, []);
+
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<Filters>("all");
-  const newUser: User = {
-    ID: 7,
-    fullName: "کاربر آزمایشی",
-    age: 27,
-    role: "operator",
-    isActive: true,
-    email: "test.user@example.com",
-  };
+  const [isFormVisible, setIsFormVisible] = useState(false);
+
   const addUserHandler = (newUser: User) => {
     const isAvailable = UsersList.find((user) => user.ID === newUser.ID);
     if (isAvailable) alert("you cant add the same user twice");
     else {
       setUserList([...UsersList, newUser]);
+      setIsFormVisible(false);
       alert("user Added Successfully");
     }
   };
@@ -33,83 +70,153 @@ function App() {
     setUserList(remainingUsers);
     alert("user removed seccessfully");
   };
-  const ChangeStatusHandler = (id: number) => {
-    const toggleUser = UsersList.map((user) => {
-      if (user.ID === id) return { ...user, isActive: !user.isActive };
-      return user;
-    });
-    setUserList(toggleUser);
+  const removeApiUser = async (id: number) => {
+    try {
+      setError(null);
+      const deleteResponse = await deleteApiUser(id);
+      if (deleteResponse.isDeleted) removeUserHandler(id);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unexpected Error");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const ChangeStatusHandler = async (ediitingUser: User) => {
+    try {
+      setError(null);
+      const editedUser = await editApiUserStatus(ediitingUser);
+      const toggleUser = UsersList.map((user) => {
+        if (user.ID === editedUser.ID)
+          return {
+            ...user,
+            isActive: editedUser.isActive,
+          };
+        return user;
+      });
+      setUserList(toggleUser);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unexpected Error");
+    } finally {
+      setIsLoading(false);
+    }
   };
   const SearchUser = (searchTerm: string) => {
     setSearchTerm(searchTerm);
   };
-  const allUsers = UsersList;
-  const ActiveUsers = UsersList.filter((user) => user.isActive);
-  const InActiveUsers = UsersList.filter((user) => !user.isActive);
-  const searchedUsers = UsersList.filter((user) => {
-    const term = searchedTerm.toLowerCase().trim();
-    return user.fullName.toLowerCase().includes(term);
-  });
 
-  const displayedUsers: User[] = searchedUsers.filter((user) => {
-    if (status === "all") return true;
-    else if (status === "inactive") return !user.isActive;
-    return user.isActive;
-  });
-  let content;
-  if (UsersList.length === 0 || displayedUsers.length === 0)
-    content = (
-      <EmptyState
-        UsersList={UsersList}
-        displayedUsers={displayedUsers}
-        status={status}
-        searchedTerm={searchedTerm}
-      />
-    );
-  else {
-    content = (
-      <UserList
-        users={displayedUsers}
-        onRemove={removeUserHandler}
-        changeStatus={ChangeStatusHandler}
-      />
-    );
-  }
+  const changeInfo = async (formData: FormPropType, id: number) => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const role = formData.role;
+      if (role === "") return;
+      await sendEditedUser(formData, id);
+      const changedUsers: User[] = UsersList.map((user) => {
+        if (user.ID !== id) return user;
+
+        return {
+          ...user,
+          fullName: formData.fullName.trim(),
+          age: Number(formData.age),
+          role,
+          isActive: formData.isActive,
+          email: formData.email.trim() || undefined,
+        };
+      });
+
+      setUserList(changedUsers);
+      setSelectedUser(null);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unexpected Error");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    document.title = `User Managment -${UsersList.length} Users`;
+  }, [UsersList.length]);
+
   return (
     <>
-      <Searchinput onSearchChange={SearchUser} value={searchedTerm} />
-      {content}
-      <button
-        onClick={() => addUserHandler(newUser)}
-        className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-      >
-        Add New User
-      </button>
-      <div className="flex items-center">
-        <button
-          onClick={() => setUserStatus("active")}
-          className="bg-slate-50 block m-auto mt-5 border border-green-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-        >
-          active
-        </button>
-        <button
-          onClick={() => setUserStatus("inactive")}
-          className="bg-slate-50 block m-auto mt-5 border border-red-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-        >
-          inactive
-        </button>
-        <button
-          onClick={() => setUserStatus("all")}
-          className="bg-slate-50 block m-auto mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-        >
-          all
-        </button>
-      </div>
-      <UserStats
-        allUsers={allUsers.length}
-        ActiveUsers={ActiveUsers.length}
-        InActiveUsers={InActiveUsers.length}
-      />
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<HomePage UsersList={UsersList} />}></Route>
+          <Route path="users">
+            <Route
+              index
+              element={
+                <UsersPage
+                  UsersList={UsersList}
+                  searchedTerm={searchedTerm}
+                  SearchUser={SearchUser}
+                  status={status}
+                  setUserStatus={setUserStatus}
+                  removeUserHandler={removeApiUser}
+                  ChangeStatusHandler={ChangeStatusHandler}
+                  isLoading={isLoading}
+                  error={error}
+                  LoadUser={loadUsers}
+                  setIsLoading={setIsLoading}
+                  setError={setError}
+                />
+              }
+            ></Route>
+            <Route
+              path="new"
+              element={
+                <AddUserPage
+                  setSelectedUser={setSelectedUser}
+                  addUserHandeler={addUserHandler}
+                  UsersList={UsersList}
+                  setIsLoading={setIsLoading}
+                  setError={setError}
+                  isLoading={isLoading}
+                  error={error}
+                />
+              }
+            ></Route>
+            <Route
+              path=":userId"
+              element={
+                <UserDetailsPage
+                  UsersList={UsersList}
+                  onRemove={removeApiUser}
+                  changeStatus={ChangeStatusHandler}
+                  setSelectedUser={setSelectedUser}
+                  isFormVisible={isFormVisible}
+                  changeInfo={changeInfo}
+                  setError={setError}
+                  setIsLoading={setIsLoading}
+                  isLoading={isLoading}
+                  error={error}
+                />
+              }
+            ></Route>
+            <Route
+              path=":userId/edit"
+              element={
+                <EditUserPage
+                  UsersList={UsersList}
+                  changeInfo={changeInfo}
+                  selectedUser={selectedUser}
+                  setSelectedUser={setSelectedUser}
+                  isLoading={isLoading}
+                  error={error}
+                  setIsLoading={setIsLoading}
+                  setError={setError}
+                />
+              }
+            ></Route>
+          </Route>
+
+          <Route path="/about" element={<AboutPage />}></Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
+        </Route>
+      </Routes>
     </>
   );
 }
