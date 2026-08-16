@@ -18,7 +18,10 @@ const AddUserForm = ({
   addUserHandeler?: (newUser: User) => void;
   UsersList: User[];
   user?: User | null;
-  editUserHandeler?: (formData: FormPropType, id: number) => void;
+  editUserHandeler?: (
+    formData: FormPropType,
+    id: number,
+  ) => Promise<boolean | undefined>;
   setIsLoading: (value: boolean) => void;
   setError: (value: string | null) => void;
   isLoading: boolean;
@@ -135,8 +138,8 @@ const AddUserForm = ({
             if (user) {
               if (!editUserHandeler) return;
 
-              await editUserHandeler(formData, user.ID);
-              navigate(`/users/${user.ID}`);
+              const isSuccess = await editUserHandeler(formData, user.ID);
+              if (isSuccess) navigate(`/users/${user.ID}`);
 
               return;
             }

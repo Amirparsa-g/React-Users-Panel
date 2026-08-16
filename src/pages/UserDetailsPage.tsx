@@ -14,7 +14,7 @@ const UserDetailsPage = ({
   setError,
 }: {
   UsersList: User[];
-  onRemove: (id: number) => void;
+  onRemove: (id: number) => Promise<boolean | undefined>;
   changeStatus: (user: User) => void;
   changeInfo: (formData: FormPropType, id: number) => void;
   setIsLoading: (value: boolean) => void;
@@ -89,8 +89,9 @@ const UserDetailsPage = ({
             className="block mx-auto mt-20 border border-green-400 p-3 rounded-md"
             onClick={async () => {
               setUpdatingUserId(clickedUser.ID);
-              await onRemove(clickedUser.ID);
-              navigate("/users");
+              const isSeccess = await onRemove(clickedUser.ID);
+              if (isSeccess) navigate("/users");
+              else setIsDeleting(false);
             }}
           >
             Continue
@@ -104,47 +105,47 @@ const UserDetailsPage = ({
       {error && (
         <h2 className="text-red-600 text-3xl font-semibold">{error}</h2>
       )}
-      {!error && (
-        <div className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200 min-w-md">
-          <p>{clickedUser.fullName}</p>
-          <p>{clickedUser.age}</p>
-          <p>{clickedUser.role}</p>
-          <p>{clickedUser.email}</p>
-          <p>{clickedUser.isActive ? "Active" : "inActive"}</p>
-          <div className="flex justify-center gap-4">
-            <button
-              disabled={updatingUserId === clickedUser.ID}
-              onClick={async () => {
-                setIsDeleting(true);
-              }}
-              className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
-            >
-              remove
-            </button>
-            <button
-              disabled={updatingUserId === clickedUser.ID}
-              onClick={async () => {
-                setUpdatingUserId(clickedUser.ID);
-                await changeStatus(clickedUser);
-                setUpdatingUserId(null);
-                setClickedUser((prev) =>
-                  prev ? { ...prev, isActive: !prev.isActive } : prev,
-                );
-              }}
-              className="bg-purple-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-purple-700"
-            >
-              change status
-            </button>
-            <Link
-              aria-disabled={updatingUserId === clickedUser.ID}
-              to={`/users/${userId}/edit`}
-              className="bg-orange-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-orange-700"
-            >
-              Edit
-            </Link>
-          </div>
+
+      <div className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200 min-w-md">
+        <p>{clickedUser.fullName}</p>
+        <p>{clickedUser.age}</p>
+        <p>{clickedUser.role}</p>
+        <p>{clickedUser.email}</p>
+        <p>{clickedUser.isActive ? "Active" : "inActive"}</p>
+        <div className="flex justify-center gap-4">
+          <button
+            disabled={updatingUserId === clickedUser.ID}
+            onClick={async () => {
+              setIsDeleting(true);
+            }}
+            className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
+          >
+            remove
+          </button>
+          <button
+            disabled={updatingUserId === clickedUser.ID}
+            onClick={async () => {
+              setUpdatingUserId(clickedUser.ID);
+              await changeStatus(clickedUser);
+              setUpdatingUserId(null);
+              setClickedUser((prev) =>
+                prev ? { ...prev, isActive: !prev.isActive } : prev,
+              );
+            }}
+            className="bg-purple-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-purple-700"
+          >
+            change status
+          </button>
+          <Link
+            aria-disabled={updatingUserId === clickedUser.ID}
+            to={`/users/${userId}/edit`}
+            className="bg-orange-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-orange-700"
+          >
+            Edit
+          </Link>
         </div>
-      )}
+      </div>
+
       <Link
         to="/users"
         className="mt-2 border border-purple-400 p-2 rounded-md hover:scale-105 tramsition-all ease-in-out duration-300"

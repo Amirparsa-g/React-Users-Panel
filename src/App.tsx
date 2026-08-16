@@ -69,9 +69,11 @@ function App() {
       setError(null);
       const deleteResponse = await deleteApiUser(id);
       if (deleteResponse.isDeleted) removeUserHandler(id);
+      return true;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
       else setError("Unexpected Error");
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -112,9 +114,11 @@ function App() {
           user.ID === updatedUser.ID ? updatedUser : user,
         ),
       );
+      return true;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
       else setError("Unexpected Error");
+      return false;
     } finally {
       setIsLoading(false);
     }
