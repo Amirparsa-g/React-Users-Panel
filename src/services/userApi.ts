@@ -9,13 +9,14 @@ import type {
   DeletedUserResponse,
   UserApiResponse,
 } from "../types/apiUser";
+import type { CreateUserRequest } from "../types/requests";
 import type { User } from "../types/user";
 import type { FormPropType } from "../types/userForm";
 
 const API_BASE_URL = "https://dummyjson.com";
 
 export const getUsers = async (): Promise<User[]> => {
-  const response = await fetch(`${API_BASE_URL}/users?limit=10`);
+  const response = await fetch(`${API_BASE_URL}/users?limit=0`);
   if (!response.ok)
     throw new Error(`failed to load users : ${response.status}`);
   const rawData: UserApiResponse = await response.json();
@@ -31,8 +32,7 @@ export const getUserById = async (id: number): Promise<User | undefined> => {
   return cleanData;
 };
 export const addApiUser = async (formData: FormPropType): Promise<User> => {
-  const ApiUserPayload: User = {
-    ID: Date.now(),
+  const ApiUserPayload: CreateUserRequest = {
     fullName: formData.fullName,
     age: Number(formData.age),
     role: formData.role,
@@ -92,7 +92,7 @@ export const sendEditedUser = async (FormData: FormPropType, id: number) => {
     body: JSON.stringify({
       firstName,
       lastName,
-      age: FormData.age,
+      age: Number(FormData.age),
       role: mapUserRoleToApiUserRole(FormData.role),
       email: FormData.email,
       isActive: FormData.isActive,

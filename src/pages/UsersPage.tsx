@@ -44,9 +44,9 @@ const UsersPage = ({
   const term = searchedTerm.toLowerCase().trim();
   useEffect(() => {
     const fetchServerResult = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
-        setIsLoading(true);
-        setError(null);
         const serachedServerUsers: User[] = await serverSearch(term);
         setServerResult(serachedServerUsers);
       } catch (error) {

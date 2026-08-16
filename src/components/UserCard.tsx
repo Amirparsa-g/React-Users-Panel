@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { User } from "../types/user";
+import { useState } from "react";
 const UserCard = ({
   user,
   onRemove,
@@ -13,6 +14,7 @@ const UserCard = ({
   isLoading: boolean;
   error: string | null;
 }) => {
+  const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
   return (
     <div
       className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200"
@@ -30,13 +32,23 @@ const UserCard = ({
       {user.isActive ? <p>Active</p> : <p>InActive</p>}
       <div className="flex justify-center gap-4">
         <button
-          onClick={() => onRemove(user.ID)}
+          disabled={updatingUserId === user.ID}
+          onClick={async () => {
+            setUpdatingUserId(user.ID);
+            await onRemove(user.ID);
+            setUpdatingUserId(null);
+          }}
           className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
         >
           Remove
         </button>
         <button
-          onClick={() => changeStatus(user)}
+          disabled={updatingUserId === user.ID}
+          onClick={async () => {
+            setUpdatingUserId(user.ID);
+            await changeStatus(user);
+            setUpdatingUserId(null);
+          }}
           className="bg-purple-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-purple-700"
         >
           changeStatus

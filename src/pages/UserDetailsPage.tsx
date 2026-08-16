@@ -8,17 +8,14 @@ const UserDetailsPage = ({
   UsersList,
   onRemove,
   changeStatus,
-  setSelectedUser,
   isLoading,
   setIsLoading,
   error,
   setError,
 }: {
   UsersList: User[];
-  isFormVisible: boolean;
   onRemove: (id: number) => void;
   changeStatus: (user: User) => void;
-  setSelectedUser: (user: User | null) => void;
   changeInfo: (formData: FormPropType, id: number) => void;
   setIsLoading: (value: boolean) => void;
   isLoading: boolean;
@@ -27,11 +24,14 @@ const UserDetailsPage = ({
 }) => {
   const { userId } = useParams();
   const navigate = useNavigate();
+
   const [clickedUser, setClickedUser] = useState<User | undefined>(undefined);
+  const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
+
   const setUser = async () => {
+    setIsLoading(true);
+    setError(null);
     try {
-      setIsLoading(true);
-      setError(null);
       const userIds: number[] = UsersList.map((user: User) => user.ID);
       const user = userIds.includes(Number(userId))
         ? UsersList.find((user) => user.ID === Number(userId))
@@ -49,6 +49,12 @@ const UserDetailsPage = ({
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   useEffect(() => {
     const settingUser = async () => {
+      const id = Number(userId);
+      if (!userId || !Number.isInteger(id)) {
+        alert("Invalid Id");
+        navigate("/users");
+        return;
+      }
       const fetchedUser = await setUser();
       if (!fetchedUser) {
         alert("User Not Found");
@@ -60,6 +66,7 @@ const UserDetailsPage = ({
   useEffect(() => {
     document.title = "User Details | User Management";
   }, []);
+
   if (isLoading) {
     return (
       <h2 className="text-center text-3xl font-semibold">
@@ -67,6 +74,7 @@ const UserDetailsPage = ({
       </h2>
     );
   }
+
   if (!clickedUser) {
     return null;
   }
@@ -80,6 +88,7 @@ const UserDetailsPage = ({
           <button
             className="block mx-auto mt-20 border border-green-400 p-3 rounded-md"
             onClick={async () => {
+              setUpdatingUserId(clickedUser.ID);
               await onRemove(clickedUser.ID);
               navigate("/users");
             }}
@@ -104,6 +113,7 @@ const UserDetailsPage = ({
           <p>{clickedUser.isActive ? "Active" : "inActive"}</p>
           <div className="flex justify-center gap-4">
             <button
+              disabled={updatingUserId === clickedUser.ID}
               onClick={async () => {
                 setIsDeleting(true);
               }}
@@ -112,8 +122,11 @@ const UserDetailsPage = ({
               remove
             </button>
             <button
-              onClick={() => {
-                changeStatus(clickedUser);
+              disabled={updatingUserId === clickedUser.ID}
+              onClick={async () => {
+                setUpdatingUserId(clickedUser.ID);
+                await changeStatus(clickedUser);
+                setUpdatingUserId(null);
                 setClickedUser((prev) =>
                   prev ? { ...prev, isActive: !prev.isActive } : prev,
                 );
@@ -123,11 +136,9 @@ const UserDetailsPage = ({
               change status
             </button>
             <Link
+              aria-disabled={updatingUserId === clickedUser.ID}
               to={`/users/${userId}/edit`}
               className="bg-orange-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-orange-700"
-              onClick={() => {
-                setSelectedUser(clickedUser);
-              }}
             >
               Edit
             </Link>

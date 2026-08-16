@@ -10,7 +10,6 @@ const AddUserForm = ({
   UsersList,
   user,
   editUserHandeler,
-  setSelectedUser,
   setIsLoading,
   setError,
   isLoading,
@@ -20,7 +19,6 @@ const AddUserForm = ({
   UsersList: User[];
   user?: User | null;
   editUserHandeler?: (formData: FormPropType, id: number) => void;
-  setSelectedUser: (user: User | null) => void;
   setIsLoading: (value: boolean) => void;
   setError: (value: string | null) => void;
   isLoading: boolean;
@@ -119,7 +117,7 @@ const AddUserForm = ({
       setIsLoading(false);
     }
   };
-  console.log(isLoading);
+
   return (
     <div className=" z-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
@@ -137,9 +135,8 @@ const AddUserForm = ({
             if (user) {
               if (!editUserHandeler) return;
 
-              editUserHandeler(formData, user.ID);
-              setSelectedUser(null);
-              navigate(`/users`);
+              await editUserHandeler(formData, user.ID);
+              navigate(`/users/${user.ID}`);
 
               return;
             }
@@ -279,7 +276,6 @@ const AddUserForm = ({
           <button
             type="button"
             onClick={() => {
-              setSelectedUser(null);
               navigate(user ? `/users/${user.ID}` : "/users");
             }}
             className="bg-gray-100 border border-red-400 p-2 rounded-sm"
