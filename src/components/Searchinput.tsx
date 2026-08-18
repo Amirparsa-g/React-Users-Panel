@@ -16,7 +16,7 @@ const Searchinput = ({
 }: SearchBarProps) => {
   const [serverValue, setServerValue] = useState<string>("");
   return (
-    <div className="flex flex-col justify-center w-md items-center mx-auto">
+    <div className="flex flex-col justify-center w-full items-center mx-auto ">
       {!isServer && (
         <input
           type="text"
