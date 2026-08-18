@@ -112,40 +112,41 @@ const UsersPage = ({
   }
 
   return (
-    <>
+    <div className="flex flex-col flex-wrap items-center max-w-full">
       <Searchinput
         onSearchChange={SearchUser}
         value={searchedTerm}
         isServer={isServer}
         setIsServer={setIsServer}
       />
-      {content}
+      <div className="flex items-center justify-center gap-2 w-full">
+        <button
+          onClick={() => setUserStatus("active")}
+          className="bg-slate-50  mt-5 border border-green-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+        >
+          active
+        </button>
+        <button
+          onClick={() => setUserStatus("inactive")}
+          className="bg-slate-50  mt-5 border border-red-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+        >
+          inactive
+        </button>
+        <button
+          onClick={() => setUserStatus("all")}
+          className="bg-slate-50  mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+        >
+          all
+        </button>
+      </div>
       <Link
         to="/users/new"
         className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
       >
         Add User
       </Link>
-      <div className="flex items-center">
-        <button
-          onClick={() => setUserStatus("active")}
-          className="bg-slate-50 block m-auto mt-5 border border-green-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-        >
-          active
-        </button>
-        <button
-          onClick={() => setUserStatus("inactive")}
-          className="bg-slate-50 block m-auto mt-5 border border-red-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-        >
-          inactive
-        </button>
-        <button
-          onClick={() => setUserStatus("all")}
-          className="bg-slate-50 block m-auto mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-        >
-          all
-        </button>
-      </div>
+
+      {content}
       <UserStats
         allUsers={allUsers.length}
         ActiveUsers={ActiveUsers.length}
@@ -153,11 +154,11 @@ const UsersPage = ({
       />
       <button
         onClick={LoadUser}
-        className="bg-slate-50 block m-auto mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+        className="bg-slate-50 mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-32"
       >
         retry
       </button>
-    </>
+    </div>
   );
 };
 

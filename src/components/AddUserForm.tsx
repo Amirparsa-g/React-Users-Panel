@@ -272,7 +272,7 @@ const AddUserForm = ({
           <button
             disabled={isLoading}
             type="submit"
-            className="bg-gray-100 border border-green-400 p-2 rounded-sm"
+            className={`${isLoading ? "bg-gray-50 border border-gray-400 text-gray-400 p-2 rounded-sm" : "bg-gray-100 border border-green-400 p-2 rounded-sm hover:scale-105 ease-in-out duration-300"}`}
           >
             {isLoading ? "saving ..." : "submit"}
           </button>
@@ -281,7 +281,7 @@ const AddUserForm = ({
             onClick={() => {
               navigate(user ? `/users/${user.ID}` : "/users");
             }}
-            className="bg-gray-100 border border-red-400 p-2 rounded-sm"
+            className="bg-gray-100 border border-red-400 p-2 rounded-sm hover:scale-105 ease-in-out duration-300"
           >
             Cancel
           </button>

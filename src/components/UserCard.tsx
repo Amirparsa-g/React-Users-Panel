@@ -17,7 +17,7 @@ const UserCard = ({
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
   return (
     <div
-      className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200"
+      className="bg-slate-50 text-center p-5 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200 max-w-md"
       aria-disabled={isLoading}
     >
       {error && (
@@ -25,11 +25,35 @@ const UserCard = ({
           {error}
         </p>
       )}
-      <p className="p-0.5">{user.fullName}</p>
-      <p className="p-0.5">{user.age}</p>
-      <p className="p-0.5">{user.role}</p>
-      {user.email ? <p>{user.email}</p> : <p>ایمیل ثبت نشده است</p>}
-      {user.isActive ? <p>Active</p> : <p>InActive</p>}
+      <p className="p-0.5 text-xl font-bold">{user.fullName}</p>
+      <p className="p-0.5">
+        <span className="font-semibold">age : </span> {user.age}
+      </p>
+      <p className="p-0.5">
+        {" "}
+        <span className="font-semibold">role : </span>
+        {user.role}
+      </p>
+      {user.email ? (
+        <p className="break-all px-2">
+          {" "}
+          <span className="font-semibold">email : </span>
+          {user.email}
+        </p>
+      ) : (
+        <p>ایمیل ثبت نشده است</p>
+      )}
+      {user.isActive ? (
+        <p className="text-green-500">
+          {" "}
+          <span className="font-semibold text-black">Activity : </span>Active
+        </p>
+      ) : (
+        <p className="text-pink-800">
+          {" "}
+          <span className="font-semibold text-black">Activity :</span>InActive
+        </p>
+      )}
       <div className="flex justify-center gap-4">
         <button
           disabled={updatingUserId === user.ID}

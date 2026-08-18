@@ -16,7 +16,7 @@ import type { FormPropType } from "../types/userForm";
 const API_BASE_URL = "https://dummyjson.com";
 
 export const getUsers = async (): Promise<User[]> => {
-  const response = await fetch(`${API_BASE_URL}/users?limit=0`);
+  const response = await fetch(`${API_BASE_URL}/users?limit=10`);
   if (!response.ok)
     throw new Error(`failed to load users : ${response.status}`);
   const rawData: UserApiResponse = await response.json();

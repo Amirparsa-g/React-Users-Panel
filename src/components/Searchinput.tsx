@@ -16,7 +16,7 @@ const Searchinput = ({
 }: SearchBarProps) => {
   const [serverValue, setServerValue] = useState<string>("");
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-col justify-center w-md items-center mx-auto">
       {!isServer && (
         <input
           type="text"
@@ -37,14 +37,14 @@ const Searchinput = ({
           />
 
           <button
-            className="border border-green-500 p-2 m-2 rounded-2xl"
+            className="border border-green-500 p-2 m-2 rounded-2xl active:bg-green-500 hover:scale-105 active:text-white ease-in-out duration-300"
             onClick={() => onSearchChange(serverValue)}
           >
             search
           </button>
         </div>
       )}
-      <label htmlFor="">
+      <label className="flex flex-row gap-1 justify-center items-center mt-3">
         server search
         <input
           type="checkbox"

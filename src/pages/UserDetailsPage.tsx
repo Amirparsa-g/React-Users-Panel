@@ -101,17 +101,29 @@ const UserDetailsPage = ({
     );
   }
   return (
-    <div className="flex flex-col gap-4 justify-center items-center">
+    <div className="flex flex-col flex-wrap gap-4 items-center">
       {error && (
         <h2 className="text-red-600 text-3xl font-semibold">{error}</h2>
       )}
 
-      <div className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200 min-w-md">
-        <p>{clickedUser.fullName}</p>
-        <p>{clickedUser.age}</p>
-        <p>{clickedUser.role}</p>
-        <p>{clickedUser.email}</p>
-        <p>{clickedUser.isActive ? "Active" : "inActive"}</p>
+      <div className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200">
+        <p className="text-xl font-bold">{clickedUser.fullName}</p>
+        <p>
+          <span className="font-semibold ">age : </span>
+          {clickedUser.age}
+        </p>
+        <p>
+          <span className="font-semibold ">role : </span>
+          {clickedUser.role}
+        </p>
+        <p className="break-all px-2">
+          <span className="font-semibold ">email : </span>
+          {clickedUser.email}
+        </p>
+        <p>
+          <span className="font-semibold ">Activity : </span>
+          {clickedUser.isActive ? "Active" : "inActive"}
+        </p>
         <div className="flex justify-center gap-4">
           <button
             disabled={updatingUserId === clickedUser.ID}

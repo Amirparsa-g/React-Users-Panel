@@ -12,7 +12,9 @@ const HomePage = ({ UsersList }: { UsersList: User[] }) => {
   }, []);
   return (
     <>
-      <h1 className="text-center">User Managment Project</h1>
+      <h1 className="text-center text-xl font-semibold">
+        User Managment Project
+      </h1>
       <div className="flex justify-center items-center m-3 p-2 border border-purple-400 rounded-md bg-slate-50">
         <p>
           This is a User Managment Project with the avility to add Users ,
