@@ -25,16 +25,14 @@ import EditUserPage from "./pages/EditUserPage";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
-  const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [UsersList, setUserList] = useState<User[]>(users);
+  const [UsersList, setUserList] = useState<User[]>([]);
   const loadUsers = async () => {
     try {
       setIsLoading(true);
       setError("");
       const apiUsers = await getUsers();
-      setUsers(apiUsers);
       setUserList(apiUsers);
     } catch (error) {
       if (error instanceof Error) setError(error.message);
@@ -50,18 +48,14 @@ function App() {
     load();
   }, []);
 
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
-
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<Filters>("all");
-  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const addUserHandler = (newUser: User) => {
     const isAvailable = UsersList.find((user) => user.ID === newUser.ID);
     if (isAvailable) alert("you cant add the same user twice");
     else {
       setUserList([...UsersList, newUser]);
-      setIsFormVisible(false);
       alert("user Added Successfully");
     }
   };
@@ -75,9 +69,11 @@ function App() {
       setError(null);
       const deleteResponse = await deleteApiUser(id);
       if (deleteResponse.isDeleted) removeUserHandler(id);
+      return true;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
       else setError("Unexpected Error");
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -112,25 +108,17 @@ function App() {
       setError(null);
       const role = formData.role;
       if (role === "") return;
-      await sendEditedUser(formData, id);
-      const changedUsers: User[] = UsersList.map((user) => {
-        if (user.ID !== id) return user;
-
-        return {
-          ...user,
-          fullName: formData.fullName.trim(),
-          age: Number(formData.age),
-          role,
-          isActive: formData.isActive,
-          email: formData.email.trim() || undefined,
-        };
-      });
-
-      setUserList(changedUsers);
-      setSelectedUser(null);
+      const updatedUser = await sendEditedUser(formData, id);
+      setUserList((currentUsers) =>
+        currentUsers.map((user) =>
+          user.ID === updatedUser.ID ? updatedUser : user,
+        ),
+      );
+      return true;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
       else setError("Unexpected Error");
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -169,7 +157,6 @@ function App() {
               path="new"
               element={
                 <AddUserPage
-                  setSelectedUser={setSelectedUser}
                   addUserHandeler={addUserHandler}
                   UsersList={UsersList}
                   setIsLoading={setIsLoading}
@@ -186,8 +173,6 @@ function App() {
                   UsersList={UsersList}
                   onRemove={removeApiUser}
                   changeStatus={ChangeStatusHandler}
-                  setSelectedUser={setSelectedUser}
-                  isFormVisible={isFormVisible}
                   changeInfo={changeInfo}
                   setError={setError}
                   setIsLoading={setIsLoading}
@@ -202,8 +187,6 @@ function App() {
                 <EditUserPage
                   UsersList={UsersList}
                   changeInfo={changeInfo}
-                  selectedUser={selectedUser}
-                  setSelectedUser={setSelectedUser}
                   isLoading={isLoading}
                   error={error}
                   setIsLoading={setIsLoading}

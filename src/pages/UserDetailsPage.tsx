@@ -8,17 +8,14 @@ const UserDetailsPage = ({
   UsersList,
   onRemove,
   changeStatus,
-  setSelectedUser,
   isLoading,
   setIsLoading,
   error,
   setError,
 }: {
   UsersList: User[];
-  isFormVisible: boolean;
-  onRemove: (id: number) => void;
+  onRemove: (id: number) => Promise<boolean | undefined>;
   changeStatus: (user: User) => void;
-  setSelectedUser: (user: User | null) => void;
   changeInfo: (formData: FormPropType, id: number) => void;
   setIsLoading: (value: boolean) => void;
   isLoading: boolean;
@@ -27,11 +24,14 @@ const UserDetailsPage = ({
 }) => {
   const { userId } = useParams();
   const navigate = useNavigate();
+
   const [clickedUser, setClickedUser] = useState<User | undefined>(undefined);
+  const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
+
   const setUser = async () => {
+    setIsLoading(true);
+    setError(null);
     try {
-      setIsLoading(true);
-      setError(null);
       const userIds: number[] = UsersList.map((user: User) => user.ID);
       const user = userIds.includes(Number(userId))
         ? UsersList.find((user) => user.ID === Number(userId))
@@ -49,6 +49,12 @@ const UserDetailsPage = ({
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   useEffect(() => {
     const settingUser = async () => {
+      const id = Number(userId);
+      if (!userId || !Number.isInteger(id)) {
+        alert("Invalid Id");
+        navigate("/users");
+        return;
+      }
       const fetchedUser = await setUser();
       if (!fetchedUser) {
         alert("User Not Found");
@@ -60,6 +66,7 @@ const UserDetailsPage = ({
   useEffect(() => {
     document.title = "User Details | User Management";
   }, []);
+
   if (isLoading) {
     return (
       <h2 className="text-center text-3xl font-semibold">
@@ -67,6 +74,7 @@ const UserDetailsPage = ({
       </h2>
     );
   }
+
   if (!clickedUser) {
     return null;
   }
@@ -80,8 +88,10 @@ const UserDetailsPage = ({
           <button
             className="block mx-auto mt-20 border border-green-400 p-3 rounded-md"
             onClick={async () => {
-              await onRemove(clickedUser.ID);
-              navigate("/users");
+              setUpdatingUserId(clickedUser.ID);
+              const isSeccess = await onRemove(clickedUser.ID);
+              if (isSeccess) navigate("/users");
+              else setIsDeleting(false);
             }}
           >
             Continue
@@ -91,49 +101,63 @@ const UserDetailsPage = ({
     );
   }
   return (
-    <div className="flex flex-col gap-4 justify-center items-center">
+    <div className="flex flex-col flex-wrap gap-4 items-center">
       {error && (
         <h2 className="text-red-600 text-3xl font-semibold">{error}</h2>
       )}
-      {!error && (
-        <div className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200 min-w-md">
-          <p>{clickedUser.fullName}</p>
-          <p>{clickedUser.age}</p>
-          <p>{clickedUser.role}</p>
-          <p>{clickedUser.email}</p>
-          <p>{clickedUser.isActive ? "Active" : "inActive"}</p>
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={async () => {
-                setIsDeleting(true);
-              }}
-              className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
-            >
-              remove
-            </button>
-            <button
-              onClick={() => {
-                changeStatus(clickedUser);
-                setClickedUser((prev) =>
-                  prev ? { ...prev, isActive: !prev.isActive } : prev,
-                );
-              }}
-              className="bg-purple-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-purple-700"
-            >
-              change status
-            </button>
-            <Link
-              to={`/users/${userId}/edit`}
-              className="bg-orange-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-orange-700"
-              onClick={() => {
-                setSelectedUser(clickedUser);
-              }}
-            >
-              Edit
-            </Link>
-          </div>
+
+      <div className="bg-slate-50 text-center p-2 rounded-2xl mx-4 border border-purple-500 shadow-lg hover:scale-101 ease-in-out duration-200">
+        <p className="text-xl font-bold">{clickedUser.fullName}</p>
+        <p>
+          <span className="font-semibold ">age : </span>
+          {clickedUser.age}
+        </p>
+        <p>
+          <span className="font-semibold ">role : </span>
+          {clickedUser.role}
+        </p>
+        <p className="break-all px-2">
+          <span className="font-semibold ">email : </span>
+          {clickedUser.email}
+        </p>
+        <p>
+          <span className="font-semibold ">Activity : </span>
+          {clickedUser.isActive ? "Active" : "inActive"}
+        </p>
+        <div className="flex justify-center gap-4">
+          <button
+            disabled={updatingUserId === clickedUser.ID}
+            onClick={async () => {
+              setIsDeleting(true);
+            }}
+            className="text-white bg-red-500 p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300  border-2 border-red-700"
+          >
+            remove
+          </button>
+          <button
+            disabled={updatingUserId === clickedUser.ID}
+            onClick={async () => {
+              setUpdatingUserId(clickedUser.ID);
+              await changeStatus(clickedUser);
+              setUpdatingUserId(null);
+              setClickedUser((prev) =>
+                prev ? { ...prev, isActive: !prev.isActive } : prev,
+              );
+            }}
+            className="bg-purple-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-purple-700"
+          >
+            change status
+          </button>
+          <Link
+            aria-disabled={updatingUserId === clickedUser.ID}
+            to={`/users/${userId}/edit`}
+            className="bg-orange-400 text-white p-2 rounded-2xl mt-2 hover:scale-105 ease-in-out duration-300 border-2 border-orange-700"
+          >
+            Edit
+          </Link>
         </div>
-      )}
+      </div>
+
       <Link
         to="/users"
         className="mt-2 border border-purple-400 p-2 rounded-md hover:scale-105 tramsition-all ease-in-out duration-300"

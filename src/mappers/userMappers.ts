@@ -1,4 +1,5 @@
 import type { ApiUser, ApiUserRole } from "../types/apiUser";
+import type { CreateUserRequest } from "../types/requests";
 import type { User, UserRole } from "../types/user";
 
 function mapApiRoleToUserRole(role: ApiUserRole): UserRole {
@@ -21,7 +22,7 @@ export function splitFullName(fullName: string) {
   const [firstName, ...rest] = fullName.trim().split(/\s+/);
   return {
     firstName,
-    lastName: rest.join(""),
+    lastName: rest.join(" "),
   };
 }
 
@@ -31,10 +32,9 @@ export function mapUserRoleToApiUserRole(userRole: UserRole | ""): ApiUserRole {
   return "admin";
 }
 
-export function mapUserToApiUser(user: User): ApiUser {
+export function mapUserToApiUser(user: CreateUserRequest): Omit<ApiUser, "id"> {
   const { firstName, lastName } = splitFullName(user.fullName);
   return {
-    id: user.ID,
     firstName: firstName,
     lastName: lastName,
     role: mapUserRoleToApiUserRole(user.role),

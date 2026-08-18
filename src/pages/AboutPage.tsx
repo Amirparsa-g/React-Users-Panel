@@ -5,7 +5,7 @@ const AboutPage = () => {
     document.title = "About | User Management";
   }, []);
   return (
-    <div className="bg-slate-50 p-3 border border-cyan-700 m-2 rounded-md">
+    <div className="lg:px-10">
       <h2 className="text-2xl font-semibold">the purpose of this project :</h2>
       <p className="text-xl mt-2 mb-4">
         the purpose of this project is learning about react fundamentals (witch

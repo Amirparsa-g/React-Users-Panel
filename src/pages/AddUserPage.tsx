@@ -7,7 +7,6 @@ const AddUserPage = ({
   setIsLoading,
   setError,
   UsersList,
-  setSelectedUser,
   isLoading,
   error,
 }: {
@@ -16,7 +15,6 @@ const AddUserPage = ({
   setError: (value: string | null) => void;
   UsersList: User[];
   user?: User | null;
-  setSelectedUser: (user: User | null) => void;
   isLoading: boolean;
   error: string | null;
 }) => {
@@ -27,7 +25,6 @@ const AddUserPage = ({
     <AddUserForm
       addUserHandeler={addUserHandeler}
       UsersList={UsersList}
-      setSelectedUser={setSelectedUser}
       setIsLoading={setIsLoading}
       setError={setError}
       isLoading={isLoading}

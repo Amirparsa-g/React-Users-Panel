@@ -10,44 +10,19 @@ const UserStats = ({
   InActiveUsers: number;
 }) => {
   return (
-    <div className="m-10">
-      <table className="w-full text-sm text-left text-gray-500 rtl:text-right shadow-lg">
-        <thead className="bg-slate-100 text-xs uppercase text-gray-700">
-          <tr>
-            <th
-              scope="col"
-              className="px-6 py-4 font-semibold border-2 border-purple-400"
-            >
-              All Users Count
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-4 font-semibold border-2 border-purple-400"
-            >
-              Active Users count
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-4 font-semibold border-2 border-purple-400"
-            >
-              InActive Users Count
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="text-center p-3 border-2 border-purple-400">
-              {allUsers}
-            </td>
-            <td className="text-center p-3 border-2 border-purple-400">
-              {ActiveUsers}
-            </td>
-            <td className="text-center p-3 border-2 border-purple-400">
-              {InActiveUsers}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="m-10 grid grid-col-1 gap-4 sm:grid-cols-3">
+      <div className="border border-green-500 bg-slate-100 p-4 rounded-md shadow-lg ">
+        <h2 className="font-semibold text-xl">All Users</h2>
+        {allUsers}
+      </div>
+      <div className="border border-green-500 bg-slate-100 p-4 rounded-md shadow-lg ">
+        <h2 className="font-semibold text-xl">Active Users</h2>
+        {ActiveUsers}
+      </div>
+      <div className="border border-green-500 bg-slate-100 p-4 rounded-md shadow-lg ">
+        <h2 className="font-semibold text-xl">InActive Users</h2>
+        {InActiveUsers}
+      </div>
     </div>
   );
 };
