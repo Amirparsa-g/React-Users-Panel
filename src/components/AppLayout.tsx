@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import hamburgerIcon from "/Users/AP.Gorji/stage-03/react-user-directory/public/hamburger-icon.svg";
+import hamburgerIcon from "../assets/hamburger-icon.svg";
 const AppLayout = () => {
   const [isHamburger, setIsHamburger] = useState<boolean>(false);
   return (
