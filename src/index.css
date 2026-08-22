@@ -1,1 +1,55 @@
 @import "tailwindcss";
+@theme {
+  --color-primary: #2563eb;
+  --color-primaryDark: #1d4ed8;
+  --color-primaryDarker: #09173f;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-Warning: #f59e08;
+  --text-header1: 32px;
+  --text-header2: 24px;
+  --text-body: 16px;
+  --text-small: 14px;
+  --font-weight-header1: bold;
+  --font-weight-header2: 600;
+}
+@layer base {
+  aside {
+    @apply hidden md:flex flex-col w-40 h-screen bg-primaryDarker p-2;
+  }
+}
+@layer components {
+  .nav-btn-notSelected {
+    @apply bg-primaryDarker text-white p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md w-full;
+  }
+  .nav-btn-selected {
+    @apply bg-primary border border-blue-700 p-2 hover:scale-105 text-slate-100 transition-all ease-in-out duration-300 rounded-md w-full;
+  }
+  .nav-img {
+    @apply brightness-0 invert;
+  }
+  .nav-desktop {
+    @apply flex flex-col justify-center items-center gap-2 mt-20;
+  }
+  .nav-mobile {
+    @apply flex fixed md:hidden w-full bottom-0 justify-center items-center;
+  }
+  .nav-mobile-btn-selected {
+    @apply bg-white text-primary p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md w-full fill-primary;
+  }
+  .nav-mobile-btn-notSelected {
+    @apply bg-white text-black p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md w-full fill-black;
+  }
+  .aside-notHamburger {
+    @apply hidden md:flex flex-col w-40 h-screen bg-primaryDarker p-2;
+  }
+  .aside-hamburger {
+    @apply flex flex-col w-40 h-screen bg-primaryDarker p-2 sticky;
+  }
+  .svg-clicked {
+    @apply fill-primary;
+  }
+  .svg-not-clicked {
+    @apply fill-black;
+  }
+}
