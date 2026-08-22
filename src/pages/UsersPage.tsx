@@ -113,7 +113,7 @@ const UsersPage = ({
   }
 
   return (
-    <div className="flex flex-col flex-wrap items-center max-w-full">
+    <div className="flex flex-col flex-wrap  w-full">
       <Searchinput
         onSearchChange={SearchUser}
         value={searchedTerm}
@@ -146,14 +146,14 @@ const UsersPage = ({
       >
         Add User
       </Link>
-
-      {content}
       <UserStats
         allUsers={allUsers.length}
         Admins={Admins.length}
         Moderators={moderators.length}
         Customers={customers.length}
       />
+      {content}
+
       <button
         onClick={LoadUser}
         className="bg-slate-50 mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-32"
