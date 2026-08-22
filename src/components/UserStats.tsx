@@ -2,26 +2,32 @@
 
 const UserStats = ({
   allUsers,
-  ActiveUsers,
-  InActiveUsers,
+  Admins,
+  Moderators,
+  Customers,
 }: {
   allUsers: number;
-  ActiveUsers: number;
-  InActiveUsers: number;
+  Admins: number;
+  Moderators: number;
+  Customers: number;
 }) => {
   return (
-    <div className="m-10 grid grid-col-1 gap-4 sm:grid-cols-3">
-      <div className="border border-green-500 bg-slate-100 p-4 rounded-md shadow-lg ">
-        <h2 className="font-semibold text-xl">All Users</h2>
-        {allUsers}
+    <div className="m-10 grid grid-col-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="userStats-card">
+        <h2 className="text-body">All Users</h2>
+        <h3 className="text-header1 font-header1">{allUsers}</h3>
       </div>
-      <div className="border border-green-500 bg-slate-100 p-4 rounded-md shadow-lg ">
-        <h2 className="font-semibold text-xl">Active Users</h2>
-        {ActiveUsers}
+      <div className="userStats-card">
+        <h2 className="text-body">Admins</h2>
+        <h3 className="text-header1 font-header1">{Admins}</h3>
       </div>
-      <div className="border border-green-500 bg-slate-100 p-4 rounded-md shadow-lg ">
-        <h2 className="font-semibold text-xl">InActive Users</h2>
-        {InActiveUsers}
+      <div className="userStats-card">
+        <h2 className="text-body">Moderators</h2>
+        <h3 className="text-header1 font-header1">{Moderators}</h3>
+      </div>
+      <div className="userStats-card">
+        <h2 className="text-body">Customers</h2>
+        <h3 className="text-header1 font-header1">{Customers}</h3>
       </div>
     </div>
   );

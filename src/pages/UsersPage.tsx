@@ -39,8 +39,9 @@ const UsersPage = ({
   const allUsers = UsersList;
   const [isServer, setIsServer] = useState<boolean>(false);
   const [serverResult, setServerResult] = useState<User[]>([]);
-  const ActiveUsers = UsersList.filter((user) => user.isActive);
-  const InActiveUsers = UsersList.filter((user) => !user.isActive);
+  const Admins = UsersList.filter((user) => user.role === "admin");
+  const moderators = UsersList.filter((user) => user.role === "operator");
+  const customers = UsersList.filter((user) => user.role === "customer");
   const term = searchedTerm.toLowerCase().trim();
   useEffect(() => {
     const fetchServerResult = async () => {
@@ -149,8 +150,9 @@ const UsersPage = ({
       {content}
       <UserStats
         allUsers={allUsers.length}
-        ActiveUsers={ActiveUsers.length}
-        InActiveUsers={InActiveUsers.length}
+        Admins={Admins.length}
+        Moderators={moderators.length}
+        Customers={customers.length}
       />
       <button
         onClick={LoadUser}
