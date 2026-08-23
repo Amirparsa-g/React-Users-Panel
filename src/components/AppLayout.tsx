@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import hamburgerIcon from "../assets/hamburger-icon.svg";
 import DesktopSidebar from "./DesktopSidebar";
 import ButtomNav from "./ButtomNav";
 
@@ -9,11 +8,19 @@ const AppLayout = () => {
   return (
     <div className="flex w-full h-screen overflow-hidden">
       {!isHamburger && (
-        <div className="flex justify-start items-start mt-6.5 mx-2 md:hidden">
+        <span className="flex justify-start items-start mt-6.5 mx-2 md:hidden">
           <button onClick={() => setIsHamburger(true)}>
-            <img src={hamburgerIcon} alt="hambutger" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#1f1f1f"
+            >
+              <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+            </svg>
           </button>
-        </div>
+        </span>
       )}
 
       <DesktopSidebar

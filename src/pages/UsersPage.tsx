@@ -4,8 +4,6 @@ import UserList from "../components/UserList";
 import type { User } from "../types/user";
 import Searchinput from "../components/Searchinput";
 import UserStats from "../components/UserStats";
-
-import { Link } from "react-router-dom";
 import { serverSearch } from "../services/userApi";
 type Filters = "active" | "inactive" | "all";
 const UsersPage = ({
@@ -113,39 +111,42 @@ const UsersPage = ({
   }
 
   return (
-    <div className="flex flex-col flex-wrap  w-full">
-      <Searchinput
-        onSearchChange={SearchUser}
-        value={searchedTerm}
-        isServer={isServer}
-        setIsServer={setIsServer}
-      />
-      <div className="flex items-center justify-center gap-2 w-full">
+    <div className="flex flex-col flex-wrap w-full">
+      <div>
+        <Searchinput
+          setUserStatus={setUserStatus}
+          onSearchChange={SearchUser}
+          value={searchedTerm}
+          isServer={isServer}
+          setIsServer={setIsServer}
+        />
+      </div>
+      <div className="flex items-center justify-center gap-4 w-full mt-5 md:hidden">
         <button
           onClick={() => setUserStatus("active")}
-          className="bg-slate-50  mt-5 border border-green-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+          className={
+            status === "active" ? "success-button" : "button-not-selected"
+          }
         >
           active
         </button>
         <button
           onClick={() => setUserStatus("inactive")}
-          className="bg-slate-50  mt-5 border border-red-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+          className={
+            status === "inactive" ? "danger-button" : "button-not-selected"
+          }
         >
           inactive
         </button>
         <button
           onClick={() => setUserStatus("all")}
-          className="bg-slate-50  mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+          className={
+            status === "all" ? "neutral-button" : "button-not-selected"
+          }
         >
           all
         </button>
       </div>
-      <Link
-        to="/users/new"
-        className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
-      >
-        Add User
-      </Link>
       <UserStats
         allUsers={allUsers.length}
         Admins={Admins.length}
@@ -154,10 +155,7 @@ const UsersPage = ({
       />
       {content}
 
-      <button
-        onClick={LoadUser}
-        className="bg-slate-50 mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-32"
-      >
+      <button onClick={LoadUser} className="neutral-button mt-5 block mx-auto">
         retry
       </button>
     </div>
