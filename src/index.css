@@ -84,4 +84,7 @@
   .profile {
     @apply rounded-full border border-black w-10 h-10 shrink-0;
   }
+  .warning-button {
+    @apply border border-Warning bg-white p-4 rounded-md shadow-md hover:scale-105 w-35 duration-300 ease-in-out;
+  }
 }
