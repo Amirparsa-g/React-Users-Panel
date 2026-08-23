@@ -25,12 +25,29 @@ const UserCard = ({
       )}
       <tr aria-disabled={isLoading} key={user.ID}>
         <td>
-          <Link to={`/users/${user.ID}`} className="text-black">
-            <p className="text-body font-header2">{user.fullName}</p>
-            <p className="text-small break-all">
-              {user.email ? user.email : "no email registered"}
-            </p>
-          </Link>
+          <div className="flex gap-2 items-center">
+            <div
+              className={
+                user.role === "admin"
+                  ? "profile text-admin border border-admin"
+                  : user.role === "operator"
+                    ? "profile text-moderator border border-moderator"
+                    : "profile"
+              }
+            >
+              <div>
+                <p className="text-center">{user.fullName[0]}</p>
+              </div>
+            </div>
+            <div>
+              <Link to={`/users/${user.ID}`} className="text-black">
+                <p className="text-body font-header2">{user.fullName}</p>
+                <p className="text-small break-all">
+                  {user.email ? user.email : "no email registered"}
+                </p>
+              </Link>
+            </div>
+          </div>
         </td>
         <td
           className={
