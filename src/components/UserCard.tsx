@@ -23,11 +23,11 @@ const UserCard = ({
           {error}
         </p>
       )}
-      <tr aria-disabled={isLoading}>
+      <tr aria-disabled={isLoading} key={user.ID}>
         <td>
           <Link to={`/users/${user.ID}`} className="text-black">
             <p className="text-body font-header2">{user.fullName}</p>
-            <p className="text-small">
+            <p className="text-small break-all">
               {user.email ? user.email : "no email registered"}
             </p>
           </Link>
@@ -35,10 +35,10 @@ const UserCard = ({
         <td
           className={
             user.role === "admin"
-              ? "bg-admin/10 text-admin stats-header text-center"
+              ? " text-admin  text-center"
               : user.role === "operator"
-                ? "bg-moderator/10 text-moderator stats-header text-center"
-                : "bg-black/10 text-black stats-header text-center"
+                ? " text-moderator stats-header text-center"
+                : " text-black stats-header text-center"
           }
         >
           {user.role}

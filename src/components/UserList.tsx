@@ -27,12 +27,14 @@ const UserList = ({
 
   return (
     <div className="w-full userStats-card">
-      <table className="w-full border-separate border-spacing-y-4 border-spacing-x-4">
-        <thead className=" text-left">
-          <th>User</th>
-          <th>role</th>
-          <th className="hidden md:table-cell">status</th>
-          <th className="hidden md:table-cell">Actions</th>
+      <table className="w-full table-fixed border-separate border-spacing-y-4 border-spacing-x-4">
+        <thead className=" text-center">
+          <tr>
+            <th className="w-7/12 sm:w-1/2 text-left">User</th>
+            <th className="w-3/12">role</th>
+            <th className="hidden md:table-cell">status</th>
+            <th className="hidden md:table-cell">Actions</th>
+          </tr>
         </thead>
         <tbody>{mappedUsers}</tbody>
       </table>
