@@ -31,8 +31,8 @@ const UserList = ({
         <thead className="border-b border-b-black text-left">
           <th>User</th>
           <th>role</th>
-          <th>status</th>
-          <th>Actions</th>
+          <th className="hidden md:flex">status</th>
+          <th className="hidden md:flex">Actions</th>
         </thead>
         <tbody>{mappedUsers}</tbody>
       </table>

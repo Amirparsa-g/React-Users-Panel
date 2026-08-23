@@ -60,4 +60,13 @@
   .stats-header {
     @apply w-fit rounded-md p-1;
   }
+  .select-wrapper {
+    @apply relative inline-block w-3 h-3;
+  }
+  .select-wrapper img {
+    @apply w-full h-full object-cover cursor-pointer;
+  }
+  .select-wrapper select {
+    @apply absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer appearance-none;
+  }
 }
