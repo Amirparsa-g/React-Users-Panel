@@ -35,16 +35,13 @@ const UserCard = ({
             >
               <div>
                 <p className="text-center">{user.fullName[0]}</p>
+                <span className={`block md:hidden absolute end-px bottom-0 size-3 rounded-full ${user.isActive ? "bg-success" : "bg-danger"}`}></span>
               </div>
             </div>
             <div>
               <Link
                 to={`/users/${user.ID}`}
-                className={
-                  user.isActive
-                    ? "text-success md:text-black"
-                    : "text-danger md:text-black"
-                }
+                className="text-black"
               >
                 <p className="text-body font-header2">{user.fullName}</p>
                 <p className="text-small break-all">
