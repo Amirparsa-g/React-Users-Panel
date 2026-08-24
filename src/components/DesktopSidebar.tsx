@@ -13,7 +13,7 @@ const DesktopSidebar = ({
 }) => {
   return (
     <aside
-      className={`${isHamburger ? "aside-hamburger" : "aside-notHamburger"}`}
+      className={`${isHamburger ? "aside-hamburger md:aside-notHamburger" : "aside-notHamburger"}`}
     >
       <h2 className="text-body font-header2 text-white">User Mangement</h2>
       <nav className="nav-desktop">
