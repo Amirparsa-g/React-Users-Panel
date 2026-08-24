@@ -18,7 +18,7 @@ const AppLayout = () => {
   };
   const [isHamburger, setIsHamburger] = useState<boolean>(false);
   return (
-    <div className="flex w-full h-screen overflow-hidden">
+    <div className="flex w-full h-screen overflow-hidden ">
       <div
         className={
           isHamburger
@@ -69,7 +69,7 @@ const AppLayout = () => {
           )}
         </header>
 
-        <main className=" flex flex-1 flex-col justify-start items-center p-3 w-full overflow-y-auto mb-10">
+        <main className=" flex flex-1 flex-col justify-start items-center p-3 w-full overflow-y-auto mb-10 mx-auto px-4 max-w-screen-2xl">
           <Outlet />
         </main>
       </div>
