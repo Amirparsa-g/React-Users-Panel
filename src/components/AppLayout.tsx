@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet, Link } from "react-router-dom";
 import DesktopSidebar from "./DesktopSidebar";
 import ButtomNav from "./ButtomNav";
 
@@ -53,6 +53,20 @@ const AppLayout = () => {
           <h1 className="text-center text-2xl font-semibold">
             {getPageTitle()}
           </h1>
+          {getPageTitle() === "Users" && (
+            <Link to="/users/new" className="fixed top-6 right-4">
+              <svg
+                className="bg-primary p-1 rounded-md"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#ffffff"
+              >
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+              </svg>
+            </Link>
+          )}
         </header>
 
         <main className=" flex flex-1 flex-col justify-start items-center p-3 w-full overflow-y-auto mb-10">

@@ -176,7 +176,7 @@ const AddUserForm = ({
                   nameError: "",
                 });
               }}
-              className="w-full userStats-card p-2"
+              className="w-full userStats-card p-2 h-12"
             />
             {FormError.nameError !== "" && (
               <p className="text-danger">{FormError.nameError}</p>
@@ -192,7 +192,7 @@ const AddUserForm = ({
                 setFormData({ ...formData, age: e.target.value });
                 setFormError({ ...FormError, ageError: "" });
               }}
-              className="w-full userStats-card p-2"
+              className="w-full userStats-card p-2 h-12"
             />
             {FormError.ageError !== "" && (
               <p className="text-danger">{FormError.ageError}</p>
@@ -263,7 +263,7 @@ const AddUserForm = ({
                   setFormData({ ...formData, email: e.target.value });
                   setFormError({ ...FormError, emailError: "" });
                 }}
-                className="w-full userStats-card p-2"
+                className="w-full userStats-card p-2 h-12"
               />
               {FormError.emailError !== "" && (
                 <p className="text-danger">{FormError.emailError}</p>

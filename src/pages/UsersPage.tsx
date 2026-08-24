@@ -113,6 +113,13 @@ const UsersPage = ({
 
   return (
     <div className="flex flex-col flex-wrap w-full">
+      <UserStats
+        isLoading={isLoading}
+        allUsers={allUsers.length}
+        Admins={Admins.length}
+        Moderators={moderators.length}
+        Customers={customers.length}
+      />
       <div>
         <Searchinput
           setUserStatus={setUserStatus}
@@ -163,13 +170,7 @@ const UsersPage = ({
         </svg>
         <span className=" ml-4 text-black">Back to Home</span>
       </Link>
-      <UserStats
-        isLoading={isLoading}
-        allUsers={allUsers.length}
-        Admins={Admins.length}
-        Moderators={moderators.length}
-        Customers={customers.length}
-      />
+
       {content}
 
       <button onClick={LoadUser} className="neutral-button mt-5 block mx-auto">
