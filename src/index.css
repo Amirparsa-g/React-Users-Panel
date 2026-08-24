@@ -88,7 +88,7 @@
   }
 }
 @utility aside-notHamburger {
-  @apply hidden md:flex flex-col w-40 h-screen bg-primaryDarker relative p-2;
+  @apply fixed md:flex flex-col w-40 h-screen bg-primaryDarker p-2 z-50 md:relative;
 }
 @utility btn {
   @apply border border-black  bg-white p-4 rounded-md shadow-md hover:scale-105 w-35 duration-300 ease-in-out;
@@ -109,10 +109,13 @@
     opacity: 1;
   }
   100% {
-    transform: translateX(100%);
+    transform: translateX(-100%);
     opacity: 0;
   }
 }
 .animate-slide-in {
   animation: slide-in 0.4s ease-in-out forwards;
+}
+.animate-slide-out {
+  animation: slide-out 0.4s ease-in-out forwards;
 }
