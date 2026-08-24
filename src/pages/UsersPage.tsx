@@ -5,6 +5,7 @@ import type { User } from "../types/user";
 import Searchinput from "../components/Searchinput";
 import UserStats from "../components/UserStats";
 import { serverSearch } from "../services/userApi";
+import { Link } from "react-router-dom";
 type Filters = "active" | "inactive" | "all";
 const UsersPage = ({
   UsersList,
@@ -147,6 +148,21 @@ const UsersPage = ({
           all
         </button>
       </div>
+      <Link
+        to="/"
+        className="flex justify-center items-center mt-5 md:justify-start md:items-start"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#1f1f1f"
+        >
+          <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+        </svg>
+        <span className=" ml-4 text-black">Back to Home</span>
+      </Link>
       <UserStats
         allUsers={allUsers.length}
         Admins={Admins.length}

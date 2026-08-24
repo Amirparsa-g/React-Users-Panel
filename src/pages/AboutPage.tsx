@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const AboutPage = () => {
   useEffect(() => {
@@ -37,6 +38,23 @@ const AboutPage = () => {
       <p className="text-xl mt-2 mb-4">
         Aty the moment the project is on stage 5 : react routers
       </p>
+      <Link
+        to="/"
+        className="w-fit mt-12 mb-10 self-center sm:self-start sm:ml-4"
+      >
+        <span className="flex items-center gap-1 text-black font-medium hover:opacity-70 transition-opacity">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#1f1f1f"
+          >
+            <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+          </svg>
+          Back to Home
+        </span>
+      </Link>
     </div>
   );
 };

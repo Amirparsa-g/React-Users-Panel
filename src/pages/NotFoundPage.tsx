@@ -12,15 +12,20 @@ const NotFoundPage = () => {
       <div className="flex justify-evenly items-center mt-30 ">
         <Link
           to="/"
-          className="bg-slate-100 border border-blue-400 p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md"
+          className="w-fit mt-12 mb-10 self-center sm:self-start sm:ml-4"
         >
-          Home
-        </Link>
-        <Link
-          to="/users"
-          className="bg-slate-100 border border-blue-400 p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md"
-        >
-          Users
+          <span className="flex items-center gap-1 text-black font-medium hover:opacity-70 transition-opacity">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#1f1f1f"
+            >
+              <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+            </svg>
+            Back to Home
+          </span>
         </Link>
       </div>
     </div>
