@@ -18,6 +18,7 @@ const DesktopSidebar = ({
       <h2 className="text-body font-header2 text-white">User Mangement</h2>
       <nav className="nav-desktop">
         <NavLink
+          onClick={() => setIsHamburger(false)}
           to="/"
           className={({ isActive }) =>
             isActive ? "nav-btn-selected" : "nav-btn-notSelected"
@@ -30,6 +31,7 @@ const DesktopSidebar = ({
         </NavLink>
         <NavLink
           to="/users"
+          onClick={() => setIsHamburger(false)}
           end
           className={({ isActive }) =>
             isActive ? "nav-btn-selected" : "nav-btn-notSelected"
@@ -42,6 +44,7 @@ const DesktopSidebar = ({
         </NavLink>
         <NavLink
           to="/users/new"
+          onClick={() => setIsHamburger(false)}
           className={({ isActive }) =>
             isActive ? "nav-btn-selected" : "nav-btn-notSelected"
           }
@@ -53,6 +56,7 @@ const DesktopSidebar = ({
         </NavLink>
         <NavLink
           to="/about"
+          onClick={() => setIsHamburger(false)}
           className={({ isActive }) =>
             isActive ? "nav-btn-selected" : "nav-btn-notSelected"
           }
