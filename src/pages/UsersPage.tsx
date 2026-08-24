@@ -59,7 +59,7 @@ const UsersPage = ({
       }
     };
     void fetchServerResult();
-  }, [searchedTerm, isServer]);
+  }, [searchedTerm, isServer, term]);
   const searchedUsers =
     isServer && searchedTerm.trim() !== ""
       ? serverResult
