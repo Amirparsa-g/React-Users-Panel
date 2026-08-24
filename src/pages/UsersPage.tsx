@@ -42,12 +42,14 @@ const UsersPage = ({
   const moderators = UsersList.filter((user) => user.role === "operator");
   const customers = UsersList.filter((user) => user.role === "customer");
   const term = searchedTerm.toLowerCase().trim();
+  setTimeout(() => {});
   useEffect(() => {
     const fetchServerResult = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const serachedServerUsers: User[] = await serverSearch(term);
+        const serachedServerUsers: User[] =
+          term === "" ? [] : await serverSearch(term);
         setServerResult(serachedServerUsers);
       } catch (error) {
         if (error instanceof Error) setError(error.message);
@@ -89,7 +91,7 @@ const UsersPage = ({
       </h2>
     );
   } else {
-    if (UsersList.length === 0 || displayedUsers.length === 0)
+    if (displayedUsers.length === 0)
       content = (
         <EmptyState
           UsersList={UsersList}
