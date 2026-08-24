@@ -13,7 +13,7 @@ const DesktopSidebar = ({
 }) => {
   return (
     <aside
-      className={`${isHamburger ? "aside-hamburger md:aside-notHamburger" : "aside-notHamburger"}`}
+      className={`${isHamburger ? "aside-hamburger animate-slide-in md:aside-notHamburger" : "aside-notHamburger"}`}
     >
       <h2 className="text-body font-header2 text-white">User Mangement</h2>
       <nav className="nav-desktop">
@@ -70,7 +70,7 @@ const DesktopSidebar = ({
       {isHamburger && (
         <button
           onClick={() => setIsHamburger(false)}
-          className="fixed bottom-15"
+          className="fixed bottom-15 md:hidden"
         >
           <img src={arrowBackIcon} alt="back" className="nav-img" />
         </button>
