@@ -113,7 +113,7 @@ const UserDetailsPage = ({
   return (
     <div className="flex flex-col items-center w-full px-4 overflow-x-hidden box-border pb-10">
       {error && (
-        <h2 className="text-red-600 text-2xl md:text-3xl font-semibold mb-4 text-center break-words w-full">
+        <h2 className="text-danger text-2xl md:text-3xl font-semibold mb-4 text-center break-words w-full">
           {error}
         </h2>
       )}

@@ -83,7 +83,7 @@ const UsersPage = ({
     );
   } else if (error) {
     content = (
-      <h2 className="text-center text-3xl font-semibold text-red-600">
+      <h2 className="text-center text-3xl font-semibold text-danger">
         Failed to load the Users
       </h2>
     );

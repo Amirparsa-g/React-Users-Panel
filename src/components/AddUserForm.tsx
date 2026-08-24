@@ -154,7 +154,7 @@ const AddUserForm = ({
           <p className="text-center text-3xl m-2 font-semibold">Loading ...</p>
         )}
         {error && (
-          <p className="text-center text-xl m-2 font-semibold text-red-600">
+          <p className="text-center text-xl m-2 font-semibold text-danger">
             {error}
           </p>
         )}
@@ -179,7 +179,7 @@ const AddUserForm = ({
               className="w-full userStats-card p-2"
             />
             {FormError.nameError !== "" && (
-              <p className="text-red-700">{FormError.nameError}</p>
+              <p className="text-danger">{FormError.nameError}</p>
             )}
           </label>
           <label htmlFor="">
@@ -195,7 +195,7 @@ const AddUserForm = ({
               className="w-full userStats-card p-2"
             />
             {FormError.ageError !== "" && (
-              <p className="text-red-700">{FormError.ageError}</p>
+              <p className="text-danger">{FormError.ageError}</p>
             )}
           </label>
           <label htmlFor="">
@@ -223,7 +223,7 @@ const AddUserForm = ({
               <option value="customer">customer</option>
             </select>
             {FormError.roleError !== "" && (
-              <p className="text-red-700">{FormError.roleError}</p>
+              <p className="text-danger">{FormError.roleError}</p>
             )}
           </label>
           <div>
@@ -266,7 +266,7 @@ const AddUserForm = ({
                 className="w-full userStats-card p-2"
               />
               {FormError.emailError !== "" && (
-                <p className="text-red-700">{FormError.emailError}</p>
+                <p className="text-danger">{FormError.emailError}</p>
               )}
             </label>
           </div>

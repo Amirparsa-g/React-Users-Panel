@@ -19,9 +19,7 @@ const UserCard = ({
   return (
     <>
       {error && (
-        <p className="text-red-600 text-xl text-center font-semibold">
-          {error}
-        </p>
+        <p className="text-danger text-xl text-center font-semibold">{error}</p>
       )}
       <tr aria-disabled={isLoading} key={user.ID}>
         <td>
