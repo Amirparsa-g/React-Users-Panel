@@ -3,7 +3,13 @@ import UserStats from "../components/UserStats";
 import type { User } from "../types/user";
 import { useEffect } from "react";
 
-const HomePage = ({ UsersList }: { UsersList: User[] }) => {
+const HomePage = ({
+  UsersList,
+  isLoading,
+}: {
+  UsersList: User[];
+  isLoading: boolean;
+}) => {
   const allUsers = UsersList;
   const Admins = UsersList.filter((user) => user.role === "admin");
   const moderators = UsersList.filter((user) => user.role === "operator");
@@ -14,6 +20,7 @@ const HomePage = ({ UsersList }: { UsersList: User[] }) => {
   return (
     <div>
       <UserStats
+        isLoading={isLoading}
         allUsers={allUsers.length}
         Admins={Admins.length}
         Moderators={moderators.length}

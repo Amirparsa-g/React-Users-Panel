@@ -132,7 +132,10 @@ function App() {
     <>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route path="/" element={<HomePage UsersList={UsersList} />}></Route>
+          <Route
+            path="/"
+            element={<HomePage UsersList={UsersList} isLoading={isLoading} />}
+          ></Route>
           <Route path="users">
             <Route
               index

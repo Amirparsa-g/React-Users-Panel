@@ -164,6 +164,7 @@ const UsersPage = ({
         <span className=" ml-4 text-black">Back to Home</span>
       </Link>
       <UserStats
+        isLoading={isLoading}
         allUsers={allUsers.length}
         Admins={Admins.length}
         Moderators={moderators.length}
