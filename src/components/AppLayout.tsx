@@ -50,7 +50,7 @@ const AppLayout = () => {
               </button>
             </span>
           )}
-          <h1 className="text-center text-2xl font-semibold">
+          <h1 className="text-center text-body font-header2 md:text-header2">
             {getPageTitle()}
           </h1>
           {getPageTitle() === "Users" && (

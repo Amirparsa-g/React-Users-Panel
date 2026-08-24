@@ -62,7 +62,7 @@ function App() {
   const removeUserHandler = (id: number) => {
     const remainingUsers = UsersList.filter((user) => user.ID !== id);
     setUserList(remainingUsers);
-    alert("user removed seccessfully");
+    confirm("are you sure you want to remove this use?");
   };
   const removeApiUser = async (id: number) => {
     try {

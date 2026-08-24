@@ -38,7 +38,14 @@ const UserCard = ({
               </div>
             </div>
             <div>
-              <Link to={`/users/${user.ID}`} className="text-black">
+              <Link
+                to={`/users/${user.ID}`}
+                className={
+                  user.isActive
+                    ? "text-success md:text-black"
+                    : "text-danger md:text-black"
+                }
+              >
                 <p className="text-body font-header2">{user.fullName}</p>
                 <p className="text-small break-all">
                   {user.email ? user.email : "no email registered"}
@@ -68,8 +75,8 @@ const UserCard = ({
           {user.isActive ? "active" : "inactive"}
         </td>
         <td>
-          <div className="hidden md:flex gap-1">
-            <Link to={`/users/${user.ID}`}>
+          <div className="hidden md:flex gap-1 ">
+            <Link to={`/users/${user.ID}`} className="cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
@@ -87,6 +94,7 @@ const UserCard = ({
                 await onRemove(user.ID);
                 setUpdatingUserId(null);
               }}
+              className="cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -105,6 +113,7 @@ const UserCard = ({
                 await changeStatus(user);
                 setUpdatingUserId(null);
               }}
+              className="cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -139,10 +148,18 @@ const UserCard = ({
 
                   e.target.value = "";
                 }
+                if (e.target.value === "change status") {
+                  setUpdatingUserId(user.ID);
+                  await changeStatus(user);
+                  setUpdatingUserId(null);
+
+                  e.target.value = "";
+                }
               }}
             >
               <option value="" disabled hidden></option>
               <option>remove user</option>
+              <option>change status</option>
             </select>
           </div>
         </td>
