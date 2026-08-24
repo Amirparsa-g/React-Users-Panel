@@ -218,7 +218,7 @@ const AddUserForm = ({
                   roleError: "",
                 });
               }}
-              className="w-full userStats-card p-2"
+              className="w-full userStats-card p-2 h-12"
             >
               <option value=""></option>
               <option value="admin">admin</option>
@@ -256,21 +256,23 @@ const AddUserForm = ({
               </label>
             </div>
           </div>
-          <label htmlFor="">
-            Email (Optional)
-            <input
-              type="text"
-              value={formData.email}
-              onChange={(e) => {
-                setFormData({ ...formData, email: e.target.value });
-                setFormError({ ...FormError, emailError: "" });
-              }}
-              className="w-full userStats-card p-2"
-            />
-            {FormError.emailError !== "" && (
-              <p className="text-red-700">{FormError.emailError}</p>
-            )}
-          </label>
+          <div className="flex flex-col col-span-full">
+            <label htmlFor="">
+              Email (Optional)
+              <input
+                type="text"
+                value={formData.email}
+                onChange={(e) => {
+                  setFormData({ ...formData, email: e.target.value });
+                  setFormError({ ...FormError, emailError: "" });
+                }}
+                className="w-full userStats-card p-2"
+              />
+              {FormError.emailError !== "" && (
+                <p className="text-red-700">{FormError.emailError}</p>
+              )}
+            </label>
+          </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full gap-2">
           <button
