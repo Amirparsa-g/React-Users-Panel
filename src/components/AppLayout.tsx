@@ -22,9 +22,9 @@ const AppLayout = () => {
         />
       </div>
       <div className="flex flex-1 flex-col h-full overflow-hidden">
-        <header className="w-full h-10 flex justify-center items-center my-4 shrink-0 gap-5">
+        <header className="w-full h-10 flex justify-evenly items-center my-4 shrink-0 gap-5">
           {!isHamburger && (
-            <span className="mt-2.5 ml-1 md:hidden">
+            <span className=" md:hidden">
               <button onClick={() => setIsHamburger(true)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
