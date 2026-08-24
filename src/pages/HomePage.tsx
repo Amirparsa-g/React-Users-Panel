@@ -13,7 +13,6 @@ const HomePage = ({ UsersList }: { UsersList: User[] }) => {
   }, []);
   return (
     <div>
-      <h2 className="text-header2 font-header2 text-center">Home Page</h2>
       <UserStats
         allUsers={allUsers.length}
         Admins={Admins.length}

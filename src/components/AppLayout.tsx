@@ -1,9 +1,21 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import DesktopSidebar from "./DesktopSidebar";
 import ButtomNav from "./ButtomNav";
 
 const AppLayout = () => {
+  const location = useLocation();
+  const getPageTitle = () => {
+    const path = location.pathname;
+    if (path === "/") return "Home Page";
+    if (path === "/users") return "Users";
+    if (path === "/users/new") return "Add User";
+    if (path.startsWith("/users/") && !path.endsWith("/edit"))
+      return "User Details";
+    if (path.startsWith("/users/") && path.endsWith("/edit"))
+      return "Edit User";
+    return "User Management Panel Project";
+  };
   const [isHamburger, setIsHamburger] = useState<boolean>(false);
   return (
     <div className="flex w-full h-screen overflow-hidden">
@@ -24,7 +36,7 @@ const AppLayout = () => {
       <div className="flex flex-1 flex-col h-full overflow-hidden">
         <header className="w-full h-10 flex justify-evenly items-center my-4 shrink-0 gap-5">
           {!isHamburger && (
-            <span className=" md:hidden">
+            <span className="fixed top-6 left-4 md:hidden">
               <button onClick={() => setIsHamburger(true)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +51,7 @@ const AppLayout = () => {
             </span>
           )}
           <h1 className="text-center text-2xl font-semibold">
-            User Managment Pannel Project
+            {getPageTitle()}
           </h1>
         </header>
 

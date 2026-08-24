@@ -158,9 +158,6 @@ const AddUserForm = ({
             {error}
           </p>
         )}
-        <h1 className="text-center , text-xl ">
-          {user ? "Edit User" : "Add User"}
-        </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <label htmlFor="">
             Full Name:
