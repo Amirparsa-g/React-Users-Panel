@@ -113,9 +113,11 @@
     opacity: 0;
   }
 }
-.animate-slide-in {
-  animation: slide-in 0.4s ease-in-out forwards;
-}
-.animate-slide-out {
-  animation: slide-out 0.4s ease-in-out forwards;
+@media (max-width: 767px) {
+  .animate-slide-in {
+    animation: slide-in 0.4s ease-in-out forwards;
+  }
+  .animate-slide-out {
+    animation: slide-out 0.4s ease-in-out forwards;
+  }
 }

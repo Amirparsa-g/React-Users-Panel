@@ -16,7 +16,7 @@ const AppLayout = () => {
       return "Edit User";
     return "User Management Panel Project";
   };
-  const [isHamburger, setIsHamburger] = useState<boolean>(false);
+  const [isHamburger, setIsHamburger] = useState<boolean | null>(null);
   return (
     <div className="flex w-full h-screen overflow-hidden ">
       <div
