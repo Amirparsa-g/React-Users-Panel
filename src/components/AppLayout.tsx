@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation, Outlet, Link } from "react-router-dom";
 import DesktopSidebar from "./DesktopSidebar";
 import ButtomNav from "./ButtomNav";
-
+import { motion } from "framer-motion";
 const AppLayout = () => {
   const location = useLocation();
   const getPageTitle = () => {
@@ -47,6 +47,7 @@ const AppLayout = () => {
             <span className="absolute left-2">
               <button onClick={() => setIsClicked(true)}>
                 <svg
+                  className="cursor-pointer"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -62,6 +63,7 @@ const AppLayout = () => {
             <span className="absolute left-2">
               <button onClick={() => setIsClicked(false)}>
                 <svg
+                  className="cursor-pointer"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -93,9 +95,15 @@ const AppLayout = () => {
           )}
         </header>
 
-        <main className=" flex flex-1 flex-col justify-start items-center p-3 w-full overflow-y-auto mb-10 mx-auto px-4 max-w-screen-2xl">
+        <motion.main
+          key={location.pathname}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className=" flex flex-1 flex-col justify-start items-center p-3 w-full overflow-y-auto mb-10 mx-auto px-4 max-w-screen-2xl"
+        >
           <Outlet />
-        </main>
+        </motion.main>
       </div>
       <ButtomNav />
     </div>

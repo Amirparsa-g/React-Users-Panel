@@ -91,7 +91,11 @@ const DesktopSidebar = ({
           onClick={() => setIsClicked(false)}
           className="fixed bottom-15 md:hidden"
         >
-          <img src={arrowBackIcon} alt="back" className="nav-img" />
+          <img
+            src={arrowBackIcon}
+            alt="back"
+            className="nav-img cursor-pointer"
+          />
         </button>
       )}
     </aside>
