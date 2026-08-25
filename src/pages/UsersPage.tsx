@@ -4,9 +4,8 @@ import UserList from "../components/UserList";
 import type { User } from "../types/user";
 import Searchinput from "../components/Searchinput";
 import UserStats from "../components/UserStats";
-
-import { Link } from "react-router-dom";
 import { serverSearch } from "../services/userApi";
+import { Link } from "react-router-dom";
 type Filters = "active" | "inactive" | "all";
 const UsersPage = ({
   UsersList,
@@ -39,15 +38,18 @@ const UsersPage = ({
   const allUsers = UsersList;
   const [isServer, setIsServer] = useState<boolean>(false);
   const [serverResult, setServerResult] = useState<User[]>([]);
-  const ActiveUsers = UsersList.filter((user) => user.isActive);
-  const InActiveUsers = UsersList.filter((user) => !user.isActive);
+  const Admins = UsersList.filter((user) => user.role === "admin");
+  const moderators = UsersList.filter((user) => user.role === "operator");
+  const customers = UsersList.filter((user) => user.role === "customer");
   const term = searchedTerm.toLowerCase().trim();
+  setTimeout(() => {});
   useEffect(() => {
     const fetchServerResult = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const serachedServerUsers: User[] = await serverSearch(term);
+        const serachedServerUsers: User[] =
+          term === "" ? [] : await serverSearch(term);
         setServerResult(serachedServerUsers);
       } catch (error) {
         if (error instanceof Error) setError(error.message);
@@ -59,7 +61,7 @@ const UsersPage = ({
       }
     };
     void fetchServerResult();
-  }, [searchedTerm, isServer]);
+  }, [searchedTerm, isServer, term]);
   const searchedUsers =
     isServer && searchedTerm.trim() !== ""
       ? serverResult
@@ -84,12 +86,12 @@ const UsersPage = ({
     );
   } else if (error) {
     content = (
-      <h2 className="text-center text-3xl font-semibold text-red-600">
+      <h2 className="text-center text-3xl font-semibold text-danger">
         Failed to load the Users
       </h2>
     );
   } else {
-    if (UsersList.length === 0 || displayedUsers.length === 0)
+    if (displayedUsers.length === 0)
       content = (
         <EmptyState
           UsersList={UsersList}
@@ -112,50 +114,68 @@ const UsersPage = ({
   }
 
   return (
-    <div className="flex flex-col flex-wrap items-center max-w-full">
-      <Searchinput
-        onSearchChange={SearchUser}
-        value={searchedTerm}
-        isServer={isServer}
-        setIsServer={setIsServer}
+    <div className="flex flex-col flex-wrap w-full">
+      <UserStats
+        isLoading={isLoading}
+        allUsers={allUsers.length}
+        Admins={Admins.length}
+        Moderators={moderators.length}
+        Customers={customers.length}
       />
-      <div className="flex items-center justify-center gap-2 w-full">
+      <div>
+        <Searchinput
+          setUserStatus={setUserStatus}
+          onSearchChange={SearchUser}
+          value={searchedTerm}
+          isServer={isServer}
+          setIsServer={setIsServer}
+        />
+      </div>
+      <div className="flex items-center justify-center gap-4 w-full mt-5 md:hidden">
         <button
           onClick={() => setUserStatus("active")}
-          className="bg-slate-50  mt-5 border border-green-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+          className={
+            status === "active" ? "success-button" : "button-not-selected"
+          }
         >
           active
         </button>
         <button
           onClick={() => setUserStatus("inactive")}
-          className="bg-slate-50  mt-5 border border-red-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+          className={
+            status === "inactive" ? "danger-button" : "button-not-selected"
+          }
         >
           inactive
         </button>
         <button
           onClick={() => setUserStatus("all")}
-          className="bg-slate-50  mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+          className={
+            status === "all" ? "neutral-button" : "button-not-selected"
+          }
         >
           all
         </button>
       </div>
       <Link
-        to="/users/new"
-        className="bg-slate-50 block m-auto mt-5 border border-purple-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-35"
+        to="/"
+        className="flex justify-center items-center mt-5 md:justify-start md:items-start"
       >
-        Add User
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#1f1f1f"
+        >
+          <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+        </svg>
+        <span className=" ml-4 text-black">Back to Home</span>
       </Link>
 
       {content}
-      <UserStats
-        allUsers={allUsers.length}
-        ActiveUsers={ActiveUsers.length}
-        InActiveUsers={InActiveUsers.length}
-      />
-      <button
-        onClick={LoadUser}
-        className="bg-slate-50 mt-5 border border-blue-500 p-3 rounded-2xl hover:scale-105 ease-in-out duration-300 mb-3 w-32"
-      >
+
+      <button onClick={LoadUser} className="neutral-button mt-5 block mx-auto">
         retry
       </button>
     </div>

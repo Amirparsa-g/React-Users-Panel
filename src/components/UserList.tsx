@@ -1,7 +1,7 @@
 // import React from "react";
-import UserCard from "./UserCard";
+// import UserCard from "./UserCard";
 import type { User } from "../types/user";
-
+import UserCard from "./UserCard";
 const UserList = ({
   users,
   onRemove,
@@ -17,18 +17,27 @@ const UserList = ({
 }) => {
   const mappedUsers = users.map((user) => (
     <UserCard
-      key={user.ID}
       user={user}
+      isLoading={isLoading}
       onRemove={onRemove}
       changeStatus={changeStatus}
-      isLoading={isLoading}
       error={error}
     />
   ));
 
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 mt-3">
-      {mappedUsers}
+    <div className="w-full userStats-card">
+      <table className="w-full table-fixed border-separate border-spacing-y-4 border-spacing-x-4">
+        <thead className=" text-left">
+          <tr>
+            <th className="w-7/12 sm:w-1/2 ">User</th>
+            <th className="text-center">role</th>
+            <th className="hidden md:table-cell">status</th>
+            <th className="hidden md:table-cell">Actions</th>
+          </tr>
+        </thead>
+        <tbody>{mappedUsers}</tbody>
+      </table>
     </div>
   );
 };

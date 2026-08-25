@@ -123,49 +123,44 @@ const AddUserForm = ({
 
   return (
     <div className=" z-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-        <form
-          action=""
-          className="flex flex-col w-full gap-3"
-          onSubmit={async (e) => {
-            e.preventDefault();
+      <form
+        action=""
+        className="flex flex-col w-full gap-3"
+        onSubmit={async (e) => {
+          e.preventDefault();
 
-            const isValid = Validation();
+          const isValid = Validation();
 
-            if (!isValid) return;
-            if (formData.role === "") return;
+          if (!isValid) return;
+          if (formData.role === "") return;
 
-            if (user) {
-              if (!editUserHandeler) return;
+          if (user) {
+            if (!editUserHandeler) return;
 
-              const isSuccess = await editUserHandeler(formData, user.ID);
-              if (isSuccess) navigate(`/users/${user.ID}`);
+            const isSuccess = await editUserHandeler(formData, user.ID);
+            if (isSuccess) navigate(`/users/${user.ID}`);
 
-              return;
-            }
+            return;
+          }
 
-            if (!addUserHandeler) return;
-            const newUser = await addingApiUser();
-            if (!newUser) return;
-            addUserHandeler(newUser);
-            navigate("/users");
-          }}
-        >
-          {isLoading && (
-            <p className="text-center text-3xl m-2 font-semibold">
-              Loading ...
-            </p>
-          )}
-          {error && (
-            <p className="text-center text-xl m-2 font-semibold text-red-600">
-              {error}
-            </p>
-          )}
-          <h1 className="text-center , text-xl ">
-            {user ? "Edit User" : "Add User"}
-          </h1>
+          if (!addUserHandeler) return;
+          const newUser = await addingApiUser();
+          if (!newUser) return;
+          addUserHandeler(newUser);
+          navigate("/users");
+        }}
+      >
+        {isLoading && (
+          <p className="text-center text-3xl m-2 font-semibold">Loading ...</p>
+        )}
+        {error && (
+          <p className="text-center text-xl m-2 font-semibold text-danger">
+            {error}
+          </p>
+        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <label htmlFor="">
-            full name:
+            Full Name:
             <input
               type="text"
               placeholder="Enter you full name"
@@ -181,14 +176,14 @@ const AddUserForm = ({
                   nameError: "",
                 });
               }}
-              className="w-full px-2 bg-gray-100 border border-purple-500 rounded-3xl"
+              className="w-full userStats-card p-2 h-12"
             />
             {FormError.nameError !== "" && (
-              <p className="text-red-700">{FormError.nameError}</p>
+              <p className="text-danger">{FormError.nameError}</p>
             )}
           </label>
           <label htmlFor="">
-            age
+            Age
             <input
               type="number"
               placeholder="age"
@@ -197,14 +192,14 @@ const AddUserForm = ({
                 setFormData({ ...formData, age: e.target.value });
                 setFormError({ ...FormError, ageError: "" });
               }}
-              className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
+              className="w-full userStats-card p-2 h-12"
             />
             {FormError.ageError !== "" && (
-              <p className="text-red-700">{FormError.ageError}</p>
+              <p className="text-danger">{FormError.ageError}</p>
             )}
           </label>
           <label htmlFor="">
-            role :
+            Role :
             <select
               name="role"
               id="role"
@@ -220,7 +215,7 @@ const AddUserForm = ({
                   roleError: "",
                 });
               }}
-              className="w-full bg-gray-100 px-2 border border-purple-500 rounded-3xl"
+              className="w-full userStats-card p-2 h-12"
             >
               <option value=""></option>
               <option value="admin">admin</option>
@@ -228,51 +223,59 @@ const AddUserForm = ({
               <option value="customer">customer</option>
             </select>
             {FormError.roleError !== "" && (
-              <p className="text-red-700">{FormError.roleError}</p>
+              <p className="text-danger">{FormError.roleError}</p>
             )}
           </label>
-
-          <label htmlFor="">Activity :</label>
-          <label htmlFor="">
-            Active
-            <input
-              type="radio"
-              value={"Active"}
-              checked={formData.isActive}
-              onChange={() => setFormData({ ...formData, isActive: true })}
-              className="m-2"
-            />
-          </label>
-          <label htmlFor="">
-            Inactive
-            <input
-              type="radio"
-              value={"inActive"}
-              checked={!formData.isActive}
-              onChange={() => setFormData({ ...formData, isActive: false })}
-              className="m-2"
-            />
+          <div>
+            <label htmlFor="">Activity :</label>
             <br />
-          </label>
-          <label htmlFor="">
-            email (optional)
-            <input
-              type="text"
-              value={formData.email}
-              onChange={(e) => {
-                setFormData({ ...formData, email: e.target.value });
-                setFormError({ ...FormError, emailError: "" });
-              }}
-              className="w-full bg-gray-100 px-2 border border-purple-500 rounded-sm"
-            />
-            {FormError.emailError !== "" && (
-              <p className="text-red-700">{FormError.emailError}</p>
-            )}
-          </label>
+            <div className="userStats-card p-2">
+              <label htmlFor="">
+                Active
+                <input
+                  type="radio"
+                  value={"Active"}
+                  checked={formData.isActive}
+                  onChange={() => setFormData({ ...formData, isActive: true })}
+                  className="m-2"
+                />
+              </label>
+              <label htmlFor="">
+                Inactive
+                <input
+                  type="radio"
+                  value={"inActive"}
+                  checked={!formData.isActive}
+                  onChange={() => setFormData({ ...formData, isActive: false })}
+                  className="m-2"
+                />
+                <br />
+              </label>
+            </div>
+          </div>
+          <div className="flex flex-col col-span-full">
+            <label htmlFor="">
+              Email (Optional)
+              <input
+                type="text"
+                value={formData.email}
+                onChange={(e) => {
+                  setFormData({ ...formData, email: e.target.value });
+                  setFormError({ ...FormError, emailError: "" });
+                }}
+                className="w-full userStats-card p-2 h-12"
+              />
+              {FormError.emailError !== "" && (
+                <p className="text-danger">{FormError.emailError}</p>
+              )}
+            </label>
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center w-full gap-2">
           <button
             disabled={isLoading}
             type="submit"
-            className={`${isLoading ? "bg-gray-50 border border-gray-400 text-gray-400 p-2 rounded-sm" : "bg-gray-100 border border-green-400 p-2 rounded-sm hover:scale-105 ease-in-out duration-300"}`}
+            className={`${isLoading ? "button-not-selected" : "success-button"}`}
           >
             {isLoading ? "saving ..." : "submit"}
           </button>
@@ -281,12 +284,12 @@ const AddUserForm = ({
             onClick={() => {
               navigate(user ? `/users/${user.ID}` : "/users");
             }}
-            className="bg-gray-100 border border-red-400 p-2 rounded-sm hover:scale-105 ease-in-out duration-300"
+            className="danger-button"
           >
             Cancel
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };

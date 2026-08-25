@@ -1,76 +1,79 @@
 import { useState } from "react";
-import { Outlet, NavLink } from "react-router-dom";
-import hamburgerIcon from "../assets/hamburger-icon.svg";
+import { useLocation, Outlet, Link } from "react-router-dom";
+import DesktopSidebar from "./DesktopSidebar";
+import ButtomNav from "./ButtomNav";
+
 const AppLayout = () => {
+  const location = useLocation();
+  const getPageTitle = () => {
+    const path = location.pathname;
+    if (path === "/") return "Home Page";
+    if (path === "/users") return "Users";
+    if (path === "/users/new") return "Add User";
+    if (path.startsWith("/users/") && !path.endsWith("/edit"))
+      return "User Details";
+    if (path.startsWith("/users/") && path.endsWith("/edit"))
+      return "Edit User";
+    return "User Management Panel Project";
+  };
   const [isHamburger, setIsHamburger] = useState<boolean>(false);
   return (
-    <div className="min-h-1">
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        <header className="w-full h-10 flex justify-center items-center my-4">
-          <h1 className="text-center text-2xl font-semibold">
-            User Managment Pannel Project
-          </h1>
-        </header>
-        <span className="sm:hidden">
-          <button
-            className="block  sm:hidden ml-3"
-            onClick={() => setIsHamburger((prev) => !prev)}
-          >
-            <img src={hamburgerIcon} alt="hamburger icon" />
-          </button>
-        </span>
-        <nav
-          className={`${isHamburger ? "flex" : "hidden"} flex-col max-w-fit ml-3 sm:flex sm:flex-row sm:justify-center sm:items-center sm:gap-3 sm:my-4 sm:mx-auto`}
-        >
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? "bg-blue-400 border border-blue-700 p-2 hover:scale-105 text-slate-100 transition-all ease-in-out duration-300 rounded-md"
-                : "bg-slate-100 border border-blue-400 p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md"
-            }
-          >
-            Home Page
-          </NavLink>
-          <NavLink
-            to="/users"
-            end
-            className={({ isActive }) =>
-              isActive
-                ? "bg-blue-400 border border-blue-700 p-2 hover:scale-105 text-slate-100 transition-all ease-in-out duration-300 rounded-md"
-                : "bg-slate-100 border border-blue-400 p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md"
-            }
-          >
-            Users
-          </NavLink>
-          <NavLink
-            to="/users/new"
-            className={({ isActive }) =>
-              isActive
-                ? "bg-blue-400 border border-blue-700 p-2 hover:scale-105 text-slate-100 transition-all ease-in-out duration-300 rounded-md"
-                : "bg-slate-100 border border-blue-400 p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md"
-            }
-          >
-            Add User
-          </NavLink>
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              isActive
-                ? "bg-blue-400 border border-blue-700 p-2 hover:scale-105 text-slate-100 transition-all ease-in-out duration-300 rounded-md"
-                : "bg-slate-100 border border-blue-400 p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md"
-            }
-          >
-            About Project
-          </NavLink>
-        </nav>
+    <div className="flex w-full h-screen overflow-hidden ">
+      <div
+        className={
+          isHamburger
+            ? "fixed inset-0 z-40 bg-black/50 w-full h-screen md:hidden transition-opacity"
+            : "hidden"
+        }
+        onClick={() => setIsHamburger(false)}
+      ></div>
+      <div>
+        <DesktopSidebar
+          isHamburger={isHamburger}
+          setIsHamburger={setIsHamburger}
+        />
       </div>
-      <main className=" flex flex-col justify-center items-center p-3 min-h-screen">
-        <Outlet />
-      </main>
-      <footer className="border-t-2 border-purple-400 my-5 bg-slate-50 h-50">
-        <h2 className="text-center text-3xl text-cyan-400 ">Footer</h2>
-      </footer>
+      <div className="flex flex-1 flex-col h-full overflow-hidden">
+        <header className="w-full h-10 flex justify-evenly items-center my-4 shrink-0 gap-5">
+          {!isHamburger && (
+            <span className="fixed top-6 left-4 md:hidden">
+              <button onClick={() => setIsHamburger(true)}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                  fill="#1f1f1f"
+                >
+                  <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                </svg>
+              </button>
+            </span>
+          )}
+          <h1 className="text-center text-body font-header2 md:text-header2">
+            {getPageTitle()}
+          </h1>
+          {getPageTitle() === "Users" && (
+            <Link to="/users/new" className="fixed top-6 right-4">
+              <svg
+                className="bg-primary p-1 rounded-md"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#ffffff"
+              >
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+              </svg>
+            </Link>
+          )}
+        </header>
+
+        <main className=" flex flex-1 flex-col justify-start items-center p-3 w-full overflow-y-auto mb-10 mx-auto px-4 max-w-screen-2xl">
+          <Outlet />
+        </main>
+      </div>
+      <ButtomNav />
     </div>
   );
 };

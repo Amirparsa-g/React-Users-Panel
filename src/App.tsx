@@ -62,14 +62,15 @@ function App() {
   const removeUserHandler = (id: number) => {
     const remainingUsers = UsersList.filter((user) => user.ID !== id);
     setUserList(remainingUsers);
-    alert("user removed seccessfully");
   };
   const removeApiUser = async (id: number) => {
     try {
       setError(null);
-      const deleteResponse = await deleteApiUser(id);
-      if (deleteResponse.isDeleted) removeUserHandler(id);
-      return true;
+      if (confirm("are you sure you want to remove this use?")) {
+        const deleteResponse = await deleteApiUser(id);
+        if (deleteResponse.isDeleted) removeUserHandler(id);
+        return true;
+      }
     } catch (error) {
       if (error instanceof Error) setError(error.message);
       else setError("Unexpected Error");
@@ -132,7 +133,10 @@ function App() {
     <>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route path="/" element={<HomePage UsersList={UsersList} />}></Route>
+          <Route
+            path="/"
+            element={<HomePage UsersList={UsersList} isLoading={isLoading} />}
+          ></Route>
           <Route path="users">
             <Route
               index

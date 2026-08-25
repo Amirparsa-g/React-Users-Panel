@@ -1,1 +1,121 @@
 @import "tailwindcss";
+@theme {
+  --color-primary: #2563eb;
+  --color-primaryDark: #1d4ed8;
+  --color-primaryDarker: #09173f;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-Warning: #f59e08;
+  --color-admin: #771dd8;
+  --color-moderator: #4077ed;
+  --text-header1: 32px;
+  --text-header2: 24px;
+  --text-body: 16px;
+  --text-small: 14px;
+  --font-weight-header1: bold;
+  --font-weight-header2: 600;
+}
+@layer base {
+  a {
+    @apply text-primary;
+  }
+}
+@layer components {
+  .nav-btn-notSelected {
+    @apply bg-primaryDarker text-white p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md w-full;
+  }
+  .nav-btn-selected {
+    @apply bg-primary border border-blue-700 p-2 hover:scale-105 text-slate-100 transition-all ease-in-out duration-300 rounded-md w-full;
+  }
+  .nav-img {
+    @apply brightness-0 invert;
+  }
+  .nav-desktop {
+    @apply flex flex-col justify-center items-center gap-2 mt-20;
+  }
+  .nav-mobile {
+    @apply flex fixed md:hidden w-full bottom-0 justify-center items-center;
+  }
+  .nav-mobile-btn-selected {
+    @apply bg-white text-primary p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md w-full fill-primary;
+  }
+  .nav-mobile-btn-notSelected {
+    @apply bg-white text-black p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md w-full fill-black;
+  }
+
+  .aside-hamburger {
+    @apply flex flex-col w-40 h-screen bg-primaryDarker p-2 fixed z-70;
+  }
+  .svg-clicked {
+    @apply fill-primary;
+  }
+  .svg-not-clicked {
+    @apply fill-black;
+  }
+  .userStats-card {
+    @apply border border-gray-100 bg-white p-4 rounded-md shadow-md;
+  }
+  .stats-header {
+    @apply w-fit rounded-md p-1;
+  }
+  .select-wrapper {
+    @apply relative inline-block w-5 h-5;
+  }
+  .select-wrapper img {
+    @apply w-full h-full object-cover cursor-pointer;
+  }
+  .select-wrapper select {
+    @apply absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer appearance-none;
+  }
+
+  .success-button {
+    @apply btn border-success;
+  }
+  .danger-button {
+    @apply btn border-danger;
+  }
+  .neutral-button {
+    @apply btn border-primary;
+  }
+  .button-not-selected {
+    @apply border border-gray-100 bg-white p-4 rounded-md shadow-md hover:scale-105 w-35 duration-300 ease-in-out;
+  }
+  .profile {
+    @apply rounded-full border border-black w-10 h-10 shrink-0 relative flex justify-center items-center;
+  }
+  .warning-button {
+    @apply border border-Warning bg-white p-4 rounded-md shadow-md hover:scale-105 w-35 duration-300 ease-in-out;
+  }
+}
+@utility aside-notHamburger {
+  @apply fixed md:flex flex-col w-40 h-screen bg-primaryDarker p-2 z-50 md:relative;
+}
+@utility btn {
+  @apply border border-black  bg-white p-4 rounded-md shadow-md hover:scale-105 w-35 duration-300 ease-in-out;
+}
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-out {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+.animate-slide-in {
+  animation: slide-in 0.4s ease-in-out forwards;
+}
+.animate-slide-out {
+  animation: slide-out 0.4s ease-in-out forwards;
+}
