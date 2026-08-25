@@ -44,7 +44,7 @@
   }
 
   .aside-hamburger {
-    @apply flex flex-col w-40 h-screen bg-primaryDarker p-2 fixed z-70;
+    @apply flex flex-col w-60 h-screen bg-primaryDarker p-2 fixed z-70;
   }
   .svg-clicked {
     @apply fill-primary;
@@ -86,9 +86,15 @@
   .warning-button {
     @apply border border-Warning bg-white p-4 rounded-md shadow-md hover:scale-105 w-35 duration-300 ease-in-out;
   }
+  .wrapper {
+    @apply flex gap-1;
+  }
+  .wrapper p {
+    @apply line-clamp-1;
+  }
 }
 @utility aside-notHamburger {
-  @apply fixed md:flex flex-col w-40 h-screen bg-primaryDarker p-2 z-50 md:relative;
+  @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker p-2 z-50 md:relative;
 }
 @utility btn {
   @apply border border-black  bg-white p-4 rounded-md shadow-md hover:scale-105 w-35 duration-300 ease-in-out;
