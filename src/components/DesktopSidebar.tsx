@@ -21,7 +21,7 @@ const DesktopSidebar = ({
     <aside
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className={` md:transition-all md:duration-200 ${!isMobile ? ` ${isHover || isClicked ? " hidden md:aside-notHamburger" : " hidden md:aside-notHamburger md:w-20  "}` : ` md:hidden ${isClicked ? "aside-notHamburger md:aside-notHamburger animate-slide-in" : " aside-notHamburger w-20 animate-slide-out"}`}`}
+      className={` transition-all duration-200 ${!isMobile ? ` ${isHover || isClicked ? " hidden md:aside-notHamburger" : " hidden md:aside-notHamburger md:w-20  "}` : ` md:hidden ${isClicked ? "aside-notHamburger md:aside-notHamburger animate-slide-in" : " aside-notHamburger -translate-x-60 "}`}`}
     >
       <div className="flex gap-2">
         <img src={logoIcon} alt="logoIcon" className="nav-img" />
