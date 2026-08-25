@@ -16,28 +16,36 @@ const AppLayout = () => {
       return "Edit User";
     return "User Management Panel Project";
   };
-  const [isHamburger, setIsHamburger] = useState<boolean | null>(null);
+
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+
   return (
     <div className="flex w-full h-screen overflow-hidden ">
       <div
         className={
-          isHamburger
+          isClicked
             ? "fixed inset-0 z-40 bg-black/50 w-full h-screen md:hidden transition-opacity"
             : "hidden"
         }
-        onClick={() => setIsHamburger(false)}
+        onClick={() => setIsClicked(false)}
       ></div>
       <div>
         <DesktopSidebar
-          isHamburger={isHamburger}
-          setIsHamburger={setIsHamburger}
+          isMobile={true}
+          isClicked={isClicked}
+          setIsClicked={setIsClicked}
+        />
+        <DesktopSidebar
+          isMobile={false}
+          isClicked={isClicked}
+          setIsClicked={setIsClicked}
         />
       </div>
       <div className="flex flex-1 flex-col h-full overflow-hidden">
-        <header className="w-full h-10 flex justify-evenly items-center my-4 shrink-0 gap-5">
-          {!isHamburger && (
-            <span className="fixed top-6 left-4 md:hidden">
-              <button onClick={() => setIsHamburger(true)}>
+        <header className="relative w-full h-10 flex justify-evenly items-center my-4 shrink-0 gap-5">
+          {!isClicked && (
+            <span className="absolute left-2">
+              <button onClick={() => setIsClicked(true)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
@@ -50,6 +58,22 @@ const AppLayout = () => {
               </button>
             </span>
           )}
+          {isClicked && (
+            <span className="absolute left-2">
+              <button onClick={() => setIsClicked(false)}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                  fill="#1f1f1f"
+                >
+                  <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                </svg>
+              </button>
+            </span>
+          )}
+
           <h1 className="text-center text-body font-header2 md:text-header2">
             {getPageTitle()}
           </h1>
