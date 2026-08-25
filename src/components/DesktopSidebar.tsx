@@ -8,12 +8,12 @@ const DesktopSidebar = ({
   isHamburger,
   setIsHamburger,
 }: {
-  isHamburger: boolean;
-  setIsHamburger: (value: boolean) => void;
+  isHamburger: boolean | null;
+  setIsHamburger: (value: boolean | null) => void;
 }) => {
   return (
     <aside
-      className={`${isHamburger ? "aside-hamburger animate-slide-in md:aside-notHamburger" : "aside-notHamburger animate-slide-out"}`}
+      className={`${isHamburger === null ? "hidden md:aside-notHamburger" : `${isHamburger === true ? "aside-hamburger animate-slide-in md:aside-notHamburger" : "aside-notHamburger animate-slide-out"}`}`}
     >
       <h2 className="text-body font-header2 text-white">User Mangement</h2>
       <nav className="nav-desktop">
