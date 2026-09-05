@@ -16,18 +16,29 @@ const UserList = ({
   error: string | null;
 }) => {
   const mappedUsers = users.map((user) => (
-    <UserCard
-      user={user}
-      isLoading={isLoading}
-      onRemove={onRemove}
-      changeStatus={changeStatus}
-      error={error}
-    />
+    <>
+      <UserCard
+        user={user}
+        isMobile={true}
+        isLoading={isLoading}
+        onRemove={onRemove}
+        changeStatus={changeStatus}
+        error={error}
+      />
+      <UserCard
+        user={user}
+        isMobile={false}
+        isLoading={isLoading}
+        onRemove={onRemove}
+        changeStatus={changeStatus}
+        error={error}
+      />
+    </>
   ));
 
   return (
-    <div className="w-full userStats-card">
-      <table className="w-full table-fixed border-separate border-spacing-y-4 border-spacing-x-4">
+    <div className="w-full md:userStats-card">
+      <table className=" hidden md:table md:w-full md:table-fixed md:border-separate md:border-spacing-y-4 md:border-spacing-x-4">
         <thead className=" text-left">
           <tr>
             <th className="w-7/12 sm:w-1/2 ">User</th>
@@ -38,6 +49,7 @@ const UserList = ({
         </thead>
         <tbody>{mappedUsers}</tbody>
       </table>
+      <div className="md:hidden">{mappedUsers}</div>
     </div>
   );
 };
