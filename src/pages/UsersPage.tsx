@@ -42,7 +42,6 @@ const UsersPage = ({
   const moderators = UsersList.filter((user) => user.role === "operator");
   const customers = UsersList.filter((user) => user.role === "customer");
   const term = searchedTerm.toLowerCase().trim();
-  setTimeout(() => {});
   useEffect(() => {
     const fetchServerResult = async () => {
       setIsLoading(true);

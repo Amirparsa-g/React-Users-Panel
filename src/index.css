@@ -8,18 +8,17 @@
   --color-Warning: #f59e08;
   --color-admin: #771dd8;
   --color-moderator: #4077ed;
+  --color-bg: #f6f8fc;
+  --color-primary-hover: #1d4ed8;
   --text-header1: 32px;
   --text-header2: 24px;
   --text-body: 16px;
+  --text-bodyHeader: 20px;
   --text-small: 14px;
   --font-weight-header1: bold;
   --font-weight-header2: 600;
 }
-@layer base {
-  a {
-    @apply text-primary;
-  }
-}
+
 @layer components {
   .nav-btn-notSelected {
     @apply bg-primaryDarker text-white p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md w-full;
@@ -91,6 +90,18 @@
   }
   .wrapper p {
     @apply line-clamp-1;
+  }
+  .caption {
+    @apply text-small text-gray-500;
+  }
+  .stats-content {
+    @apply flex flex-col mt-5 justify-start items-start;
+  }
+  .nutText {
+    @apply text-body text-gray-700;
+  }
+  .HomePage-Link {
+    @apply w-full border border-gray-200 p-3 rounded-md text-body font-header1 hover:border-primary-hover/30 hover:bg-primary/5 transition-all duration-150 flex justify-between;
   }
 }
 @utility aside-notHamburger {
