@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import DesktopSidebar from "./DesktopSidebar";
 import ButtomNav from "./ButtomNav";
 import { motion } from "framer-motion";
@@ -29,7 +29,7 @@ const AppLayout = () => {
         />
       </div>
       <div className="flex flex-1 flex-col h-full overflow-hidden">
-        <header className="relative w-full h-10 flex justify-evenly items-center my-4 shrink-0 gap-5">
+        <header className="relative w-full h-10 flex justify-between items-center my-4 shrink-0 gap-5">
           {!isClicked && (
             <span className="absolute left-2">
               <button onClick={() => setIsClicked(true)}>
@@ -63,7 +63,19 @@ const AppLayout = () => {
             </span>
           )}
 
-          <h1 className="text-body font-black">User Managment</h1>
+          <h1 className="text-body font-black block mx-auto">User Managment</h1>
+          <Link to={"/users/new"} className="fixed top-5 right-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#ffffff"
+              className="bg-primary w-10 h-8 rounded-md shadow-md hover:bg-primaryDark"
+            >
+              <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+            </svg>
+          </Link>
         </header>
 
         <motion.main
