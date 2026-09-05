@@ -144,6 +144,9 @@
   .customer-div {
     @apply p-div bg-black/10 text-black;
   }
+  .buttomNav-font {
+    @apply font-semibold text-small;
+  }
 }
 @utility aside-notHamburger {
   @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker p-2 z-50 md:relative;
