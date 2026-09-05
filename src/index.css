@@ -10,6 +10,7 @@
   --color-moderator: #4077ed;
   --color-bg: #f6f8fc;
   --color-primary-hover: #1d4ed8;
+  --color-sidebar-2: #102a5e;
   --text-header1: 32px;
   --text-header2: 24px;
   --text-body: 16px;
@@ -21,16 +22,16 @@
 
 @layer components {
   .nav-btn-notSelected {
-    @apply bg-primaryDarker text-white p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-md w-full;
+    @apply bg-primaryDarker text-white p-2 hover:bg-sidebar-2 transition-all ease-in-out duration-300 rounded-md w-full;
   }
   .nav-btn-selected {
-    @apply bg-primary border border-blue-700 p-2 hover:scale-105 text-slate-100 transition-all ease-in-out duration-300 rounded-md w-full;
+    @apply bg-primary border border-blue-700 p-2  text-slate-100 transition-all ease-in-out duration-300 rounded-md w-full;
   }
   .nav-img {
     @apply brightness-0 invert;
   }
   .nav-desktop {
-    @apply flex flex-col justify-center items-center gap-2 mt-20;
+    @apply flex flex-col justify-center items-center gap-2 mt-10;
   }
   .nav-mobile {
     @apply flex fixed md:hidden w-full bottom-0 justify-center items-center;
