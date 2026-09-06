@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const AddUserPage = ({
   addUserHandeler,
+  onRemove,
   setIsLoading,
   setError,
   UsersList,
@@ -12,6 +13,7 @@ const AddUserPage = ({
   error,
 }: {
   addUserHandeler: (newUser: User) => void;
+  onRemove: (id: number) => Promise<boolean | undefined>;
   setIsLoading: (value: boolean) => void;
   setError: (value: string | null) => void;
   UsersList: User[];
@@ -43,6 +45,7 @@ const AddUserPage = ({
         setError={setError}
         isLoading={isLoading}
         error={error}
+        onRemove={onRemove}
       />
     </div>
   );

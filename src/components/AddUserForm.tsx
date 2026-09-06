@@ -9,6 +9,7 @@ const AddUserForm = ({
   addUserHandeler,
   UsersList,
   user,
+  onRemove,
   editUserHandeler,
   setIsLoading,
   setError,
@@ -18,6 +19,7 @@ const AddUserForm = ({
   addUserHandeler?: (newUser: User) => void;
   UsersList: User[];
   user?: User | null;
+  onRemove: (id: number) => Promise<boolean | undefined>;
   editUserHandeler?: (
     formData: FormPropType,
     id: number,
@@ -28,7 +30,7 @@ const AddUserForm = ({
   error: string | null;
 }) => {
   const navigate = useNavigate();
-
+  const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
   const [formData, setFormData] = useState<FormPropType>({
     fullName: user?.fullName ?? "",
     age: user?.age.toString() ?? "",
@@ -273,7 +275,7 @@ const AddUserForm = ({
             </label>
           </div>
         </div>
-        <div className="flex  items-center justify-center w-full gap-2">
+        <div className="flex  items-center justify-center md:justify-end md:items-end w-full gap-2">
           <button
             disabled={isLoading}
             type="submit"
@@ -286,10 +288,26 @@ const AddUserForm = ({
             onClick={() => {
               navigate(user ? `/users/${user.ID}` : "/users");
             }}
-            className="danger-button"
+            className="neutral-button"
           >
             Cancel
           </button>
+          {user && (
+            <button
+              disabled={updatingUserId === user.ID}
+              onClick={async () => {
+                setUpdatingUserId(user.ID);
+                const isDeleted = await onRemove(user.ID);
+                setUpdatingUserId(null);
+                if (isDeleted) {
+                  navigate("/users");
+                }
+              }}
+              className="danger-button"
+            >
+              Delete
+            </button>
+          )}
         </div>
       </form>
     </div>

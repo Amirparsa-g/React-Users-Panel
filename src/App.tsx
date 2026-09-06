@@ -163,6 +163,7 @@ function App() {
                 <AddUserPage
                   addUserHandeler={addUserHandler}
                   UsersList={UsersList}
+                  onRemove={removeApiUser}
                   setIsLoading={setIsLoading}
                   setError={setError}
                   isLoading={isLoading}
@@ -190,6 +191,7 @@ function App() {
               element={
                 <EditUserPage
                   UsersList={UsersList}
+                  onRemove={removeApiUser}
                   changeInfo={changeInfo}
                   isLoading={isLoading}
                   error={error}

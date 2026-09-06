@@ -89,7 +89,7 @@ const UserDetailsPage = ({
             Are you sure you want to continue this action?
           </h2>
           <button
-            className="block mx-auto success-button w-full mt-10"
+            className="primary-button w-full mt-3"
             onClick={async () => {
               setUpdatingUserId(clickedUser.ID);
               const isSeccess = await onRemove(clickedUser.ID);
