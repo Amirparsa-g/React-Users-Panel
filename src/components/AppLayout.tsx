@@ -13,7 +13,7 @@ const AppLayout = () => {
       <div
         className={
           isClicked
-            ? "fixed inset-0 z-40 bg-black/50 w-full h-screen md:hidden transition-opacity"
+            ? "fixed inset-0 z-40 bg-black/50 w-full h-screen md:hidden transition-opacity "
             : "hidden"
         }
         onClick={() => setIsClicked(false)}
@@ -31,7 +31,7 @@ const AppLayout = () => {
         />
       </div>
       <div className="flex flex-1 flex-col h-full overflow-hidden">
-        <header className="relative w-full h-10 flex justify-between items-center my-4 shrink-0 gap-5">
+        <header className="relative w-full h-10 flex justify-between items-center mذ-4 shrink-0 gap-5 bg-white">
           {!isClicked && (
             <span className="absolute left-2">
               <button onClick={() => setIsClicked(true)}>

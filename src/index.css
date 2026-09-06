@@ -13,6 +13,7 @@
   --color-sidebar-2: #102a5e;
   --color-primary-soft: #eff6ff;
   --color-violet: #7c3aed;
+  --color-borderNeut: #cbd5e1;
   --text-header1: 32px;
   --text-header2: 24px;
   --text-body: 16px;
@@ -76,7 +77,7 @@
     @apply btn border-danger/30 text-danger hover:bg-danger/5;
   }
   .neutral-button {
-    @apply btn border-black/30 hover:bg-gray-100;
+    @apply btn border-borderNeut hover:bg-gray-100;
   }
   .primary-button {
     @apply btn border-primary/30 bg-primary hover:bg-primaryDark text-white;
@@ -163,7 +164,7 @@
   @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker p-2 z-50 md:relative;
 }
 @utility btn {
-  @apply border border-black  bg-white p-4 rounded-md shadow-sm  w-35 duration-300 ease-in-out font-bold;
+  @apply border border-black  bg-white px-4 py-2 rounded-md shadow-sm  w-35 duration-300 ease-in-out font-bold;
 }
 @utility p-div {
   @apply p-1 rounded-lg text-small font-bold shadow-sm;
