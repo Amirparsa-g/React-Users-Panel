@@ -23,7 +23,19 @@ const AddUserPage = ({
     document.title = "Add User | User Management";
   }, []);
   return (
-    <div>
+    <div className="w-full md:w-3/4">
+      <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-5">
+        <div className="flex flex-col items-start text-left">
+          <h2 className="text-header1  font-bold text-3xl">Add User</h2>
+          <p className="caption text-black/50 mt-1">Create a new user</p>
+        </div>
+        <Link
+          to="/users"
+          className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-black font-medium hover:bg-gray-50 transition-colors"
+        >
+          <span>&larr;</span> Back to Users
+        </Link>
+      </header>
       <AddUserForm
         addUserHandeler={addUserHandeler}
         UsersList={UsersList}
@@ -32,20 +44,6 @@ const AddUserPage = ({
         isLoading={isLoading}
         error={error}
       />
-      <Link to="/users" className="flex justify-center items-center mt-10">
-        <span className="flex items-center gap-1 text-black font-medium hover:opacity-70 transition-opacity">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#1f1f1f"
-          >
-            <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
-          </svg>
-          Back to Users
-        </span>
-      </Link>
     </div>
   );
 };

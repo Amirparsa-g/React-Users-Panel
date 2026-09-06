@@ -122,10 +122,10 @@ const AddUserForm = ({
   };
 
   return (
-    <div className=" z-50 flex items-center justify-center">
+    <div className="w-full">
       <form
         action=""
-        className="flex flex-col w-full gap-3"
+        className="flex flex-col w-full gap-3 userStats-card "
         onSubmit={async (e) => {
           e.preventDefault();
 
@@ -159,7 +159,7 @@ const AddUserForm = ({
           </p>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <label htmlFor="">
+          <label htmlFor="" className="label-form">
             Full Name:
             <input
               type="text"
@@ -176,13 +176,13 @@ const AddUserForm = ({
                   nameError: "",
                 });
               }}
-              className="w-full userStats-card p-2 h-12"
+              className="w-full border control"
             />
             {FormError.nameError !== "" && (
               <p className="text-danger">{FormError.nameError}</p>
             )}
           </label>
-          <label htmlFor="">
+          <label htmlFor="" className="label-form">
             Age
             <input
               type="number"
@@ -192,13 +192,13 @@ const AddUserForm = ({
                 setFormData({ ...formData, age: e.target.value });
                 setFormError({ ...FormError, ageError: "" });
               }}
-              className="w-full userStats-card p-2 h-12"
+              className="control"
             />
             {FormError.ageError !== "" && (
               <p className="text-danger">{FormError.ageError}</p>
             )}
           </label>
-          <label htmlFor="">
+          <label htmlFor="" className="label-form">
             Role :
             <select
               name="role"
@@ -215,7 +215,7 @@ const AddUserForm = ({
                   roleError: "",
                 });
               }}
-              className="w-full userStats-card p-2 h-12"
+              className="control"
             >
               <option value=""></option>
               <option value="admin">admin</option>
@@ -227,9 +227,11 @@ const AddUserForm = ({
             )}
           </label>
           <div>
-            <label htmlFor="">Activity :</label>
+            <label htmlFor="" className="label-form">
+              Activity :
+            </label>
             <br />
-            <div className="userStats-card p-2">
+            <div className="control">
               <label htmlFor="">
                 Active
                 <input
@@ -254,7 +256,7 @@ const AddUserForm = ({
             </div>
           </div>
           <div className="flex flex-col col-span-full">
-            <label htmlFor="">
+            <label htmlFor="" className="label-form">
               Email (Optional)
               <input
                 type="text"
@@ -263,7 +265,7 @@ const AddUserForm = ({
                   setFormData({ ...formData, email: e.target.value });
                   setFormError({ ...FormError, emailError: "" });
                 }}
-                className="w-full userStats-card p-2 h-12"
+                className="control"
               />
               {FormError.emailError !== "" && (
                 <p className="text-danger">{FormError.emailError}</p>
@@ -271,11 +273,11 @@ const AddUserForm = ({
             </label>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-full gap-2">
+        <div className="flex  items-center justify-center w-full gap-2">
           <button
             disabled={isLoading}
             type="submit"
-            className={`${isLoading ? "button-not-selected" : "success-button"}`}
+            className={`${isLoading ? "button-not-selected" : "primary-button"}`}
           >
             {isLoading ? "saving ..." : "submit"}
           </button>
