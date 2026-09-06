@@ -27,9 +27,9 @@ const UserCard = ({
         <tr
           aria-disabled={isLoading}
           key={user.ID}
-          className="hidden md:table-row"
+          className="hidden md:table-row hover:bg-gray-50 transition-colors"
         >
-          <td>
+          <td className="px-4 py-3 align-middle">
             <div className="flex gap-2 items-center">
               <div
                 className={
@@ -57,7 +57,7 @@ const UserCard = ({
               </div>
             </div>
           </td>
-          <td className="text-center">
+          <td className="px-4 py-3 text-center align-middle">
             <span
               className={
                 user.role === "admin"
@@ -70,19 +70,19 @@ const UserCard = ({
               {user.role}
             </span>
           </td>
-          <td className="text-center">
+          <td className="px-4 py-3 text-center align-middle">
             <span
               className={
                 user.isActive
-                  ? "bg-success/10 active-div text-center hidden md:table-cell"
-                  : "bg-danger/10 inactive-div text-center hidden md:table-cell"
+                  ? "bg-success/10 active-div text-center"
+                  : "bg-danger/10 inactive-div text-center"
               }
             >
               {user.isActive ? "active" : "inactive"}
             </span>
           </td>
-          <td>
-            <div className="hidden md:flex gap-1 justify-between">
+          <td className="px-4 py-3 align-middle">
+            <div className="flex gap-1 justify-center">
               <Link
                 to={`/users/${user.ID}`}
                 className="cursor-pointer relative group flex items-center justify-center"
@@ -147,42 +147,6 @@ const UserCard = ({
                   Change status
                 </div>
               </button>
-            </div>
-          </td>
-          <td className="flex md:hidden">
-            <div className="select-wrapper">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#1f1f1f"
-              >
-                <path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z" />
-              </svg>
-              <select
-                value=""
-                onChange={async (e) => {
-                  if (e.target.value === "remove user") {
-                    setUpdatingUserId(user.ID);
-                    await onRemove(user.ID);
-                    setUpdatingUserId(null);
-
-                    e.target.value = "";
-                  }
-                  if (e.target.value === "change status") {
-                    setUpdatingUserId(user.ID);
-                    await changeStatus(user);
-                    setUpdatingUserId(null);
-
-                    e.target.value = "";
-                  }
-                }}
-              >
-                <option value="" disabled hidden></option>
-                <option>remove user</option>
-                <option>change status</option>
-              </select>
             </div>
           </td>
         </tr>

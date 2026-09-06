@@ -103,7 +103,7 @@ const UsersPage = ({
         <h2 className="font-bold text-header2">Users</h2>
         <p className="caption">Search, filter, view and manage users.</p>
       </div>
-      <div className="w-full flex flex-col md:flex-row md:gap-2 md:items-center bg-white userStats-card mb-5">
+      <div className="w-full flex flex-col gap-4 md:flex-row md:gap-3 md:items-end bg-white userStats-card mb-5">
         <div className="md:w-8/12">
           <Searchinput
             onSearchChange={SearchUser}
@@ -112,7 +112,7 @@ const UsersPage = ({
             setIsServer={setIsServer}
           />
         </div>
-        <div className="md:w-4/12 md:mb-5.5">
+        <div className="md:w-3/12">
           <label htmlFor="">
             <p className="font-bold text-small text-gray-600 mb-1">status</p>
 
@@ -138,7 +138,7 @@ const UsersPage = ({
           </label>
         </div>
         <button
-          className="neutral-button w-full mt-3 "
+          className="neutral-button w-full md:w-auto md:min-w-24 md:px-6 md:h-12"
           onClick={() => {
             setSearchTerm("");
             setUserStatus("all");

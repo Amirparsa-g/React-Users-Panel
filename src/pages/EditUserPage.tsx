@@ -73,7 +73,7 @@ const EditUserPage = ({
         </div>
         <Link
           to="/users"
-          className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-black font-medium hover:bg-gray-50 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white text-black font-medium hover:bg-gray-50 transition-colors"
         >
           <span>&larr;</span> Back to Users
         </Link>
