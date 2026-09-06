@@ -22,6 +22,7 @@ import {
   sendEditedUser,
 } from "./services/userApi";
 import EditUserPage from "./pages/EditUserPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
@@ -131,6 +132,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route element={<AppLayout />}>
           <Route

@@ -3,11 +3,13 @@ import { Link, Outlet } from "react-router-dom";
 import DesktopSidebar from "./DesktopSidebar";
 import ButtomNav from "./ButtomNav";
 import { motion } from "framer-motion";
+import ScrollToTop from "./ScrollToTop";
 const AppLayout = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
   return (
     <div className="flex w-full h-screen overflow-hidden ">
+      <ScrollToTop />
       <div
         className={
           isClicked

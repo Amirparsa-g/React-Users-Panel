@@ -18,6 +18,7 @@
   --text-body: 16px;
   --text-bodyHeader: 20px;
   --text-small: 14px;
+  --text-smaller: 10px;
   --font-weight-header1: bold;
   --font-weight-header2: 600;
 }
@@ -150,7 +151,7 @@
     @apply p-div bg-black/10 text-black;
   }
   .buttomNav-font {
-    @apply font-semibold text-small;
+    @apply font-semibold text-smaller;
   }
   .statsCard-svg {
     @apply absolute right-4 top-4 bg-primary-soft w-8 h-8 p-1 rounded-md shadow-md;
