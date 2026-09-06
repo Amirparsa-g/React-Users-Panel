@@ -228,12 +228,10 @@ const AddUserForm = ({
               <p className="text-danger">{FormError.roleError}</p>
             )}
           </label>
-          <div>
-            <label htmlFor="" className="label-form">
-              Activity :
-            </label>
+          <div className="label-form ">
+            <label htmlFor="">Activity :</label>
             <br />
-            <div className="control">
+            <div className="control h-[42px] ">
               <label htmlFor="">
                 Active
                 <input
