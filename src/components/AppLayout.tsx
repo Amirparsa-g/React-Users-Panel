@@ -66,7 +66,7 @@ const AppLayout = () => {
           )}
 
           <h1 className="text-body font-black block mx-auto">User Managment</h1>
-          <Link to={"/users/new"} className="fixed top-5 right-3">
+          <Link to={"/users/new"} className="fixed top-5 right-3 md:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
@@ -77,6 +77,23 @@ const AppLayout = () => {
             >
               <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
             </svg>
+          </Link>
+          <Link
+            to={"/users/new"}
+            className="hidden md:flex fixed top-5 right-3 "
+          >
+            <div className="primary-button flex p-2 w-fit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#ffffff"
+              >
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+              </svg>
+              <p className="ml-2">Add User</p>
+            </div>
           </Link>
         </header>
 
