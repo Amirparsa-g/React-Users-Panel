@@ -14,6 +14,7 @@ const UsersPage = ({
   status,
   setUserStatus,
   searchedTerm,
+  setSearchTerm,
   SearchUser,
   removeUserHandler,
   ChangeStatusHandler,
@@ -28,6 +29,7 @@ const UsersPage = ({
   status: Filters;
   setUserStatus: (filter: Filters) => void;
   searchedTerm: string;
+  setSearchTerm: (value: string) => void;
   SearchUser: (term: string) => void;
   removeUserHandler: (id: number) => void;
   ChangeStatusHandler: (user: User) => void;
@@ -121,6 +123,13 @@ const UsersPage = ({
                 else setUserStatus("inactive");
               }}
               className="control p-3"
+              value={
+                status === "all"
+                  ? "All Statuses"
+                  : status === "active"
+                    ? "Active"
+                    : "Inactive"
+              }
             >
               <option value="All Statuses">All Statuses</option>
               <option value="Active">Active</option>
@@ -128,6 +137,15 @@ const UsersPage = ({
             </select>
           </label>
         </div>
+        <button
+          className="neutral-button w-full mt-3 "
+          onClick={() => {
+            setSearchTerm("");
+            setUserStatus("all");
+          }}
+        >
+          Clear
+        </button>
       </div>
 
       {content}

@@ -144,6 +144,7 @@ function App() {
               index
               element={
                 <UsersPage
+                  setSearchTerm={setSearchTerm}
                   UsersList={UsersList}
                   searchedTerm={searchedTerm}
                   SearchUser={SearchUser}
