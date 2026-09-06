@@ -8,7 +8,7 @@ const AppLayout = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
   return (
-    <div className="flex w-full h-screen overflow-hidden ">
+    <div className="flex w-full h-screen overflow-hidden">
       <ScrollToTop />
       <div
         className={
@@ -30,8 +30,8 @@ const AppLayout = () => {
           setIsClicked={setIsClicked}
         />
       </div>
-      <div className="flex flex-1 flex-col h-full overflow-hidden">
-        <header className="relative w-full h-10 flex justify-between items-center my-4 shrink-0 gap-5">
+      <div className="flex flex-1 flex-col h-full overflow-y-auto">
+        <header className="fixed w-full h-20 flex justify-between items-center  z-10 gap-5 bg-white">
           {!isClicked && (
             <span className="absolute left-2">
               <button onClick={() => setIsClicked(true)}>
@@ -102,7 +102,7 @@ const AppLayout = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className=" flex flex-1 flex-col justify-start items-center p-3 w-full overflow-y-auto mb-10 mx-auto px-4 max-w-screen-2xl bg-bg"
+          className=" flex flex-1 flex-col justify-start items-center p-3 w-full  mb-10 mx-auto px-4 max-w-screen-2xl bg-bg"
         >
           <Outlet />
         </motion.main>
