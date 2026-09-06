@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { User } from "../types/user";
 import { useNavigate } from "react-router-dom";
 import { addApiUser } from "../services/userApi";
+import Loading from "./Loading";
 
 const AddUserForm = ({
   addUserHandeler,
@@ -152,9 +153,7 @@ const AddUserForm = ({
           navigate("/users");
         }}
       >
-        {isLoading && (
-          <p className="text-center text-3xl m-2 font-semibold">Loading ...</p>
-        )}
+        {isLoading && <Loading />}
         {error && (
           <p className="text-center text-xl m-2 font-semibold text-danger">
             {error}
@@ -277,7 +276,7 @@ const AddUserForm = ({
           <button
             disabled={isLoading}
             type="submit"
-            className={`${isLoading ? "button-not-selected" : "primary-button"}`}
+            className={`${isLoading ? "button-not-selected" : "primary-button "}`}
           >
             {isLoading ? "saving ..." : "submit"}
           </button>
@@ -286,7 +285,7 @@ const AddUserForm = ({
             onClick={() => {
               navigate(user ? `/users/${user.ID}` : "/users");
             }}
-            className="neutral-button"
+            className="neutral-button "
           >
             Cancel
           </button>

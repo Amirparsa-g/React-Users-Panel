@@ -3,8 +3,9 @@ import EmptyState from "../components/EmptyState";
 import UserList from "../components/UserList";
 import type { User } from "../types/user";
 import Searchinput from "../components/Searchinput";
-
 import { serverSearch } from "../services/userApi";
+import Loading from "../components/Loading";
+import UserError from "../components/UserError";
 
 type Filters = "active" | "inactive" | "all";
 const UsersPage = ({
@@ -12,6 +13,7 @@ const UsersPage = ({
   status,
   setUserStatus,
   searchedTerm,
+  setSearchTerm,
   SearchUser,
   removeUserHandler,
   ChangeStatusHandler,
@@ -22,10 +24,10 @@ const UsersPage = ({
   LoadUser,
 }: {
   UsersList: User[];
-
   status: Filters;
   setUserStatus: (filter: Filters) => void;
   searchedTerm: string;
+  setSearchTerm: (value: string) => void;
   SearchUser: (term: string) => void;
   removeUserHandler: (id: number) => void;
   ChangeStatusHandler: (user: User) => void;
@@ -49,15 +51,14 @@ const UsersPage = ({
         setServerResult(serachedServerUsers);
       } catch (error) {
         if (error instanceof Error) setError(error.message);
-        else {
-          setError("Unexpected Error");
-        }
+        else setError("Unexpected Error");
       } finally {
         setIsLoading(false);
       }
     };
     void fetchServerResult();
   }, [searchedTerm, isServer, term]);
+
   const searchedUsers =
     isServer && searchedTerm.trim() !== ""
       ? serverResult
@@ -75,27 +76,11 @@ const UsersPage = ({
 
   let content;
   if (isLoading) {
-    content = (
-      <>
-        <h2 className="text-center text-3xl font-semibold">Loadin Users ...</h2>
-      </>
-    );
+    content = <Loading />;
   } else if (error) {
-    content = (
-      <h2 className="text-center text-3xl font-semibold text-danger">
-        Failed to load the Users
-      </h2>
-    );
+    content = <UserError LoadUser={LoadUser} />;
   } else {
-    if (displayedUsers.length === 0)
-      content = (
-        <EmptyState
-          UsersList={UsersList}
-          displayedUsers={displayedUsers}
-          status={status}
-          searchedTerm={searchedTerm}
-        />
-      );
+    if (displayedUsers.length === 0) content = <EmptyState />;
     else {
       content = (
         <UserList
@@ -115,8 +100,13 @@ const UsersPage = ({
         <h2 className="font-bold text-header2">Users</h2>
         <p className="caption">Search, filter, view and manage users.</p>
       </div>
-      <div className="w-full flex flex-col md:flex-row md:gap-2 md:items-center bg-white userStats-card mb-5">
-        <div className="md:w-8/12">
+
+      {/* Container اصلاح شده با items-end */}
+      <div className="w-full flex flex-col md:flex-row gap-4 items-end bg-white userStats-card mb-5 p-4">
+        <div className="flex-1 w-full">
+          <label className="font-bold text-small text-gray-600 mb-1 block">
+            Search
+          </label>
           <Searchinput
             onSearchChange={SearchUser}
             value={searchedTerm}
@@ -124,34 +114,44 @@ const UsersPage = ({
             setIsServer={setIsServer}
           />
         </div>
-        <div className="md:w-4/12 md:mb-5.5">
-          <label htmlFor="">
-            <p className="font-bold text-small text-gray-600 mb-1">status</p>
 
-            <select
-              onChange={(e) => {
-                if (e.target.value === "All Statuses") setUserStatus("all");
-                else if (e.target.value === "Active") setUserStatus("active");
-                else setUserStatus("inactive");
-              }}
-              className="control p-3"
-            >
-              <option value="All Statuses">All Statuses</option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
+        <div className="w-full md:w-48 flex-shrink-0">
+          <label className="font-bold text-small text-gray-600 mb-1 block">
+            Status
           </label>
+          <select
+            onChange={(e) => {
+              if (e.target.value === "All Statuses") setUserStatus("all");
+              else if (e.target.value === "Active") setUserStatus("active");
+              else setUserStatus("inactive");
+            }}
+            value={
+              status === "all"
+                ? "All Statuses"
+                : status === "active"
+                  ? "Active"
+                  : "Inactive"
+            }
+            className="control w-full h-[42px] px-3"
+          >
+            <option value="All Statuses">All Statuses</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
         </div>
+
+        <button
+          className="neutral-button border-gray-300 w-full md:w-auto h-[42px] px-6 flex items-center justify-center flex-shrink-0"
+          onClick={() => {
+            setSearchTerm("");
+            setUserStatus("all");
+          }}
+        >
+          Clear
+        </button>
       </div>
 
       {content}
-
-      <button
-        onClick={LoadUser}
-        className="userStats-card w-40 hover:scale-105 duration-200 mt-5 block mx-auto"
-      >
-        Retry
-      </button>
     </div>
   );
 };

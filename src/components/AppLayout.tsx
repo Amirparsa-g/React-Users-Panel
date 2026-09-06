@@ -13,7 +13,7 @@ const AppLayout = () => {
       <div
         className={
           isClicked
-            ? "fixed inset-0 z-40 bg-black/50 w-full h-screen md:hidden transition-opacity"
+            ? "fixed inset-0 z-40 bg-black/50 w-full h-screen md:hidden transition-opacity "
             : "hidden"
         }
         onClick={() => setIsClicked(false)}
@@ -31,7 +31,7 @@ const AppLayout = () => {
         />
       </div>
       <div className="flex flex-1 flex-col h-full overflow-hidden">
-        <header className="relative w-full h-10 flex justify-between items-center my-4 shrink-0 gap-5">
+        <header className="relative w-full h-20 flex justify-between items-center mذ-4 shrink-0 gap-5 bg-white">
           {!isClicked && (
             <span className="absolute left-2">
               <button onClick={() => setIsClicked(true)}>
@@ -66,17 +66,34 @@ const AppLayout = () => {
           )}
 
           <h1 className="text-body font-black block mx-auto">User Managment</h1>
-          <Link to={"/users/new"} className="fixed top-5 right-3">
+          <Link to={"/users/new"} className="fixed top-5 right-3 md:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
               viewBox="0 -960 960 960"
               width="24px"
               fill="#ffffff"
-              className="bg-primary w-8 h-8 rounded-md shadow-md hover:bg-primaryDark p-1.5"
+              className="bg-primary w-8 h-8 rounded-md shadow-sm hover:bg-primaryDark p-1.5"
             >
               <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
             </svg>
+          </Link>
+          <Link
+            to={"/users/new"}
+            className="hidden md:flex fixed top-5 right-3 "
+          >
+            <div className="primary-button flex p-2 w-fit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#ffffff"
+              >
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+              </svg>
+              <p className="ml-2">Add User</p>
+            </div>
           </Link>
         </header>
 

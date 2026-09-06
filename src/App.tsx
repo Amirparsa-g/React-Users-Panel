@@ -132,6 +132,7 @@ function App() {
 
   return (
     <>
+      <html className="bg-bg"></html>
       <ScrollToTop />
       <Routes>
         <Route element={<AppLayout />}>
@@ -144,6 +145,7 @@ function App() {
               index
               element={
                 <UsersPage
+                  setSearchTerm={setSearchTerm}
                   UsersList={UsersList}
                   searchedTerm={searchedTerm}
                   SearchUser={SearchUser}
