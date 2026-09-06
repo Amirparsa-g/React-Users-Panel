@@ -5,6 +5,8 @@ import type { User } from "../types/user";
 import Searchinput from "../components/Searchinput";
 
 import { serverSearch } from "../services/userApi";
+import Loading from "../components/Loading";
+import UserError from "../components/UserError";
 
 type Filters = "active" | "inactive" | "all";
 const UsersPage = ({
@@ -75,27 +77,11 @@ const UsersPage = ({
 
   let content;
   if (isLoading) {
-    content = (
-      <>
-        <h2 className="text-center text-3xl font-semibold">Loadin Users ...</h2>
-      </>
-    );
+    content = <Loading />;
   } else if (error) {
-    content = (
-      <h2 className="text-center text-3xl font-semibold text-danger">
-        Failed to load the Users
-      </h2>
-    );
+    content = <UserError LoadUser={LoadUser} />;
   } else {
-    if (displayedUsers.length === 0)
-      content = (
-        <EmptyState
-          UsersList={UsersList}
-          displayedUsers={displayedUsers}
-          status={status}
-          searchedTerm={searchedTerm}
-        />
-      );
+    if (displayedUsers.length === 0) content = <EmptyState />;
     else {
       content = (
         <UserList
@@ -145,13 +131,6 @@ const UsersPage = ({
       </div>
 
       {content}
-
-      <button
-        onClick={LoadUser}
-        className="userStats-card w-40 hover:scale-105 duration-200 mt-5 block mx-auto"
-      >
-        Retry
-      </button>
     </div>
   );
 };
