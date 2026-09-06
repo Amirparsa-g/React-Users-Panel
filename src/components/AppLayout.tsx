@@ -31,7 +31,7 @@ const AppLayout = () => {
         />
       </div>
       <div className="flex flex-1 flex-col h-full overflow-hidden">
-        <header className="relative w-full h-10 flex justify-between items-center mذ-4 shrink-0 gap-5 bg-white">
+        <header className="relative w-full h-20 flex justify-between items-center mذ-4 shrink-0 gap-5 bg-white">
           {!isClicked && (
             <span className="absolute left-2">
               <button onClick={() => setIsClicked(true)}>
