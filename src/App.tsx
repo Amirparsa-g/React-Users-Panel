@@ -132,6 +132,7 @@ function App() {
 
   return (
     <>
+      <html className="bg-bg"></html>
       <ScrollToTop />
       <Routes>
         <Route element={<AppLayout />}>

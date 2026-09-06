@@ -3,6 +3,7 @@ import type { User } from "../types/user";
 import type { FormPropType } from "../types/userForm";
 import { useEffect, useState } from "react";
 import { getUserById } from "../services/userApi";
+import Loading from "../components/Loading";
 
 const UserDetailsPage = ({
   UsersList,
@@ -70,11 +71,7 @@ const UserDetailsPage = ({
   }, []);
 
   if (isLoading) {
-    return (
-      <h2 className="text-center text-3xl font-semibold px-4">
-        Loading User Details ...
-      </h2>
-    );
+    return <Loading />;
   }
 
   if (!clickedUser) {
