@@ -118,7 +118,6 @@
     border-radius: 9px;
     background: #fff;
     padding: 9px 11px;
-    color: var(--text);
     outline: 0;
   }
   .control:focus {
