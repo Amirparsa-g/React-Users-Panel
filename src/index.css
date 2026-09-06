@@ -11,6 +11,8 @@
   --color-bg: #f6f8fc;
   --color-primary-hover: #1d4ed8;
   --color-sidebar-2: #102a5e;
+  --color-primary-soft: #eff6ff;
+  --color-violet: #7c3aed;
   --text-header1: 32px;
   --text-header2: 24px;
   --text-body: 16px;
@@ -146,6 +148,9 @@
   }
   .buttomNav-font {
     @apply font-semibold text-small;
+  }
+  .statsCard-svg {
+    @apply absolute right-4 top-4 bg-primary-soft w-8 h-8 p-1 rounded-md shadow-md;
   }
 }
 @utility aside-notHamburger {
