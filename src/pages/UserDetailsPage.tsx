@@ -118,110 +118,124 @@ const UserDetailsPage = ({
         </h2>
       )}
 
-      <div className="flex flex-col gap-6 w-full max-w-xl mt-4">
-        <div className="flex flex-col sm:flex-row justify-start items-center sm:items-start gap-4 w-full">
-          <div className="flex justify-center items-center w-20 h-20 rounded-full border border-black shrink-0">
-            <p className="text-center text-2xl uppercase">
+      <div className="w-full max-w-4xl flex flex-col gap-8 mt-4">
+        <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+          <div className="flex flex-col items-start text-left">
+            <h2 className="text-header1  font-bold text-3xl">User Details</h2>
+            <p className="caption text-black/50 mt-1">
+              View and manage the selected user.
+            </p>
+          </div>
+          <Link
+            to="/users"
+            className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-black font-medium hover:bg-gray-50 transition-colors"
+          >
+            <span>&larr;</span> Back to Users
+          </Link>
+        </header>
+
+        <div className="flex justify-start gap-4 w-full">
+          <div
+            className={`flex justify-center items-center w-20 h-20 rounded-full border shrink-0 ${clickedUser.role === "admin" ? "admin-div" : clickedUser.role === "operator" ? "moderator-div" : "customer-div"}`}
+          >
+            <p className="text-center text-3xl font-bold uppercase">
               {clickedUser.fullName[0]}
             </p>
           </div>
 
-          <div className="flex flex-col gap-2 items-center sm:items-start text-center sm:text-left overflow-hidden w-full">
-            <p className="text-header1 font-header1 break-all w-full">
+          <div className="flex flex-col justify-center gap-2 sm:items-start overflow-hidden w-full">
+            <p className="text-header2 font-extrabold break-all w-full text-2xl">
               {clickedUser.fullName}
             </p>
 
             <div className="flex gap-2">
               <p
                 className={
-                  clickedUser.isActive
-                    ? "bg-success/10 text-success w-fit rounded-md px-2"
-                    : "bg-danger/10 text-danger w-fit rounded-md px-2"
-                }
-              >
-                {clickedUser.isActive ? "active" : "inactive"}
-              </p>
-              <p
-                className={
                   clickedUser.role === "admin"
-                    ? "bg-admin/10 text-admin w-fit rounded-md px-2"
+                    ? "bg-admin/10 text-admin font-bold w-fit rounded-md px-3 py-1 text-sm"
                     : clickedUser.role === "operator"
-                      ? "bg-moderator/10 text-moderator rounded-md w-fit px-2"
-                      : "bg-black/10 text-black w-fit rounded-md px-2"
+                      ? "bg-moderator/10 text-moderator font-bold rounded-md w-fit px-3 py-1 text-sm"
+                      : "bg-black/10 text-black font-bold w-fit rounded-md px-3 py-1 text-sm"
                 }
               >
                 {clickedUser.role}
+              </p>
+              <p
+                className={
+                  clickedUser.isActive
+                    ? "bg-success/10 text-success font-bold w-fit rounded-md px-3 py-1 text-sm"
+                    : "bg-danger/10 text-danger font-bold w-fit rounded-md px-3 py-1 text-sm"
+                }
+              >
+                {clickedUser.isActive ? "Active" : "Inactive"}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 userStats-card w-full p-4">
-          <p className="text-black/50">Age</p>
-          <p className="text-body font-header2 break-all">{clickedUser.age}</p>
-          <hr className="sm:hidden col-span-1 border-gray-200" />
+        <div className="userStats-card w-full rounded-lg border border-gray-200 bg-white overflow-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2">
+            <div className="p-5 border-b border-gray-100 sm:border-r">
+              <p className="text-black/50 text-sm font-semibold mb-1">
+                Full Name
+              </p>
+              <p className="text-body font-bold break-all">
+                {clickedUser.fullName}
+              </p>
+            </div>
+            <div className="p-5 border-b border-gray-100">
+              <p className="text-black/50 text-sm font-semibold mb-1">Age</p>
+              <p className="text-body font-bold break-all">{clickedUser.age}</p>
+            </div>
 
-          <p className="text-black/50">Role</p>
-          <p className="text-body font-header2 break-all">{clickedUser.role}</p>
-          <hr className="sm:hidden col-span-1 border-gray-200" />
+            <div className="p-5 border-b border-gray-100 sm:border-r">
+              <p className="text-black/50 text-sm font-semibold mb-1">Email</p>
+              <p className="text-body font-bold break-all">
+                {clickedUser.email}
+              </p>
+            </div>
+            <div className="p-5 border-b border-gray-100">
+              <p className="text-black/50 text-sm font-semibold mb-1">Role</p>
+              <p className="text-body font-bold break-all capitalize">
+                {clickedUser.role}
+              </p>
+            </div>
 
-          <p className="text-black/50">Email</p>
-          <p className="text-body font-header2 break-all">
-            {clickedUser.email}
-          </p>
-        </div>
-
-        <div className="flex justify-center sm:justify-start gap-3 flex-wrap w-full mt-2">
-          <button
-            disabled={updatingUserId === clickedUser.ID}
-            onClick={async () => {
-              setIsDeleting(true);
-            }}
-            className="danger-button flex-1 sm:flex-none min-w-30"
-          >
-            remove
-          </button>
-          <button
-            disabled={updatingUserId === clickedUser.ID}
-            onClick={async () => {
-              setUpdatingUserId(clickedUser.ID);
-              await changeStatus(clickedUser);
-              setUpdatingUserId(null);
-              setClickedUser((prev) =>
-                prev ? { ...prev, isActive: !prev.isActive } : prev,
-              );
-            }}
-            className="neutral-button flex-1 sm:flex-none min-w-30"
-          >
-            change status
-          </button>
-          <Link
-            aria-disabled={updatingUserId === clickedUser.ID}
-            to={`/users/${userId}/edit`}
-            className="warning-button text-black text-center flex-1 sm:flex-none min-w-[120px]"
-          >
-            Edit
-          </Link>
+            <div className="p-5 sm:col-span-2 flex flex-wrap sm:flex-nowrap items-center justify-end gap-3 w-full">
+              <button
+                disabled={updatingUserId === clickedUser.ID}
+                onClick={async () => {
+                  setUpdatingUserId(clickedUser.ID);
+                  await changeStatus(clickedUser);
+                  setUpdatingUserId(null);
+                  setClickedUser((prev) =>
+                    prev ? { ...prev, isActive: !prev.isActive } : prev,
+                  );
+                }}
+                className="neutral-button flex-1 sm:flex-none px-4 py-2 whitespace-nowrap h-fit"
+              >
+                Change Status
+              </button>
+              <Link
+                aria-disabled={updatingUserId === clickedUser.ID}
+                to={`/users/${userId}/edit`}
+                className="primary-button text-center flex-1 sm:flex-none flex items-center justify-center px-4 py-2 whitespace-nowrap h-fit"
+              >
+                Edit User
+              </Link>
+              <button
+                disabled={updatingUserId === clickedUser.ID}
+                onClick={async () => {
+                  setIsDeleting(true);
+                }}
+                className="danger-button w-full sm:w-auto sm:flex-none px-4 py-2 whitespace-nowrap h-fit"
+              >
+                Delete User
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-
-      <Link
-        to="/users"
-        className="w-fit mt-12 mb-10 self-center sm:self-start sm:ml-4"
-      >
-        <span className="flex items-center gap-1 text-black font-medium hover:opacity-70 transition-opacity">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#1f1f1f"
-          >
-            <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
-          </svg>
-          Back to Users
-        </span>
-      </Link>
     </div>
   );
 };
