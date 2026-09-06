@@ -3,9 +3,9 @@ import EmptyState from "../components/EmptyState";
 import UserList from "../components/UserList";
 import type { User } from "../types/user";
 import Searchinput from "../components/Searchinput";
-import UserStats from "../components/UserStats";
+
 import { serverSearch } from "../services/userApi";
-import { Link } from "react-router-dom";
+
 type Filters = "active" | "inactive" | "all";
 const UsersPage = ({
   UsersList,
@@ -35,14 +35,10 @@ const UsersPage = ({
   error: string | null;
   LoadUser: () => void;
 }) => {
-  const allUsers = UsersList;
   const [isServer, setIsServer] = useState<boolean>(false);
   const [serverResult, setServerResult] = useState<User[]>([]);
-  const Admins = UsersList.filter((user) => user.role === "admin");
-  const moderators = UsersList.filter((user) => user.role === "operator");
-  const customers = UsersList.filter((user) => user.role === "customer");
+
   const term = searchedTerm.toLowerCase().trim();
-  setTimeout(() => {});
   useEffect(() => {
     const fetchServerResult = async () => {
       setIsLoading(true);
@@ -115,68 +111,46 @@ const UsersPage = ({
 
   return (
     <div className="flex flex-col flex-wrap w-full">
-      <UserStats
-        isLoading={isLoading}
-        allUsers={allUsers.length}
-        Admins={Admins.length}
-        Moderators={moderators.length}
-        Customers={customers.length}
-      />
-      <div>
-        <Searchinput
-          setUserStatus={setUserStatus}
-          onSearchChange={SearchUser}
-          value={searchedTerm}
-          isServer={isServer}
-          setIsServer={setIsServer}
-        />
+      <div className="mb-5">
+        <h2 className="font-bold text-header2">Users</h2>
+        <p className="caption">Search, filter, view and manage users.</p>
       </div>
-      <div className="flex items-center justify-center gap-4 w-full mt-5 md:hidden">
-        <button
-          onClick={() => setUserStatus("active")}
-          className={
-            status === "active" ? "success-button" : "button-not-selected"
-          }
-        >
-          active
-        </button>
-        <button
-          onClick={() => setUserStatus("inactive")}
-          className={
-            status === "inactive" ? "danger-button" : "button-not-selected"
-          }
-        >
-          inactive
-        </button>
-        <button
-          onClick={() => setUserStatus("all")}
-          className={
-            status === "all" ? "neutral-button" : "button-not-selected"
-          }
-        >
-          all
-        </button>
+      <div className="w-full flex flex-col md:flex-row md:gap-2 md:items-center bg-white userStats-card mb-5">
+        <div className="md:w-8/12">
+          <Searchinput
+            onSearchChange={SearchUser}
+            value={searchedTerm}
+            isServer={isServer}
+            setIsServer={setIsServer}
+          />
+        </div>
+        <div className="md:w-4/12 md:mb-5.5">
+          <label htmlFor="">
+            <p className="font-bold text-small text-gray-600 mb-1">status</p>
+
+            <select
+              onChange={(e) => {
+                if (e.target.value === "All Statuses") setUserStatus("all");
+                else if (e.target.value === "Active") setUserStatus("active");
+                else setUserStatus("inactive");
+              }}
+              className="control p-3"
+            >
+              <option value="All Statuses">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </label>
+        </div>
       </div>
-      <Link
-        to="/"
-        className="flex justify-center items-center mt-5 md:justify-start md:items-start"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 -960 960 960"
-          width="24px"
-          fill="#1f1f1f"
-        >
-          <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
-        </svg>
-        <span className=" ml-4 text-black">Back to Home</span>
-      </Link>
 
       {content}
 
-      <button onClick={LoadUser} className="neutral-button mt-5 block mx-auto">
-        retry
+      <button
+        onClick={LoadUser}
+        className="userStats-card w-40 hover:scale-105 duration-200 mt-5 block mx-auto"
+      >
+        Retry
       </button>
     </div>
   );

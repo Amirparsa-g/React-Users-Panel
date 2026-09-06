@@ -18,7 +18,11 @@ const HomePage = ({
     document.title = "Home | User Management";
   }, []);
   return (
-    <div>
+    <div className="mb-10">
+      <h1 className="text-header2 font-header1">Dashboard</h1>
+      <p className="caption">
+        A quick overview of the current users in the system.
+      </p>
       <UserStats
         isLoading={isLoading}
         allUsers={allUsers.length}
@@ -26,33 +30,65 @@ const HomePage = ({
         Moderators={moderators.length}
         Customers={customers.length}
       />
-      <div className="flex flex-col justify-center items-center userStats-card">
-        <h2 className="text-header2 font-header2">About Project</h2>
-        <p className="mt-10">
-          This is a User's managment project built with vite , react ,
-          TypeScript and tailwind CSS.
-          <br />
-          The APIs witch are used in this Project are from DummyJson and the
-          Project has the features for adding new users,editing their status or
-          information and removing them.
-          <br />
-          You can also visit the stats of the Users in the boxes above or at the
-          users page.
-          <br />
-          Also you can go to the users page or add user page and add a user by
-          using the buttons in the sidebar or bottom navigation.
-          <br />
-          Since the APIs witch are being used in this project are fake APIs ,
-          the changes that you apply to the whole list of the users will be gone
-          by refreshing the page.
-          <br />
-          You can read a more detailed paragraph about the features of this
-          project at the <Link to={"/about"}>About Page</Link>.
-          <br />
-          Also you can visit my{" "}
-          <a href="https://github.com/Amirparsa-g">github</a> for simillar
-          projects.
-        </p>
+      <div className="flex flex-col lg:flex-row gap-7 w-full">
+        <div className="flex flex-col userStats-card lg:w-8/12">
+          <h2 className="text-bodyHeader font-black">Project Overview</h2>
+          <p className="caption">An overview of this Project</p>
+          <p className="mt-10 nutText">
+            This project manages users loaded from the existing API. The UI
+            should make the main operations easy to find without changing the
+            existing API, mapper, validation, routing, or state logic.
+            <br />
+            <br />
+            The reference focuses on a consistent visual system: shared spacing,
+            buttons, form fields, status badges, desktop table, mobile list, and
+            visible interaction states.
+          </p>
+        </div>
+
+        <div className="flex flex-col userStats-card lg:w-4/12">
+          <h1 className="text-bodyHeader font-black">Quick Actions</h1>
+          <p className="caption">Project Actions</p>
+          <div className="flex flex-col gap-2 mt-4">
+            <Link to={"/users"} className="HomePage-Link">
+              View users
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#1f1f1f"
+              >
+                <path d="m700-300-57-56 84-84H120v-80h607l-83-84 57-56 179 180-180 180Z" />
+              </svg>
+            </Link>
+
+            <Link to={"/users/new"} className="HomePage-Link">
+              Add a user
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#1f1f1f"
+              >
+                <path d="m700-300-57-56 84-84H120v-80h607l-83-84 57-56 179 180-180 180Z" />
+              </svg>
+            </Link>
+            <Link to={"/about"} className="HomePage-Link">
+              About project
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#1f1f1f"
+              >
+                <path d="m700-300-57-56 84-84H120v-80h607l-83-84 57-56 179 180-180 180Z" />
+              </svg>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

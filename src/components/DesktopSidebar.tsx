@@ -5,7 +5,7 @@ import addUserIcon from "../assets/add.svg";
 import aboutIcon from "../assets/about.svg";
 import arrowBackIcon from "../assets/arrow-back.svg";
 import { useState } from "react";
-import logoIcon from "../assets/logo.svg";
+
 const DesktopSidebar = ({
   setIsClicked,
   isClicked,
@@ -23,15 +23,17 @@ const DesktopSidebar = ({
       onMouseLeave={() => setIsHover(false)}
       className={` transition-all duration-200 ${!isMobile ? ` ${isHover || isClicked ? " hidden md:aside-notHamburger" : " hidden md:aside-notHamburger md:w-20  "}` : ` md:hidden ${isClicked ? "aside-notHamburger md:aside-notHamburger animate-slide-in" : " aside-notHamburger -translate-x-60 "}`}`}
     >
-      <div className="flex gap-2">
-        <img src={logoIcon} alt="logoIcon" className="nav-img" />
+      <div className="flex gap-2  items-center p-2">
+        <div className="bg-sidebar-2 p-2 rounded-lg w-10 h-10 flex justify-center items-center border border-white">
+          <p className="text-white font-black text-bodyHeader">U</p>
+        </div>
         {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
-          <h2 className="text-body font-header2 text-white line-clamp-1">
+          <h2 className="text-body font-black text-white line-clamp-1">
             User Mangement
           </h2>
         )}
       </div>
-      <nav className="nav-desktop">
+      <nav className="nav-desktop p-2">
         <NavLink
           onClick={() => setIsClicked(false)}
           to="/"
@@ -42,7 +44,9 @@ const DesktopSidebar = ({
           <div className=" wrapper">
             <img src={homeIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && <p>Home</p>}
+              (isMobile && isClicked)) && (
+              <p className="font-bold">Dashboard</p>
+            )}
           </div>
         </NavLink>
         <NavLink
@@ -56,7 +60,7 @@ const DesktopSidebar = ({
           <div className="wrapper">
             <img src={usersIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && <p>Users</p>}
+              (isMobile && isClicked)) && <p className="font-bold">Users</p>}
           </div>
         </NavLink>
         <NavLink
@@ -69,7 +73,7 @@ const DesktopSidebar = ({
           <div className="wrapper">
             <img src={addUserIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && <p>Add User</p>}
+              (isMobile && isClicked)) && <p className="font-bold">Add User</p>}
           </div>
         </NavLink>
         <NavLink
@@ -82,7 +86,7 @@ const DesktopSidebar = ({
           <div className="wrapper">
             <img src={aboutIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && <p>About</p>}
+              (isMobile && isClicked)) && <p className="font-bold">About</p>}
           </div>
         </NavLink>
       </nav>

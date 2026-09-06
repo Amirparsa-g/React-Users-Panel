@@ -22,6 +22,7 @@ import {
   sendEditedUser,
 } from "./services/userApi";
 import EditUserPage from "./pages/EditUserPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 type Filters = "active" | "inactive" | "all";
 function App() {
@@ -131,6 +132,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route element={<AppLayout />}>
           <Route
@@ -163,6 +165,7 @@ function App() {
                 <AddUserPage
                   addUserHandeler={addUserHandler}
                   UsersList={UsersList}
+                  onRemove={removeApiUser}
                   setIsLoading={setIsLoading}
                   setError={setError}
                   isLoading={isLoading}
@@ -190,6 +193,7 @@ function App() {
               element={
                 <EditUserPage
                   UsersList={UsersList}
+                  onRemove={removeApiUser}
                   changeInfo={changeInfo}
                   isLoading={isLoading}
                   error={error}
