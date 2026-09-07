@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { User } from "../types/user";
 import { useNavigate } from "react-router-dom";
 import { addApiUser } from "../services/userApi";
+import Buttons from "./Buttons";
 
 const AddUserForm = ({
   addUserHandeler,
@@ -279,24 +280,16 @@ const AddUserForm = ({
           </div>
         </div>
         <div className="flex  items-center justify-center md:justify-end md:items-end w-full gap-2">
-          <button
-            disabled={isLoading}
-            type="submit"
-            className={`${isLoading ? "button-not-selected" : "primary-button"}`}
-          >
-            {isLoading ? "saving ..." : "submit"}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              navigate(user ? `/users/${user.ID}` : "/users");
-            }}
-            className="neutral-button"
-          >
+          <Buttons comp="button" buttonType={isLoading ? "loading" : "submit"}>
+            {isLoading ? "Saving..." : "Submit"}
+          </Buttons>
+          <Buttons comp="button" buttonType={"neutral"}>
             Cancel
-          </button>
+          </Buttons>
           {user && (
-            <button
+            <Buttons
+              comp="button"
+              buttonType="danger"
               disabled={updatingUserId === user.ID}
               onClick={async () => {
                 setUpdatingUserId(user.ID);
@@ -309,7 +302,7 @@ const AddUserForm = ({
               className="danger-button"
             >
               Delete
-            </button>
+            </Buttons>
           )}
         </div>
       </form>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Buttons from "./Buttons";
 
 const EmptyState = () => {
   return (
@@ -7,9 +7,14 @@ const EmptyState = () => {
       <p className="caption mb-5">
         No users match the current search or filters.
       </p>
-      <Link to={"/users/new"} className="primary-button p-2 w-fit">
+      <Buttons
+        buttonType="primary"
+        comp="link"
+        navigation={"/users/new"}
+        className="primary-button p-2 w-fit"
+      >
         Add User
-      </Link>
+      </Buttons>
     </div>
   );
 };

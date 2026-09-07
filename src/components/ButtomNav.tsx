@@ -1,14 +1,8 @@
-import { NavLink } from "react-router-dom";
+import Buttons from "./Buttons";
 const ButtomNav = () => {
   return (
     <nav className="nav-mobile">
-      <NavLink
-        to="/"
-        end
-        className={({ isActive }) =>
-          isActive ? "nav-mobile-btn-selected" : "nav-mobile-btn-notSelected"
-        }
-      >
+      <Buttons comp="navLink" navigation="/" buttonType="buttomNavLink">
         <div className="flex gap-1 justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -21,13 +15,12 @@ const ButtomNav = () => {
           </svg>
           <p className="buttomNav-font">Dashboard</p>
         </div>
-      </NavLink>
-      <NavLink
-        to="/users"
+      </Buttons>
+      <Buttons
+        comp="navLink"
+        navigation="/users"
         end
-        className={({ isActive }) =>
-          isActive ? "nav-mobile-btn-selected" : "nav-mobile-btn-notSelected"
-        }
+        buttonType="buttomNavLink"
       >
         <div className="flex gap-1 justify-center items-center">
           <svg
@@ -40,12 +33,11 @@ const ButtomNav = () => {
           </svg>
           <p className="buttomNav-font">Users</p>
         </div>
-      </NavLink>
-      <NavLink
-        to="/users/new"
-        className={({ isActive }) =>
-          isActive ? "nav-mobile-btn-selected" : "nav-mobile-btn-notSelected"
-        }
+      </Buttons>
+      <Buttons
+        comp="navLink"
+        navigation="/users/new"
+        buttonType="buttomNavLink"
       >
         <div className="flex gap-1 justify-center items-center">
           <svg
@@ -58,13 +50,8 @@ const ButtomNav = () => {
           </svg>
           <p className="buttomNav-font">Add User</p>
         </div>
-      </NavLink>
-      <NavLink
-        to="/about"
-        className={({ isActive }) =>
-          isActive ? "nav-mobile-btn-selected" : "nav-mobile-btn-notSelected"
-        }
-      >
+      </Buttons>
+      <Buttons comp="navLink" navigation="/about" buttonType="buttomNavLink">
         <div className="flex gap-1 justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +63,7 @@ const ButtomNav = () => {
           </svg>
           <p className="buttomNav-font">About</p>
         </div>
-      </NavLink>
+      </Buttons>
     </nav>
   );
 };

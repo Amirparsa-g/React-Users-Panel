@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom";
 import homeIcon from "../assets/home.svg";
 import usersIcon from "../assets/users.svg";
 import addUserIcon from "../assets/add.svg";
 import aboutIcon from "../assets/about.svg";
 import arrowBackIcon from "../assets/arrow-back.svg";
 import { useState } from "react";
+import Buttons from "./Buttons";
 
 const DesktopSidebar = ({
   setIsClicked,
@@ -34,13 +34,7 @@ const DesktopSidebar = ({
         )}
       </div>
       <nav className="nav-desktop p-2">
-        <NavLink
-          onClick={() => setIsClicked(false)}
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "nav-btn-selected" : "nav-btn-notSelected"
-          }
-        >
+        <Buttons comp="navLink" navigation="/" buttonType="sideNavlink">
           <div className=" wrapper">
             <img src={homeIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
@@ -48,59 +42,51 @@ const DesktopSidebar = ({
               <p className="font-bold">Dashboard</p>
             )}
           </div>
-        </NavLink>
-        <NavLink
-          to="/users"
-          onClick={() => setIsClicked(false)}
+        </Buttons>
+        <Buttons
+          comp="navLink"
+          navigation="/users"
           end
-          className={({ isActive }) =>
-            isActive ? "nav-btn-selected" : "nav-btn-notSelected"
-          }
+          buttonType="sideNavlink"
         >
           <div className="wrapper">
             <img src={usersIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
               (isMobile && isClicked)) && <p className="font-bold">Users</p>}
           </div>
-        </NavLink>
-        <NavLink
-          to="/users/new"
-          onClick={() => setIsClicked(false)}
-          className={({ isActive }) =>
-            isActive ? "nav-btn-selected" : "nav-btn-notSelected"
-          }
+        </Buttons>
+        <Buttons
+          comp="navLink"
+          navigation="/users/new"
+          buttonType="sideNavlink"
         >
           <div className="wrapper">
             <img src={addUserIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
               (isMobile && isClicked)) && <p className="font-bold">Add User</p>}
           </div>
-        </NavLink>
-        <NavLink
-          to="/about"
-          onClick={() => setIsClicked(false)}
-          className={({ isActive }) =>
-            isActive ? "nav-btn-selected" : "nav-btn-notSelected"
-          }
-        >
+        </Buttons>
+        <Buttons comp="navLink" navigation="/about" buttonType="sideNavlink">
           <div className="wrapper">
             <img src={aboutIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
               (isMobile && isClicked)) && <p className="font-bold">About</p>}
           </div>
-        </NavLink>
+        </Buttons>
       </nav>
       {isClicked && (
-        <button
+        <Buttons
+          comp="button"
+          buttonType="regular"
           onClick={() => setIsClicked(false)}
-          className="fixed bottom-15 md:hidden"
+          more="fixed bottom-15 md:hidden"
         >
           <img
             src={arrowBackIcon}
             alt="back"
             className="nav-img cursor-pointer"
           />
-        </button>
+        </Buttons>
       )}
     </aside>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Buttons from "./Buttons";
 
 interface SearchBarProps {
   onSearchChange: (value: string) => void;
@@ -62,20 +63,26 @@ const Searchinput = ({
               />
             </div>
 
-            <button
-              className="w-full border border-success px-4 py-1.5 rounded-lg active:bg-success hover:scale-105 active:text-white ease-in-out duration-300 text-sm"
+            <Buttons
+              comp="button"
+              buttonType="success"
+              more="w-full font-normal hover:bg-success/5"
               onClick={() => onSearchChange(serverValue)}
             >
               search
-            </button>
+            </Buttons>
           </div>
         )}
 
         <div className="hidden sm:block w-px bg-gray-300 mx-2 self-stretch my-1"></div>
 
-        <label className="flex flex-row gap-2 justify-center items-center cursor-pointer text-sm text-gray-700 px-2 sm:pr-4 whitespace-nowrap">
+        <label
+          className="flex flex-row gap-2 justify-center items-center cursor-pointer text-sm text-gray-700 px-2 sm:pr-4 whitespace-nowrap"
+          htmlFor="checkbox"
+        >
           server search
           <input
+            id="checkbox"
             type="checkbox"
             checked={isServer}
             onChange={(e) => setIsServer(e.target.checked)}
