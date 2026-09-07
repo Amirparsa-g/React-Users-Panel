@@ -114,6 +114,7 @@ const AddUserForm = ({
       setIsLoading(true);
       setError(null);
       const newUser = await addApiUser(formData);
+
       return newUser;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
@@ -147,6 +148,7 @@ const AddUserForm = ({
 
           if (!addUserHandeler) return;
           const newUser = await addingApiUser();
+
           if (!newUser) return;
           addUserHandeler(newUser);
           navigate("/users");

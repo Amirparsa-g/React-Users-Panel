@@ -13,7 +13,6 @@ const UserStats = ({
   Customers: number;
   isLoading: boolean;
 }) => {
-  console.log(isLoading);
   return (
     <div className="my-3 grid grid-col-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       <div className="userStats-card relative">

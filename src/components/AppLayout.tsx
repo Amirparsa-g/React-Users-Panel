@@ -30,10 +30,10 @@ const AppLayout = () => {
           setIsClicked={setIsClicked}
         />
       </div>
-      <div className="relative flex flex-1 flex-col h-full  ">
-        <header className="absolute shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-5 bg-white">
+      <div className=" flex flex-1 flex-col h-full  ">
+        <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-5 bg-white">
           {!isClicked && (
-            <span className="absolute left-2">
+            <span className="absolute left-2 md:left-22">
               <button onClick={() => setIsClicked(true)}>
                 <svg
                   className="cursor-pointer"
@@ -49,7 +49,7 @@ const AppLayout = () => {
             </span>
           )}
           {isClicked && (
-            <span className="absolute left-2">
+            <span className="absolute md:left-62 ">
               <button onClick={() => setIsClicked(false)}>
                 <svg
                   className="cursor-pointer"

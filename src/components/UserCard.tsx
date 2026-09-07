@@ -29,7 +29,7 @@ const UserCard = ({
           key={user.ID}
           className="hidden md:table-row hover:bg-gray-50 transition-colors"
         >
-          <td className="px-4 py-3 align-middle">
+          <td className="px-4 py-6 align-middle">
             <div className="flex gap-2 items-center">
               <div
                 className={
