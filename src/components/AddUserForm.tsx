@@ -283,7 +283,12 @@ const AddUserForm = ({
           <Buttons comp="button" buttonType={isLoading ? "loading" : "submit"}>
             {isLoading ? "Saving..." : "Submit"}
           </Buttons>
-          <Buttons comp="button" buttonType={"neutral"}>
+          <Buttons
+            comp="link"
+            navigation="/users"
+            buttonType={"neutral"}
+            more="text-center"
+          >
             Cancel
           </Buttons>
           {user && (
