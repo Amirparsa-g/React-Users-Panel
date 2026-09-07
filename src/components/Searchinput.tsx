@@ -18,7 +18,7 @@ const Searchinput = ({
 
   return (
     <div className="flex justify-center w-full items-center mx-auto">
-      <div className="flex flex-col sm:flex-row w-full items-center gap-4 border border-gray-300 rounded-lg p-3 bg-white shadow-sm">
+      <div className="flex flex-col sm:flex-row w-full items-center gap-4 border border-gray-300 rounded-xl p-3 bg-white shadow-sm">
         {!isServer && (
           <div className="flex flex-1 w-full items-center gap-2 px-2">
             <svg

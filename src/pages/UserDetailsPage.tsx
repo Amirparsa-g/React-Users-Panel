@@ -133,7 +133,7 @@ const UserDetailsPage = ({
           </div>
           <Link
             to="/users"
-            className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white text-black font-medium hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-xl bg-white text-black font-medium hover:bg-gray-50 transition-colors"
           >
             <span>&larr;</span> Back to Users
           </Link>
@@ -157,10 +157,10 @@ const UserDetailsPage = ({
               <p
                 className={
                   clickedUser.role === "admin"
-                    ? "bg-admin/10 text-admin font-bold w-fit rounded-lg px-3 py-1 text-sm"
+                    ? "bg-admin/10 text-admin font-bold w-fit rounded-xl px-3 py-1 text-sm"
                     : clickedUser.role === "operator"
-                      ? "bg-moderator/10 text-moderator font-bold rounded-lg w-fit px-3 py-1 text-sm"
-                      : "bg-black/10 text-black font-bold w-fit rounded-lg px-3 py-1 text-sm"
+                      ? "bg-moderator/10 text-moderator font-bold rounded-xl w-fit px-3 py-1 text-sm"
+                      : "bg-black/10 text-black font-bold w-fit rounded-xl px-3 py-1 text-sm"
                 }
               >
                 {clickedUser.role}
@@ -168,8 +168,8 @@ const UserDetailsPage = ({
               <p
                 className={
                   clickedUser.isActive
-                    ? "bg-success/10 text-success font-bold w-fit rounded-lg px-3 py-1 text-sm"
-                    : "bg-danger/10 text-danger font-bold w-fit rounded-lg px-3 py-1 text-sm"
+                    ? "bg-success/10 text-success font-bold w-fit rounded-xl px-3 py-1 text-sm"
+                    : "bg-danger/10 text-danger font-bold w-fit rounded-xl px-3 py-1 text-sm"
                 }
               >
                 {clickedUser.isActive ? "Active" : "Inactive"}
@@ -178,7 +178,7 @@ const UserDetailsPage = ({
           </div>
         </div>
 
-        <div className="userStats-card w-full rounded-lg border border-gray-200 bg-white overflow-hidden">
+        <div className="userStats-card w-full rounded-xl border border-gray-200 bg-white overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2">
             <div className="p-5 border-b border-gray-100 sm:border-r">
               <p className="text-black/50 text-sm font-semibold mb-1">

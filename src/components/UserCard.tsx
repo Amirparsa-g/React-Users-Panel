@@ -26,7 +26,6 @@ const UserCard = ({
       {!isMobile && (
         <tr
           aria-disabled={isLoading}
-          key={user.ID}
           className="hidden md:table-row hover:bg-gray-50 transition-colors"
         >
           <td className="px-4 py-6 align-middle">
