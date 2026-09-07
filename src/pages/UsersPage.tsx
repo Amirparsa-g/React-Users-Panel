@@ -44,6 +44,7 @@ const UsersPage = ({
 
   const term = searchedTerm.toLowerCase().trim();
   useEffect(() => {
+    if (!isServer) return;
     const fetchServerResult = async () => {
       setIsLoading(true);
       setError(null);
