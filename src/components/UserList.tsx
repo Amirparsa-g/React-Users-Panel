@@ -18,16 +18,15 @@ const UserList = ({
 }) => {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const mappedUsers = users.map((user) => (
-    <>
-      <UserCard
-        user={user}
-        isMobile={isMobile}
-        isLoading={isLoading}
-        onRemove={onRemove}
-        changeStatus={changeStatus}
-        error={error}
-      />
-    </>
+    <UserCard
+      key={user.ID}
+      user={user}
+      isMobile={isMobile}
+      isLoading={isLoading}
+      onRemove={onRemove}
+      changeStatus={changeStatus}
+      error={error}
+    />
   ));
 
   return (
