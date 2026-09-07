@@ -30,10 +30,10 @@ const AppLayout = () => {
           setIsClicked={setIsClicked}
         />
       </div>
-      <div className="flex flex-1 flex-col h-full overflow-y-auto">
-        <header className="fixed w-full h-20 flex justify-between items-center  z-10 gap-5 bg-white">
+      <div className=" flex flex-1 flex-col h-full  ">
+        <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-5 bg-white">
           {!isClicked && (
-            <span className="absolute left-2">
+            <span className="absolute left-2 md:left-22">
               <button onClick={() => setIsClicked(true)}>
                 <svg
                   className="cursor-pointer"
@@ -49,7 +49,7 @@ const AppLayout = () => {
             </span>
           )}
           {isClicked && (
-            <span className="absolute left-2">
+            <span className="absolute md:left-62 ">
               <button onClick={() => setIsClicked(false)}>
                 <svg
                   className="cursor-pointer"
@@ -96,16 +96,17 @@ const AppLayout = () => {
             </div>
           </Link>
         </header>
-
-        <motion.main
-          key={location.pathname}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className=" flex flex-1 flex-col justify-start items-center p-3 w-full  mb-10 mx-auto px-4 max-w-screen-2xl bg-bg"
-        >
-          <Outlet />
-        </motion.main>
+        <div className="flex-1 overflow-y-auto bg-bg">
+          <motion.main
+            key={location.pathname}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className=" flex flex-1 flex-col justify-start items-center p-3 w-full  mb-10 mx-auto px-4 max-w-screen-2xl bg-bg"
+          >
+            <Outlet />
+          </motion.main>
+        </div>
       </div>
       <ButtomNav />
     </div>

@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import type { User } from "../types/user";
 import { useState } from "react";
+import Buttons from "./Buttons";
 
 const UserCard = ({
   user,
@@ -29,7 +29,7 @@ const UserCard = ({
           key={user.ID}
           className="hidden md:table-row hover:bg-gray-50 transition-colors"
         >
-          <td className="px-4 py-3 align-middle">
+          <td className="px-4 py-6 align-middle">
             <div className="flex gap-2 items-center">
               <div
                 className={
@@ -48,12 +48,17 @@ const UserCard = ({
                 </div>
               </div>
               <div>
-                <Link to={`/users/${user.ID}`} className="text-black">
+                <Buttons
+                  comp="link"
+                  more="text-black"
+                  navigation={`/users/${user.ID}`}
+                  buttonType="regular"
+                >
                   <p className="text-body  font-bold">{user.fullName}</p>
                   <p className="text-small break-all caption">
                     {user.email ? user.email : "no email registered"}
                   </p>
-                </Link>
+                </Buttons>
               </div>
             </div>
           </td>
@@ -83,9 +88,11 @@ const UserCard = ({
           </td>
           <td className="px-4 py-3 align-middle">
             <div className="flex gap-1 justify-center">
-              <Link
-                to={`/users/${user.ID}`}
-                className="cursor-pointer relative group flex items-center justify-center"
+              <Buttons
+                comp="link"
+                navigation={`/users/${user.ID}`}
+                more="cursor-pointer relative group flex items-center justify-center"
+                buttonType="regular"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -100,15 +107,17 @@ const UserCard = ({
                 <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-900 text-white text-xs px-2.5 py-1.5 rounded shadow-lg whitespace-nowrap z-50">
                   View user
                 </div>
-              </Link>
-              <button
+              </Buttons>
+              <Buttons
                 disabled={updatingUserId === user.ID}
                 onClick={async () => {
                   setUpdatingUserId(user.ID);
                   await onRemove(user.ID);
                   setUpdatingUserId(null);
                 }}
-                className="cursor-pointer relative group flex items-center justify-center"
+                buttonType="regular"
+                more="cursor-pointer relative group flex items-center justify-center"
+                comp="link"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -123,15 +132,17 @@ const UserCard = ({
                 <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-900 text-white text-xs px-2.5 py-1.5 rounded shadow-lg whitespace-nowrap z-50">
                   Remove user
                 </div>
-              </button>
-              <button
+              </Buttons>
+              <Buttons
                 disabled={updatingUserId === user.ID}
                 onClick={async () => {
                   setUpdatingUserId(user.ID);
                   await changeStatus(user);
                   setUpdatingUserId(null);
                 }}
-                className="cursor-pointer relative group flex items-center justify-center"
+                more="cursor-pointer relative group flex items-center justify-center"
+                buttonType="regular"
+                comp="link"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +157,7 @@ const UserCard = ({
                 <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-900 text-white text-xs px-2.5 py-1.5 rounded shadow-lg whitespace-nowrap z-50">
                   Change status
                 </div>
-              </button>
+              </Buttons>
             </div>
           </td>
         </tr>
@@ -171,7 +182,12 @@ const UserCard = ({
               </div>
             </div>
             <div>
-              <Link to={`/users/${user.ID}`} className="text-black">
+              <Buttons
+                comp="link"
+                navigation={`/users/${user.ID}`}
+                more="text-black"
+                buttonType="regular"
+              >
                 <p className="text-body font-bold">{user.fullName}</p>
                 <p
                   className="
@@ -195,22 +211,26 @@ const UserCard = ({
                     {user.role}
                   </p>
                 </div>
-              </Link>
+              </Buttons>
             </div>
           </div>
           <div className="flex gap-2 mt-3 w-full">
-            <Link
-              to={`/users/${user.ID}`}
-              className="HomePage-Link justify-center hover:bg-black/5 hover:border-black/70"
+            <Buttons
+              comp="link"
+              navigation={`/users/${user.ID}`}
+              buttonType="HomePageLink"
+              more="justify-center hover:bg-black/5 hover:border-black/70"
             >
               View
-            </Link>
-            <Link
-              to={`/users/${user.ID}/edit`}
-              className="HomePage-Link justify-center hover:bg-black/5 hover:border-black/70"
+            </Buttons>
+            <Buttons
+              comp="link"
+              buttonType="HomePageLink"
+              navigation={`/users/${user.ID}/edit`}
+              more=" justify-center hover:bg-black/5 hover:border-black/70"
             >
               Edit
-            </Link>
+            </Buttons>
           </div>
         </div>
       )}

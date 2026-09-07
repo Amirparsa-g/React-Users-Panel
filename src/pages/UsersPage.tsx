@@ -7,6 +7,7 @@ import Searchinput from "../components/Searchinput";
 import { serverSearch } from "../services/userApi";
 import Loading from "../components/Loading";
 import UserError from "../components/UserError";
+import Buttons from "../components/Buttons";
 
 type Filters = "active" | "inactive" | "all";
 const UsersPage = ({
@@ -44,6 +45,7 @@ const UsersPage = ({
 
   const term = searchedTerm.toLowerCase().trim();
   useEffect(() => {
+    if (!isServer) return;
     const fetchServerResult = async () => {
       setIsLoading(true);
       setError(null);
@@ -113,10 +115,11 @@ const UsersPage = ({
           />
         </div>
         <div className="md:w-3/12">
-          <label htmlFor="">
+          <label htmlFor="selectStatus">
             <p className="font-bold text-small text-gray-600 mb-1">status</p>
 
             <select
+              id="selectStatus"
               onChange={(e) => {
                 if (e.target.value === "All Statuses") setUserStatus("all");
                 else if (e.target.value === "Active") setUserStatus("active");
@@ -137,15 +140,17 @@ const UsersPage = ({
             </select>
           </label>
         </div>
-        <button
-          className="neutral-button w-full md:w-auto md:min-w-24 md:px-6 md:h-12"
+        <Buttons
+          comp="button"
+          buttonType="neutral"
+          more=" w-full md:w-auto md:min-w-24 md:px-6 md:h-12"
           onClick={() => {
             setSearchTerm("");
             setUserStatus("all");
           }}
         >
           Clear
-        </button>
+        </Buttons>
       </div>
 
       {content}

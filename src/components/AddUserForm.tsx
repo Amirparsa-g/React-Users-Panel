@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { User } from "../types/user";
 import { useNavigate } from "react-router-dom";
 import { addApiUser } from "../services/userApi";
+import Buttons from "./Buttons";
 
 const AddUserForm = ({
   addUserHandeler,
@@ -114,6 +115,7 @@ const AddUserForm = ({
       setIsLoading(true);
       setError(null);
       const newUser = await addApiUser(formData);
+
       return newUser;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
@@ -147,6 +149,7 @@ const AddUserForm = ({
 
           if (!addUserHandeler) return;
           const newUser = await addingApiUser();
+
           if (!newUser) return;
           addUserHandeler(newUser);
           navigate("/users");
@@ -161,9 +164,10 @@ const AddUserForm = ({
           </p>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <label htmlFor="" className="label-form">
+          <label htmlFor="userFullName" className="label-form">
             Full Name:
             <input
+              id="userFullName"
               type="text"
               placeholder="Enter you full name"
               value={formData.fullName}
@@ -184,9 +188,10 @@ const AddUserForm = ({
               <p className="text-danger">{FormError.nameError}</p>
             )}
           </label>
-          <label htmlFor="" className="label-form">
+          <label htmlFor="userAge" className="label-form">
             Age
             <input
+              id="userAge"
               type="number"
               placeholder="age"
               value={formData.age}
@@ -200,11 +205,11 @@ const AddUserForm = ({
               <p className="text-danger">{FormError.ageError}</p>
             )}
           </label>
-          <label htmlFor="" className="label-form">
+          <label htmlFor="userRole" className="label-form">
             Role :
             <select
               name="role"
-              id="role"
+              id="userRole"
               value={formData.role}
               onChange={(e) => {
                 setFormData({
@@ -256,9 +261,10 @@ const AddUserForm = ({
             </div>
           </div>
           <div className="flex flex-col col-span-full">
-            <label htmlFor="" className="label-form">
+            <label htmlFor="userEmail" className="label-form">
               Email (Optional)
               <input
+                id="userEmail"
                 type="text"
                 value={formData.email}
                 onChange={(e) => {
@@ -274,24 +280,16 @@ const AddUserForm = ({
           </div>
         </div>
         <div className="flex  items-center justify-center md:justify-end md:items-end w-full gap-2">
-          <button
-            disabled={isLoading}
-            type="submit"
-            className={`${isLoading ? "button-not-selected" : "primary-button"}`}
-          >
-            {isLoading ? "saving ..." : "submit"}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              navigate(user ? `/users/${user.ID}` : "/users");
-            }}
-            className="neutral-button"
-          >
+          <Buttons comp="button" buttonType={isLoading ? "loading" : "submit"}>
+            {isLoading ? "Saving..." : "Submit"}
+          </Buttons>
+          <Buttons comp="button" buttonType={"neutral"}>
             Cancel
-          </button>
+          </Buttons>
           {user && (
-            <button
+            <Buttons
+              comp="button"
+              buttonType="danger"
               disabled={updatingUserId === user.ID}
               onClick={async () => {
                 setUpdatingUserId(user.ID);
@@ -304,7 +302,7 @@ const AddUserForm = ({
               className="danger-button"
             >
               Delete
-            </button>
+            </Buttons>
           )}
         </div>
       </form>

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import AddUserForm from "../components/AddUserForm";
 import type { User } from "../types/user";
-import { Link } from "react-router-dom";
+
+import Buttons from "../components/Buttons";
 
 const AddUserPage = ({
   addUserHandeler,
@@ -31,12 +32,9 @@ const AddUserPage = ({
           <h2 className="text-header1  font-bold text-3xl">Add User</h2>
           <p className="caption text-black/50 mt-1">Create a new user</p>
         </div>
-        <Link
-          to="/users"
-          className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white text-black font-medium hover:bg-gray-50 transition-colors"
-        >
+        <Buttons comp="link" buttonType="backTo" navigation="/users">
           <span>&larr;</span> Back to Users
-        </Link>
+        </Buttons>
       </header>
       <AddUserForm
         addUserHandeler={addUserHandeler}

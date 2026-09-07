@@ -3,6 +3,7 @@ import type { User } from "../types/user";
 import type { FormPropType } from "../types/userForm";
 import { useEffect, useState } from "react";
 import { getUserById } from "../services/userApi";
+import Buttons from "../components/Buttons";
 
 const UserDetailsPage = ({
   UsersList,
@@ -88,8 +89,10 @@ const UserDetailsPage = ({
           <h2 className="text-center font-semibold text-xl">
             Are you sure you want to continue this action?
           </h2>
-          <button
-            className="primary-button w-full mt-3"
+          <Buttons
+            comp="button"
+            buttonType="primary"
+            more="w-full my-3"
             onClick={async () => {
               setUpdatingUserId(clickedUser.ID);
               const isSeccess = await onRemove(clickedUser.ID);
@@ -98,13 +101,15 @@ const UserDetailsPage = ({
             }}
           >
             Continue
-          </button>
-          <button
-            className="danger-button mx-auto block w-full mt-2"
+          </Buttons>
+          <Buttons
+            comp="button"
+            buttonType="danger"
+            more="w-full"
             onClick={() => setIsDeleting(false)}
           >
             Cancel
-          </button>
+          </Buttons>
         </div>
       </div>
     );
@@ -202,7 +207,8 @@ const UserDetailsPage = ({
             </div>
 
             <div className="p-5 sm:col-span-2 flex flex-wrap sm:flex-nowrap items-center justify-end gap-3 w-full">
-              <button
+              <Buttons
+                comp="button"
                 disabled={updatingUserId === clickedUser.ID}
                 onClick={async () => {
                   setUpdatingUserId(clickedUser.ID);
@@ -212,10 +218,11 @@ const UserDetailsPage = ({
                     prev ? { ...prev, isActive: !prev.isActive } : prev,
                   );
                 }}
-                className="neutral-button flex-1 sm:flex-none px-4 py-2 whitespace-nowrap h-fit"
+                buttonType="neutral"
+                more="whitespace-nowrap h-fit"
               >
                 Change Status
-              </button>
+              </Buttons>
               <Link
                 aria-disabled={updatingUserId === clickedUser.ID}
                 to={`/users/${userId}/edit`}
@@ -223,15 +230,16 @@ const UserDetailsPage = ({
               >
                 Edit User
               </Link>
-              <button
+              <Buttons
+                comp="button"
                 disabled={updatingUserId === clickedUser.ID}
                 onClick={async () => {
                   setIsDeleting(true);
                 }}
-                className="danger-button w-full sm:w-auto sm:flex-none px-4 py-2 whitespace-nowrap h-fit"
+                buttonType="danger"
               >
                 Delete User
-              </button>
+              </Buttons>
             </div>
           </div>
         </div>

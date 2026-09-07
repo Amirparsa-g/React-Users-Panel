@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import UserStats from "../components/UserStats";
 import type { User } from "../types/user";
 import { useEffect } from "react";
+import Buttons from "../components/Buttons";
 
 const HomePage = ({
   UsersList,
@@ -50,7 +50,11 @@ const HomePage = ({
           <h1 className="text-bodyHeader font-black">Quick Actions</h1>
           <p className="caption">Project Actions</p>
           <div className="flex flex-col gap-2 mt-4">
-            <Link to={"/users"} className="HomePage-Link">
+            <Buttons
+              comp="link"
+              navigation={"/users"}
+              buttonType="HomePageLink"
+            >
               View users
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,9 +65,13 @@ const HomePage = ({
               >
                 <path d="m700-300-57-56 84-84H120v-80h607l-83-84 57-56 179 180-180 180Z" />
               </svg>
-            </Link>
+            </Buttons>
 
-            <Link to={"/users/new"} className="HomePage-Link">
+            <Buttons
+              comp="link"
+              navigation={"/users/new"}
+              buttonType="HomePageLink"
+            >
               Add a user
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -74,8 +82,12 @@ const HomePage = ({
               >
                 <path d="m700-300-57-56 84-84H120v-80h607l-83-84 57-56 179 180-180 180Z" />
               </svg>
-            </Link>
-            <Link to={"/about"} className="HomePage-Link">
+            </Buttons>
+            <Buttons
+              comp="link"
+              navigation={"/about"}
+              buttonType="HomePageLink"
+            >
               About project
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +98,7 @@ const HomePage = ({
               >
                 <path d="m700-300-57-56 84-84H120v-80h607l-83-84 57-56 179 180-180 180Z" />
               </svg>
-            </Link>
+            </Buttons>
           </div>
         </div>
       </div>

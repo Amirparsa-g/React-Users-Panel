@@ -1,9 +1,10 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AddUserForm from "../components/AddUserForm";
 import type { User } from "../types/user";
 import type { FormPropType } from "../types/userForm";
 import { getUserById } from "../services/userApi";
 import { useEffect, useState } from "react";
+import Buttons from "../components/Buttons";
 
 const EditUserPage = ({
   UsersList,
@@ -71,12 +72,9 @@ const EditUserPage = ({
             Update the existing user information.
           </p>
         </div>
-        <Link
-          to="/users"
-          className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white text-black font-medium hover:bg-gray-50 transition-colors"
-        >
+        <Buttons comp="link" buttonType="backTo" navigation="/users">
           <span>&larr;</span> Back to Users
-        </Link>
+        </Buttons>
       </header>
       {clickedUser && (
         <AddUserForm

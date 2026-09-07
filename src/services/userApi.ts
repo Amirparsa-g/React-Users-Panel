@@ -39,6 +39,7 @@ export const addApiUser = async (formData: FormPropType): Promise<User> => {
     email: formData.email,
     isActive: formData.isActive,
   };
+
   const response = await fetch(`${API_BASE_URL}/users/add`, {
     method: "POST",
     headers: {
@@ -48,7 +49,9 @@ export const addApiUser = async (formData: FormPropType): Promise<User> => {
   });
   if (!response.ok) throw new Error(`Couldnt add User : ${response.status}`);
   const data = await response.json();
+
   const newUser: User = mapApiUserToUser(data);
+
   return newUser;
 };
 
