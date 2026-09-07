@@ -96,7 +96,7 @@ const AppLayout = () => {
             </div>
           </Link>
         </header>
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto bg-bg">
           <motion.main
             key={location.pathname}
             initial={{ opacity: 0, y: 20 }}
