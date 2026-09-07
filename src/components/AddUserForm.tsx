@@ -163,9 +163,10 @@ const AddUserForm = ({
           </p>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <label htmlFor="" className="label-form">
+          <label htmlFor="userFullName" className="label-form">
             Full Name:
             <input
+              id="userFullName"
               type="text"
               placeholder="Enter you full name"
               value={formData.fullName}
@@ -186,9 +187,10 @@ const AddUserForm = ({
               <p className="text-danger">{FormError.nameError}</p>
             )}
           </label>
-          <label htmlFor="" className="label-form">
+          <label htmlFor="userAge" className="label-form">
             Age
             <input
+              id="userAge"
               type="number"
               placeholder="age"
               value={formData.age}
@@ -202,11 +204,11 @@ const AddUserForm = ({
               <p className="text-danger">{FormError.ageError}</p>
             )}
           </label>
-          <label htmlFor="" className="label-form">
+          <label htmlFor="userRole" className="label-form">
             Role :
             <select
               name="role"
-              id="role"
+              id="userRole"
               value={formData.role}
               onChange={(e) => {
                 setFormData({
@@ -258,9 +260,10 @@ const AddUserForm = ({
             </div>
           </div>
           <div className="flex flex-col col-span-full">
-            <label htmlFor="" className="label-form">
+            <label htmlFor="userEmail" className="label-form">
               Email (Optional)
               <input
+                id="userEmail"
                 type="text"
                 value={formData.email}
                 onChange={(e) => {
