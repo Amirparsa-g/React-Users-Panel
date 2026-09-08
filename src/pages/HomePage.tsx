@@ -11,9 +11,9 @@ const HomePage = ({
   isLoading: boolean;
 }) => {
   const allUsers = UsersList;
-  const Admins = UsersList.filter((user) => user.role === "admin");
-  const moderators = UsersList.filter((user) => user.role === "operator");
-  const customers = UsersList.filter((user) => user.role === "customer");
+  const activeUsers = UsersList.filter((user) => user.isActive);
+  const inactiveUsers = UsersList.filter((user) => !user.isActive);
+
   useEffect(() => {
     document.title = "Home | User Management";
   }, []);
@@ -26,9 +26,8 @@ const HomePage = ({
       <UserStats
         isLoading={isLoading}
         allUsers={allUsers.length}
-        Admins={Admins.length}
-        Moderators={moderators.length}
-        Customers={customers.length}
+        activeUsers={activeUsers.length}
+        inactiveUsers={inactiveUsers.length}
       />
       <div className="flex flex-col lg:flex-row gap-7 w-full">
         <div className="flex flex-col userStats-card lg:w-8/12">
