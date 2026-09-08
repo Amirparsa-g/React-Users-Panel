@@ -117,7 +117,7 @@ const UserCard = ({
                 }}
                 more="cursor-pointer relative group flex items-center justify-center"
                 buttonType="regular"
-                comp="link"
+                comp="button"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +162,7 @@ const UserCard = ({
                 }}
                 buttonType="regular"
                 more="cursor-pointer relative group flex items-center justify-center"
-                comp="link"
+                comp="button"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
