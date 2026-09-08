@@ -23,6 +23,7 @@ const HomePage = ({
       <p className="caption">
         A quick overview of the current users in the system.
       </p>
+
       <UserStats
         isLoading={isLoading}
         allUsers={allUsers.length}

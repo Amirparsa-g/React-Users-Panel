@@ -13,7 +13,7 @@ const UserStats = ({
   isLoading: boolean;
 }) => {
   return (
-    <div className="my-3 grid grid-col-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="my-3 grid grid-cols-1 gap-4 md:grid-cols-3 w-full">
       <div className="userStats-card relative">
         <h2 className="text-small font-header1 text-black/70">Total Users</h2>
         <div className="stats-content">
