@@ -274,6 +274,7 @@ const AddUserForm = ({
               Email (Optional)
               <input
                 id="userEmail"
+                placeholder="name@example.com"
                 type="email"
                 value={formData.email}
                 onChange={(e) => {
