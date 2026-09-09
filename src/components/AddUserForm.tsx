@@ -285,7 +285,13 @@ const AddUserForm = ({
             buttonType={isLoading ? "loading" : "submit"}
             disabled={isLoading}
           >
-            {isLoading ? "Saving..." : "Submit"}
+            {user
+              ? isLoading
+                ? "Saving..."
+                : "Save Changes"
+              : isLoading
+                ? "Saving..."
+                : "Create User"}
           </Buttons>
           <Buttons
             comp="link"
