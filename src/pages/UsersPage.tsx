@@ -105,7 +105,7 @@ const UsersPage = ({
         <h2 className="font-bold text-header2">Users</h2>
         <p className="caption">Search, filter, view and manage users.</p>
       </div>
-      <div className="w-full flex flex-col gap-4 md:flex-row md:gap-3 md:items-end bg-white userStats-card mb-5">
+      <div className="w-full flex flex-col gap-4 md:flex-row md:gap-3 md:items-start bg-white userStats-card mb-5">
         <div className="md:w-8/12">
           <Searchinput
             onSearchChange={SearchUser}
@@ -114,10 +114,11 @@ const UsersPage = ({
             setIsServer={setIsServer}
           />
         </div>
-        <div className="md:w-3/12">
+        <div className="md:w-4/12">
           <label htmlFor="selectStatus">
             <p className="font-bold text-small text-gray-600 mb-1">status</p>
-
+          </label>
+          <div className="flex flex-col md:flex-row gap-2">
             <select
               id="selectStatus"
               onChange={(e) => {
@@ -125,7 +126,7 @@ const UsersPage = ({
                 else if (e.target.value === "Active") setUserStatus("active");
                 else setUserStatus("inactive");
               }}
-              className="control p-3"
+              className="control p-3 flex-1"
               value={
                 status === "all"
                   ? "All Statuses"
@@ -138,19 +139,19 @@ const UsersPage = ({
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>
             </select>
-          </label>
+            <Buttons
+              comp="button"
+              buttonType="neutral"
+              more=" w-full md:w-auto md:min-w-24 md:px-6 md:h-12"
+              onClick={() => {
+                setSearchTerm("");
+                setUserStatus("all");
+              }}
+            >
+              Clear
+            </Buttons>
+          </div>
         </div>
-        <Buttons
-          comp="button"
-          buttonType="neutral"
-          more=" w-full md:w-auto md:min-w-24 md:px-6 md:h-12"
-          onClick={() => {
-            setSearchTerm("");
-            setUserStatus("all");
-          }}
-        >
-          Clear
-        </Buttons>
       </div>
 
       {content}

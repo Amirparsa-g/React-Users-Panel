@@ -85,14 +85,6 @@ const Searchinput = ({
                   onChange={(e) => setServerValue(e.target.value)}
                   className="focus:outline-none bg-transparent w-full"
                 />
-                <Buttons
-                  comp="button"
-                  buttonType="primary"
-                  more="w-full font-normal "
-                  onClick={() => onSearchChange(serverValue)}
-                >
-                  search
-                </Buttons>
                 <label
                   className="flex flex-row gap-2 justify-center items-center cursor-pointer text-sm text-gray-700 px-2 sm:pr-4 whitespace-nowrap"
                   htmlFor="checkbox"
@@ -108,6 +100,15 @@ const Searchinput = ({
                 </label>
               </div>
             </label>
+
+            <Buttons
+              comp="button"
+              buttonType="primary"
+              more="w-full font-normal "
+              onClick={() => onSearchChange(serverValue)}
+            >
+              search
+            </Buttons>
           </div>
         )}
 
