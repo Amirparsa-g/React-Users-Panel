@@ -280,7 +280,11 @@ const AddUserForm = ({
           </div>
         </div>
         <div className="flex  items-center justify-center md:justify-end md:items-end w-full gap-2">
-          <Buttons comp="button" buttonType={isLoading ? "loading" : "submit"}>
+          <Buttons
+            comp="button"
+            buttonType={isLoading ? "loading" : "submit"}
+            disabled={isLoading}
+          >
             {isLoading ? "Saving..." : "Submit"}
           </Buttons>
           <Buttons
