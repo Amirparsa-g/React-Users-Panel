@@ -325,7 +325,7 @@ const AddUserForm = ({
                   navigate("/users");
                 }
               }}
-              more="col-span-2 w-full"
+              more="col-span-2 w-full md:w-fit "
             >
               Delete
             </Buttons>
