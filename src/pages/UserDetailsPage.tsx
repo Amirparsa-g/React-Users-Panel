@@ -172,7 +172,7 @@ const UserDetailsPage = ({
               </p>
             </div>
 
-            <div className="p-5 sm:col-span-2 flex flex-wrap sm:flex-nowrap items-center justify-end gap-3 w-full">
+            <div className="p-5 sm:col-span-2  grid grid-cols-2 md:flex md:flex-nowrap md:justify-end gap-3 w-full">
               <Buttons
                 comp="button"
                 disabled={updatingUserId === clickedUser.ID}
@@ -185,17 +185,19 @@ const UserDetailsPage = ({
                   );
                 }}
                 buttonType="neutral"
-                more="whitespace-nowrap h-fit"
+                more="whitespace-nowrap h-fit w-full md:w-fit"
               >
                 Change Status
               </Buttons>
-              <Link
+              <Buttons
+                comp="button"
                 aria-disabled={updatingUserId === clickedUser.ID}
-                to={`/users/${userId}/edit`}
-                className="primary-button text-center flex-1 sm:flex-none flex items-center justify-center px-4 py-2 whitespace-nowrap h-fit"
+                navigation={`/users/${userId}/edit`}
+                buttonType="primary"
+                more="whitespace-nowrap h-fit w-full md:w-fit"
               >
                 Edit User
-              </Link>
+              </Buttons>
               <Buttons
                 comp="button"
                 disabled={updatingUserId === clickedUser.ID}
@@ -205,6 +207,7 @@ const UserDetailsPage = ({
                   if (isSeccess) navigate("/users");
                 }}
                 buttonType="danger"
+                more="whitespace-nowrap h-fit w-full md:w-fit col-span-2"
               >
                 Delete User
               </Buttons>
