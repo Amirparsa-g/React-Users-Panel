@@ -279,11 +279,12 @@ const AddUserForm = ({
             </label>
           </div>
         </div>
-        <div className="flex  items-center justify-center md:justify-end md:items-end w-full gap-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center md:justify-end md:items-end w-full gap-2">
           <Buttons
             comp="button"
             buttonType={isLoading ? "loading" : "submit"}
             disabled={isLoading}
+            more="w-full sm:w-35"
           >
             {user
               ? isLoading
@@ -297,7 +298,7 @@ const AddUserForm = ({
             comp="link"
             navigation="/users"
             buttonType={"neutral"}
-            more="text-center"
+            more="text-center w-full sm:w-35"
           >
             Cancel
           </Buttons>
@@ -314,7 +315,7 @@ const AddUserForm = ({
                   navigate("/users");
                 }
               }}
-              className="danger-button"
+              more="w-full sm:w-35"
             >
               Delete
             </Buttons>
