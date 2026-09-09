@@ -34,7 +34,12 @@ const DesktopSidebar = ({
         )}
       </div>
       <nav className="nav-desktop p-2">
-        <Buttons comp="navLink" navigation="/" buttonType="sideNavlink">
+        <Buttons
+          comp="navLink"
+          navigation="/"
+          buttonType="sideNavlink"
+          onClick={() => setIsClicked(false)}
+        >
           <div className=" wrapper">
             <img src={homeIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
@@ -44,6 +49,7 @@ const DesktopSidebar = ({
           </div>
         </Buttons>
         <Buttons
+          onClick={() => setIsClicked(false)}
           comp="navLink"
           navigation="/users"
           end
@@ -56,6 +62,7 @@ const DesktopSidebar = ({
           </div>
         </Buttons>
         <Buttons
+          onClick={() => setIsClicked(false)}
           comp="navLink"
           navigation="/users/new"
           buttonType="sideNavlink"
@@ -66,7 +73,12 @@ const DesktopSidebar = ({
               (isMobile && isClicked)) && <p className="font-bold">Add User</p>}
           </div>
         </Buttons>
-        <Buttons comp="navLink" navigation="/about" buttonType="sideNavlink">
+        <Buttons
+          comp="navLink"
+          navigation="/about"
+          buttonType="sideNavlink"
+          onClick={() => setIsClicked(false)}
+        >
           <div className="wrapper">
             <img src={aboutIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
