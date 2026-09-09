@@ -32,6 +32,7 @@ const AddUserForm = ({
 }) => {
   const navigate = useNavigate();
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
+
   const [formData, setFormData] = useState<FormPropType>({
     fullName: user?.fullName ?? "",
     age: user?.age.toString() ?? "",
@@ -234,38 +235,46 @@ const AddUserForm = ({
             )}
           </label>
           <div className="label-form ">
-            <label htmlFor="">Activity :</label>
-            <br />
-            <div className="control h-[42px] ">
-              <label htmlFor="">
-                Active
-                <input
-                  type="radio"
-                  value={"Active"}
-                  checked={formData.isActive}
-                  onChange={() => setFormData({ ...formData, isActive: true })}
-                  className="m-2"
-                />
-              </label>
-              <label htmlFor="">
-                Inactive
-                <input
-                  type="radio"
-                  value={"inActive"}
-                  checked={!formData.isActive}
-                  onChange={() => setFormData({ ...formData, isActive: false })}
-                  className="m-2"
-                />
-                <br />
-              </label>
-            </div>
+            <label htmlFor="activityDiv">
+              Activity :
+              <br />
+              <div className="control h-10.5 " id="activityDiv">
+                <label htmlFor="activeRadio">
+                  Active
+                  <input
+                    id="activeRadio"
+                    type="radio"
+                    value={"Active"}
+                    checked={formData.isActive}
+                    onChange={() =>
+                      setFormData({ ...formData, isActive: true })
+                    }
+                    className="m-2"
+                  />
+                </label>
+                <label htmlFor="inactiveRadio">
+                  Inactive
+                  <input
+                    id="inactiveRadio"
+                    type="radio"
+                    value={"inActive"}
+                    checked={!formData.isActive}
+                    onChange={() =>
+                      setFormData({ ...formData, isActive: false })
+                    }
+                    className="m-2"
+                  />
+                  <br />
+                </label>
+              </div>
+            </label>
           </div>
           <div className="flex flex-col col-span-full">
             <label htmlFor="userEmail" className="label-form">
               Email (Optional)
               <input
                 id="userEmail"
-                type="text"
+                type="email"
                 value={formData.email}
                 onChange={(e) => {
                   setFormData({ ...formData, email: e.target.value });
