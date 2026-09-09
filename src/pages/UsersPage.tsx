@@ -9,11 +9,14 @@ import Loading from "../components/Loading";
 import UserError from "../components/UserError";
 import Buttons from "../components/Buttons";
 
-type Filters = "active" | "inactive" | "all";
+type StatusFilters = "active" | "inactive" | "all";
+type RoleFilters = "admin" | "operator" | "customer" | "all";
 const UsersPage = ({
   UsersList,
   status,
   setUserStatus,
+  role,
+  setRole,
   searchedTerm,
   setSearchTerm,
   SearchUser,
@@ -27,8 +30,10 @@ const UsersPage = ({
 }: {
   UsersList: User[];
 
-  status: Filters;
-  setUserStatus: (filter: Filters) => void;
+  status: StatusFilters;
+  setUserStatus: (filter: StatusFilters) => void;
+  role: RoleFilters;
+  setRole: (filter: RoleFilters) => void;
   searchedTerm: string;
   setSearchTerm: (value: string) => void;
   SearchUser: (term: string) => void;
@@ -69,10 +74,16 @@ const UsersPage = ({
       ? serverResult
       : UsersList.filter((user) => user.fullName.toLowerCase().includes(term));
 
-  const displayedUsers: User[] = searchedUsers.filter((user) => {
+  const determinedStatusUsers: User[] = searchedUsers.filter((user) => {
     if (status === "all") return true;
     else if (status === "inactive") return !user.isActive;
     return user.isActive;
+  });
+  const displayedUsers: User[] = determinedStatusUsers.filter((user) => {
+    if (role === "all") return true;
+    else if (role === "admin") return user.role === "admin";
+    else if (role === "operator") return user.role === "operator";
+    return user.role === "customer";
   });
 
   useEffect(() => {
@@ -105,7 +116,7 @@ const UsersPage = ({
         <h2 className="font-bold text-header2">Users</h2>
         <p className="caption">Search, filter, view and manage users.</p>
       </div>
-      <div className="w-full flex flex-col gap-4 md:flex-row md:gap-3 md:items-end bg-white userStats-card mb-5">
+      <div className="w-full flex flex-col gap-4 md:flex-row md:gap-3 md:items-start bg-white userStats-card mb-5">
         <div className="md:w-8/12">
           <Searchinput
             onSearchChange={SearchUser}
@@ -114,43 +125,82 @@ const UsersPage = ({
             setIsServer={setIsServer}
           />
         </div>
-        <div className="md:w-3/12">
-          <label htmlFor="selectStatus">
-            <p className="font-bold text-small text-gray-600 mb-1">status</p>
+        <div className="md:w-4/12">
+          <div className="flex flex-col md:flex-row gap-2">
+            <div className="flex-1">
+              <label htmlFor="selectStatus">
+                <p className="font-bold text-small text-gray-600 mb-1">
+                  Status
+                </p>
+              </label>
+              <select
+                id="selectStatus"
+                onChange={(e) => {
+                  if (e.target.value === "All Statuses") setUserStatus("all");
+                  else if (e.target.value === "Active") setUserStatus("active");
+                  else setUserStatus("inactive");
+                }}
+                className="control p-3 w-full"
+                value={
+                  status === "all"
+                    ? "All Statuses"
+                    : status === "active"
+                      ? "Active"
+                      : "Inactive"
+                }
+              >
+                <option value="All Statuses">All Statuses</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
 
-            <select
-              id="selectStatus"
-              onChange={(e) => {
-                if (e.target.value === "All Statuses") setUserStatus("all");
-                else if (e.target.value === "Active") setUserStatus("active");
-                else setUserStatus("inactive");
-              }}
-              className="control p-3"
-              value={
-                status === "all"
-                  ? "All Statuses"
-                  : status === "active"
-                    ? "Active"
-                    : "Inactive"
-              }
-            >
-              <option value="All Statuses">All Statuses</option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </label>
+            <div className="flex-1">
+              <label htmlFor="selectRole">
+                <p className="font-bold text-small text-gray-600 mb-1">Roles</p>
+              </label>
+              <select
+                id="selectRole"
+                onChange={(e) => {
+                  if (e.target.value === "All Roles") setRole("all");
+                  else if (e.target.value === "Admin") setRole("admin");
+                  else if (e.target.value === "Operator") setRole("operator");
+                  else setRole("customer");
+                }}
+                className="control p-3 w-full"
+                value={
+                  role === "all"
+                    ? "All Roles"
+                    : role === "admin"
+                      ? "Admin"
+                      : role === "operator"
+                        ? "Operator"
+                        : "Customer"
+                }
+              >
+                <option value="All Roles">All Roles</option>
+                <option value="Admin">Admin</option>
+                <option value="Operator">Operator</option>
+                <option value="Customer">Customer</option>
+              </select>
+            </div>
+
+            <div className="flex items-end">
+              <Buttons
+                comp="button"
+                buttonType="neutral"
+                more="w-full md:w-auto md:min-w-24 md:px-6 md:h-[46px]" // ارتفاع دکمه هم‌اندازه با سلکت‌ها تنظیم شد
+                onClick={() => {
+                  setSearchTerm("");
+                  setUserStatus("all");
+                  setRole("all");
+                }}
+              >
+                Clear
+              </Buttons>
+            </div>
+          </div>
         </div>
-        <Buttons
-          comp="button"
-          buttonType="neutral"
-          more=" w-full md:w-auto md:min-w-24 md:px-6 md:h-12"
-          onClick={() => {
-            setSearchTerm("");
-            setUserStatus("all");
-          }}
-        >
-          Clear
-        </Buttons>
       </div>
 
       {content}

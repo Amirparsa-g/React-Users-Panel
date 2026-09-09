@@ -24,7 +24,8 @@ import {
 import EditUserPage from "./pages/EditUserPage";
 import ScrollToTop from "./components/ScrollToTop";
 
-type Filters = "active" | "inactive" | "all";
+type StatusFilters = "active" | "inactive" | "all";
+type RoleFilters = "admin" | "operator" | "customer" | "all";
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -50,8 +51,8 @@ function App() {
   }, []);
 
   const [searchedTerm, setSearchTerm] = useState("");
-  const [status, setUserStatus] = useState<Filters>("all");
-
+  const [status, setUserStatus] = useState<StatusFilters>("all");
+  const [role, setRole] = useState<RoleFilters>("all");
   const addUserHandler = (newUser: User) => {
     const isAvailable = UsersList.find((user) => user.ID === newUser.ID);
     if (isAvailable) alert("you cant add the same user twice");
@@ -149,6 +150,8 @@ function App() {
                   searchedTerm={searchedTerm}
                   SearchUser={SearchUser}
                   status={status}
+                  role={role}
+                  setRole={setRole}
                   setUserStatus={setUserStatus}
                   removeUserHandler={removeApiUser}
                   ChangeStatusHandler={ChangeStatusHandler}

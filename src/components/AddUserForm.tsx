@@ -32,6 +32,7 @@ const AddUserForm = ({
 }) => {
   const navigate = useNavigate();
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
+
   const [formData, setFormData] = useState<FormPropType>({
     fullName: user?.fullName ?? "",
     age: user?.age.toString() ?? "",
@@ -234,38 +235,47 @@ const AddUserForm = ({
             )}
           </label>
           <div className="label-form ">
-            <label htmlFor="">Activity :</label>
-            <br />
-            <div className="control h-[42px] ">
-              <label htmlFor="">
-                Active
-                <input
-                  type="radio"
-                  value={"Active"}
-                  checked={formData.isActive}
-                  onChange={() => setFormData({ ...formData, isActive: true })}
-                  className="m-2"
-                />
-              </label>
-              <label htmlFor="">
-                Inactive
-                <input
-                  type="radio"
-                  value={"inActive"}
-                  checked={!formData.isActive}
-                  onChange={() => setFormData({ ...formData, isActive: false })}
-                  className="m-2"
-                />
-                <br />
-              </label>
-            </div>
+            <label htmlFor="activityDiv">
+              Activity :
+              <br />
+              <div className="control h-10.5 " id="activityDiv">
+                <label htmlFor="activeRadio">
+                  Active
+                  <input
+                    id="activeRadio"
+                    type="radio"
+                    value={"Active"}
+                    checked={formData.isActive}
+                    onChange={() =>
+                      setFormData({ ...formData, isActive: true })
+                    }
+                    className="m-2"
+                  />
+                </label>
+                <label htmlFor="inactiveRadio">
+                  Inactive
+                  <input
+                    id="inactiveRadio"
+                    type="radio"
+                    value={"inActive"}
+                    checked={!formData.isActive}
+                    onChange={() =>
+                      setFormData({ ...formData, isActive: false })
+                    }
+                    className="m-2"
+                  />
+                  <br />
+                </label>
+              </div>
+            </label>
           </div>
           <div className="flex flex-col col-span-full">
             <label htmlFor="userEmail" className="label-form">
               Email (Optional)
               <input
                 id="userEmail"
-                type="text"
+                placeholder="name@example.com"
+                type="email"
                 value={formData.email}
                 onChange={(e) => {
                   setFormData({ ...formData, email: e.target.value });
@@ -279,15 +289,26 @@ const AddUserForm = ({
             </label>
           </div>
         </div>
-        <div className="flex  items-center justify-center md:justify-end md:items-end w-full gap-2">
-          <Buttons comp="button" buttonType={isLoading ? "loading" : "submit"}>
-            {isLoading ? "Saving..." : "Submit"}
+        <div className="flex flex-col sm:flex-row items-center justify-center md:justify-end md:items-end w-full gap-2">
+          <Buttons
+            comp="button"
+            buttonType={isLoading ? "loading" : "submit"}
+            disabled={isLoading}
+            more="w-full sm:w-35"
+          >
+            {user
+              ? isLoading
+                ? "Saving..."
+                : "Save Changes"
+              : isLoading
+                ? "Saving..."
+                : "Create User"}
           </Buttons>
           <Buttons
             comp="link"
             navigation="/users"
             buttonType={"neutral"}
-            more="text-center"
+            more="text-center w-full sm:w-35"
           >
             Cancel
           </Buttons>
@@ -304,7 +325,7 @@ const AddUserForm = ({
                   navigate("/users");
                 }
               }}
-              className="danger-button"
+              more="w-full sm:w-35"
             >
               Delete
             </Buttons>

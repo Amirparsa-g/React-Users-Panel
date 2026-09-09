@@ -42,7 +42,8 @@ const Buttons = forwardRef<ButtonOrAnchorRef, ButtonProps>(
       sideNavlink: "nav-btn-notSelected",
     };
 
-    const combinedClasses = `${buttonClasses[variant]} ${classes ?? ""}`.trim();
+    const combinedClasses =
+      `${buttonClasses[variant]} ${classes ?? ""} focus:ring-[3px] focus:ring-blue-600/[0.28] focus:outline-none focus:ring-offset-2`.trim();
 
     if (comp === "link") {
       return (
