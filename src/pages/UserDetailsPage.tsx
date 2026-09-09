@@ -28,7 +28,6 @@ const UserDetailsPage = ({
 
   const [clickedUser, setClickedUser] = useState<User | undefined>(undefined);
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const setUser = async () => {
     setIsLoading(true);
@@ -80,39 +79,6 @@ const UserDetailsPage = ({
 
   if (!clickedUser) {
     return null;
-  }
-
-  if (isDeleting) {
-    return (
-      <div className="fixed inset-0 z-50 backdrop-blur-md bg-white/30 h-screen w-full flex justify-center items-center px-4">
-        <div className="userStats-card w-full max-w-md p-6">
-          <h2 className="text-center font-semibold text-xl">
-            Are you sure you want to continue this action?
-          </h2>
-          <Buttons
-            comp="button"
-            buttonType="primary"
-            more="w-full my-3"
-            onClick={async () => {
-              setUpdatingUserId(clickedUser.ID);
-              const isSeccess = await onRemove(clickedUser.ID);
-              if (isSeccess) navigate("/users");
-              else setIsDeleting(false);
-            }}
-          >
-            Continue
-          </Buttons>
-          <Buttons
-            comp="button"
-            buttonType="danger"
-            more="w-full"
-            onClick={() => setIsDeleting(false)}
-          >
-            Cancel
-          </Buttons>
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -234,7 +200,9 @@ const UserDetailsPage = ({
                 comp="button"
                 disabled={updatingUserId === clickedUser.ID}
                 onClick={async () => {
-                  setIsDeleting(true);
+                  setUpdatingUserId(clickedUser.ID);
+                  const isSeccess = await onRemove(clickedUser.ID);
+                  if (isSeccess) navigate("/users");
                 }}
                 buttonType="danger"
               >
