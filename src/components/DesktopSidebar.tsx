@@ -89,7 +89,7 @@ const DesktopSidebar = ({
       {isClicked && (
         <Buttons
           comp="button"
-          buttonType="regular"
+          buttonType="secondary"
           onClick={() => setIsClicked(false)}
           more="fixed bottom-15 md:hidden"
         >

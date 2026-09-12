@@ -5,7 +5,7 @@ export type buttonTypes =
   | "danger"
   | "loading"
   | "submit"
-  | "regular"
+  | "secondary"
   | "HomePageLink"
   | "backTo"
   | "buttomNavLink"

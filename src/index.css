@@ -82,6 +82,9 @@
   .neutral-button {
     @apply btn border-border-neut hover:bg-gray-100;
   }
+  .secondary-button {
+    @apply btn border-border-neut text-black hover:bg-gray-100;
+  }
   .primary-button {
     @apply btn border-primary/30 bg-primary hover:bg-primaryDark text-white;
   }

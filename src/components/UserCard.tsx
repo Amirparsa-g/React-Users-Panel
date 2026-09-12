@@ -51,7 +51,7 @@ const UserCard = ({
                   comp="link"
                   more="text-black"
                   navigation={`/users/${user.ID}`}
-                  buttonType="regular"
+                  buttonType="secondary"
                 >
                   <p className="text-body  font-bold">{user.fullName}</p>
                   <p className="text-small break-all caption">
@@ -91,7 +91,7 @@ const UserCard = ({
                 comp="link"
                 navigation={`/users/${user.ID}`}
                 more="cursor-pointer relative group flex items-center justify-center"
-                buttonType="regular"
+                buttonType="secondary"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,7 @@ const UserCard = ({
                   setUpdatingUserId(null);
                 }}
                 more="cursor-pointer relative group flex items-center justify-center"
-                buttonType="regular"
+                buttonType="secondary"
                 comp="button"
               >
                 <svg
@@ -137,7 +137,7 @@ const UserCard = ({
                 comp="link"
                 navigation={`/users/${user.ID}/edit`}
                 more="cursor-pointer relative group flex items-center justify-center"
-                buttonType="regular"
+                buttonType="secondary"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +160,7 @@ const UserCard = ({
                   await onRemove(user.ID);
                   setUpdatingUserId(null);
                 }}
-                buttonType="regular"
+                buttonType="secondary"
                 more="cursor-pointer relative group flex items-center justify-center"
                 comp="button"
               >
@@ -206,7 +206,7 @@ const UserCard = ({
                 comp="link"
                 navigation={`/users/${user.ID}`}
                 more="text-black"
-                buttonType="regular"
+                buttonType="secondary"
               >
                 <p className="text-body font-bold">{user.fullName}</p>
                 <p
