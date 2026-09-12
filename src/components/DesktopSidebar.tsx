@@ -89,9 +89,9 @@ const DesktopSidebar = ({
       {isClicked && (
         <Buttons
           comp="button"
-          buttonType="regular"
+          buttonType="primary"
           onClick={() => setIsClicked(false)}
-          more="fixed bottom-15 md:hidden"
+          more="fixed bottom-15 md:hidden bg-primaryDarker border-none"
         >
           <img
             src={arrowBackIcon}

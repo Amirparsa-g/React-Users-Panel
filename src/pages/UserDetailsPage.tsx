@@ -107,7 +107,7 @@ const UserDetailsPage = ({
 
         <div className="flex justify-start gap-4 w-full">
           <div
-            className={`flex justify-center items-center w-20 h-20 rounded-full border shrink-0 ${clickedUser.role === "admin" ? "admin-div" : clickedUser.role === "operator" ? "moderator-div" : "customer-div"}`}
+            className={`flex justify-center items-center w-20 h-20 rounded-full border shrink-0 ${clickedUser.role === "admin" ? "admin-div" : clickedUser.role === "operator" ? "operator-div" : "customer-div"}`}
           >
             <p className="text-center text-3xl font-bold uppercase">
               {clickedUser.fullName[0]}
@@ -125,7 +125,7 @@ const UserDetailsPage = ({
                   clickedUser.role === "admin"
                     ? "bg-admin/10 text-admin font-bold w-fit rounded-xl px-3 py-1 text-sm"
                     : clickedUser.role === "operator"
-                      ? "bg-moderator/10 text-moderator font-bold rounded-xl w-fit px-3 py-1 text-sm"
+                      ? "bg-operator/10 text-operator font-bold rounded-xl w-fit px-3 py-1 text-sm"
                       : "bg-black/10 text-black font-bold w-fit rounded-xl px-3 py-1 text-sm"
                 }
               >
@@ -190,11 +190,11 @@ const UserDetailsPage = ({
                 Change Status
               </Buttons>
               <Buttons
-                comp="button"
+                comp="link"
                 aria-disabled={updatingUserId === clickedUser.ID}
                 navigation={`/users/${userId}/edit`}
                 buttonType="primary"
-                more="whitespace-nowrap h-fit w-full md:w-fit"
+                more="whitespace-nowrap h-fit w-full md:w-fit text-center"
               >
                 Edit User
               </Buttons>

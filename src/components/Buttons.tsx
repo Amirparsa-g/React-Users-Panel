@@ -35,7 +35,7 @@ const Buttons = forwardRef<ButtonOrAnchorRef, ButtonProps>(
       danger: "danger-button",
       loading: "button-not-selected",
       submit: "primary-button",
-      regular: "",
+      secondary: "secondary-button",
       HomePageLink: "HomePage-Link",
       backTo: "backTo-link",
       buttomNavLink: "nav-mobile-btn-notSelected",

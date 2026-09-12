@@ -34,8 +34,8 @@ const UserCard = ({
                 className={
                   user.role === "admin"
                     ? "profile text-admin border border-admin"
-                    : user.role === "operator"
-                      ? "profile text-moderator border border-moderator"
+                    :                   user.role === "operator"
+                      ? "profile text-operator border border-operator"
                       : "profile"
                 }
               >
@@ -51,7 +51,7 @@ const UserCard = ({
                   comp="link"
                   more="text-black"
                   navigation={`/users/${user.ID}`}
-                  buttonType="regular"
+                  buttonType="secondary"
                 >
                   <p className="text-body  font-bold">{user.fullName}</p>
                   <p className="text-small break-all caption">
@@ -67,7 +67,7 @@ const UserCard = ({
                 user.role === "admin"
                   ? " admin-div text-center "
                   : user.role === "operator"
-                    ? " moderator-div text-center"
+                    ? " operator-div text-center"
                     : " customer-div text-center"
               }
             >
@@ -91,7 +91,7 @@ const UserCard = ({
                 comp="link"
                 navigation={`/users/${user.ID}`}
                 more="cursor-pointer relative group flex items-center justify-center"
-                buttonType="regular"
+                buttonType="secondary"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,7 @@ const UserCard = ({
                   setUpdatingUserId(null);
                 }}
                 more="cursor-pointer relative group flex items-center justify-center"
-                buttonType="regular"
+                buttonType="secondary"
                 comp="button"
               >
                 <svg
@@ -137,7 +137,7 @@ const UserCard = ({
                 comp="link"
                 navigation={`/users/${user.ID}/edit`}
                 more="cursor-pointer relative group flex items-center justify-center"
-                buttonType="regular"
+                buttonType="secondary"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +160,7 @@ const UserCard = ({
                   await onRemove(user.ID);
                   setUpdatingUserId(null);
                 }}
-                buttonType="regular"
+                buttonType="secondary"
                 more="cursor-pointer relative group flex items-center justify-center"
                 comp="button"
               >
@@ -190,7 +190,7 @@ const UserCard = ({
                 user.role === "admin"
                   ? "profile admin-profile"
                   : user.role === "operator"
-                    ? "profile moderator-profile"
+                    ? "profile operator-profile"
                     : "profile customer-profile"
               }
             >
@@ -206,7 +206,7 @@ const UserCard = ({
                 comp="link"
                 navigation={`/users/${user.ID}`}
                 more="text-black"
-                buttonType="regular"
+                buttonType="secondary"
               >
                 <p className="text-body font-bold">{user.fullName}</p>
                 <p
@@ -224,7 +224,7 @@ const UserCard = ({
                       user.role === "admin"
                         ? "admin-div"
                         : user.role === "operator"
-                          ? "moderator-div"
+                          ? "operator-div"
                           : "customer-div"
                     }
                   >

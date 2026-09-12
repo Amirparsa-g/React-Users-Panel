@@ -289,7 +289,7 @@ const AddUserForm = ({
             </label>
           </div>
         </div>
-        <div className=" grid grid-cols-2 md:flex md:justify-end md:items-end w-full gap-2">
+        <div className=" grid grid-cols-2 sm:flex sm:justify-end md:items-end w-full gap-2">
           <Buttons
             comp="button"
             buttonType={isLoading ? "loading" : "submit"}
@@ -325,9 +325,9 @@ const AddUserForm = ({
                   navigate("/users");
                 }
               }}
-              more="col-span-2 w-full"
+              more="col-span-2 w-full sm:w-fit "
             >
-              Delete
+              Delete User
             </Buttons>
           )}
         </div>

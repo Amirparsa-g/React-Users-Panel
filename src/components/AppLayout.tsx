@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import DesktopSidebar from "./DesktopSidebar";
 import ButtomNav from "./ButtomNav";
 import { motion } from "framer-motion";
 import ScrollToTop from "./ScrollToTop";
+import Buttons from "./Buttons";
 const AppLayout = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
@@ -34,7 +35,12 @@ const AppLayout = () => {
         <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-5 bg-white">
           {!isClicked && (
             <span className="absolute left-2 md:left-22">
-              <button onClick={() => setIsClicked(true)}>
+              <Buttons
+                comp="button"
+                buttonType="secondary"
+                more="w-fit border-none shadow-none"
+                onClick={() => setIsClicked(true)}
+              >
                 <svg
                   className="cursor-pointer"
                   xmlns="http://www.w3.org/2000/svg"
@@ -45,12 +51,17 @@ const AppLayout = () => {
                 >
                   <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                 </svg>
-              </button>
+              </Buttons>
             </span>
           )}
           {isClicked && (
             <span className="absolute md:left-62 ">
-              <button onClick={() => setIsClicked(false)}>
+              <Buttons
+                comp="button"
+                buttonType="secondary"
+                more="w-fit border-none shadow-none"
+                onClick={() => setIsClicked(false)}
+              >
                 <svg
                   className="cursor-pointer"
                   xmlns="http://www.w3.org/2000/svg"
@@ -61,40 +72,27 @@ const AppLayout = () => {
                 >
                   <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
                 </svg>
-              </button>
+              </Buttons>
             </span>
           )}
 
           <h1 className="text-body font-black block mx-auto">User Managment</h1>
-          <Link to={"/users/new"} className="fixed top-5 right-3 md:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#ffffff"
-              className="bg-primary w-8 h-8 rounded-xl shadow-sm hover:bg-primaryDark p-1.5"
-            >
-              <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-            </svg>
-          </Link>
-          <Link
-            to={"/users/new"}
-            className="hidden md:flex fixed top-5 right-3 "
+          <Buttons
+            comp="link"
+            navigation={"/users/new"}
+            more="fixed top-5 right-3 md:hidden w-fit"
+            buttonType="primary"
           >
-            <div className="primary-button flex p-2 w-fit">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#ffffff"
-              >
-                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-              </svg>
-              <p className="ml-2">Add User</p>
-            </div>
-          </Link>
+            +
+          </Buttons>
+          <Buttons
+            comp="link"
+            navigation={"/users/new"}
+            more="hidden fixed top-5 right-3 md:flex w-fit"
+            buttonType="primary"
+          >
+            + Add User
+          </Buttons>
         </header>
         <div className="flex-1 overflow-y-auto bg-bg">
           <motion.main

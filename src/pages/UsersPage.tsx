@@ -112,9 +112,27 @@ const UsersPage = ({
 
   return (
     <div className="flex flex-col flex-wrap w-full">
-      <div className="mb-5">
-        <h2 className="font-bold text-header2">Users</h2>
-        <p className="caption">Search, filter, view and manage users.</p>
+      <div className="mb-5 flex justify-between">
+        <div>
+          <h2 className="font-bold text-header2">Users</h2>
+          <p className="caption">Search, filter, view and manage users.</p>
+        </div>
+        <Buttons
+          comp="link"
+          buttonType="primary"
+          navigation="/users/new"
+          more="md:hidden w-fit"
+        >
+          +
+        </Buttons>
+        <Buttons
+          comp="link"
+          buttonType="primary"
+          navigation="/users/new"
+          more="hidden md:flex w-fit"
+        >
+          + Add User
+        </Buttons>
       </div>
       <div className="w-full flex flex-col gap-4 md:flex-row md:gap-3 md:items-start bg-white userStats-card mb-5">
         <div className="md:w-8/12">
