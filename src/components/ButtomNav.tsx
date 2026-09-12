@@ -1,10 +1,11 @@
 import Buttons from "./Buttons";
 const ButtomNav = () => {
   return (
-    <nav className="nav-mobile bg-white">
+    <nav className="nav-mobile bg-white dark:bg-slate-800">
       <Buttons comp="navLink" navigation="/" buttonType="buttomNavLink">
         <div className="flex gap-1 justify-center items-center">
           <svg
+            className="fill-[#1f1f1f] dark:fill-white"
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
             viewBox="0 -960 960 960"

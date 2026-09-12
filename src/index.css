@@ -2,20 +2,35 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @theme {
   --color-primary: #2563eb;
+  --color-primary-darkMode: #3b82f6;
   --color-primaryDark: #1d4ed8;
+  --color-primaryDark-darkMode: #2563eb;
   --color-primaryDarker: #09173f;
+  --color-primaryDarker-darkMode: #172554;
   --color-success: #10b981;
+  --color-success-darkMode: #34d399;
   --color-danger: #ef4444;
+  --color-danger-darkMode: #f87171;
   --color-Warning: #f59e08;
+  --color-Warning-darkMode: #fbbf24;
   --color-admin: #771dd8;
+  --color-admin-darkMode: #a855f7;
   --color-operator: #4077ed;
+  --color-operator-darkMode: #60a5fa;
   --color-bg: #f6f8fc;
+  --color-bg-darkMode: #0f172a;
   --color-primary-hover: #1d4ed8;
+  --color-primary-hover-darkMode: #60a5fa;
   --color-sidebar-2: #102a5e;
+  --color-sidebar-2-darkMode: #1e293b;
   --color-primary-soft: #eff6ff;
+  --color-primary-soft-darkMode: #1e3a8a;
   --color-violet: #7c3aed;
+  --color-violet-darkMode: #8b5cf6;
   --color-border-neut: #cbd5e1;
+  --color-border-neut-darkMode: #334155;
   --color-border: #e2e8f0;
+  --color-border-darkMode: #1e293b;
   --text-header1: 32px;
   --text-header2: 24px;
   --text-body: 16px;
@@ -28,10 +43,10 @@
 
 @layer components {
   .nav-btn-notSelected {
-    @apply bg-primaryDarker text-white p-2 hover:bg-sidebar-2 transition-all ease-in-out duration-300 rounded-xl w-full;
+    @apply bg-primaryDarker dark:bg-primaryDarker-darkMode text-white p-2 hover:bg-sidebar-2 dark:hover:bg-sidebar-2-darkMode transition-all ease-in-out duration-300 rounded-xl w-full;
   }
   .nav-btn-notSelected.active {
-    @apply bg-primary border border-blue-700 p-2  text-slate-100 transition-all ease-in-out duration-300 rounded-xl w-full;
+    @apply bg-primary dark:bg-primary-darkMode border border-blue-700 p-2  text-slate-100 transition-all ease-in-out duration-300 rounded-xl w-full;
   }
   .nav-img {
     @apply brightness-0 invert;
@@ -43,22 +58,22 @@
     @apply flex fixed md:hidden w-full bottom-0 justify-center items-center;
   }
   .nav-mobile-btn-selected {
-    @apply bg-white text-primary p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-xl w-full fill-primary;
+    @apply bg-white dark:bg-slate-800 text-primary dark:text-primary-darkMode p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-xl w-full fill-primary;
   }
   .nav-mobile-btn-notSelected {
-    @apply bg-white text-black p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-xl w-full fill-black;
+    @apply bg-white dark:bg-slate-800 text-black dark:text-white p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-xl w-full fill-black dark:fill-white;
   }
   .nav-mobile-btn-notSelected.active {
-    @apply bg-white text-primary p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-xl w-full fill-primary;
+    @apply bg-white dark:bg-slate-800 text-primary dark:text-primary-darkMode p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-xl w-full fill-primary dark:fill-primary-darkMode;
   }
   .aside-hamburger {
-    @apply flex flex-col w-60 h-screen bg-primaryDarker p-2 fixed z-70;
+    @apply flex flex-col w-60 h-screen bg-primaryDarker dark:bg-primaryDarker-darkMode p-2 fixed z-70;
   }
   .svg-clicked {
-    @apply fill-primary;
+    @apply fill-primary dark:fill-primary-darkMode;
   }
   .svg-not-clicked {
-    @apply fill-black;
+    @apply fill-black dark:fill-white;
   }
 
   .stats-header {
@@ -75,28 +90,28 @@
   }
 
   .success-button {
-    @apply btn border-success;
+    @apply btn border-success dark:border-success-darkMode;
   }
   .danger-button {
-    @apply btn border-danger/30 text-danger hover:bg-danger/5;
+    @apply btn border-danger/30 dark:border-danger-darkMode/30 text-danger dark:text-danger-darkMode hover:bg-danger/5 dark:hover:bg-danger-darkMode/5;
   }
   .neutral-button {
-    @apply btn border-border-neut hover:bg-gray-100;
+    @apply btn border-border-neut dark:border-border-neut-darkMode hover:bg-gray-100 dark:hover:bg-gray-900;
   }
   .secondary-button {
-    @apply btn border-border-neut text-black hover:bg-gray-100;
+    @apply btn border-border-neut dark:border-border-neut-darkMode text-black hover:bg-gray-100;
   }
   .primary-button {
-    @apply btn border-primary/30 bg-primary hover:bg-primaryDark text-white;
+    @apply btn border-primary/30 dark:border-primary-darkMode/30 bg-primary dark:bg-primary-darkMode hover:bg-primaryDark dark:hover:bg-primaryDark-darkMode text-white;
   }
   .button-not-selected {
-    @apply border border-gray-100 bg-white px-4 py-2 rounded-xl shadow-sm hover:scale-105 w-35 duration-300 ease-in-out;
+    @apply border border-border dark:border-border-darkMode bg-white dark:bg-slate-800 px-4 py-2 rounded-xl shadow-sm hover:scale-105 w-35 duration-300 ease-in-out;
   }
   .profile {
     @apply rounded-full border border-black w-10 h-10 shrink-0 relative flex justify-center items-center;
   }
   .warning-button {
-    @apply border border-Warning bg-white p-4 rounded-xl shadow-sm hover:scale-105 w-35 duration-300 ease-in-out;
+    @apply border border-Warning dark:border-Warning-darkMode bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm hover:scale-105 w-35 duration-300 ease-in-out;
   }
   .wrapper {
     @apply flex gap-1;
@@ -105,19 +120,19 @@
     @apply line-clamp-1;
   }
   .caption {
-    @apply text-small text-gray-500;
+    @apply text-small text-gray-500 dark:text-slate-100;
   }
   .stats-content {
     @apply flex flex-col mt-5 justify-start items-start;
   }
   .nutText {
-    @apply text-body text-gray-700;
+    @apply text-body text-gray-700 dark:text-slate-100;
   }
   .HomePage-Link {
-    @apply w-full border border-gray-200 p-3 rounded-xl text-body font-header1 hover:border-primary-hover/30 hover:bg-primary/5 transition-all duration-150 flex justify-between;
+    @apply w-full border border-border p-3 rounded-xl text-body font-header1 hover:border-primary-hover/30 dark:hover:border-primary-hover-darkMode/30 hover:bg-primary/5 dark:bg-primary-darkMode/5 transition-all duration-150 flex justify-between dark:text-white;
   }
   .searchdiv {
-    @apply w-full border border-gray-200 p-3 rounded-xl text-body  transition-all duration-150;
+    @apply w-full border border-border  p-3 rounded-xl text-body  transition-all duration-150;
   }
   .control {
     min-height: 42px;
@@ -134,54 +149,57 @@
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
   }
   .admin-profile {
-    @apply border border-admin bg-admin/10;
+    @apply border border-admin dark:border-admin-darkMode bg-admin/10 dark:bg-admin-darkMode/10;
   }
   .operator-profile {
-    @apply border border-operator bg-operator/10;
+    @apply border border-operator dark:border-operator-darkMode bg-operator/10 dark:bg-operator-darkMode/10;
   }
   .customer-profile {
-    @apply border border-black bg-black/10;
+    @apply border border-black dark:border-white bg-black/10 dark:bg-white/10;
   }
   .active-div {
-    @apply bg-success/10  p-div text-success;
+    @apply bg-success/10 dark:bg-success-darkMode/10  p-div text-success dark:text-success-darkMode;
   }
   .inactive-div {
-    @apply bg-danger/10 p-div text-danger;
+    @apply bg-danger/10 dark:bg-danger-darkMode/10 p-div text-danger dark:text-danger-darkMode;
   }
 
   .admin-div {
-    @apply p-div bg-admin/10 text-admin;
+    @apply p-div bg-admin/10 dark:bg-admin-darkMode/10 text-admin dark:text-admin-darkMode;
   }
   .operator-div {
     @apply p-div bg-operator/10 text-operator;
   }
   .customer-div {
-    @apply p-div bg-black/10 text-black;
+    @apply p-div bg-black/10 dark:bg-white/10  text-black dark:text-white;
   }
   .buttomNav-font {
     @apply font-semibold text-smaller;
   }
   .statsCard-svg {
-    @apply absolute right-4 top-4 bg-primary-soft w-8 h-8 p-1 rounded-xl shadow-sm;
+    @apply absolute right-4 top-4 bg-primary-soft dark:bg-primary-soft-darkMode w-8 h-8 p-1 rounded-xl shadow-sm;
   }
   .label-form {
-    @apply font-bold text-small text-gray-600 mb-1;
+    @apply font-bold text-small text-gray-600 dark:text-gray-100 mb-1;
   }
   .backTo-link {
-    @apply flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-xl bg-white text-black font-medium hover:bg-gray-50 transition-colors;
+    @apply flex items-center gap-2 px-4 py-2 border border-border dark:border-border-darkMode rounded-xl bg-white dark:bg-slate-800 text-black dark:text-slate-100 font-medium hover:bg-gray-50 dark:hover:bg-gray-950 transition-colors;
+  }
+  .div-bg {
+    @apply bg-white dark:bg-slate-800;
   }
 }
 @utility aside-notHamburger {
-  @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker p-2 z-50 md:relative;
+  @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker dark:bg-primaryDarker-darkMode p-2 z-50 md:relative;
 }
 @utility btn {
-  @apply whitespace-nowrap h-fit border border-black  bg-white px-4 py-2 rounded-xl shadow-sm  w-35 duration-300 ease-in-out font-bold;
+  @apply whitespace-nowrap h-fit border border-black   bg-white px-4 py-2 rounded-xl shadow-sm  w-35 duration-300 ease-in-out font-bold;
 }
 @utility p-div {
   @apply p-1 rounded-xl text-small font-bold shadow-sm;
 }
 @utility userStats-card {
-  @apply border border-border bg-white p-4 rounded-xl shadow-sm;
+  @apply border border-border dark:border-border-darkMode bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm;
 }
 @keyframes slide-in {
   0% {

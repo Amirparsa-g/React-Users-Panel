@@ -15,10 +15,14 @@ const UserStats = ({
   return (
     <div className="my-3 grid grid-cols-1 gap-4 md:grid-cols-3 w-full">
       <div className="userStats-card relative">
-        <h2 className="text-small font-header1 text-black/70">Total Users</h2>
+        <h2 className="text-small font-header1 text-black/70 dark:text-white/70">
+          Total Users
+        </h2>
         <div className="stats-content">
           {!isLoading && (
-            <h3 className="text-header2 font-black">{allUsers}</h3>
+            <h3 className="text-header2 font-black dark:text-white">
+              {allUsers}
+            </h3>
           )}
           <p className="caption">All users currently loaded</p>
           {isLoading && (
@@ -40,10 +44,14 @@ const UserStats = ({
         </svg>
       </div>
       <div className="userStats-card relative">
-        <h2 className="text-small font-header1 text-black/70">Active Users</h2>
+        <h2 className="text-small font-header1 text-black/70 dark:text-white/70">
+          Active Users
+        </h2>
         <div className="stats-content ">
           {!isLoading && (
-            <h3 className="text-header2 font-black">{activeUsers}</h3>
+            <h3 className="text-header2 font-black dark:text-white">
+              {activeUsers}
+            </h3>
           )}
           <p className="caption">Users with active status</p>
           {isLoading && (
@@ -65,12 +73,14 @@ const UserStats = ({
         </svg>
       </div>
       <div className="userStats-card relative">
-        <h2 className="text-small font-header1 text-black/70">
+        <h2 className="text-small font-header1 text-black/70 dark:text-white/70">
           Inactive Users
         </h2>
         <div className="stats-content ">
           {!isLoading && (
-            <h3 className="text-header2 font-black">{inactiveUsers}</h3>
+            <h3 className="text-header2 font-black dark:text-white">
+              {inactiveUsers}
+            </h3>
           )}
           <p className="caption">Users with inactive status</p>
           {isLoading && (
