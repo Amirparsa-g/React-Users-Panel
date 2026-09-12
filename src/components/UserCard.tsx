@@ -34,7 +34,7 @@ const UserCard = ({
                 className={
                   user.role === "admin"
                     ? "profile text-admin border border-admin"
-                    :                   user.role === "operator"
+                    : user.role === "operator"
                       ? "profile text-operator border border-operator"
                       : "profile"
                 }
@@ -49,7 +49,7 @@ const UserCard = ({
               <div>
                 <Buttons
                   comp="link"
-                  more="text-black"
+                  more="text-black border-none w-fit shadow-none p-0"
                   navigation={`/users/${user.ID}`}
                   buttonType="secondary"
                 >
@@ -90,7 +90,7 @@ const UserCard = ({
               <Buttons
                 comp="link"
                 navigation={`/users/${user.ID}`}
-                more="cursor-pointer relative group flex items-center justify-center"
+                more="cursor-pointer relative group flex items-center justify-center border-none w-fit shadow-none p-0"
                 buttonType="secondary"
               >
                 <svg
@@ -115,7 +115,7 @@ const UserCard = ({
                   await changeStatus(user);
                   setUpdatingUserId(null);
                 }}
-                more="cursor-pointer relative group flex items-center justify-center"
+                more="cursor-pointer relative group flex items-center justify-center border-none w-fit shadow-none p-0"
                 buttonType="secondary"
                 comp="button"
               >
@@ -136,7 +136,7 @@ const UserCard = ({
               <Buttons
                 comp="link"
                 navigation={`/users/${user.ID}/edit`}
-                more="cursor-pointer relative group flex items-center justify-center"
+                more="cursor-pointer relative group flex items-center justify-center border-none w-fit shadow-none p-0"
                 buttonType="secondary"
               >
                 <svg
@@ -161,7 +161,7 @@ const UserCard = ({
                   setUpdatingUserId(null);
                 }}
                 buttonType="secondary"
-                more="cursor-pointer relative group flex items-center justify-center"
+                more="cursor-pointer relative group flex items-center justify-center border-none w-fit shadow-none p-0"
                 comp="button"
               >
                 <svg
@@ -205,7 +205,7 @@ const UserCard = ({
               <Buttons
                 comp="link"
                 navigation={`/users/${user.ID}`}
-                more="text-black"
+                more="text-black border-none w-fit shadow-none p-0"
                 buttonType="secondary"
               >
                 <p className="text-body font-bold">{user.fullName}</p>
