@@ -34,8 +34,8 @@ const UserCard = ({
                 className={
                   user.role === "admin"
                     ? "profile text-admin border border-admin"
-                    : user.role === "operator"
-                      ? "profile text-moderator border border-moderator"
+                    :                   user.role === "operator"
+                      ? "profile text-operator border border-operator"
                       : "profile"
                 }
               >
@@ -67,7 +67,7 @@ const UserCard = ({
                 user.role === "admin"
                   ? " admin-div text-center "
                   : user.role === "operator"
-                    ? " moderator-div text-center"
+                    ? " operator-div text-center"
                     : " customer-div text-center"
               }
             >
@@ -190,7 +190,7 @@ const UserCard = ({
                 user.role === "admin"
                   ? "profile admin-profile"
                   : user.role === "operator"
-                    ? "profile moderator-profile"
+                    ? "profile operator-profile"
                     : "profile customer-profile"
               }
             >
@@ -224,7 +224,7 @@ const UserCard = ({
                       user.role === "admin"
                         ? "admin-div"
                         : user.role === "operator"
-                          ? "moderator-div"
+                          ? "operator-div"
                           : "customer-div"
                     }
                   >

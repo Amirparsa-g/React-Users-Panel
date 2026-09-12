@@ -7,7 +7,7 @@
   --color-danger: #ef4444;
   --color-Warning: #f59e08;
   --color-admin: #771dd8;
-  --color-moderator: #4077ed;
+  --color-operator: #4077ed;
   --color-bg: #f6f8fc;
   --color-primary-hover: #1d4ed8;
   --color-sidebar-2: #102a5e;
@@ -132,8 +132,8 @@
   .admin-profile {
     @apply border border-admin bg-admin/10;
   }
-  .moderator-profile {
-    @apply border border-moderator bg-moderator/10;
+  .operator-profile {
+    @apply border border-operator bg-operator/10;
   }
   .customer-profile {
     @apply border border-black bg-black/10;
@@ -148,8 +148,8 @@
   .admin-div {
     @apply p-div bg-admin/10 text-admin;
   }
-  .moderator-div {
-    @apply p-div bg-moderator/10 text-moderator;
+  .operator-div {
+    @apply p-div bg-operator/10 text-operator;
   }
   .customer-div {
     @apply p-div bg-black/10 text-black;
