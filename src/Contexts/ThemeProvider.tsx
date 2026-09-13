@@ -2,13 +2,18 @@ import { type ReactNode } from "react";
 import { createContext, useState, useEffect } from "react";
 import type { themeContextType } from "../types/themeContextType";
 
-
 // eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext<themeContextType | undefined>(
   undefined,
 );
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [isDark, setIsDark] = useState<boolean>(false);
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      return savedTheme === "dark";
+    }
+    return false;
+  });
   useEffect(() => {
     const htmlElement = document.documentElement;
     if (isDark) {
