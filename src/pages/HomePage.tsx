@@ -19,7 +19,7 @@ const HomePage = ({
   }, []);
   return (
     <div className="mb-10">
-      <h1 className="text-header2 font-header1">Dashboard</h1>
+      <h1 className="text-header2 font-header1 dark:text-text-primary-darkMode">Dashboard</h1>
       <p className="caption">
         A quick overview of the current users in the system.
       </p>
@@ -32,7 +32,9 @@ const HomePage = ({
       />
       <div className="flex flex-col lg:flex-row gap-7 w-full">
         <div className="flex flex-col userStats-card lg:w-8/12">
-          <h2 className="text-bodyHeader font-black">Project Overview</h2>
+          <h2 className="text-bodyHeader font-black dark:text-text-primary-darkMode">
+            Project Overview
+          </h2>
           <p className="caption">An overview of this Project</p>
           <p className="mt-10 nutText">
             This project manages users loaded from the existing API. The UI
@@ -47,7 +49,9 @@ const HomePage = ({
         </div>
 
         <div className="flex flex-col userStats-card lg:w-4/12">
-          <h1 className="text-bodyHeader font-black">Quick Actions</h1>
+          <h1 className="text-bodyHeader font-black dark:text-text-primary-darkMode">
+            Quick Actions
+          </h1>
           <p className="caption">Project Actions</p>
           <div className="flex flex-col gap-2 mt-4">
             <Buttons
@@ -57,6 +61,7 @@ const HomePage = ({
             >
               View users
               <svg
+                className="fill-[#1f1f1f] dark:fill-text-secondary-darkMode"
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
                 viewBox="0 -960 960 960"
@@ -74,6 +79,7 @@ const HomePage = ({
             >
               Add a user
               <svg
+                className="fill-[#1f1f1f] dark:fill-text-secondary-darkMode"
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
                 viewBox="0 -960 960 960"
@@ -90,6 +96,7 @@ const HomePage = ({
             >
               About project
               <svg
+                className="fill-[#1f1f1f] dark:fill-text-secondary-darkMode"
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
                 viewBox="0 -960 960 960"

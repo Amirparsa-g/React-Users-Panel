@@ -21,11 +21,11 @@ const Searchinput = ({
       <div className="flex flex-col sm:flex-row w-full items-center gap-4 ">
         {!isServer && (
           <label
-            className="flex flex-col w-full gap-1 label-form"
+            className="flex flex-col w-full gap-1 label-form "
             id="searchDiv"
           >
             Search
-            <div className="flex items-center gap-2 control w-full transition-all border border-border-neut focus-within:border-[#60a5fa] focus-within:[box-shadow:0_0_0_3px_rgba(37,99,235,0.12)]">
+            <div className="flex items-center gap-2 control w-full transition-all border border-border-neut dark:border-border-neut-darkMode dark:bg-surface-darkMode focus-within:border-primary-darkMode focus-within:[box-shadow:0_0_0_3px_rgba(96,165,250,0.15)]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
@@ -41,10 +41,10 @@ const Searchinput = ({
                 placeholder="search by name"
                 value={value}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="w-full bg-transparent border-none outline-none"
+                className="w-full bg-transparent border-none outline-none dark:text-text-secondary-darkMode"
               />
               <label
-                className="flex flex-row gap-2 justify-center items-center cursor-pointer text-sm text-gray-700 px-2 sm:pr-4 whitespace-nowrap"
+                className="flex flex-row gap-2 justify-center items-center cursor-pointer text-sm text-gray-600 dark:text-text-secondary-darkMode px-2 sm:pr-4 whitespace-nowrap"
                 htmlFor="checkbox"
               >
                 server search
@@ -53,7 +53,7 @@ const Searchinput = ({
                   type="checkbox"
                   checked={isServer}
                   onChange={(e) => setIsServer(e.target.checked)}
-                  className="cursor-pointer w-4 h-4 accent-primary"
+                  className="cursor-pointer w-4 h-4 accent-primary dark:accent-primary-darkMode"
                 />
               </label>
             </div>
@@ -67,7 +67,7 @@ const Searchinput = ({
               id="searchDiv"
             >
               Search
-              <div className="flex items-center gap-2 control w-full transition-all border border-border-neut focus-within:border-[#60a5fa] focus-within:[box-shadow:0_0_0_3px_rgba(37,99,235,0.12)]">
+              <div className="flex items-center gap-2 control w-full transition-all border border-border-neut dark:border-border-neut-darkMode dark:bg-surface-darkMode focus-within:border-primary-darkMode focus-within:[box-shadow:0_0_0_3px_rgba(96,165,250,0.15)]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
@@ -86,7 +86,7 @@ const Searchinput = ({
                   className="focus:outline-none bg-transparent w-full"
                 />
                 <label
-                  className="flex flex-row gap-2 justify-center items-center cursor-pointer text-sm text-gray-700 px-2 sm:pr-4 whitespace-nowrap"
+                  className="flex flex-row gap-2 justify-center items-center cursor-pointer text-sm text-gray-600 dark:text-text-secondary-darkMode mpx-2 sm:pr-4 whitespace-nowrap"
                   htmlFor="checkbox"
                 >
                   server search

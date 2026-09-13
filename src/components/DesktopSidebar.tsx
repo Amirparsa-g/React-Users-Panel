@@ -28,7 +28,7 @@ const DesktopSidebar = ({
           <p className="text-white font-black text-bodyHeader">U</p>
         </div>
         {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
-          <h2 className="text-body font-black text-white line-clamp-1">
+          <h2 className="text-body font-black text-white line-clamp-1 dark:text-text-primary-darkMode">
             User Management
           </h2>
         )}

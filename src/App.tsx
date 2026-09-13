@@ -23,6 +23,7 @@ import {
 } from "./services/userApi";
 import EditUserPage from "./pages/EditUserPage";
 import ScrollToTop from "./components/ScrollToTop";
+import ThemeProvider from "./Contexts/ThemeProvider";
 
 type StatusFilters = "active" | "inactive" | "all";
 type RoleFilters = "admin" | "operator" | "customer" | "all";
@@ -132,7 +133,7 @@ function App() {
   }, [UsersList.length]);
 
   return (
-    <>
+    <ThemeProvider>
       <ScrollToTop />
       <Routes>
         <Route element={<AppLayout />}>
@@ -212,7 +213,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />}></Route>
         </Route>
       </Routes>
-    </>
+    </ThemeProvider>
   );
 }
 

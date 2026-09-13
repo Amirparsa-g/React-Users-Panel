@@ -160,7 +160,7 @@ const AddUserForm = ({
           <p className="text-center text-3xl m-2 font-semibold">Loading ...</p>
         )}
         {error && (
-          <p className="text-center text-xl m-2 font-semibold text-danger">
+          <p className="text-center text-xl m-2 font-semibold text-danger dark:text-danger-darkMode">
             {error}
           </p>
         )}
@@ -186,7 +186,7 @@ const AddUserForm = ({
               className="w-full border control"
             />
             {FormError.nameError !== "" && (
-              <p className="text-danger">{FormError.nameError}</p>
+              <p className="text-danger dark:text-danger-darkMode">{FormError.nameError}</p>
             )}
           </label>
           <label htmlFor="userAge" className="label-form">
@@ -203,7 +203,7 @@ const AddUserForm = ({
               className="control"
             />
             {FormError.ageError !== "" && (
-              <p className="text-danger">{FormError.ageError}</p>
+              <p className="text-danger dark:text-danger-darkMode">{FormError.ageError}</p>
             )}
           </label>
           <label htmlFor="userRole" className="label-form">
@@ -231,7 +231,7 @@ const AddUserForm = ({
               <option value="customer">customer</option>
             </select>
             {FormError.roleError !== "" && (
-              <p className="text-danger">{FormError.roleError}</p>
+              <p className="text-danger dark:text-danger-darkMode">{FormError.roleError}</p>
             )}
           </label>
           <div className="label-form ">
@@ -284,7 +284,7 @@ const AddUserForm = ({
                 className="control"
               />
               {FormError.emailError !== "" && (
-                <p className="text-danger">{FormError.emailError}</p>
+                <p className="text-danger dark:text-danger-darkMode">{FormError.emailError}</p>
               )}
             </label>
           </div>
@@ -308,7 +308,7 @@ const AddUserForm = ({
             comp="link"
             navigation="/users"
             buttonType={"neutral"}
-            more="text-center w-full sm:w-35"
+            more="text-center w-full sm:w-35 dark:text-text-secondary-darkMode"
           >
             Cancel
           </Buttons>
