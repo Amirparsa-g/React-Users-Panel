@@ -25,7 +25,7 @@ const Searchinput = ({
             id="searchDiv"
           >
             Search
-            <div className="flex items-center gap-2 control w-full transition-all border border-border-neut dark:border-border-neut-darkMode dark:bg-surface-darkMode focus-within:border-primary-darkMode focus-within:[box-shadow:0_0_0_3px_rgba(96,165,250,0.15)]">
+            <div className="flex items-center gap-2 control w-full  border border-border-neut dark:border-border-neut-darkMode dark:bg-surface-darkMode focus-within:border-primary-darkMode focus-within:[box-shadow:0_0_0_3px_rgba(96,165,250,0.15)]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"

@@ -47,21 +47,18 @@
 }
 @layer base {
   html {
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease,
-      border-color 0.3s ease;
+    @apply transition-all ease-in-out duration-1000;
   }
-   h2 {
+  h2 {
     @apply dark:text-text-primary-darkMode;
   }
 }
 @layer components {
-   .nav-btn-notSelected {
-    @apply bg-primaryDarker dark:bg-primaryDarker-darkMode text-white p-2 hover:bg-sidebar-2 dark:hover:bg-sidebar-2-darkMode transition-all ease-in-out duration-300 rounded-xl w-full;
+  .nav-btn-notSelected {
+    @apply bg-primaryDarker dark:bg-primaryDarker-darkMode text-white p-2 hover:bg-sidebar-2 dark:hover:bg-sidebar-2-darkMode ease-in-out  rounded-xl w-full;
   }
   .nav-btn-notSelected.active {
-    @apply bg-primary dark:bg-primary-darkMode border border-primary-darkMode p-2  text-slate-100 transition-all ease-in-out duration-300 rounded-xl w-full;
+    @apply bg-primary dark:bg-primary-darkMode border border-primary-darkMode p-2  text-slate-100  ease-in-out  rounded-xl w-full;
   }
   .nav-img {
     @apply brightness-0 invert;
@@ -72,14 +69,14 @@
   .nav-mobile {
     @apply flex fixed md:hidden w-full bottom-0 justify-center items-center;
   }
-   .nav-mobile-btn-selected {
-    @apply bg-white dark:bg-surface-darkMode text-primary dark:text-primary-darkMode p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-xl w-full fill-primary-darkMode;
+  .nav-mobile-btn-selected {
+    @apply bg-white dark:bg-surface-darkMode text-primary dark:text-primary-darkMode p-2 hover:scale-105  ease-in-out  rounded-xl w-full fill-primary-darkMode;
   }
   .nav-mobile-btn-notSelected {
-    @apply bg-white dark:bg-surface-darkMode text-black dark:text-text-muted-darkMode p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-xl w-full fill-black dark:fill-text-primary-darkMode;
+    @apply bg-white dark:bg-surface-darkMode text-black dark:text-text-muted-darkMode p-2 hover:scale-105  ease-in-out  rounded-xl w-full fill-black dark:fill-text-primary-darkMode;
   }
   .nav-mobile-btn-notSelected.active {
-    @apply bg-white dark:bg-surface-darkMode text-primary dark:text-primary-darkMode p-2 hover:scale-105 transition-all ease-in-out duration-300 rounded-xl w-full fill-primary-darkMode;
+    @apply bg-white dark:bg-surface-darkMode text-primary dark:text-primary-darkMode p-2 hover:scale-105  ease-in-out rounded-xl w-full fill-primary-darkMode;
   }
   .aside-hamburger {
     @apply flex flex-col w-60 h-screen bg-primaryDarker dark:bg-primaryDarker-darkMode p-2 fixed z-70;
@@ -120,13 +117,13 @@
     @apply btn border-primary/30 dark:border-primary-darkMode/30 bg-primary dark:bg-primary-darkMode hover:bg-primaryDark dark:hover:bg-primaryDark-darkMode text-white;
   }
   .button-not-selected {
-    @apply border border-border dark:border-border-darkMode bg-white dark:bg-surface-darkMode px-4 py-2 rounded-xl shadow-sm hover:scale-105 w-35 duration-300 ease-in-out;
+    @apply border border-border dark:border-border-darkMode bg-white dark:bg-surface-darkMode px-4 py-2 rounded-xl shadow-sm hover:scale-105 w-35  ease-in-out;
   }
   .profile {
     @apply rounded-full border border-black dark:border-white w-10 h-10 shrink-0 relative flex justify-center items-center;
   }
   .warning-button {
-    @apply border border-Warning dark:border-Warning-darkMode bg-white dark:bg-surface-darkMode p-4 rounded-xl shadow-sm hover:scale-105 w-35 duration-300 ease-in-out;
+    @apply border border-Warning dark:border-Warning-darkMode bg-white dark:bg-surface-darkMode p-4 rounded-xl shadow-sm hover:scale-105 w-35  ease-in-out;
   }
   .wrapper {
     @apply flex gap-1;
@@ -144,10 +141,10 @@
     @apply text-body text-gray-700 dark:text-text-secondary-darkMode;
   }
   .HomePage-Link {
-    @apply w-full border border-border p-3 rounded-xl text-body font-header1 hover:border-primary-hover/30 dark:hover:border-primary-hover-darkMode/30 hover:bg-primary/5 dark:bg-primary-darkMode/5 transition-all duration-150 flex justify-between dark:text-text-primary-darkMode;
+    @apply w-full border border-border p-3 rounded-xl text-body font-header1 hover:border-primary-hover/30 dark:hover:border-primary-hover-darkMode/30 hover:bg-primary/5 dark:bg-primary-darkMode/5  flex justify-between dark:text-text-primary-darkMode;
   }
   .searchdiv {
-    @apply w-full border border-border dark:border-border-darkMode bg-white dark:bg-surface-darkMode p-3 rounded-xl text-body dark:text-text-primary-darkMode transition-all duration-150;
+    @apply w-full border border-border dark:border-border-darkMode bg-white dark:bg-surface-darkMode p-3 rounded-xl text-body dark:text-text-primary-darkMode;
   }
   .control {
     min-height: 42px;
@@ -204,7 +201,7 @@
     @apply font-bold text-small text-gray-600 dark:text-text-secondary-darkMode mb-1;
   }
   .backTo-link {
-    @apply flex items-center gap-2 px-4 py-2 border border-border dark:border-border-darkMode rounded-xl bg-white dark:bg-surface-darkMode text-black dark:text-text-primary-darkMode font-medium hover:bg-gray-50 dark:hover:bg-surface-elevated-darkMode transition-colors;
+    @apply flex items-center gap-2 px-4 py-2 border border-border dark:border-border-darkMode rounded-xl bg-white dark:bg-surface-darkMode text-black dark:text-text-primary-darkMode font-medium hover:bg-gray-50 dark:hover:bg-surface-elevated-darkMode;
   }
   .div-bg {
     @apply bg-white dark:bg-surface-darkMode;
@@ -214,14 +211,14 @@
   @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker dark:bg-primaryDarker-darkMode p-2 z-50 md:relative;
 }
 @utility btn {
-  @apply whitespace-nowrap h-fit border  px-4 py-2 rounded-xl shadow-sm  w-35 duration-300 ease-in-out font-bold;
+  @apply whitespace-nowrap h-fit border  px-4 py-2 rounded-xl shadow-sm  w-35  ease-in-out font-bold;
 }
 @utility p-div {
   @apply p-1 rounded-xl text-small font-bold shadow-sm;
 }
-  @utility userStats-card {
-    @apply border border-border dark:border-border-darkMode bg-white dark:bg-surface-darkMode p-4 rounded-xl shadow-sm;
-  }
+@utility userStats-card {
+  @apply border border-border dark:border-border-darkMode bg-white dark:bg-surface-darkMode p-4 rounded-xl shadow-sm;
+}
 @keyframes slide-in {
   0% {
     transform: translateX(-100%);
@@ -250,16 +247,16 @@
     animation: slide-out 0.4s ease-in-out forwards;
   }
 }
-  .skeleton {
-    height: 12px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #e2e8f0, #f8fafc, #e2e8f0);
-    background-size: 200% 100%;
-    animation: pulse 1.4s infinite;
-  }
-  .dark .skeleton {
-    background: linear-gradient(90deg, #334155, #475569, #334155);
-  }
+.skeleton {
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e2e8f0, #f8fafc, #e2e8f0);
+  background-size: 200% 100%;
+  animation: pulse 1.4s infinite;
+}
+.dark .skeleton {
+  background: linear-gradient(90deg, #334155, #475569, #334155);
+}
 .skeleton + .skeleton {
   margin-top: 8px;
   width: 70%;
