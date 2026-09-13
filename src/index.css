@@ -47,8 +47,8 @@
       color 0.3s ease,
       border-color 0.3s ease;
   }
-  input {
-    @apply bg-white dark:bg-slate-800;
+  h2 {
+    @apply dark:text-white;
   }
 }
 @layer components {
