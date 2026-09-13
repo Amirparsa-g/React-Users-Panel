@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import type { User } from "../types/user";
 import type { FormPropType } from "../types/userForm";
 import { useEffect, useState } from "react";
@@ -84,7 +84,7 @@ const UserDetailsPage = ({
   return (
     <div className="flex flex-col items-center w-full px-4 overflow-x-hidden box-border pb-10">
       {error && (
-        <h2 className="text-danger text-2xl md:text-3xl font-semibold mb-4 text-center break-words w-full">
+        <h2 className="text-danger dark:text-danger-darkMode text-2xl md:text-3xl font-semibold mb-4 text-center break-words w-full">
           {error}
         </h2>
       )}
@@ -92,17 +92,14 @@ const UserDetailsPage = ({
       <div className="w-full max-w-4xl flex flex-col gap-8 mt-4">
         <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
           <div className="flex flex-col items-start text-left">
-            <h2 className="text-header1  font-bold text-3xl">User Details</h2>
-            <p className="caption text-black/50 mt-1">
-              View and manage the selected user.
-            </p>
+            <h2 className="text-header1  font-bold text-3xl dark:text-white">
+              User Details
+            </h2>
+            <p className="caption  mt-1">View and manage the selected user.</p>
           </div>
-          <Link
-            to="/users"
-            className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-xl bg-white text-black font-medium hover:bg-gray-50 transition-colors"
-          >
+          <Buttons comp="link" buttonType="backTo" navigation="/users">
             <span>&larr;</span> Back to Users
-          </Link>
+          </Buttons>
         </header>
 
         <div className="flex justify-start gap-4 w-full">
@@ -115,7 +112,7 @@ const UserDetailsPage = ({
           </div>
 
           <div className="flex flex-col justify-center gap-2 sm:items-start overflow-hidden w-full">
-            <p className="text-header2 font-extrabold break-all w-full text-2xl">
+            <p className="text-header2 font-extrabold break-all w-full text-2xl dark:text-white">
               {clickedUser.fullName}
             </p>
 
@@ -123,20 +120,16 @@ const UserDetailsPage = ({
               <p
                 className={
                   clickedUser.role === "admin"
-                    ? "bg-admin/10 text-admin font-bold w-fit rounded-xl px-3 py-1 text-sm"
+                    ? "admin-div"
                     : clickedUser.role === "operator"
-                      ? "bg-operator/10 text-operator font-bold rounded-xl w-fit px-3 py-1 text-sm"
-                      : "bg-black/10 text-black font-bold w-fit rounded-xl px-3 py-1 text-sm"
+                      ? "operator-div"
+                      : "customer-div"
                 }
               >
                 {clickedUser.role}
               </p>
               <p
-                className={
-                  clickedUser.isActive
-                    ? "bg-success/10 text-success font-bold w-fit rounded-xl px-3 py-1 text-sm"
-                    : "bg-danger/10 text-danger font-bold w-fit rounded-xl px-3 py-1 text-sm"
-                }
+                className={clickedUser.isActive ? "active-div" : "inactive-div"}
               >
                 {clickedUser.isActive ? "Active" : "Inactive"}
               </p>
@@ -144,30 +137,30 @@ const UserDetailsPage = ({
           </div>
         </div>
 
-        <div className="userStats-card w-full rounded-xl border border-gray-200 bg-white overflow-hidden">
+        <div className="userStats-card w-full rounded-xl border  overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2">
-            <div className="p-5 border-b border-gray-100 sm:border-r">
-              <p className="text-black/50 text-sm font-semibold mb-1">
-                Full Name
-              </p>
-              <p className="text-body font-bold break-all">
+            <div className="p-5 border-b border-gray-100 dark:border-white/5 sm:border-r">
+              <p className="label-form">Full Name</p>
+              <p className="text-body font-bold break-all dark:text-gray-100">
                 {clickedUser.fullName}
               </p>
             </div>
-            <div className="p-5 border-b border-gray-100">
-              <p className="text-black/50 text-sm font-semibold mb-1">Age</p>
-              <p className="text-body font-bold break-all">{clickedUser.age}</p>
+            <div className="p-5 border-b border-gray-100 dark:border-white/5">
+              <p className="label-form">Age</p>
+              <p className="text-body font-bold break-all dark:text-gray-100">
+                {clickedUser.age}
+              </p>
             </div>
 
-            <div className="p-5 border-b border-gray-100 sm:border-r">
-              <p className="text-black/50 text-sm font-semibold mb-1">Email</p>
-              <p className="text-body font-bold break-all">
+            <div className="p-5 border-b border-gray-100 dark:border-white/5 sm:border-r">
+              <p className="label-form">Email</p>
+              <p className="text-body font-bold break-all dark:text-gray-100">
                 {clickedUser.email}
               </p>
             </div>
-            <div className="p-5 border-b border-gray-100">
-              <p className="text-black/50 text-sm font-semibold mb-1">Role</p>
-              <p className="text-body font-bold break-all capitalize">
+            <div className="p-5 border-b border-gray-100 dark:border-white/5">
+              <p className="label-form">Role</p>
+              <p className="text-body font-bold break-all capitalize dark:text-gray-100">
                 {clickedUser.role}
               </p>
             </div>
@@ -185,7 +178,7 @@ const UserDetailsPage = ({
                   );
                 }}
                 buttonType="neutral"
-                more="whitespace-nowrap h-fit w-full md:w-fit"
+                more="whitespace-nowrap h-fit w-full md:w-fit dark:text-white"
               >
                 Change Status
               </Buttons>
