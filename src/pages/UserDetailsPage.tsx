@@ -92,7 +92,7 @@ const UserDetailsPage = ({
       <div className="w-full max-w-4xl flex flex-col gap-8 mt-4">
         <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
           <div className="flex flex-col items-start text-left">
-            <h2 className="text-header1  font-bold text-3xl dark:text-white">
+            <h2 className="text-header1  font-bold text-3xl dark:text-text-primary-darkMode">
               User Details
             </h2>
             <p className="caption  mt-1">View and manage the selected user.</p>
@@ -112,7 +112,7 @@ const UserDetailsPage = ({
           </div>
 
           <div className="flex flex-col justify-center gap-2 sm:items-start overflow-hidden w-full">
-            <p className="text-header2 font-extrabold break-all w-full text-2xl dark:text-white">
+            <p className="text-header2 font-extrabold break-all w-full text-2xl dark:text-text-primary-darkMode">
               {clickedUser.fullName}
             </p>
 
@@ -139,28 +139,28 @@ const UserDetailsPage = ({
 
         <div className="userStats-card w-full rounded-xl border  overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2">
-            <div className="p-5 border-b border-gray-100 dark:border-white/5 sm:border-r">
+            <div className="p-5 border-b border-gray-100 dark:border-border-darkMode sm:border-r">
               <p className="label-form">Full Name</p>
-              <p className="text-body font-bold break-all dark:text-gray-100">
+              <p className="text-body font-bold break-all dark:text-text-secondary-darkMode">
                 {clickedUser.fullName}
               </p>
             </div>
-            <div className="p-5 border-b border-gray-100 dark:border-white/5">
+            <div className="p-5 border-b border-gray-100 dark:border-border-darkMode">
               <p className="label-form">Age</p>
-              <p className="text-body font-bold break-all dark:text-gray-100">
+              <p className="text-body font-bold break-all dark:text-text-secondary-darkMode">
                 {clickedUser.age}
               </p>
             </div>
 
-            <div className="p-5 border-b border-gray-100 dark:border-white/5 sm:border-r">
+            <div className="p-5 border-b border-gray-100 dark:border-border-darkMode sm:border-r">
               <p className="label-form">Email</p>
-              <p className="text-body font-bold break-all dark:text-gray-100">
+              <p className="text-body font-bold break-all dark:text-text-secondary-darkMode">
                 {clickedUser.email}
               </p>
             </div>
-            <div className="p-5 border-b border-gray-100 dark:border-white/5">
+            <div className="p-5 border-b border-gray-100 dark:border-border-darkMode">
               <p className="label-form">Role</p>
-              <p className="text-body font-bold break-all capitalize dark:text-gray-100">
+              <p className="text-body font-bold break-all capitalize dark:text-text-secondary-darkMode">
                 {clickedUser.role}
               </p>
             </div>
@@ -178,7 +178,7 @@ const UserDetailsPage = ({
                   );
                 }}
                 buttonType="neutral"
-                more="whitespace-nowrap h-fit w-full md:w-fit dark:text-white"
+                more="whitespace-nowrap h-fit w-full md:w-fit dark:text-text-primary-darkMode"
               >
                 Change Status
               </Buttons>

@@ -114,7 +114,7 @@ const UsersPage = ({
     <div className="flex flex-col flex-wrap w-full">
       <div className="mb-5 flex justify-between">
         <div>
-          <h2 className="font-bold text-header2 dark:text-white">Users</h2>
+          <h2 className="font-bold text-header2 dark:text-text-primary-darkMode">Users</h2>
           <p className="caption">Search, filter, view and manage users.</p>
         </div>
         <Buttons
@@ -156,7 +156,7 @@ const UsersPage = ({
                   else if (e.target.value === "Active") setUserStatus("active");
                   else setUserStatus("inactive");
                 }}
-                className="control p-3 w-full dark:bg-slate-800 dark:text-gray-100"
+                className="control p-3 w-full dark:bg-surface-darkMode dark:text-text-secondary-darkMode"
                 value={
                   status === "all"
                     ? "All Statuses"
@@ -183,7 +183,7 @@ const UsersPage = ({
                   else if (e.target.value === "Operator") setRole("operator");
                   else setRole("customer");
                 }}
-                className="control p-3 w-full dark:bg-slate-800 dark:text-gray-100"
+                className="control p-3 w-full dark:bg-surface-darkMode dark:text-text-secondary-darkMode"
                 value={
                   role === "all"
                     ? "All Roles"
@@ -205,7 +205,7 @@ const UsersPage = ({
               <Buttons
                 comp="button"
                 buttonType="neutral"
-                more="w-full md:w-auto md:min-w-24 md:px-6 md:h-[46px] dark:bg-slate-800 dark:text-gray-100" // ارتفاع دکمه هم‌اندازه با سلکت‌ها تنظیم شد
+                more="w-full md:w-auto md:min-w-24 md:px-6 md:h-[46px] dark:bg-surface-darkMode dark:text-text-secondary-darkMode" // ارتفاع دکمه هم‌اندازه با سلکت‌ها تنظیم شد
                 onClick={() => {
                   setSearchTerm("");
                   setUserStatus("all");

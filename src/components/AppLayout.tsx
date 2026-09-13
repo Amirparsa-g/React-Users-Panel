@@ -35,17 +35,17 @@ const AppLayout = () => {
           />
         </div>
         <div className=" flex flex-1 flex-col h-full  ">
-          <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-5 bg-white dark:bg-slate-800">
+          <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-5 bg-white dark:bg-surface-darkMode">
             {!isClicked && (
               <span className="absolute left-2 md:left-22">
                 <Buttons
                   comp="button"
                   buttonType="secondary"
-                  more="w-fit border-none shadow-none dark:bg-slate-800"
+                  more="w-fit border-none shadow-none dark:bg-surface-darkMode"
                   onClick={() => setIsClicked(true)}
                 >
                   <svg
-                    className="cursor-pointer fill-[#1f1f1f] dark:fill-white"
+                    className="cursor-pointer fill-[#1f1f1f] dark:fill-text-secondary-darkMode"
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
                     viewBox="0 -960 960 960"
@@ -61,11 +61,11 @@ const AppLayout = () => {
                 <Buttons
                   comp="button"
                   buttonType="secondary"
-                  more="w-fit border-none shadow-none dark:bg-slate-800"
+                  more="w-fit border-none shadow-none dark:bg-surface-darkMode"
                   onClick={() => setIsClicked(false)}
                 >
                   <svg
-                    className="cursor-pointer  fill-[#1f1f1f] dark:fill-white"
+                    className="cursor-pointer  fill-[#1f1f1f] dark:fill-text-secondary-darkMode"
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
                     viewBox="0 -960 960 960"
@@ -78,7 +78,7 @@ const AppLayout = () => {
               </span>
             )}
 
-            <h1 className="text-body font-black block mx-auto dark:text-white">
+            <h1 className="text-body font-black block mx-auto dark:text-text-primary-darkMode">
               User Managment
             </h1>
             <Buttons
