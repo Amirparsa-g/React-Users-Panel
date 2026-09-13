@@ -114,7 +114,7 @@ const UsersPage = ({
     <div className="flex flex-col flex-wrap w-full">
       <div className="mb-5 flex justify-between">
         <div>
-          <h2 className="font-bold text-header2">Users</h2>
+          <h2 className="font-bold text-header2 dark:text-white">Users</h2>
           <p className="caption">Search, filter, view and manage users.</p>
         </div>
         <Buttons
@@ -134,7 +134,7 @@ const UsersPage = ({
           + Add User
         </Buttons>
       </div>
-      <div className="w-full flex flex-col gap-4 md:flex-row md:gap-3 md:items-start bg-white userStats-card mb-5">
+      <div className="w-full flex flex-col gap-4 md:flex-row md:gap-3 md:items-start  userStats-card mb-5">
         <div className="md:w-8/12">
           <Searchinput
             onSearchChange={SearchUser}
@@ -147,9 +147,7 @@ const UsersPage = ({
           <div className="flex flex-col md:flex-row gap-2">
             <div className="flex-1">
               <label htmlFor="selectStatus">
-                <p className="font-bold text-small text-gray-600 mb-1">
-                  Status
-                </p>
+                <p className="font-bold text-small label-form">Status</p>
               </label>
               <select
                 id="selectStatus"
@@ -158,7 +156,7 @@ const UsersPage = ({
                   else if (e.target.value === "Active") setUserStatus("active");
                   else setUserStatus("inactive");
                 }}
-                className="control p-3 w-full"
+                className="control p-3 w-full dark:bg-slate-800 dark:text-gray-100"
                 value={
                   status === "all"
                     ? "All Statuses"
@@ -175,7 +173,7 @@ const UsersPage = ({
 
             <div className="flex-1">
               <label htmlFor="selectRole">
-                <p className="font-bold text-small text-gray-600 mb-1">Roles</p>
+                <p className="font-bold text-small label-form">Roles</p>
               </label>
               <select
                 id="selectRole"
@@ -185,7 +183,7 @@ const UsersPage = ({
                   else if (e.target.value === "Operator") setRole("operator");
                   else setRole("customer");
                 }}
-                className="control p-3 w-full"
+                className="control p-3 w-full dark:bg-slate-800 dark:text-gray-100"
                 value={
                   role === "all"
                     ? "All Roles"
@@ -207,7 +205,7 @@ const UsersPage = ({
               <Buttons
                 comp="button"
                 buttonType="neutral"
-                more="w-full md:w-auto md:min-w-24 md:px-6 md:h-[46px]" // ارتفاع دکمه هم‌اندازه با سلکت‌ها تنظیم شد
+                more="w-full md:w-auto md:min-w-24 md:px-6 md:h-[46px] dark:bg-slate-800 dark:text-gray-100" // ارتفاع دکمه هم‌اندازه با سلکت‌ها تنظیم شد
                 onClick={() => {
                   setSearchTerm("");
                   setUserStatus("all");

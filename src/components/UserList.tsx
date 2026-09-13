@@ -34,17 +34,17 @@ const UserList = ({
       {!isMobile && (
         <table className="hidden md:table md:w-full md:table-fixed md:border-collapse">
           <thead>
-            <tr className="bg-gray-50 border-b border-gray-200">
-              <th className="w-6/12 text-left px-4 py-3 text-small font-bold uppercase tracking-wide text-gray-600">
+            <tr className="bg-gray-50 dark:bg-bg-darkMode border-b border-gray-200">
+              <th className="w-6/12 text-left px-4 py-3 text-small font-bold uppercase tracking-wide text-gray-600 dark:text-gray-100">
                 User
               </th>
-              <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-gray-600">
+              <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-gray-600 dark:text-gray-100">
                 Role
               </th>
-              <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-gray-600">
+              <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-gray-600 dark:text-gray-100">
                 Status
               </th>
-              <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-gray-600">
+              <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-gray-600 dark:text-gray-100">
                 Actions
               </th>
             </tr>

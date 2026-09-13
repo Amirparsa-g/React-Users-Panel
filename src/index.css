@@ -99,7 +99,7 @@
     @apply btn border-border-neut dark:border-border-neut-darkMode hover:bg-gray-100 dark:hover:bg-gray-900;
   }
   .secondary-button {
-    @apply btn border-border-neut dark:border-border-neut-darkMode text-black hover:bg-gray-100;
+    @apply btn border-border-neut dark:border-border-neut-darkMode text-black hover:bg-gray-100 dark:hover:bg-slate-800;
   }
   .primary-button {
     @apply btn border-primary/30 dark:border-primary-darkMode/30 bg-primary dark:bg-primary-darkMode hover:bg-primaryDark dark:hover:bg-primaryDark-darkMode text-white;
@@ -193,7 +193,7 @@
   @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker dark:bg-primaryDarker-darkMode p-2 z-50 md:relative;
 }
 @utility btn {
-  @apply whitespace-nowrap h-fit border border-black   bg-white px-4 py-2 rounded-xl shadow-sm  w-35 duration-300 ease-in-out font-bold;
+  @apply whitespace-nowrap h-fit border  px-4 py-2 rounded-xl shadow-sm  w-35 duration-300 ease-in-out font-bold;
 }
 @utility p-div {
   @apply p-1 rounded-xl text-small font-bold shadow-sm;

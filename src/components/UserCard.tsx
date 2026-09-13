@@ -21,28 +21,32 @@ const UserCard = ({
   return (
     <>
       {error && (
-        <p className="text-danger text-xl text-center font-semibold">{error}</p>
+        <p className="text-danger dark:text-danger-darkMode text-xl text-center font-semibold">
+          {error}
+        </p>
       )}
       {!isMobile && (
         <tr
           aria-disabled={isLoading}
-          className="hidden md:table-row hover:bg-gray-50 transition-colors"
+          className="hidden md:table-row hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
         >
           <td className="px-4 py-6 align-middle">
             <div className="flex gap-2 items-center">
               <div
                 className={
                   user.role === "admin"
-                    ? "profile text-admin border border-admin"
+                    ? "profile text-admin dark:text-admin-darkMode border border-admin dark:border-admin-darkMode"
                     : user.role === "operator"
-                      ? "profile text-operator border border-operator"
+                      ? "profile text-operator dark:text-operator-darkMode border border-operator dark:border-operator-darkMode"
                       : "profile"
                 }
               >
                 <div>
-                  <p className="text-center">{user.fullName[0]}</p>
+                  <p className="text-center dark:text-white">
+                    {user.fullName[0]}
+                  </p>
                   <span
-                    className={`block  absolute end-px bottom-0 size-3 rounded-full ${user.isActive ? "bg-success" : "bg-danger"}`}
+                    className={`block  absolute end-px bottom-0 size-3 rounded-full ${user.isActive ? "bg-success dark:bg-success-darkMode" : "bg-danger dark:bg-danger-darkMode"}`}
                   ></span>
                 </div>
               </div>
@@ -53,7 +57,9 @@ const UserCard = ({
                   navigation={`/users/${user.ID}`}
                   buttonType="secondary"
                 >
-                  <p className="text-body  font-bold">{user.fullName}</p>
+                  <p className="text-body  font-bold dark:text-white">
+                    {user.fullName}
+                  </p>
                   <p className="text-small break-all caption">
                     {user.email ? user.email : "no email registered"}
                   </p>
@@ -78,8 +84,8 @@ const UserCard = ({
             <span
               className={
                 user.isActive
-                  ? "bg-success/10 active-div text-center"
-                  : "bg-danger/10 inactive-div text-center"
+                  ? "bg-success/10 dark:bg-success-darkMode/10 active-div text-center"
+                  : "bg-danger/10 dark:bg-danger-darkMode/10 inactive-div text-center"
               }
             >
               {user.isActive ? "active" : "inactive"}
@@ -94,6 +100,7 @@ const UserCard = ({
                 buttonType="secondary"
               >
                 <svg
+                  className="fill-[#1f1f1f] dark:fill-white"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -120,6 +127,7 @@ const UserCard = ({
                 comp="button"
               >
                 <svg
+                  className=" fill-[#1f1f1f] dark:fill-white"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -140,6 +148,7 @@ const UserCard = ({
                 buttonType="secondary"
               >
                 <svg
+                  className=" fill-[#1f1f1f] dark:fill-white"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -165,6 +174,7 @@ const UserCard = ({
                 comp="button"
               >
                 <svg
+                  className=" fill-danger dark:fill-danger-darkMode"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -195,7 +205,9 @@ const UserCard = ({
               }
             >
               <div>
-                <p className="text-center font-bold">{user.fullName[0]}</p>
+                <p className="text-center font-bold dark:text-white">
+                  {user.fullName[0]}
+                </p>
                 <span
                   className={`block md:hidden absolute end-px bottom-0 size-3 rounded-full ${user.isActive ? "bg-success" : "bg-danger"}`}
                 ></span>
@@ -208,7 +220,9 @@ const UserCard = ({
                 more="text-black border-none w-fit shadow-none p-0"
                 buttonType="secondary"
               >
-                <p className="text-body font-bold">{user.fullName}</p>
+                <p className="text-body font-bold dark:text-white">
+                  {user.fullName}
+                </p>
                 <p
                   className="
                  break-all caption"
@@ -239,7 +253,7 @@ const UserCard = ({
               comp="link"
               navigation={`/users/${user.ID}`}
               buttonType="HomePageLink"
-              more="justify-center hover:bg-black/5 hover:border-black/70"
+              more="justify-center hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/70 dark:hover:border-white/70"
             >
               View
             </Buttons>
@@ -247,7 +261,7 @@ const UserCard = ({
               comp="link"
               buttonType="HomePageLink"
               navigation={`/users/${user.ID}/edit`}
-              more=" justify-center hover:bg-black/5 hover:border-black/70"
+              more="justify-center hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/70 dark:hover:border-white/70"
             >
               Edit
             </Buttons>
