@@ -61,6 +61,7 @@ const HomePage = ({
             >
               View users
               <svg
+                className="fill-[#1f1f1f] dark:fill-white"
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
                 viewBox="0 -960 960 960"
@@ -78,6 +79,7 @@ const HomePage = ({
             >
               Add a user
               <svg
+                className="fill-[#1f1f1f] dark:fill-white"
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
                 viewBox="0 -960 960 960"
@@ -94,6 +96,7 @@ const HomePage = ({
             >
               About project
               <svg
+                className="fill-[#1f1f1f] dark:fill-white"
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
                 viewBox="0 -960 960 960"

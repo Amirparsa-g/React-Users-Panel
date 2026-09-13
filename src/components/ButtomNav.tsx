@@ -5,7 +5,7 @@ const ButtomNav = () => {
       <Buttons comp="navLink" navigation="/" buttonType="buttomNavLink">
         <div className="flex gap-1 justify-center items-center">
           <svg
-            className="fill-[#1f1f1f] dark:fill-white"
+            className="fill-[#1f1f1f] dark:fill-primary-darkMode"
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
             viewBox="0 -960 960 960"

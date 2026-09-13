@@ -1,12 +1,10 @@
 import React, { type ReactNode } from "react";
 import { createContext, useState, useEffect } from "react";
+import type { themeContextType } from "../types/themeContextType";
 
-interface ThemeContextType {
-  isDark: boolean;
-  setIsDark: (value: boolean) => void;
-}
+
 // eslint-disable-next-line react-refresh/only-export-components
-export const ThemeContext = createContext<ThemeContextType | undefined>(
+export const ThemeContext = createContext<themeContextType | undefined>(
   undefined,
 );
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
