@@ -40,7 +40,17 @@
   --font-weight-header1: bold;
   --font-weight-header2: 600;
 }
-
+@layer base {
+  html {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease;
+  }
+  input {
+    @apply bg-white dark:bg-slate-800;
+  }
+}
 @layer components {
   .nav-btn-notSelected {
     @apply bg-primaryDarker dark:bg-primaryDarker-darkMode text-white p-2 hover:bg-sidebar-2 dark:hover:bg-sidebar-2-darkMode transition-all ease-in-out duration-300 rounded-xl w-full;
@@ -96,7 +106,7 @@
     @apply btn border-danger/30 dark:border-danger-darkMode/30 text-danger dark:text-danger-darkMode hover:bg-danger/5 dark:hover:bg-danger-darkMode/5;
   }
   .neutral-button {
-    @apply btn border-border-neut dark:border-border-neut-darkMode hover:bg-gray-100 dark:hover:bg-gray-900;
+    @apply btn border-border-neut dark:border-border-neut-darkMode hover:bg-gray-100 dark:hover:bg-white/5;
   }
   .secondary-button {
     @apply btn border-border-neut dark:border-border-neut-darkMode text-black hover:bg-gray-100 dark:hover:bg-slate-800;
@@ -143,6 +153,11 @@
     padding: 9px 11px;
     outline: 0;
   }
+
+  .dark .control {
+    @apply bg-slate-800;
+  }
+
   .control:focus,
   .control:focus-within {
     border-color: #60a5fa;

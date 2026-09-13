@@ -308,7 +308,7 @@ const AddUserForm = ({
             comp="link"
             navigation="/users"
             buttonType={"neutral"}
-            more="text-center w-full sm:w-35"
+            more="text-center w-full sm:w-35 dark:text-gray-100"
           >
             Cancel
           </Buttons>
