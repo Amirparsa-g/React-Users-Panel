@@ -21,7 +21,7 @@ const DesktopSidebar = ({
     <aside
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className={` transition-all duration-200 ${!isMobile ? ` ${isHover || isClicked ? " hidden md:aside-notHamburger" : " hidden md:aside-notHamburger md:w-20  "}` : ` md:hidden ${isClicked ? "aside-notHamburger md:aside-notHamburger animate-slide-in" : " aside-notHamburger -translate-x-60 "}`}`}
+      className={` transition-all ${!isMobile ? ` ${isHover || isClicked ? " hidden md:aside-notHamburger" : " hidden md:aside-notHamburger md:w-20  "}` : ` md:hidden ${isClicked ? "aside-notHamburger md:aside-notHamburger animate-slide-in" : " aside-notHamburger -translate-x-60 "}`}`}
     >
       <div className="flex gap-2  items-center p-2 ">
         <div className="bg-sidebar-2 p-2 rounded-xl w-10 h-10 flex justify-center items-center border border-white">
@@ -91,7 +91,7 @@ const DesktopSidebar = ({
           comp="button"
           buttonType="primary"
           onClick={() => setIsClicked(false)}
-          more="fixed bottom-15 md:hidden bg-primaryDarker border-none"
+          more="fixed bottom-15 md:hidden bg-primaryDarker dark:bg-primaryDarker-darkMode border-none"
         >
           <img
             src={arrowBackIcon}
