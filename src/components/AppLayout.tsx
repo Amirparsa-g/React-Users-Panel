@@ -78,26 +78,28 @@ const AppLayout = () => {
               </span>
             )}
 
-            <h1 className="text-body font-black block mx-auto dark:text-text-primary-darkMode">
+            <h1 className="text-body font-black block ml-20 sm:mx-auto dark:text-text-primary-darkMode">
               User Managment
             </h1>
-            <Buttons
-              comp="link"
-              navigation={"/users/new"}
-              more=" md:hidden w-fit"
-              buttonType="primary"
-            >
-              +
-            </Buttons>
-            <Buttons
-              comp="link"
-              navigation={"/users/new"}
-              more="hidden md:flex w-fit"
-              buttonType="primary"
-            >
-              + Add User
-            </Buttons>
-            <ThemeToggleButton />
+            <div className="flex items-center gap-2">
+              <Buttons
+                comp="link"
+                navigation={"/users/new"}
+                more=" md:hidden w-fit"
+                buttonType="primary"
+              >
+                +
+              </Buttons>
+              <Buttons
+                comp="link"
+                navigation={"/users/new"}
+                more="hidden md:flex w-fit"
+                buttonType="primary"
+              >
+                + Add User
+              </Buttons>
+              <ThemeToggleButton />
+            </div>
           </header>
           <div className="flex-1 overflow-y-auto bg-bg dark:bg-bg-darkMode">
             <motion.main

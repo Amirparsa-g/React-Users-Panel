@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { addApiUser } from "../services/userApi";
 import Buttons from "./Buttons";
 
+import Loading from "../components/Loading";
+
 const AddUserForm = ({
   addUserHandeler,
   UsersList,
@@ -125,6 +127,12 @@ const AddUserForm = ({
       setIsLoading(false);
     }
   };
+  if (isLoading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
 
   return (
     <div className="w-full">
@@ -156,9 +164,6 @@ const AddUserForm = ({
           navigate("/users");
         }}
       >
-        {isLoading && (
-          <p className="text-center text-3xl m-2 font-semibold">Loading ...</p>
-        )}
         {error && (
           <p className="text-center text-xl m-2 font-semibold text-danger dark:text-danger-darkMode">
             {error}
@@ -186,7 +191,9 @@ const AddUserForm = ({
               className="w-full border control"
             />
             {FormError.nameError !== "" && (
-              <p className="text-danger dark:text-danger-darkMode">{FormError.nameError}</p>
+              <p className="text-danger dark:text-danger-darkMode">
+                {FormError.nameError}
+              </p>
             )}
           </label>
           <label htmlFor="userAge" className="label-form">
@@ -203,7 +210,9 @@ const AddUserForm = ({
               className="control"
             />
             {FormError.ageError !== "" && (
-              <p className="text-danger dark:text-danger-darkMode">{FormError.ageError}</p>
+              <p className="text-danger dark:text-danger-darkMode">
+                {FormError.ageError}
+              </p>
             )}
           </label>
           <label htmlFor="userRole" className="label-form">
@@ -231,7 +240,9 @@ const AddUserForm = ({
               <option value="customer">customer</option>
             </select>
             {FormError.roleError !== "" && (
-              <p className="text-danger dark:text-danger-darkMode">{FormError.roleError}</p>
+              <p className="text-danger dark:text-danger-darkMode">
+                {FormError.roleError}
+              </p>
             )}
           </label>
           <div className="label-form ">
@@ -284,7 +295,9 @@ const AddUserForm = ({
                 className="control"
               />
               {FormError.emailError !== "" && (
-                <p className="text-danger dark:text-danger-darkMode">{FormError.emailError}</p>
+                <p className="text-danger dark:text-danger-darkMode">
+                  {FormError.emailError}
+                </p>
               )}
             </label>
           </div>
