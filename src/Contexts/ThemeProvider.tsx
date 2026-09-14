@@ -10,7 +10,10 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme");
-      return savedTheme === "dark";
+      if (savedTheme !== null) {
+        return savedTheme === "dark";
+      }
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
     return false;
   });
