@@ -114,14 +114,16 @@ const UsersPage = ({
     <div className="flex flex-col flex-wrap w-full">
       <div className="mb-5 flex justify-between">
         <div>
-          <h2 className="font-bold text-header2 dark:text-text-primary-darkMode">Users</h2>
+          <h2 className="font-bold text-header2 dark:text-text-primary-darkMode">
+            Users
+          </h2>
           <p className="caption">Search, filter, view and manage users.</p>
         </div>
         <Buttons
           comp="link"
           buttonType="primary"
           navigation="/users/new"
-          more="md:hidden w-fit"
+          more="md:hidden w-fit mr-5"
         >
           +
         </Buttons>
