@@ -35,13 +35,13 @@ const AppLayout = () => {
           />
         </div>
         <div className=" flex flex-1 flex-col h-full  ">
-          <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-5 bg-white dark:bg-surface-darkMode">
+          <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-2 sm:gap-5 bg-white dark:bg-surface-darkMode">
             {!isClicked && (
-              <span className="absolute left-2 md:left-22">
+              <span className="absolute  left-2 md:left-22">
                 <Buttons
                   comp="button"
                   buttonType="secondary"
-                  more="w-fit border-none shadow-none dark:bg-surface-darkMode"
+                  more="w-fit px-0 border-none shadow-none dark:bg-surface-darkMode"
                   onClick={() => setIsClicked(true)}
                 >
                   <svg
@@ -78,7 +78,7 @@ const AppLayout = () => {
               </span>
             )}
 
-            <h1 className="text-body font-black block ml-20 sm:mx-auto dark:text-text-primary-darkMode">
+            <h1 className="text-body font-black block ml-14 sm:mx-auto dark:text-text-primary-darkMode ">
               User Managment
             </h1>
             <div className="flex items-center gap-2">

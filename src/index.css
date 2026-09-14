@@ -47,7 +47,7 @@
 }
 @layer base {
   html {
-    @apply transition-all ease-in-out duration-1000;
+    @apply transition-all ease-in-out duration-300;
   }
   h2 {
     @apply dark:text-text-primary-darkMode;
@@ -206,12 +206,21 @@
   .div-bg {
     @apply bg-white dark:bg-surface-darkMode;
   }
+  .theme-toggle {
+    @apply inline-flex items-center gap-0 sm:gap-1 p-0.5 sm:p-1.5 rounded-full bg-white dark:bg-surface-darkMode border border-border dark:border-border-darkMode mr-7;
+  }
+  .theme-toggle-btn {
+    @apply flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 rounded-full text-text-muted-darkMode hover:text-text-primary-darkMode transition-all duration-300 ease-in-out;
+  }
+  .theme-toggle-btn.active {
+    @apply bg-primary dark:bg-primary-darkMode text-white;
+  }
 }
 @utility aside-notHamburger {
   @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker dark:bg-primaryDarker-darkMode p-2 z-50 md:relative;
 }
 @utility btn {
-  @apply whitespace-nowrap h-fit border  px-4 py-2 rounded-xl shadow-sm  w-35  ease-in-out font-bold;
+  @apply whitespace-nowrap h-fit border  px-4 py-2 rounded-xl shadow-sm  w-35 duration-300 ease-in-out font-bold;
 }
 @utility p-div {
   @apply p-1 rounded-xl text-small font-bold shadow-sm;
