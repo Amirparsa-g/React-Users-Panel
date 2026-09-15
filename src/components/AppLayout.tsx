@@ -35,17 +35,17 @@ const AppLayout = () => {
           />
         </div>
         <div className=" flex flex-1 flex-col h-full  ">
-          <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-2 sm:gap-5 bg-white dark:bg-surface-darkMode">
+          <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-2 sm:gap-5 bg-surface">
             {!isClicked && (
               <span className="absolute  left-2 md:left-22">
                 <Buttons
                   comp="button"
                   buttonType="secondary"
-                  more="w-fit px-0 border-none shadow-none dark:bg-surface-darkMode"
+                  more="w-fit px-0 border-none shadow-none bg-surface"
                   onClick={() => setIsClicked(true)}
                 >
                   <svg
-                    className="cursor-pointer fill-[#1f1f1f] dark:fill-text-secondary-darkMode"
+                    className="cursor-pointer fill-[#1f1f1f] fill-text-secondary"
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
                     viewBox="0 -960 960 960"
@@ -61,11 +61,11 @@ const AppLayout = () => {
                 <Buttons
                   comp="button"
                   buttonType="secondary"
-                  more="w-fit border-none shadow-none dark:bg-surface-darkMode"
+                  more="w-fit border-none shadow-none bg-surface"
                   onClick={() => setIsClicked(false)}
                 >
                   <svg
-                    className="cursor-pointer  fill-[#1f1f1f] dark:fill-text-secondary-darkMode"
+                    className="cursor-pointer  fill-[#1f1f1f] fill-text-secondary"
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
                     viewBox="0 -960 960 960"
@@ -78,7 +78,7 @@ const AppLayout = () => {
               </span>
             )}
 
-            <h1 className="text-body font-black block ml-14 sm:mx-auto dark:text-text-primary-darkMode ">
+            <h1 className="text-body font-black block ml-14 sm:mx-auto text-text-primary ">
               User Managment
             </h1>
             <div className="flex items-center gap-2">
@@ -101,13 +101,13 @@ const AppLayout = () => {
               <ThemeToggleButton />
             </div>
           </header>
-          <div className="flex-1 overflow-y-auto bg-bg dark:bg-bg-darkMode">
+          <div className="flex-1 overflow-y-auto bg-bg">
             <motion.main
               key={location.pathname}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className=" flex flex-1 flex-col justify-start items-center p-3 w-full  mb-10 mx-auto px-4 max-w-screen-2xl bg-bg dark:bg-bg-darkMode"
+              className=" flex flex-1 flex-col justify-start items-center p-3 w-full  mb-10 mx-auto px-4 max-w-screen-2xl bg-bg"
             >
               <Outlet />
             </motion.main>

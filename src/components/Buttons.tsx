@@ -43,7 +43,7 @@ const Buttons = forwardRef<ButtonOrAnchorRef, ButtonProps>(
     };
 
     const combinedClasses =
-      `${buttonClasses[variant]} ${classes ?? ""} focus:ring-[3px] focus:ring-blue-600/[0.28] dark:focus:ring-white/50 focus:outline-none focus:ring-offset-2`.trim();
+      `${buttonClasses[variant]} ${classes ?? ""} focus:ring-[3px] focus:ring-blue-600/[0.28] focus:outline-none focus:ring-offset-2`.trim();
 
     if (comp === "link") {
       return (

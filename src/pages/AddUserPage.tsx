@@ -29,7 +29,7 @@ const AddUserPage = ({
     <div className="w-full md:w-3/4">
       <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-5">
         <div className="flex flex-col items-start text-left">
-          <h2 className="text-header1  font-bold text-3xl dark:text-text-primary-darkMode">
+          <h2 className="text-header1  font-bold text-3xl text-text-primary">
             Add User
           </h2>
           <p className="caption  mt-1">Create a new user</p>

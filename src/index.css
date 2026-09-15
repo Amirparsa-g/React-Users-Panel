@@ -1,41 +1,99 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+@layer base {
+  html {
+    @apply transition-all ease-in-out duration-300;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-text-primary;
+  }
+  p,
+  span,
+  li {
+    @apply text-text-secondary;
+  }
+  a {
+    @apply text-primary;
+  }
+  :root {
+    --theme-primary: #2563eb;
+    --theme-primaryDark: #1d4ed8;
+    --theme-primaryDarker: #09173f;
+    --theme-success: #10b981;
+    --theme-danger: #ef4444;
+    --theme-Warning: #f59e08;
+    --theme-admin: #771dd8;
+    --theme-operator: #4077ed;
+    --theme-customer: #080b11;
+    --theme-bg: #f6f8fc;
+    --theme-primary-hover: #1d4ed8;
+    --theme-sidebar-2: #102a5e;
+    --theme-primary-soft: #eff6ff;
+    --theme-violet: #7c3aed;
+    --theme-border-neut: #cbd5e1;
+    --theme-border: #e2e8f0;
+    --theme-surface: #ffffff;
+    --theme-surface-elevated: #f1f5f9;
+    --theme-text-primary: #0f172a;
+    --theme-text-secondary: #475569;
+    --theme-text-muted: #94a3b8;
+    --theme-tr-hover: #f9fafb;
+  }
+
+  .dark {
+    --theme-primary: #60a5fa;
+    --theme-primaryDark: #3b82f6;
+    --theme-primaryDarker: #1e293b;
+    --theme-success: #6ee7b7;
+    --theme-danger: #fca5a5;
+    --theme-Warning: #fcd34d;
+    --theme-admin: #c084fc;
+    --theme-operator: #7dd3fd;
+    --theme-customer: #838485;
+    --theme-bg: #0f172a;
+    --theme-primary-hover: #93c5fd;
+    --theme-sidebar-2: #1e293b;
+    --theme-primary-soft: #1e3a8a;
+    --theme-violet: #a78bfa;
+    --theme-border-neut: #475569;
+    --theme-border: #334155;
+    --theme-surface: #1e293b;
+    --theme-surface-elevated: #334155;
+    --theme-text-primary: #f8fafc;
+    --theme-text-secondary: #cbd5e1;
+    --theme-text-muted: #94a3b8;
+    --theme-tr-hover: rgba(119, 119, 119, 0.05);
+  }
+}
 @theme {
-  --color-primary: #2563eb;
-  --color-primary-darkMode: #60a5fa;
-  --color-primaryDark: #1d4ed8;
-  --color-primaryDark-darkMode: #3b82f6;
-  --color-primaryDarker: #09173f;
-  --color-primaryDarker-darkMode: #1e293b;
-  --color-success: #10b981;
-  --color-success-darkMode: #6ee7b7;
-  --color-danger: #ef4444;
-  --color-danger-darkMode: #fca5a5;
-  --color-Warning: #f59e08;
-  --color-Warning-darkMode: #fcd34d;
-  --color-admin: #771dd8;
-  --color-admin-darkMode: #c084fc;
-  --color-operator: #4077ed;
-  --color-operator-darkMode: #7dd3fd;
-  --color-bg: #f6f8fc;
-  --color-bg-darkMode: #0f172a;
+  --color-primary: var(--theme-primary);
+  --color-primaryDark: var(--theme-primaryDark);
+  --color-primaryDarker: var(--theme-primaryDarker);
+  --color-success: var(--theme-success);
+  --color-danger: var(--theme-danger);
+  --color-Warning: var(--theme-Warning);
+  --color-admin: var(--theme-admin);
+  --color-operator: var(--theme-operator);
+  --color-bg: var(--theme-bg);
   --color-surface-darkMode: #1e293b;
   --color-surface-elevated-darkMode: #334155;
-  --color-primary-hover: #1d4ed8;
-  --color-primary-hover-darkMode: #93c5fd;
-  --color-sidebar-2: #102a5e;
-  --color-sidebar-2-darkMode: #09173f;
-  --color-primary-soft: #eff6ff;
-  --color-primary-soft-darkMode: #1e3a8a;
-  --color-violet: #7c3aed;
-  --color-violet-darkMode: #a78bfa;
-  --color-border-neut: #cbd5e1;
-  --color-border-neut-darkMode: #475569;
-  --color-border: #e2e8f0;
-  --color-border-darkMode: #334155;
-  --color-text-primary-darkMode: #f8fafc;
-  --color-text-secondary-darkMode: #cbd5e1;
-  --color-text-muted-darkMode: #94a3b8;
+  --color-primary-hover: var(--theme-primary-hover);
+  --color-sidebar-2: var(--theme-sidebar-2);
+  --color-primary-soft: var(--theme-primary-soft);
+  --color-violet: var(--theme-violet);
+  --color-border-neut: var(--theme-border-neut);
+  --color-border: var(--theme-border);
+  --color-surface: var(--theme-surface);
+  --color-surface-elevated: var(--theme-surface-elevated);
+  --color-text-primary: var(--theme-text-primary);
+  --color-text-secondary: var(--theme-text-secondary);
+  --color-text-muted: var(--theme-text-muted);
+  --color-tr-hover: var(--theme-tr-hover);
+  --color-customer: var(--theme-customer);
+
   --text-header1: 32px;
   --text-header2: 24px;
   --text-body: 16px;
@@ -45,20 +103,13 @@
   --font-weight-header1: bold;
   --font-weight-header2: 600;
 }
-@layer base {
-  html {
-    @apply transition-all ease-in-out duration-300;
-  }
-  h2 {
-    @apply dark:text-text-primary-darkMode;
-  }
-}
+
 @layer components {
   .nav-btn-notSelected {
-    @apply bg-primaryDarker dark:bg-primaryDarker-darkMode text-white p-2 hover:bg-sidebar-2 dark:hover:bg-sidebar-2-darkMode ease-in-out  rounded-xl w-full;
+    @apply bg-primaryDarker text-white p-2 hover:bg-sidebar-2 ease-in-out  rounded-xl w-full;
   }
   .nav-btn-notSelected.active {
-    @apply bg-primary dark:bg-primary-darkMode border border-primary-darkMode p-2  text-slate-100  ease-in-out  rounded-xl w-full;
+    @apply bg-primary border border-primary p-2  text-slate-100  ease-in-out  rounded-xl w-full;
   }
   .nav-img {
     @apply brightness-0 invert;
@@ -70,22 +121,22 @@
     @apply flex fixed md:hidden w-full bottom-0 justify-center items-center;
   }
   .nav-mobile-btn-selected {
-    @apply bg-white dark:bg-surface-darkMode text-primary dark:text-primary-darkMode p-2 hover:scale-105  ease-in-out  rounded-xl w-full fill-primary-darkMode;
+    @apply bg-surface text-primary p-2 hover:scale-105  ease-in-out  rounded-xl w-full fill-primary;
   }
   .nav-mobile-btn-notSelected {
-    @apply bg-white dark:bg-surface-darkMode text-black dark:text-text-muted-darkMode p-2 hover:scale-105  ease-in-out  rounded-xl w-full fill-black dark:fill-text-primary-darkMode;
+    @apply bg-surface text-text-muted p-2 hover:scale-105  ease-in-out  rounded-xl w-full fill-text-muted;
   }
   .nav-mobile-btn-notSelected.active {
-    @apply bg-white dark:bg-surface-darkMode text-primary dark:text-primary-darkMode p-2 hover:scale-105  ease-in-out rounded-xl w-full fill-primary-darkMode;
+    @apply bg-surface text-primary p-2 hover:scale-105  ease-in-out rounded-xl w-full fill-primary;
   }
   .aside-hamburger {
-    @apply flex flex-col w-60 h-screen bg-primaryDarker dark:bg-primaryDarker-darkMode p-2 fixed z-70;
+    @apply bg-primaryDarker p-2 fixed z-70;
   }
   .svg-clicked {
-    @apply fill-primary dark:fill-primary-darkMode;
+    @apply fill-primary;
   }
   .svg-not-clicked {
-    @apply fill-black dark:fill-text-secondary-darkMode;
+    @apply fill-text-secondary;
   }
 
   .stats-header {
@@ -102,28 +153,28 @@
   }
 
   .success-button {
-    @apply btn border-success dark:border-success-darkMode;
+    @apply btn border-success;
   }
   .danger-button {
-    @apply btn border-danger/30 dark:border-danger-darkMode/30 text-danger dark:text-danger-darkMode hover:bg-danger/5 dark:hover:bg-danger-darkMode/10;
+    @apply btn border-danger/30 text-danger hover:bg-danger/5;
   }
   .neutral-button {
-    @apply btn border-border-neut dark:border-border-neut-darkMode hover:bg-gray-100 dark:hover:bg-white/10;
+    @apply btn border-border-neut hover:bg-tr-hover;
   }
   .secondary-button {
-    @apply btn border-border-neut dark:border-border-neut-darkMode text-black dark:text-text-primary-darkMode hover:bg-gray-100 dark:hover:bg-surface-elevated-darkMode;
+    @apply btn border-border-neut text-black hover:bg-gray-100;
   }
   .primary-button {
-    @apply btn border-primary/30 dark:border-primary-darkMode/30 bg-primary dark:bg-primary-darkMode hover:bg-primaryDark dark:hover:bg-primaryDark-darkMode text-white;
+    @apply btn border-primary/30 bg-primary hover:bg-primaryDark text-white;
   }
   .button-not-selected {
-    @apply border border-border dark:border-border-darkMode bg-white dark:bg-surface-darkMode px-4 py-2 rounded-xl shadow-sm hover:scale-105 w-35  ease-in-out;
+    @apply border border-border bg-surface px-4 py-2 rounded-xl shadow-sm hover:scale-105 w-35  ease-in-out;
   }
   .profile {
-    @apply rounded-full border border-black dark:border-white w-10 h-10 shrink-0 relative flex justify-center items-center;
+    @apply rounded-full border border-customer w-10 h-10 shrink-0 relative flex justify-center items-center;
   }
   .warning-button {
-    @apply border border-Warning dark:border-Warning-darkMode bg-white dark:bg-surface-darkMode p-4 rounded-xl shadow-sm hover:scale-105 w-35  ease-in-out;
+    @apply border border-Warning bg-surface p-4 rounded-xl shadow-sm hover:scale-105 w-35  ease-in-out;
   }
   .wrapper {
     @apply flex gap-1;
@@ -132,19 +183,19 @@
     @apply line-clamp-1;
   }
   .caption {
-    @apply text-small text-gray-500 dark:text-text-secondary-darkMode;
+    @apply text-small text-text-secondary;
   }
   .stats-content {
     @apply flex flex-col mt-5 justify-start items-start;
   }
   .nutText {
-    @apply text-body text-gray-700 dark:text-text-secondary-darkMode;
+    @apply text-body text-text-secondary;
   }
   .HomePage-Link {
-    @apply w-full border border-border p-3 rounded-xl text-body font-header1 hover:border-primary-hover/30 dark:hover:border-primary-hover-darkMode/30 hover:bg-primary/5 dark:bg-primary-darkMode/5  flex justify-between dark:text-text-primary-darkMode;
+    @apply w-full border border-border p-3 rounded-xl text-body font-header1 hover:border-primary-hover/30 hover:bg-primary/5  flex justify-between text-text-primary;
   }
   .searchdiv {
-    @apply w-full border border-border dark:border-border-darkMode bg-white dark:bg-surface-darkMode p-3 rounded-xl text-body dark:text-text-primary-darkMode;
+    @apply w-full border border-border bg-surface p-3 rounded-xl text-body text-text-primary;
   }
   .control {
     min-height: 42px;
@@ -158,66 +209,66 @@
   }
 
   .dark .control {
-    @apply bg-surface-darkMode text-text-primary-darkMode border-border-darkMode;
+    @apply bg-surface text-text-primary border-border;
   }
 
   .control:focus,
   .control:focus-within {
-    border-color: var(--color-primary-darkMode);
+    border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
   }
   .admin-profile {
-    @apply border border-admin dark:border-admin-darkMode bg-admin/10 dark:bg-admin-darkMode/10;
+    @apply border border-admin bg-admin/10;
   }
   .operator-profile {
-    @apply border border-operator dark:border-operator-darkMode bg-operator/10 dark:bg-operator-darkMode/10;
+    @apply border border-operator bg-operator/10;
   }
   .customer-profile {
-    @apply border border-black dark:border-white bg-black/10 dark:bg-white/10;
+    @apply border border-black bg-black/10;
   }
   .active-div {
-    @apply bg-success/10 dark:bg-success-darkMode/10  p-div text-success dark:text-success-darkMode;
+    @apply bg-success/10 p-div text-success;
   }
   .inactive-div {
-    @apply bg-danger/10 dark:bg-danger-darkMode/10 p-div text-danger dark:text-danger-darkMode;
+    @apply bg-danger/10 p-div text-danger;
   }
 
   .admin-div {
-    @apply p-div bg-admin/10 dark:bg-admin-darkMode/10 text-admin dark:text-admin-darkMode;
+    @apply p-div bg-admin/10 text-admin;
   }
   .operator-div {
-    @apply p-div bg-operator/10 text-operator dark:text-operator-darkMode;
+    @apply p-div bg-operator/10 text-operator;
   }
   .customer-div {
-    @apply p-div bg-black/10 dark:bg-white/10  text-black dark:text-text-primary-darkMode;
+    @apply p-div bg-customer/10  text-text-primary;
   }
   .buttomNav-font {
     @apply font-semibold text-smaller;
   }
   .statsCard-svg {
-    @apply absolute right-4 top-4 bg-primary-soft dark:bg-primary-soft-darkMode w-8 h-8 p-1 rounded-xl shadow-sm;
+    @apply bg-primary-soft w-8 h-8 p-1 rounded-xl shadow-sm;
   }
   .label-form {
-    @apply font-bold text-small text-gray-600 dark:text-text-secondary-darkMode mb-1;
+    @apply font-bold text-small text-text-secondary mb-1;
   }
   .backTo-link {
-    @apply flex items-center gap-2 px-4 py-2 border border-border dark:border-border-darkMode rounded-xl bg-white dark:bg-surface-darkMode text-black dark:text-text-primary-darkMode font-medium hover:bg-gray-50 dark:hover:bg-surface-elevated-darkMode;
+    @apply flex items-center gap-2 px-4 py-2 border border-border rounded-xl bg-surface text-text-primary font-medium hover:bg-tr-hover;
   }
   .div-bg {
-    @apply bg-white dark:bg-surface-darkMode;
+    @apply bg-surface;
   }
   .theme-toggle {
-    @apply inline-flex items-center gap-0 sm:gap-1 p-0.5 sm:p-1.5 rounded-full bg-white dark:bg-surface-darkMode border border-border dark:border-border-darkMode mr-7;
+    @apply inline-flex items-center gap-0 sm:gap-1 p-0.5 sm:p-1.5 rounded-full bg-surface border border-border mr-7;
   }
   .theme-toggle-btn {
-    @apply flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 rounded-full text-text-muted-darkMode hover:text-text-primary-darkMode transition-all duration-300 ease-in-out;
+    @apply flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 rounded-full text-text-muted hover:text-text-primary transition-all duration-300 ease-in-out;
   }
   .theme-toggle-btn.active {
-    @apply bg-primary dark:bg-primary-darkMode text-white;
+    @apply bg-primary text-white;
   }
 }
 @utility aside-notHamburger {
-  @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker dark:bg-primaryDarker-darkMode p-2 z-50 md:relative;
+  @apply fixed md:flex flex-col w-60 h-screen bg-primaryDarker p-2 z-50 md:relative;
 }
 @utility btn {
   @apply whitespace-nowrap h-fit border  px-4 py-2 rounded-xl shadow-sm  w-35 duration-300 ease-in-out font-bold;
@@ -226,7 +277,7 @@
   @apply p-1 rounded-xl text-small font-bold shadow-sm;
 }
 @utility userStats-card {
-  @apply border border-border dark:border-border-darkMode bg-white dark:bg-surface-darkMode p-4 rounded-xl shadow-sm;
+  @apply border border-border bg-surface p-4 rounded-xl shadow-sm;
 }
 @keyframes slide-in {
   0% {

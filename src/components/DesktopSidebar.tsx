@@ -28,7 +28,7 @@ const DesktopSidebar = ({
           <p className="text-white font-black text-bodyHeader">U</p>
         </div>
         {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
-          <h2 className="text-body font-black text-white line-clamp-1 dark:text-text-primary-darkMode">
+          <h2 className="text-body font-black text-text-primary line-clamp-1">
             User Management
           </h2>
         )}
@@ -91,7 +91,7 @@ const DesktopSidebar = ({
           comp="button"
           buttonType="primary"
           onClick={() => setIsClicked(false)}
-          more="fixed bottom-15 md:hidden bg-primaryDarker dark:bg-primaryDarker-darkMode border-none"
+          more="fixed bottom-15 md:hidden bg-primaryDarker border-none"
         >
           <img
             src={arrowBackIcon}

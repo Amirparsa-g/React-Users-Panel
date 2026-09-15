@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../Contexts/ThemeProvider";
-import type { themeContextType, ThemeMode } from "../types/themeContextType";
+import type { themeContextType } from "../types/themeContextType";
 
 const iconPaths = {
   light: "M480-28 346-160H160v-186L28-480l132-134v-186h186l134-132 134 132h186v186l132 134-132 134v186H614L480-28Zm141.5-310.5Q680-397 680-480t-58.5-141.5Q563-680 480-680t-141.5 58.5Q280-563 280-480t58.5 141.5Q397-280 480-280t141.5-58.5ZM480-480Zm0 340 100-100h140v-140l100-100-100-100v-140H580L480-820 380-720H240v140L140-480l100 100v140h140l100 100Zm0-340Z",
@@ -15,7 +15,7 @@ const ThemeToggleButton = () => {
 
   return (
     <div className="theme-toggle">
-      {(["light", "dark", "system"] as ThemeMode[]).map((mode) => (
+      {(["light", "dark", "system"] as const).map((mode) => (
         <button
           key={mode}
           type="button"

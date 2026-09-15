@@ -1,10 +1,7 @@
 import { type ReactNode, useState, useEffect } from "react";
 import { createContext } from "react";
 import type { themeContextType, ThemeMode } from "../types/themeContextType";
-
-const getSystemIsDark = (): boolean =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-color-scheme: dark)").matches;
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const getInitialTheme = (): ThemeMode => {
   if (typeof window !== "undefined") {
@@ -27,31 +24,16 @@ export const ThemeContext = createContext<themeContextType | undefined>(
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
+  const systemIsDark = useMediaQuery("(prefers-color-scheme: dark)");
 
   useEffect(() => {
     const htmlElement = document.documentElement;
 
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" && getSystemIsDark());
+    const isDark = theme === "dark" || (theme === "system" && systemIsDark);
 
     htmlElement.classList.toggle("dark", isDark);
     localStorage.setItem("theme", theme);
-
-    if (theme === "system") {
-      const mediaQuery = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      );
-
-      const handler = () => {
-        htmlElement.classList.toggle("dark", getSystemIsDark());
-      };
-
-      mediaQuery.addEventListener("change", handler);
-
-      return () => mediaQuery.removeEventListener("change", handler);
-    }
-  }, [theme]);
+  }, [theme, systemIsDark]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
