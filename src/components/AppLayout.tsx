@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import DesktopSidebar from "./DesktopSidebar";
 import ButtomNav from "./ButtomNav";
 import { motion } from "framer-motion";
@@ -9,6 +9,7 @@ import ThemeProvider from "../Contexts/ThemeProvider";
 import ThemeToggleButton from "./ThemeToggleButton";
 const AppLayout = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const location = useLocation();
 
   return (
     <ThemeProvider>
