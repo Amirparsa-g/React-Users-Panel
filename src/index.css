@@ -40,6 +40,7 @@
     --theme-text-primary: #0f172a;
     --theme-text-secondary: #475569;
     --theme-text-muted: #94a3b8;
+    --theme-text-sidebar: #ffffff;
     --theme-tr-hover: #f9fafb;
   }
 
@@ -65,6 +66,7 @@
     --theme-text-primary: #f8fafc;
     --theme-text-secondary: #cbd5e1;
     --theme-text-muted: #94a3b8;
+    --theme-text-sidebar: #f8fafc;
     --theme-tr-hover: rgba(119, 119, 119, 0.05);
   }
 }
@@ -93,7 +95,7 @@
   --color-text-muted: var(--theme-text-muted);
   --color-tr-hover: var(--theme-tr-hover);
   --color-customer: var(--theme-customer);
-
+  --color-text-sidebar: var(--theme-text-sidebar);
   --text-header1: 32px;
   --text-header2: 24px;
   --text-body: 16px;

@@ -28,7 +28,7 @@ const DesktopSidebar = ({
           <p className="text-white font-black text-bodyHeader">U</p>
         </div>
         {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
-          <h2 className="text-body font-black text-text-primary line-clamp-1">
+          <h2 className="text-body font-black text-text-sidebar line-clamp-1">
             User Management
           </h2>
         )}
@@ -44,7 +44,7 @@ const DesktopSidebar = ({
             <img src={homeIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
               (isMobile && isClicked)) && (
-              <p className="font-bold">Dashboard</p>
+              <p className="font-bold text-text-sidebar">Dashboard</p>
             )}
           </div>
         </Buttons>
@@ -58,7 +58,9 @@ const DesktopSidebar = ({
           <div className="wrapper">
             <img src={usersIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && <p className="font-bold">Users</p>}
+              (isMobile && isClicked)) && (
+              <p className="font-bold text-text-sidebar">Users</p>
+            )}
           </div>
         </Buttons>
         <Buttons
@@ -70,7 +72,9 @@ const DesktopSidebar = ({
           <div className="wrapper">
             <img src={addUserIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && <p className="font-bold">Add User</p>}
+              (isMobile && isClicked)) && (
+              <p className="font-bold text-text-sidebar">Add User</p>
+            )}
           </div>
         </Buttons>
         <Buttons
@@ -82,7 +86,9 @@ const DesktopSidebar = ({
           <div className="wrapper">
             <img src={aboutIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && <p className="font-bold">About</p>}
+              (isMobile && isClicked)) && (
+              <p className="font-bold text-text-sidebar">About</p>
+            )}
           </div>
         </Buttons>
       </nav>
