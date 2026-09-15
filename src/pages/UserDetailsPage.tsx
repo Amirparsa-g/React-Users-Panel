@@ -85,7 +85,7 @@ const UserDetailsPage = ({
   return (
     <div className="flex flex-col items-center w-full px-4 overflow-x-hidden box-border pb-10">
       {error && (
-        <h2 className="text-danger dark:text-danger-darkMode text-2xl md:text-3xl font-semibold mb-4 text-center break-words w-full">
+        <h2 className="text-danger text-2xl md:text-3xl font-semibold mb-4 text-center break-words w-full">
           {error}
         </h2>
       )}
@@ -93,7 +93,7 @@ const UserDetailsPage = ({
       <div className="w-full max-w-4xl flex flex-col gap-8 mt-4">
         <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
           <div className="flex flex-col items-start text-left">
-            <h2 className="text-header1  font-bold text-3xl dark:text-text-primary-darkMode">
+            <h2 className="text-header1  font-bold text-3xl text-text-primary">
               User Details
             </h2>
             <p className="caption  mt-1">View and manage the selected user.</p>
@@ -113,7 +113,7 @@ const UserDetailsPage = ({
           </div>
 
           <div className="flex flex-col justify-center gap-2 sm:items-start overflow-hidden w-full">
-            <p className="text-header2 font-extrabold break-all w-full text-2xl dark:text-text-primary-darkMode">
+            <p className="text-header2 font-extrabold break-all w-full text-2xl text-text-primary">
               {clickedUser.fullName}
             </p>
 
@@ -140,28 +140,28 @@ const UserDetailsPage = ({
 
         <div className="userStats-card w-full rounded-xl border  overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2">
-            <div className="p-5 border-b border-gray-100 dark:border-border-darkMode sm:border-r">
+            <div className="p-5 border-b border-gray-100 sm:border-r">
               <p className="label-form">Full Name</p>
-              <p className="text-body font-bold break-all dark:text-text-secondary-darkMode">
+              <p className="text-body font-bold break-all text-text-secondary">
                 {clickedUser.fullName}
               </p>
             </div>
-            <div className="p-5 border-b border-gray-100 dark:border-border-darkMode">
+            <div className="p-5 border-b border-gray-100">
               <p className="label-form">Age</p>
-              <p className="text-body font-bold break-all dark:text-text-secondary-darkMode">
+              <p className="text-body font-bold break-all text-text-secondary">
                 {clickedUser.age}
               </p>
             </div>
 
-            <div className="p-5 border-b border-gray-100 dark:border-border-darkMode sm:border-r">
+            <div className="p-5 border-b border-gray-100 sm:border-r">
               <p className="label-form">Email</p>
-              <p className="text-body font-bold break-all dark:text-text-secondary-darkMode">
+              <p className="text-body font-bold break-all text-text-secondary">
                 {clickedUser.email}
               </p>
             </div>
-            <div className="p-5 border-b border-gray-100 dark:border-border-darkMode">
+            <div className="p-5 border-b border-gray-100">
               <p className="label-form">Role</p>
-              <p className="text-body font-bold break-all capitalize dark:text-text-secondary-darkMode">
+              <p className="text-body font-bold break-all capitalize text-text-secondary">
                 {clickedUser.role}
               </p>
             </div>
@@ -179,7 +179,7 @@ const UserDetailsPage = ({
                   );
                 }}
                 buttonType="neutral"
-                more="whitespace-nowrap h-fit w-full md:w-fit dark:text-text-primary-darkMode"
+                more="whitespace-nowrap h-fit w-full md:w-fit text-text-primary"
               >
                 Change Status
               </Buttons>

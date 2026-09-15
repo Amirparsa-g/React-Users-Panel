@@ -1,34 +1,42 @@
-import { type ReactNode } from "react";
-import { createContext, useState, useEffect } from "react";
-import type { themeContextType } from "../types/themeContextType";
+import { type ReactNode, useState, useEffect } from "react";
+import { createContext } from "react";
+import type { themeContextType, ThemeMode } from "../types/themeContextType";
+import { useMediaQuery } from "../hooks/useMediaQuery";
+
+const getInitialTheme = (): ThemeMode => {
+  if (typeof window !== "undefined") {
+    const savedTheme = localStorage.getItem("theme");
+    if (
+      savedTheme === "light" ||
+      savedTheme === "dark" ||
+      savedTheme === "system"
+    ) {
+      return savedTheme;
+    }
+  }
+  return "system";
+};
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext<themeContextType | undefined>(
   undefined,
 );
+
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme !== null) {
-        return savedTheme === "dark";
-      }
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-    return false;
-  });
+  const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
+  const systemIsDark = useMediaQuery("(prefers-color-scheme: dark)");
+
   useEffect(() => {
     const htmlElement = document.documentElement;
-    if (isDark) {
-      htmlElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      htmlElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDark]);
+
+    const isDark = theme === "dark" || (theme === "system" && systemIsDark);
+
+    htmlElement.classList.toggle("dark", isDark);
+    localStorage.setItem("theme", theme);
+  }, [theme, systemIsDark]);
+
   return (
-    <ThemeContext.Provider value={{ isDark, setIsDark }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

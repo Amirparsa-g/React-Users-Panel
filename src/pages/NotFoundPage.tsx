@@ -9,7 +9,7 @@ const NotFoundPage = () => {
   return (
     <div className="userStats-card w-full">
       <h2 className="text-[160px] text-center text-gray-400">404</h2>
-      <p className="text-xl font-bold text-center mt-5 dark:text-white">
+      <p className="text-xl font-bold text-center mt-5 text-text-primary">
         Page Not Found
       </p>
       <div className="flex justify-evenly items-center mt-30 ">
