@@ -166,7 +166,7 @@ const UserDetailsPage = ({
               </p>
             </div>
 
-            <div className="p-5 sm:col-span-2  grid grid-cols-2 md:flex md:flex-nowrap md:justify-end gap-3 w-full">
+            <div className="p-5 sm:col-span-2  grid grid-cols-1 md:flex md:flex-nowrap md:justify-end gap-3 w-full">
               <Buttons
                 comp="button"
                 disabled={updatingUserId === clickedUser.ID}
@@ -179,9 +179,9 @@ const UserDetailsPage = ({
                   );
                 }}
                 buttonType="neutral"
-                more="whitespace-nowrap h-fit w-full md:w-fit text-text-primary"
+                more="whitespace-nowrap h-fit w-full md:w-fit text-text-primary flex justify-center items-center"
               >
-                Change Status
+                <p className="text-text-primary">Change Status</p>
               </Buttons>
               <Buttons
                 comp="link"
