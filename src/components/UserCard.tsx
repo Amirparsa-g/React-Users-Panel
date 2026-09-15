@@ -125,7 +125,7 @@ const UserCard = ({
                 comp="button"
               >
                 <svg
-                  className=" fill-[#1f1f1f] fill-text-secondary"
+                  className=" fill-text-secondary"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -146,7 +146,7 @@ const UserCard = ({
                 buttonType="secondary"
               >
                 <svg
-                  className=" fill-[#1f1f1f] fill-text-secondary"
+                  className="  fill-text-secondary"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -172,7 +172,7 @@ const UserCard = ({
                 comp="button"
               >
                 <svg
-                  className=" fill-danger fill-danger"
+                  className="  fill-danger"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
