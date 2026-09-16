@@ -61,9 +61,11 @@
     },
     "home": {
       "projectOverview": "Project Overview",
+      "projectOverviewDiscription": "An overview of this Project",
       "projectDescription": "This project manages users loaded from the existing API. The UI should make the main operations easy to find without changing the existing API, mapper, validation, routing, or state logic.",
       "implementationNote": "The reference focuses on a consistent visual system: shared spacing, buttons, form fields, status badges, desktop table, mobile list, and visible interaction states.",
       "quickActions": "Quick Actions",
+      "quickActionsCaption": "Project Actions",
       "actions": {
         "viewUsers": "View users",
         "addUser": "Add a user",

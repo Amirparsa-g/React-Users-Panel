@@ -1,5 +1,7 @@
 // import React from "react";
 
+import { useTranslation } from "react-i18next";
+
 const UserStats = ({
   allUsers,
   activeUsers,
@@ -12,11 +14,12 @@ const UserStats = ({
 
   isLoading: boolean;
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="my-3 grid grid-cols-1 gap-4 md:grid-cols-3 w-full">
       <div className="userStats-card relative">
         <h2 className="text-small font-header1 text-text-primary/70">
-          Total Users
+          {t("pages.stats.totalUsers")}
         </h2>
         <div className="stats-content">
           {!isLoading && (
@@ -24,7 +27,7 @@ const UserStats = ({
               {allUsers}
             </h3>
           )}
-          <p className="caption">All users currently loaded</p>
+          <p className="caption">{t("pages.stats.allUsersDesc")}</p>
           {isLoading && (
             <>
               <div className="skeleton"></div>
@@ -45,7 +48,7 @@ const UserStats = ({
       </div>
       <div className="userStats-card relative">
         <h2 className="text-small font-header1 text-text-primary/70">
-          Active Users
+          {t("pages.stats.activeUsers")}
         </h2>
         <div className="stats-content ">
           {!isLoading && (
@@ -53,7 +56,7 @@ const UserStats = ({
               {activeUsers}
             </h3>
           )}
-          <p className="caption">Users with active status</p>
+          <p className="caption">{t("pages.stats.activeUsersDesc")}</p>
           {isLoading && (
             <>
               <div className="skeleton"></div>
@@ -74,7 +77,7 @@ const UserStats = ({
       </div>
       <div className="userStats-card relative">
         <h2 className="text-small font-header1 text-text-primary/70">
-          Inactive Users
+          {t("pages.stats.inactiveUsers")}
         </h2>
         <div className="stats-content ">
           {!isLoading && (
@@ -82,7 +85,7 @@ const UserStats = ({
               {inactiveUsers}
             </h3>
           )}
-          <p className="caption">Users with inactive status</p>
+          <p className="caption">{t("pages.stats.inactiveUsersDesc")}</p>
           {isLoading && (
             <>
               <div className="skeleton"></div>

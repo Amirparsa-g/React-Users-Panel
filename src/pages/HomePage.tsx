@@ -2,6 +2,7 @@ import UserStats from "../components/UserStats";
 import type { User } from "../types/user";
 import { useEffect } from "react";
 import Buttons from "../components/Buttons";
+import { useTranslation } from "react-i18next";
 
 const HomePage = ({
   UsersList,
@@ -13,16 +14,16 @@ const HomePage = ({
   const allUsers = UsersList;
   const activeUsers = UsersList.filter((user) => user.isActive);
   const inactiveUsers = UsersList.filter((user) => !user.isActive);
-
+  const { t } = useTranslation();
   useEffect(() => {
     document.title = "Home | User Management";
   }, []);
   return (
     <div className="mb-10">
-      <h1 className="text-header2 font-header1 text-text-primary">Dashboard</h1>
-      <p className="caption">
-        A quick overview of the current users in the system.
-      </p>
+      <h1 className="text-header2 font-header1 text-text-primary">
+        {t("pages.dashboard.title")}
+      </h1>
+      <p className="caption">{t("pages.dashboard.subtitle")}</p>
 
       <UserStats
         isLoading={isLoading}
@@ -33,33 +34,31 @@ const HomePage = ({
       <div className="flex flex-col lg:flex-row gap-7 w-full">
         <div className="flex flex-col userStats-card lg:w-8/12">
           <h2 className="text-bodyHeader font-black text-text-primary">
-            Project Overview
+            {t("pages.home.projectOverview")}
           </h2>
-          <p className="caption">An overview of this Project</p>
+          <p className="caption">
+            {t("pages.home.projectOverviewDiscription")}
+          </p>
           <p className="mt-10 nutText">
-            This project manages users loaded from the existing API. The UI
-            should make the main operations easy to find without changing the
-            existing API, mapper, validation, routing, or state logic.
+            {t("pages.home.projectDescription")}
             <br />
             <br />
-            The reference focuses on a consistent visual system: shared spacing,
-            buttons, form fields, status badges, desktop table, mobile list, and
-            visible interaction states.
+            {t("pages.home.implementationNote")}
           </p>
         </div>
 
         <div className="flex flex-col userStats-card lg:w-4/12">
           <h1 className="text-bodyHeader font-black text-text-primary">
-            Quick Actions
+            {t("pages.home.quickActions")}
           </h1>
-          <p className="caption">Project Actions</p>
+          <p className="caption">{t("pages.home.quickActionsCaption")}</p>
           <div className="flex flex-col gap-2 mt-4">
             <Buttons
               comp="link"
               navigation={"/users"}
               buttonType="HomePageLink"
             >
-              View users
+              {t("pages.home.actions.viewUsers")}
               <svg
                 className="fill-[#1f1f1f] fill-text-secondary"
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +76,7 @@ const HomePage = ({
               navigation={"/users/new"}
               buttonType="HomePageLink"
             >
-              Add a user
+              {t("pages.home.actions.addUser")}
               <svg
                 className="fill-[#1f1f1f] fill-text-secondary"
                 xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +93,7 @@ const HomePage = ({
               navigation={"/about"}
               buttonType="HomePageLink"
             >
-              About project
+              {t("pages.home.actions.aboutProject")}
               <svg
                 className="fill-[#1f1f1f] fill-text-secondary"
                 xmlns="http://www.w3.org/2000/svg"
