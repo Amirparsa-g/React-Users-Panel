@@ -152,6 +152,10 @@
     },
     "errors": {
       "unexpected": "Unexpected Error"
+    },
+    "empty": {
+      "title": "Empty",
+      "message": " No users match the current search or filters."
     }
   }
 }
