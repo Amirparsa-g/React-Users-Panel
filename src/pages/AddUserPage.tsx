@@ -3,6 +3,7 @@ import AddUserForm from "../components/AddUserForm";
 import type { User } from "../types/user";
 
 import Buttons from "../components/Buttons";
+import { useTranslation } from "react-i18next";
 
 const AddUserPage = ({
   addUserHandeler,
@@ -22,6 +23,7 @@ const AddUserPage = ({
   isLoading: boolean;
   error: string | null;
 }) => {
+  const { t } = useTranslation();
   useEffect(() => {
     document.title = "Add User | User Management";
   }, []);
@@ -30,12 +32,12 @@ const AddUserPage = ({
       <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-5">
         <div className="flex flex-col items-start text-left">
           <h2 className="text-header1  font-bold text-3xl text-text-primary">
-            Add User
+            {t("pages.addUser.title")}
           </h2>
-          <p className="caption  mt-1">Create a new user</p>
+          <p className="caption  mt-1">{t("pages.addUser.subtitle")}</p>
         </div>
         <Buttons comp="link" buttonType="backTo" navigation="/users">
-          <span>&larr;</span> Back to Users
+          <span>&larr;</span> {t("common.backToUsers")}
         </Buttons>
       </header>
       <AddUserForm

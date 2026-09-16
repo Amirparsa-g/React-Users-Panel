@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getUserById } from "../services/userApi";
 import Buttons from "../components/Buttons";
 import Loading from "../components/Loading";
+import { useTranslation } from "react-i18next";
 
 const UserDetailsPage = ({
   UsersList,
@@ -26,6 +27,7 @@ const UserDetailsPage = ({
 }) => {
   const { userId } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [clickedUser, setClickedUser] = useState<User | undefined>(undefined);
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
@@ -53,13 +55,13 @@ const UserDetailsPage = ({
     const settingUser = async () => {
       const id = Number(userId);
       if (!userId || !Number.isInteger(id)) {
-        alert("Invalid Id");
+        alert(t("common.invalidId"));
         navigate("/users");
         return;
       }
       const fetchedUser = await setUser();
       if (!fetchedUser) {
-        alert("User Not Found");
+        alert(t("common.userNotFound"));
         navigate("/users");
       }
     };
@@ -94,12 +96,12 @@ const UserDetailsPage = ({
         <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
           <div className="flex flex-col items-start text-left">
             <h2 className="text-header1  font-bold text-3xl text-text-primary">
-              User Details
+              {t("pages.userDetails.title")}
             </h2>
-            <p className="caption  mt-1">View and manage the selected user.</p>
+            <p className="caption  mt-1">{t("pages.userDetails.subtitle")}</p>
           </div>
           <Buttons comp="link" buttonType="backTo" navigation="/users">
-            <span>&larr;</span> Back to Users
+            <span>&larr;</span> {t("common.backToUsers")}
           </Buttons>
         </header>
 
@@ -127,12 +129,12 @@ const UserDetailsPage = ({
                       : "customer-div"
                 }
               >
-                {clickedUser.role}
+                {t(`form.roles.${clickedUser.role}`)}
               </p>
               <p
                 className={clickedUser.isActive ? "active-div" : "inactive-div"}
               >
-                {clickedUser.isActive ? "Active" : "Inactive"}
+                {clickedUser.isActive ? t("form.active") : t("form.inactive")}
               </p>
             </div>
           </div>
@@ -141,26 +143,26 @@ const UserDetailsPage = ({
         <div className="userStats-card w-full rounded-xl border  overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2">
             <div className="p-5 border-b border-gray-100 sm:border-r">
-              <p className="label-form">Full Name</p>
+              <p className="label-form">{t("form.fullName")}</p>
               <p className="text-body font-bold break-all text-text-secondary">
                 {clickedUser.fullName}
               </p>
             </div>
             <div className="p-5 border-b border-gray-100">
-              <p className="label-form">Age</p>
+              <p className="label-form">{t("form.age")}</p>
               <p className="text-body font-bold break-all text-text-secondary">
                 {clickedUser.age}
               </p>
             </div>
 
             <div className="p-5 border-b border-gray-100 sm:border-r">
-              <p className="label-form">Email</p>
+              <p className="label-form">{t("form.email")}</p>
               <p className="text-body font-bold break-all text-text-secondary">
                 {clickedUser.email}
               </p>
             </div>
             <div className="p-5 border-b border-gray-100">
-              <p className="label-form">Role</p>
+              <p className="label-form">{t("form.role")}</p>
               <p className="text-body font-bold break-all capitalize text-text-secondary">
                 {clickedUser.role}
               </p>
@@ -181,7 +183,9 @@ const UserDetailsPage = ({
                 buttonType="neutral"
                 more="whitespace-nowrap h-fit w-full md:w-fit text-text-primary flex justify-center items-center"
               >
-                <p className="text-text-primary">Change Status</p>
+                <p className="text-text-primary">
+                  {t("pages.tooltips.changeStatus")}
+                </p>
               </Buttons>
               <Buttons
                 comp="link"
@@ -190,7 +194,7 @@ const UserDetailsPage = ({
                 buttonType="primary"
                 more="whitespace-nowrap h-fit w-full md:w-fit text-center"
               >
-                Edit User
+                {t("pages.tooltips.editUser")}
               </Buttons>
               <Buttons
                 comp="button"
@@ -203,7 +207,7 @@ const UserDetailsPage = ({
                 buttonType="danger"
                 more="whitespace-nowrap h-fit w-full md:w-fit col-span-2"
               >
-                Delete User
+                {t("pages.tooltips.removeUser")}
               </Buttons>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Buttons from "./Buttons";
+import { useTranslation } from "react-i18next";
 
 interface SearchBarProps {
   onSearchChange: (value: string) => void;
@@ -15,7 +16,7 @@ const Searchinput = ({
   isServer,
 }: SearchBarProps) => {
   const [serverValue, setServerValue] = useState<string>("");
-
+  const { t } = useTranslation();
   return (
     <div className="flex justify-center w-full items-center mx-auto">
       <div className="flex flex-col sm:flex-row w-full items-center gap-4 ">
@@ -24,7 +25,7 @@ const Searchinput = ({
             className="flex flex-col w-full gap-1 label-form "
             id="searchDiv"
           >
-            Search
+            {t("pages.search.label")}
             <div className="flex items-center gap-2 control w-full  border border-border-neut bg-surface focus-within:border-primary focus-within:[box-shadow:0_0_0_3px_rgba(96,165,250,0.15)]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +39,7 @@ const Searchinput = ({
               </svg>
               <input
                 type="text"
-                placeholder="search by name"
+                placeholder={t("pages.search.placeholder")}
                 value={value}
                 onChange={(e) => onSearchChange(e.target.value)}
                 className="w-full bg-transparent border-none outline-none text-text-secondary"
@@ -47,7 +48,7 @@ const Searchinput = ({
                 className="flex flex-row gap-2 justify-center items-center cursor-pointer text-sm text-gray-600 text-text-secondary px-2 sm:pr-4 whitespace-nowrap"
                 htmlFor="checkbox"
               >
-                server search
+                {t("pages.search.serverSearch")}
                 <input
                   id="checkbox"
                   type="checkbox"
@@ -66,7 +67,7 @@ const Searchinput = ({
               className="flex flex-col w-full gap-1 label-form"
               id="searchDiv"
             >
-              Search
+              {t("pages.search.label")}
               <div className="flex items-center gap-2 control w-full transition-all border border-border-neut bg-surface focus-within:border-primary focus-within:[box-shadow:0_0_0_3px_rgba(96,165,250,0.15)]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +81,7 @@ const Searchinput = ({
                 </svg>
                 <input
                   type="text"
-                  placeholder="search by name"
+                  placeholder={t("pages.search.placeholder")}
                   value={serverValue}
                   onChange={(e) => setServerValue(e.target.value)}
                   className="focus:outline-none bg-transparent w-full"
@@ -89,7 +90,7 @@ const Searchinput = ({
                   className="flex flex-row gap-2 justify-center items-center cursor-pointer text-sm text-gray-600 text-text-secondary mpx-2 sm:pr-4 whitespace-nowrap"
                   htmlFor="checkbox"
                 >
-                  server search
+                  {t("pages.search.serverSearch")}
                   <input
                     id="checkbox"
                     type="checkbox"
@@ -107,7 +108,7 @@ const Searchinput = ({
               more="w-full font-normal "
               onClick={() => onSearchChange(serverValue)}
             >
-              search
+              {t("pages.search.label")}
             </Buttons>
           </div>
         )}

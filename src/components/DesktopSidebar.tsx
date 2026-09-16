@@ -5,6 +5,7 @@ import aboutIcon from "../assets/about.svg";
 import arrowBackIcon from "../assets/arrow-back.svg";
 import { useState } from "react";
 import Buttons from "./Buttons";
+import { useTranslation } from "react-i18next";
 
 const DesktopSidebar = ({
   setIsClicked,
@@ -16,6 +17,7 @@ const DesktopSidebar = ({
   isMobile: boolean;
 }) => {
   const [isHover, setIsHover] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   return (
     <aside
@@ -25,11 +27,13 @@ const DesktopSidebar = ({
     >
       <div className="flex gap-2  items-center p-2 ">
         <div className="bg-sidebar-2 p-2 rounded-xl w-10 h-10 flex justify-center items-center border border-white">
-          <p className="text-white font-black text-bodyHeader">U</p>
+          <p className="text-white font-black text-bodyHeader">
+            {t("common.sideBarHeaderIcon")}
+          </p>
         </div>
         {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
           <h2 className="text-body font-black text-text-sidebar line-clamp-1">
-            User Management
+            {t("common.sideBarHeader")}
           </h2>
         )}
       </div>
@@ -44,7 +48,9 @@ const DesktopSidebar = ({
             <img src={homeIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
               (isMobile && isClicked)) && (
-              <p className="font-bold text-text-sidebar">Dashboard</p>
+              <p className="font-bold text-text-sidebar">
+                {t("navigation.dashboard")}
+              </p>
             )}
           </div>
         </Buttons>
@@ -59,7 +65,9 @@ const DesktopSidebar = ({
             <img src={usersIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
               (isMobile && isClicked)) && (
-              <p className="font-bold text-text-sidebar">Users</p>
+              <p className="font-bold text-text-sidebar">
+                {t("navigation.users")}
+              </p>
             )}
           </div>
         </Buttons>
@@ -73,7 +81,9 @@ const DesktopSidebar = ({
             <img src={addUserIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
               (isMobile && isClicked)) && (
-              <p className="font-bold text-text-sidebar">Add User</p>
+              <p className="font-bold text-text-sidebar">
+                {t("navigation.addUser")}
+              </p>
             )}
           </div>
         </Buttons>
@@ -87,7 +97,9 @@ const DesktopSidebar = ({
             <img src={aboutIcon} alt="Home" className="nav-img" />
             {((!isMobile && (isHover || isClicked)) ||
               (isMobile && isClicked)) && (
-              <p className="font-bold text-text-sidebar">About</p>
+              <p className="font-bold text-text-sidebar">
+                {t("navigation.about")}
+              </p>
             )}
           </div>
         </Buttons>

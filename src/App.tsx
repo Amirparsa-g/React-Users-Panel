@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../src/i18n/index";
 import "./App.css";
 //import UserList from "./components/UserList";
 import { type User } from "./types/user";
@@ -24,7 +25,7 @@ import {
 import EditUserPage from "./pages/EditUserPage";
 import ScrollToTop from "./components/ScrollToTop";
 import ThemeProvider from "./Contexts/ThemeProvider";
-
+import { useTranslation } from "react-i18next";
 type StatusFilters = "active" | "inactive" | "all";
 type RoleFilters = "admin" | "operator" | "customer" | "all";
 function App() {
@@ -54,12 +55,13 @@ function App() {
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<StatusFilters>("all");
   const [role, setRole] = useState<RoleFilters>("all");
+  const { t } = useTranslation();
   const addUserHandler = (newUser: User) => {
     const isAvailable = UsersList.find((user) => user.ID === newUser.ID);
-    if (isAvailable) alert("you cant add the same user twice");
+    if (isAvailable) alert(t("form.errors.addUserError"));
     else {
       setUserList([...UsersList, newUser]);
-      alert("user Added Successfully");
+      alert(t("form.errors.addUserSuccess"));
     }
   };
   const removeUserHandler = (id: number) => {
@@ -69,7 +71,7 @@ function App() {
   const removeApiUser = async (id: number) => {
     try {
       setError(null);
-      if (confirm("are you sure you want to remove this use?")) {
+      if (confirm(t("common.userRemovingConfirm"))) {
         const deleteResponse = await deleteApiUser(id);
         if (deleteResponse.isDeleted) removeUserHandler(id);
         return true;
@@ -132,6 +134,13 @@ function App() {
     document.title = `User Managment -${UsersList.length} Users`;
   }, [UsersList.length]);
 
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    const currentLang = i18n.language;
+    document.documentElement.lang = currentLang;
+    localStorage.setItem("lng", currentLang);
+    document.documentElement.dir = currentLang === "fa" ? "rtl" : "ltr";
+  }, [i18n.language]);
   return (
     <ThemeProvider>
       <ScrollToTop />
