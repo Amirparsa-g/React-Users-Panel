@@ -1,9 +1,152 @@
 {
+  "navigation": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "addUser": "Add User",
+    "about": "About"
+  },
+  "common": {
+    "backToUsers": "Back to Users",
+    "loading": "Loading...",
+    "empty": "Empty",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "create": "Create User",
+    "delete": "Delete User",
+    "search": "Search",
+    "clear": "Clear",
+    "error": "Error",
+    "invalidId": "Invalid Id",
+    "userNotFound": "User Not Found"
+  },
   "form": {
     "fullName": "Full Name",
-    "email": "Email"
+    "age": "Age",
+    "role": "Role",
+    "email": "Email",
+    "activity": "Activity",
+    "active": "Active",
+    "inactive": "Inactive",
+    "optional": "Email (Optional)",
+    "placeholders": {
+      "fullName": "Enter you full name",
+      "age": "age",
+      "email": "name@example.com"
+    },
+    "roles": {
+      "admin": "admin",
+      "operator": "operator",
+      "customer": "customer"
+    },
+    "errors": {
+      "nameRequired": "Please Enter your Name",
+      "nameLength": "name should have at least 3 charachters",
+      "ageRequired": "Enter your age",
+      "ageInteger": "Your age must be an integer",
+      "ageRange": "Age must be between 18 and 80",
+      "roleRequired": "Choose the user's role",
+      "emailAt": "Email should contain an @",
+      "emailDot": "Email sjould contain a . after @",
+      "emailDuplicate": "This email already exists",
+      "addUserError": "you cant add the same user twice",
+      "addUserSuccess": "user Added Successfully"
+    }
   },
-  "navigation": {
-    "users": "Users"
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "A quick overview of the current users in the system."
+    },
+    "home": {
+      "projectOverview": "Project Overview",
+      "projectDescription": "This project manages users loaded from the existing API. The UI should make the main operations easy to find without changing the existing API, mapper, validation, routing, or state logic.",
+      "implementationNote": "The reference focuses on a consistent visual system: shared spacing, buttons, form fields, status badges, desktop table, mobile list, and visible interaction states.",
+      "quickActions": "Quick Actions",
+      "actions": {
+        "viewUsers": "View users",
+        "addUser": "Add a user",
+        "aboutProject": "About project"
+      }
+    },
+    "users": {
+      "title": "Users",
+      "subtitle": "Search, filter, view and manage users."
+    },
+    "addUser": {
+      "title": "Add User",
+      "subtitle": "Create a new user"
+    },
+    "editUser": {
+      "title": "Edit User",
+      "subtitle": "Update the existing user information."
+    },
+    "userDetails": {
+      "title": "User Details",
+      "subtitle": "View and manage the selected user."
+    },
+    "about": {
+      "title": "About",
+      "subtitle": "A short description of the training project.",
+      "purpose": "Purpose",
+      "purposeText": "This project is a user management training application built with Vite, React, TypeScript and Tailwind CSS. The current UI is expected to remain connected to the existing project logic and API.",
+      "features": "Current features",
+      "stageFocus": "Stage 09 focus",
+      "stageText": "Rebuild the supplied static design inside the existing React application while preserving the current business logic and explaining every responsive and component decision during review.",
+      "featureList": {
+        "loadUsers": "Load and display users",
+        "searchFilter": "Search and filter users",
+        "addEditView": "Add, edit and view a user",
+        "statusDelete": "Change user status and delete a user",
+        "states": "Handle loading, error and empty states",
+        "responsive": "Responsive layout for mobile and desktop"
+      }
+    },
+    "notFound": {
+      "title": "404",
+      "message": "Page Not Found"
+    },
+    "search": {
+      "label": "Search",
+      "placeholder": "search by name",
+      "serverSearch": "server search"
+    },
+    "filters": {
+      "status": "Status",
+      "role": "Roles",
+      "allStatuses": "All Statuses",
+      "active": "Active",
+      "inactive": "Inactive",
+      "allRoles": "All Roles",
+      "admin": "Admin",
+      "operator": "Operator",
+      "customer": "Customer"
+    },
+    "userList": {
+      "tableHeaders": {
+        "user": "User",
+        "role": "Role",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "stats": {
+      "totalUsers": "Total Users",
+      "activeUsers": "Active Users",
+      "inactiveUsers": "Inactive Users",
+      "allUsersDesc": "All users currently loaded",
+      "activeUsersDesc": "Users with active status",
+      "inactiveUsersDesc": "Users with inactive status"
+    },
+    "tooltips": {
+      "viewUser": "View user",
+      "changeStatus": "Change status",
+      "editUser": "Edit User",
+      "removeUser": "Remove user"
+    },
+    "errors": {
+      "unexpected": "Unexpected Error"
+    }
   }
 }
