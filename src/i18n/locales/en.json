@@ -1,0 +1,9 @@
+{
+  "form": {
+    "fullName": "Full Name",
+    "email": "Email"
+  },
+  "navigation": {
+    "users": "Users"
+  }
+}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../src/i18n/index";
 import "./App.css";
 //import UserList from "./components/UserList";
 import { type User } from "./types/user";
@@ -24,7 +25,7 @@ import {
 import EditUserPage from "./pages/EditUserPage";
 import ScrollToTop from "./components/ScrollToTop";
 import ThemeProvider from "./Contexts/ThemeProvider";
-
+import { useTranslation } from "react-i18next";
 type StatusFilters = "active" | "inactive" | "all";
 type RoleFilters = "admin" | "operator" | "customer" | "all";
 function App() {
@@ -132,6 +133,13 @@ function App() {
     document.title = `User Managment -${UsersList.length} Users`;
   }, [UsersList.length]);
 
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    const currentLang = i18n.language;
+    document.documentElement.lang = currentLang;
+    localStorage.setItem("lng", currentLang);
+    document.documentElement.dir = currentLang === "fa" ? "rtl" : "ltr";
+  }, [i18n.language]);
   return (
     <ThemeProvider>
       <ScrollToTop />

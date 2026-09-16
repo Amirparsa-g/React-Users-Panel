@@ -7,6 +7,7 @@ import ScrollToTop from "./ScrollToTop";
 import Buttons from "./Buttons";
 //import ThemeProvider from "../Contexts/ThemeProvider";
 import ThemeToggleButton from "./ThemeToggleButton";
+import LanguageToggleButton from "./LanguageToggleButton";
 const AppLayout = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const location = useLocation();
@@ -99,6 +100,7 @@ const AppLayout = () => {
               + Add User
             </Buttons>
             <ThemeToggleButton />
+            <LanguageToggleButton />
           </div>
         </header>
         <div className="flex-1 overflow-y-auto bg-bg">
