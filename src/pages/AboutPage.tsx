@@ -1,39 +1,39 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const AboutPage = () => {
+  const { t } = useTranslation();
   useEffect(() => {
     document.title = "About | User Management";
   }, []);
   return (
     <>
-      <h2 className="text-header2 font-bold w-full ">About</h2>
-      <p className="caption w-full mb-7">
-        A short description of the training project.
-      </p>
+      <h2 className="text-header2 font-bold w-full ">
+        {t("pages.about.title")}
+      </h2>
+      <p className="caption w-full mb-7">{t("pages.about.subtitle")}</p>
 
       <div className="flex flex-col userStats-card">
-        <h2 className="text-bodyHeader font-bold">Purpose</h2>
-        <p className="text-text-secondary">
-          This project is a user management training application built with
-          Vite, React, TypeScript and Tailwind CSS. The current UI is expected
-          to remain connected to the existing project logic and API.
-        </p>
+        <h2 className="text-bodyHeader font-bold">
+          {t("pages.about.purpose")}
+        </h2>
+        <p className="text-text-secondary">{t("pages.about.purposeText")}</p>
         <br />
-        <h2 className="text-bodyHeader font-bold mb-3">Current features</h2>
+        <h2 className="text-bodyHeader font-bold mb-3">
+          {t("pages.about.features")}
+        </h2>
         <ul className="list-disc pl-5 space-y-3 text-text-secondary">
-          <li>Load and display users</li>
-          <li>Search and filter users</li>
-          <li>Add, edit and view a user</li>
-          <li>Change user status and delete a user</li>
-          <li>Handle loading, error and empty states</li>
-          <li>Responsive layout for mobile and desktop</li>
+          <li>{t("pages.about.featureList.loadUsers")}</li>
+          <li>{t("pages.about.featureList.searchFilter")}</li>
+          <li>{t("pages.about.featureList.addEditView")}</li>
+          <li>{t("pages.about.featureList.statusDelete")}</li>
+          <li>{t("pages.about.featureList.states")}</li>
+          <li>{t("pages.about.featureList.responsive")}</li>
         </ul>
-        <h2 className="text-bodyHeader font-bold my-3">Stage 09 focus</h2>
-        <p className="text-text-secondary">
-          Rebuild the supplied static design inside the existing React
-          application while preserving the current business logic and explaining
-          every responsive and component decision during review.
-        </p>
+        <h2 className="text-bodyHeader font-bold my-3">
+          {t("pages.about.stageFocus")}
+        </h2>
+        <p className="text-text-secondary">{t("pages.about.stageText")}</p>
       </div>
     </>
   );
