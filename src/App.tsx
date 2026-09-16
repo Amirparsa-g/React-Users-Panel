@@ -55,12 +55,13 @@ function App() {
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<StatusFilters>("all");
   const [role, setRole] = useState<RoleFilters>("all");
+  const { t } = useTranslation();
   const addUserHandler = (newUser: User) => {
     const isAvailable = UsersList.find((user) => user.ID === newUser.ID);
-    if (isAvailable) alert("you cant add the same user twice");
+    if (isAvailable) alert(t("form.errors.addUserError"));
     else {
       setUserList([...UsersList, newUser]);
-      alert("user Added Successfully");
+      alert(t("form.errors.addUserSuccess"));
     }
   };
   const removeUserHandler = (id: number) => {
@@ -70,7 +71,7 @@ function App() {
   const removeApiUser = async (id: number) => {
     try {
       setError(null);
-      if (confirm("are you sure you want to remove this use?")) {
+      if (confirm(t("common.userRemovingConfirm"))) {
         const deleteResponse = await deleteApiUser(id);
         if (deleteResponse.isDeleted) removeUserHandler(id);
         return true;

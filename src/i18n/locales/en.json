@@ -21,7 +21,8 @@
     "invalidId": "Invalid Id",
     "userNotFound": "User Not Found",
     "sideBarHeader": "User Management",
-    "sideBarHeaderIcon": "U"
+    "sideBarHeaderIcon": "U",
+    "userRemovingConfirm": "are you sure you want to remove this use?"
   },
   "form": {
     "fullName": "Full Name",

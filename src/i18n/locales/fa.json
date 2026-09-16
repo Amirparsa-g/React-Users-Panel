@@ -21,7 +21,8 @@
     "invalidId": "آی‌دی نامعتبر",
     "userNotFound": "کاربر یافت نشد",
     "sideBarHeader": "مدیریت کاربران",
-    "sideBarHeaderIcon": "م"
+    "sideBarHeaderIcon": "م",
+    "userRemovingConfirm": "آیا از حذف این کابر اطمینان دارید؟"
   },
   "form": {
     "fullName": "نام و نام خانوادگی",

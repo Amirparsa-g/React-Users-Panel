@@ -27,6 +27,7 @@ const UserDetailsPage = ({
 }) => {
   const { userId } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [clickedUser, setClickedUser] = useState<User | undefined>(undefined);
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
@@ -54,13 +55,13 @@ const UserDetailsPage = ({
     const settingUser = async () => {
       const id = Number(userId);
       if (!userId || !Number.isInteger(id)) {
-        alert("Invalid Id");
+        alert(t("common.invalidId"));
         navigate("/users");
         return;
       }
       const fetchedUser = await setUser();
       if (!fetchedUser) {
-        alert("User Not Found");
+        alert(t("common.userNotFound"));
         navigate("/users");
       }
     };
@@ -70,7 +71,7 @@ const UserDetailsPage = ({
   useEffect(() => {
     document.title = "User Details | User Management";
   }, []);
-  const { t } = useTranslation();
+
   if (isLoading) {
     return (
       <div>

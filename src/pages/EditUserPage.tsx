@@ -30,6 +30,7 @@ const EditUserPage = ({
   const [clickedUser, setClickedUser] = useState<User | undefined>(undefined);
   const { userId } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const setUser = async () => {
     setIsLoading(true);
     setError(null);
@@ -55,16 +56,16 @@ const EditUserPage = ({
         const id = Number(userId);
         if (!userId || !Number.isInteger(id)) {
           navigate("/users");
-          alert("Invalid Id");
+          alert(t("common.invalidId"));
           return;
         }
-        alert("User Not Found");
+        alert(t("common.userNotFound"));
         navigate("/users");
       }
     };
     void settingUser();
   }, [userId]);
-  const { t } = useTranslation();
+
   return (
     <div className="w-full md:w-3/4">
       <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-5">
