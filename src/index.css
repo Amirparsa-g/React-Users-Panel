@@ -291,22 +291,22 @@
     opacity: 1;
   }
 }
-@keyframes slide-out {
+@keyframes slide-in-fa {
   0% {
-    transform: translateX(0);
-    opacity: 1;
+    transform: translateX(100%);
+    opacity: 0;
   }
   100% {
-    transform: translateX(-100%);
-    opacity: 0;
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 @media (max-width: 767px) {
   .animate-slide-in {
     animation: slide-in 0.4s ease-in-out forwards;
   }
-  .animate-slide-out {
-    animation: slide-out 0.4s ease-in-out forwards;
+  .animate-slide-in-fa {
+    animation: slide-in-fa 0.4s ease-in-out forwards;
   }
 }
 .skeleton {
