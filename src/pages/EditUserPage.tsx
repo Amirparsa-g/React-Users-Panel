@@ -5,6 +5,7 @@ import type { FormPropType } from "../types/userForm";
 import { getUserById } from "../services/userApi";
 import { useEffect, useState } from "react";
 import Buttons from "../components/Buttons";
+import { useTranslation } from "react-i18next";
 
 const EditUserPage = ({
   UsersList,
@@ -63,17 +64,18 @@ const EditUserPage = ({
     };
     void settingUser();
   }, [userId]);
+  const { t } = useTranslation();
   return (
     <div className="w-full md:w-3/4">
       <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-5">
         <div className="flex flex-col items-start text-left">
           <h2 className="text-header1  font-bold text-3xl text-text-secondary">
-            Edit User
+            {t("pages.editUser.title")}
           </h2>
-          <p className="caption  mt-1">Update the existing user information.</p>
+          <p className="caption  mt-1">{t("pages.editUser.subtitle")}</p>
         </div>
         <Buttons comp="link" buttonType="backTo" navigation="/users">
-          <span>&larr;</span> Back to Users
+          <span>&larr;</span> {t("common.backToUsers")}
         </Buttons>
       </header>
       {clickedUser && (
