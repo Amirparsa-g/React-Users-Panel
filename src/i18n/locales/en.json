@@ -151,7 +151,8 @@
       "removeUser": "Remove user"
     },
     "errors": {
-      "unexpected": "Unexpected Error"
+      "unexpected": "Unexpected Error",
+      "userError": "Could not load users."
     },
     "empty": {
       "title": "Empty",

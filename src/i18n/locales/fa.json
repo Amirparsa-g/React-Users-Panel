@@ -151,7 +151,8 @@
       "removeUser": "حذف کاربر"
     },
     "errors": {
-      "unexpected": "خطای ناشناخته"
+      "unexpected": "خطای ناشناخته",
+      "userError": "مشکلی در بارگذاری کاربران ایجاد شد"
     },
     "empty": {
       "title": "خالی",
