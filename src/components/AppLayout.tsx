@@ -13,6 +13,8 @@ const AppLayout = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const location = useLocation();
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const isFa = i18n.language === "fa";
 
   return (
     <div className="flex w-full h-screen overflow-hidden">
@@ -40,7 +42,7 @@ const AppLayout = () => {
       <div className=" flex flex-1 flex-col h-full  ">
         <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-2 sm:gap-5 bg-surface">
           {!isClicked && (
-            <span className="absolute  left-2 md:left-22">
+            <span className={`${isFa ? "mr-5" : "ml-5"} md:left-22`}>
               <Buttons
                 comp="button"
                 buttonType="secondary"
@@ -60,7 +62,7 @@ const AppLayout = () => {
             </span>
           )}
           {isClicked && (
-            <span className="absolute md:left-62 ">
+            <span className=" md:left-62 ">
               <Buttons
                 comp="button"
                 buttonType="secondary"
