@@ -8,6 +8,7 @@ import { serverSearch } from "../services/userApi";
 import Loading from "../components/Loading";
 import UserError from "../components/UserError";
 import Buttons from "../components/Buttons";
+import { useTranslation } from "react-i18next";
 
 type StatusFilters = "active" | "inactive" | "all";
 type RoleFilters = "admin" | "operator" | "customer" | "all";
@@ -47,7 +48,7 @@ const UsersPage = ({
 }) => {
   const [isServer, setIsServer] = useState<boolean>(false);
   const [serverResult, setServerResult] = useState<User[]>([]);
-
+  const { t } = useTranslation();
   const term = searchedTerm.toLowerCase().trim();
   useEffect(() => {
     if (!isServer) return;
@@ -115,9 +116,9 @@ const UsersPage = ({
       <div className="mb-5 flex justify-between">
         <div>
           <h2 className="font-bold text-header2 text-text-primary">
-            Users
+            {t("pages.users.title")}
           </h2>
-          <p className="caption">Search, filter, view and manage users.</p>
+          <p className="caption">{t("pages.users.subtitle")}</p>
         </div>
         <Buttons
           comp="link"
@@ -133,7 +134,7 @@ const UsersPage = ({
           navigation="/users/new"
           more="hidden md:flex w-fit"
         >
-          + Add User
+          {t("pages.users.usersPageAddUserButton")}
         </Buttons>
       </div>
       <div className="w-full flex flex-col gap-4 md:flex-row md:gap-3 md:items-start  userStats-card mb-5">
@@ -149,7 +150,9 @@ const UsersPage = ({
           <div className="flex flex-col md:flex-row gap-2">
             <div className="flex-1">
               <label htmlFor="selectStatus">
-                <p className="font-bold text-small label-form">Status</p>
+                <p className="font-bold text-small label-form">
+                  {t("pages.filters.status")}
+                </p>
               </label>
               <select
                 id="selectStatus"
@@ -167,15 +170,19 @@ const UsersPage = ({
                       : "Inactive"
                 }
               >
-                <option value="All Statuses">All Statuses</option>
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
+                <option value="All Statuses">
+                  {t("pages.filters.allStatuses")}
+                </option>
+                <option value="Active">{t("pages.filters.active")}</option>
+                <option value="Inactive">{t("pages.filters.inactive")}</option>
               </select>
             </div>
 
             <div className="flex-1">
               <label htmlFor="selectRole">
-                <p className="font-bold text-small label-form">Roles</p>
+                <p className="font-bold text-small label-form">
+                  {t("pages.filters.role")}
+                </p>
               </label>
               <select
                 id="selectRole"
@@ -196,10 +203,10 @@ const UsersPage = ({
                         : "Customer"
                 }
               >
-                <option value="All Roles">All Roles</option>
-                <option value="Admin">Admin</option>
-                <option value="Operator">Operator</option>
-                <option value="Customer">Customer</option>
+                <option value="All Roles">{t("pages.filters.allRoles")}</option>
+                <option value="Admin">{t("pages.filters.admin")}</option>
+                <option value="Operator">{t("pages.filters.operator")}</option>
+                <option value="Customer">{t("pages.filters.customer")}</option>
               </select>
             </div>
 
@@ -214,7 +221,7 @@ const UsersPage = ({
                   setRole("all");
                 }}
               >
-                Clear
+                {t("common.clear")}
               </Buttons>
             </div>
           </div>

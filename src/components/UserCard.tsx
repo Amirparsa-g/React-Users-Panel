@@ -1,6 +1,7 @@
 import type { User } from "../types/user";
 import { useState } from "react";
 import Buttons from "./Buttons";
+import { useTranslation } from "react-i18next";
 
 const UserCard = ({
   user,
@@ -18,6 +19,7 @@ const UserCard = ({
   error: string | null;
 }) => {
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
+  const { t } = useTranslation();
   return (
     <>
       {error && (
@@ -75,7 +77,7 @@ const UserCard = ({
                     : " customer-div text-center"
               }
             >
-              {user.role}
+              {t(`form.roles.${user.role}`)}
             </span>
           </td>
           <td className="px-4 py-3 text-center align-middle">
@@ -86,7 +88,7 @@ const UserCard = ({
                   : "bg-danger/10 inactive-div text-center"
               }
             >
-              {user.isActive ? "active" : "inactive"}
+              {user.isActive ? t("form.active") : t("form.inactive")}
             </span>
           </td>
           <td className="px-4 py-3 align-middle">
@@ -109,7 +111,7 @@ const UserCard = ({
                 </svg>
 
                 <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-surface-elevated text-text-primary text-xs px-2.5 py-1.5 rounded shadow-lg whitespace-nowrap z-50">
-                  View user
+                  {t("pages.tooltips.viewUser")}
                 </div>
               </Buttons>
 
@@ -136,7 +138,7 @@ const UserCard = ({
                 </svg>
 
                 <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-surface-elevated text-text-primary text-xs px-2.5 py-1.5 rounded shadow-lg whitespace-nowrap z-50">
-                  Change status
+                  {t("pages.tooltips.changeStatus")}
                 </div>
               </Buttons>
               <Buttons
@@ -157,7 +159,7 @@ const UserCard = ({
                 </svg>
 
                 <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-surface-elevated text-text-primary text-xs px-2.5 py-1.5 rounded shadow-lg whitespace-nowrap z-50">
-                  Edit User
+                  {t("pages.tooltips.editUser")}
                 </div>
               </Buttons>
               <Buttons
@@ -183,7 +185,7 @@ const UserCard = ({
                 </svg>
 
                 <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-surface-elevated text-text-primary text-xs px-2.5 py-1.5 rounded shadow-lg whitespace-nowrap z-50">
-                  Remove user
+                  {t("pages.tooltips.removeUser")}
                 </div>
               </Buttons>
             </div>

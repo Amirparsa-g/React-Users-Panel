@@ -74,7 +74,8 @@
     },
     "users": {
       "title": "Users",
-      "subtitle": "Search, filter, view and manage users."
+      "subtitle": "Search, filter, view and manage users.",
+      "usersPageAddUserButton": "+ Add User"
     },
     "addUser": {
       "title": "Add User",

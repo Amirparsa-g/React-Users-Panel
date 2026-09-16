@@ -3,6 +3,7 @@
 import type { User } from "../types/user";
 import UserCard from "./UserCard";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import { useTranslation } from "react-i18next";
 const UserList = ({
   users,
   onRemove,
@@ -17,6 +18,7 @@ const UserList = ({
   error: string | null;
 }) => {
   const isMobile = useMediaQuery("(max-width: 767px)");
+  const { t } = useTranslation();
   const mappedUsers = users.map((user) => (
     <UserCard
       key={user.ID}
@@ -36,16 +38,16 @@ const UserList = ({
           <thead>
             <tr className="bg-surface border-b border-gray-200">
               <th className="w-6/12 text-left px-4 py-3 text-small font-bold uppercase tracking-wide text-text-secondary">
-                User
+                {t("pages.userList.tableHeaders.user")}
               </th>
               <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-text-secondary">
-                Role
+                {t("pages.userList.tableHeaders.role")}
               </th>
               <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-text-secondary">
-                Status
+                {t("pages.userList.tableHeaders.status")}
               </th>
               <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-text-secondary">
-                Actions
+                {t("pages.userList.tableHeaders.actions")}
               </th>
             </tr>
           </thead>
