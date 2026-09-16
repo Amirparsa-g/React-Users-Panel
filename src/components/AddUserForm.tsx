@@ -7,6 +7,7 @@ import { addApiUser } from "../services/userApi";
 import Buttons from "./Buttons";
 
 import Loading from "../components/Loading";
+import { useTranslation } from "react-i18next";
 
 const AddUserForm = ({
   addUserHandeler,
@@ -55,44 +56,44 @@ const AddUserForm = ({
 
     const nameTrimmed = formData.fullName.trim();
     if (nameTrimmed === "") {
-      newError.nameError = "Please Enter your Name";
+      newError.nameError = t("form.errors.nameRequired");
       isValid = false;
     } else if (nameTrimmed.length < 3) {
-      newError.nameError = "name should have at least 3 charachters";
+      newError.nameError = t("form.errors.nameLength");
       isValid = false;
     }
     if (formData.age.trim() === "") {
-      newError.ageError = "Enter your age";
+      newError.ageError = t("form.errors.ageRequired");
       isValid = false;
     } else if (formData.age.trim() !== "") {
       const age = Number(formData.age);
 
       if (formData.age.trim() === "") {
-        newError.ageError = "Enter your age";
+        newError.ageError = t("form.errors.ageRequired");
         isValid = false;
       } else if (!Number.isFinite(age) || !Number.isInteger(age)) {
-        newError.ageError = "Your age must be an integer";
+        newError.ageError = t("form.errors.ageInteger");
         isValid = false;
       } else if (age < 18 || age > 80) {
-        newError.ageError = "Age must be between 18 and 80";
+        newError.ageError = t("form.errors.ageRange");
         isValid = false;
       }
     }
 
     if (formData.role === "") {
-      newError.roleError = "Choose the user's role";
+      newError.roleError = t("form.errors.roleRequired");
       isValid = false;
     }
     if (formData.email?.trim() !== "") {
       const userEmail = formData.email;
       if (!userEmail?.includes("@")) {
-        newError.emailError = "Email should contain an @";
+        newError.emailError = t("form.errors.emailAt");
         isValid = false;
       } else if (userEmail.includes("@")) {
         const atIndex = userEmail.indexOf("@");
         const slicedEmail = userEmail.slice(atIndex);
         if (!slicedEmail.includes(".")) {
-          newError.emailError = "Email sjould contain a . after @";
+          newError.emailError = t("form.errors.emailDot");
           isValid = false;
         }
       }
@@ -106,7 +107,7 @@ const AddUserForm = ({
       });
 
       if (UserEmails.includes(userEmail?.toLowerCase().trim())) {
-        newError.emailError = "This email already exists";
+        newError.emailError = t("form.errors.emailDuplicate");
         isValid = false;
       }
     }
@@ -127,6 +128,7 @@ const AddUserForm = ({
       setIsLoading(false);
     }
   };
+  const { t } = useTranslation();
   if (isLoading)
     return (
       <div>
@@ -171,11 +173,11 @@ const AddUserForm = ({
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <label htmlFor="userFullName" className="label-form">
-            Full Name:
+            {t("form.fullName")}
             <input
               id="userFullName"
               type="text"
-              placeholder="Enter you full name"
+              placeholder={t("form.placeholders.fullName")}
               value={formData.fullName}
               onChange={(e) => {
                 setFormData({
@@ -191,17 +193,15 @@ const AddUserForm = ({
               className="w-full border control"
             />
             {FormError.nameError !== "" && (
-              <p className="text-danger">
-                {FormError.nameError}
-              </p>
+              <p className="text-danger">{FormError.nameError}</p>
             )}
           </label>
           <label htmlFor="userAge" className="label-form">
-            Age
+            {t("form.age")}
             <input
               id="userAge"
               type="number"
-              placeholder="age"
+              placeholder={t("form.placeholders.age")}
               value={formData.age}
               onChange={(e) => {
                 setFormData({ ...formData, age: e.target.value });
@@ -210,13 +210,11 @@ const AddUserForm = ({
               className="control"
             />
             {FormError.ageError !== "" && (
-              <p className="text-danger">
-                {FormError.ageError}
-              </p>
+              <p className="text-danger">{FormError.ageError}</p>
             )}
           </label>
           <label htmlFor="userRole" className="label-form">
-            Role :
+            {t("form.role")}
             <select
               name="role"
               id="userRole"
@@ -235,23 +233,21 @@ const AddUserForm = ({
               className="control"
             >
               <option value=""></option>
-              <option value="admin">admin</option>
-              <option value="operator">operator</option>
-              <option value="customer">customer</option>
+              <option value="admin">{t("form.roles.admin")}</option>
+              <option value="operator">{t("form.roles.operator")}</option>
+              <option value="customer">{t("form.roles.customer")}</option>
             </select>
             {FormError.roleError !== "" && (
-              <p className="text-danger">
-                {FormError.roleError}
-              </p>
+              <p className="text-danger">{FormError.roleError}</p>
             )}
           </label>
           <div className="label-form ">
             <label htmlFor="activityDiv">
-              Activity :
+              {t("form.activity")}
               <br />
               <div className="control h-10.5 " id="activityDiv">
                 <label htmlFor="activeRadio">
-                  Active
+                  {t("form.active")}
                   <input
                     id="activeRadio"
                     type="radio"
@@ -264,7 +260,7 @@ const AddUserForm = ({
                   />
                 </label>
                 <label htmlFor="inactiveRadio">
-                  Inactive
+                  {t("form.inactive")}
                   <input
                     id="inactiveRadio"
                     type="radio"
@@ -282,10 +278,10 @@ const AddUserForm = ({
           </div>
           <div className="flex flex-col col-span-full">
             <label htmlFor="userEmail" className="label-form">
-              Email (Optional)
+              {t("form.optional")}
               <input
                 id="userEmail"
-                placeholder="name@example.com"
+                placeholder={t("form.placeholders.email")}
                 type="email"
                 value={formData.email}
                 onChange={(e) => {
@@ -295,9 +291,7 @@ const AddUserForm = ({
                 className="control"
               />
               {FormError.emailError !== "" && (
-                <p className="text-danger">
-                  {FormError.emailError}
-                </p>
+                <p className="text-danger">{FormError.emailError}</p>
               )}
             </label>
           </div>
@@ -311,11 +305,11 @@ const AddUserForm = ({
           >
             {user
               ? isLoading
-                ? "Saving..."
-                : "Save Changes"
+                ? t("common.saving")
+                : t("common.save")
               : isLoading
-                ? "Saving..."
-                : "Create User"}
+                ? t("common.saving")
+                : t("common.create")}
           </Buttons>
           <Buttons
             comp="link"
@@ -323,7 +317,7 @@ const AddUserForm = ({
             buttonType={"neutral"}
             more="text-center w-full sm:w-35 text-text-secondary"
           >
-            Cancel
+            {t("common.cancel")}
           </Buttons>
           {user && (
             <Buttons
@@ -340,7 +334,7 @@ const AddUserForm = ({
               }}
               more="col-span-2 w-full sm:w-fit "
             >
-              Delete User
+              {t("common.delete")}
             </Buttons>
           )}
         </div>
