@@ -8,9 +8,11 @@ import Buttons from "./Buttons";
 //import ThemeProvider from "../Contexts/ThemeProvider";
 import ThemeToggleButton from "./ThemeToggleButton";
 import LanguageToggleButton from "./LanguageToggleButton";
+import { useTranslation } from "react-i18next";
 const AppLayout = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const location = useLocation();
+  const { t } = useTranslation();
 
   return (
     <div className="flex w-full h-screen overflow-hidden">
@@ -80,7 +82,7 @@ const AppLayout = () => {
           )}
 
           <h1 className="text-body font-black block ml-14 sm:mx-auto text-text-primary ">
-            User Managment
+            {t("common.sideBarHeader")}
           </h1>
           <div className="flex items-center gap-2">
             <Buttons
@@ -97,7 +99,7 @@ const AppLayout = () => {
               more="hidden md:flex w-fit"
               buttonType="primary"
             >
-              + Add User
+              {t("pages.users.usersPageAddUserButton")}
             </Buttons>
             <ThemeToggleButton />
             <LanguageToggleButton />
