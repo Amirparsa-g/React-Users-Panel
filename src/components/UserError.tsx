@@ -5,7 +5,12 @@ const UserError = ({ LoadUser }: { LoadUser: () => void }) => {
     <div className="flex flex-col userStats-card border border-dotted w-full">
       <p className="text-small font-bold">Error</p>
       <p className="caption mb-5">Could not load users. </p>
-      <Buttons comp="button" onClick={LoadUser} buttonType="neutral">
+      <Buttons
+        comp="button"
+        onClick={LoadUser}
+        buttonType="neutral"
+        more="dark:text-white"
+      >
         Retry
       </Buttons>
     </div>
