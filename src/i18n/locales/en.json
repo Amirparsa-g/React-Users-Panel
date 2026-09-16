@@ -19,7 +19,9 @@
     "clear": "Clear",
     "error": "Error",
     "invalidId": "Invalid Id",
-    "userNotFound": "User Not Found"
+    "userNotFound": "User Not Found",
+    "sideBarHeader": "User Management",
+    "sideBarHeaderIcon": "U"
   },
   "form": {
     "fullName": "Full Name",

@@ -19,7 +19,9 @@
     "clear": "پاک‌سازی",
     "error": "خطا",
     "invalidId": "آی‌دی نامعتبر",
-    "userNotFound": "کاربر یافت نشد"
+    "userNotFound": "کاربر یافت نشد",
+    "sideBarHeader": "مدیریت کاربران",
+    "sideBarHeaderIcon": "م"
   },
   "form": {
     "fullName": "نام و نام خانوادگی",
