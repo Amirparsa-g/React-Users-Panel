@@ -89,8 +89,8 @@ const AppLayout = () => {
               more="w-fit"
               buttonType="primary"
             >
-              <span className="sm:hidden">+</span>
-              <span className="hidden sm:inline">
+              <span className="sm:hidden text-text-primary">+</span>
+              <span className="hidden sm:inline text-text-primary">
                 {t("pages.users.usersPageAddUserButton")}
               </span>
             </Buttons>
