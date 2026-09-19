@@ -2,7 +2,7 @@ import homeIcon from "../assets/home.svg";
 import usersIcon from "../assets/users.svg";
 import addUserIcon from "../assets/add.svg";
 import aboutIcon from "../assets/about.svg";
-import arrowBackIcon from "../assets/arrow-back.svg";
+
 import { useState } from "react";
 import Buttons from "./Buttons";
 import { useTranslation } from "react-i18next";
@@ -113,11 +113,29 @@ const DesktopSidebar = ({
           onClick={() => setIsClicked(false)}
           more="fixed bottom-15 md:hidden bg-primaryDarker border-none"
         >
-          <img
-            src={arrowBackIcon}
-            alt="back"
-            className="nav-img cursor-pointer"
-          />
+          {isFa && (
+            <svg
+              className="fill-[#1f1f1f] fill-text-secondary"
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#1f1f1f"
+            >
+              <path d="m700-300-57-56 84-84H120v-80h607l-83-84 57-56 179 180-180 180Z" />
+            </svg>
+          )}
+          {!isFa && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e3e3e3"
+            >
+              <path d="M400-240 160-480l240-240 56 58-142 142h486v80H314l142 142-56 58Z" />
+            </svg>
+          )}
         </Buttons>
       )}
     </aside>
