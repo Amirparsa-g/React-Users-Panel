@@ -3,11 +3,13 @@ import Buttons from "../components/Buttons";
 const LanguageToggleButton = () => {
   const { i18n } = useTranslation();
   const { t } = useTranslation();
+  const isFa = i18n.language === "fa";
   return (
     <Buttons
       comp="button"
       buttonType="neutral"
       more="rounded-full w-9 h-9 sm:w-10 sm:h-10 p-0 flex items-center justify-center text-xs sm:text-sm font-bold uppercase text-text-primary mx-5"
+      aria-label={t(isFa ? "common.switchToEnglish" : "common.switchToFarsi")}
       onClick={() => {
         if (i18n.language === "fa") i18n.changeLanguage("en");
         else i18n.changeLanguage("fa");
