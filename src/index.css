@@ -260,10 +260,10 @@
     @apply bg-surface;
   }
   .theme-toggle {
-    @apply inline-flex items-center gap-0 sm:gap-1 p-0.5 sm:p-1.5 rounded-full bg-surface border border-border mr-7;
+    @apply inline-flex items-center gap-0 sm:gap-1 p-0.5 sm:p-1.5 rounded-full bg-surface border border-border sm:mr-7;
   }
   .theme-toggle-btn {
-    @apply flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 rounded-full text-text-muted hover:text-text-primary transition-all duration-300 ease-in-out;
+    @apply flex items-center justify-center w-6 h-6 sm:w-9 sm:h-9 rounded-full text-text-muted hover:text-text-primary transition-all duration-300 ease-in-out;
   }
   .theme-toggle-btn.active {
     @apply bg-primary text-white;
