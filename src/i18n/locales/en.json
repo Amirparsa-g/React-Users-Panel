@@ -108,8 +108,8 @@
       "purpose": "Purpose",
       "purposeText": "This project is a user management training application built with Vite, React, TypeScript and Tailwind CSS. The current UI is expected to remain connected to the existing project logic and API.",
       "features": "Current features",
-      "stageFocus": "Stage 09 focus",
-      "stageText": "Rebuild the supplied static design inside the existing React application while preserving the current business logic and explaining every responsive and component decision during review.",
+      "stageFocus": "Stage 11 focus",
+      "stageText": "Make the panel multilingual by adding English and Farsi support with a language toggle, so every About-pane string renders in the selected language while keeping the existing business logic, API, routing, validation, and mappers untouched.",
       "featureList": {
         "loadUsers": "Load and display users",
         "searchFilter": "Search and filter users",
