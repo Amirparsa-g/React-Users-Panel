@@ -231,7 +231,9 @@ const UserCard = ({
                 </p>
                 <div className="flex gap-2 mt-3">
                   <p className={user.isActive ? "active-div" : "inactive-div"}>
-                    {user.isActive ? "Active" : "Inactive"}
+                    {user.isActive
+                      ? t("pages.filters.active")
+                      : t("pages.filters.inactive")}
                   </p>
                   <p
                     className={
@@ -242,7 +244,7 @@ const UserCard = ({
                           : "customer-div"
                     }
                   >
-                    {user.role}
+                    {t(`form.roles.${user.role}`)}
                   </p>
                 </div>
               </Buttons>
@@ -255,7 +257,7 @@ const UserCard = ({
               buttonType="HomePageLink"
               more="justify-center hover:bg-tr-hover hover:border-primaty-hover"
             >
-              View
+              {t("pages.tooltips.viewUser")}
             </Buttons>
             <Buttons
               comp="link"
@@ -263,7 +265,7 @@ const UserCard = ({
               navigation={`/users/${user.ID}/edit`}
               more="justify-center hover:bg-tr-hover hover:border-primaty-hover"
             >
-              Edit
+              {t("pages.tooltips.editUser")}
             </Buttons>
           </div>
         </div>

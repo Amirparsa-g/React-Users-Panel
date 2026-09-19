@@ -13,6 +13,8 @@ const AppLayout = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const location = useLocation();
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const isFa = i18n.language === "fa";
 
   return (
     <div className="flex w-full h-screen overflow-hidden">
@@ -38,68 +40,59 @@ const AppLayout = () => {
         />
       </div>
       <div className=" flex flex-1 flex-col h-full  ">
-        <header className="shrink-0 w-full h-20 flex justify-between items-center  z-10 gap-2 sm:gap-5 bg-surface">
+        <header
+          className={`shrink-0 w-full h-14 sm:h-16 flex items-center justify-between gap-2 px-3 sm:px-4 bg-surface z-10 ${isFa ? "flex-row" : ""}`}
+        >
           {!isClicked && (
-            <span className="absolute  left-2 md:left-22">
-              <Buttons
-                comp="button"
-                buttonType="secondary"
-                more="w-fit px-0 border-none shadow-none bg-surface"
-                onClick={() => setIsClicked(true)}
+            <Buttons
+              comp="button"
+              buttonType="secondary"
+              more="w-fit px-1 border-none shadow-none bg-surface"
+              onClick={() => setIsClicked(true)}
+            >
+              <svg
+                className="h-5 w-5 cursor-pointer fill-text-secondary"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 -960 960 960"
               >
-                <svg
-                  className="cursor-pointer  fill-text-secondary"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24px"
-                  viewBox="0 -960 960 960"
-                  width="24px"
-                >
-                  <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-                </svg>
-              </Buttons>
-            </span>
+                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+              </svg>
+            </Buttons>
           )}
           {isClicked && (
-            <span className="absolute md:left-62 ">
-              <Buttons
-                comp="button"
-                buttonType="secondary"
-                more="w-fit border-none shadow-none bg-surface"
-                onClick={() => setIsClicked(false)}
+            <Buttons
+              comp="button"
+              buttonType="secondary"
+              more="w-fit px-1 border-none shadow-none bg-surface"
+              onClick={() => setIsClicked(false)}
+            >
+              <svg
+                className="h-5 w-5 cursor-pointer fill-text-secondary"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 -960 960 960"
               >
-                <svg
-                  className="cursor-pointer   fill-text-secondary"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24px"
-                  viewBox="0 -960 960 960"
-                  width="24px"
-                  fill="#1f1f1f"
-                >
-                  <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                </svg>
-              </Buttons>
-            </span>
+                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+              </svg>
+            </Buttons>
           )}
 
-          <h1 className="text-body font-black block ml-14 sm:mx-auto text-text-primary ">
+          <h1
+            className={`flex-1 truncate px-2 text-sm font-black sm:text-body text-text-primary ${isFa ? "text-right" : ""}`}
+          >
             {t("common.sideBarHeader")}
           </h1>
-          <div className="flex items-center gap-2">
+
+          <div className="flex items-center gap-1 sm:gap-2">
             <Buttons
               comp="link"
               navigation={"/users/new"}
-              more=" md:hidden w-fit"
+              more="w-fit"
               buttonType="primary"
             >
-              +
-            </Buttons>
-            <Buttons
-              comp="link"
-              navigation={"/users/new"}
-              more="hidden md:flex w-fit"
-              buttonType="primary"
-            >
-              {t("pages.users.usersPageAddUserButton")}
+              <span className="sm:hidden text-text-primary">+</span>
+              <span className="hidden sm:inline text-text-primary">
+                {t("pages.users.usersPageAddUserButton")}
+              </span>
             </Buttons>
             <ThemeToggleButton />
             <LanguageToggleButton />
