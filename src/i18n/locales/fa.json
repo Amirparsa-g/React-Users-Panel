@@ -23,7 +23,9 @@
     "sideBarHeader": "مدیریت کاربران",
     "sideBarHeaderIcon": "م",
     "userRemovingConfirm": "آیا از حذف این کابر اطمینان دارید؟",
-    "emailNotRegistered": "هیچ ایمیلی ثبت نشده است"
+    "emailNotRegistered": "هیچ ایمیلی ثبت نشده است",
+    "switchToFarsi": "تغییر زبان به فارسی",
+    "switchToEnglish": "تغییر زبان به انگلیسی"
   },
   "form": {
     "fullName": "نام و نام خانوادگی",
