@@ -13,7 +13,7 @@ const LanguageToggleButton = () => {
         console.log(i18n.language);
       }}
     >
-      {i18n.language === "fa" ? "FA" : "EN"}
+      {i18n.language === "fa" ? "EN" : "FA"}
     </Buttons>
   );
 };
