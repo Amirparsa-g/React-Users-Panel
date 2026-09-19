@@ -64,7 +64,7 @@ const UsersPage = ({
       } catch (error) {
         if (error instanceof Error) setError(error.message);
         else {
-          setError("Unexpected Error");
+          setError(t("pages.errors.unexpected"));
         }
       } finally {
         setIsLoading(false);

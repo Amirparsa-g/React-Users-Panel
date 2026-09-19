@@ -123,7 +123,7 @@ const AddUserForm = ({
       return newUser;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
-      else setError("Unexpected Error");
+      else setError(t("pages.errors.unexpected"));
     } finally {
       setIsLoading(false);
     }
