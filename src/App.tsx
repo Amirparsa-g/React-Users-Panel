@@ -40,9 +40,8 @@ function App() {
       setError("");
       const apiUsers = await getUsers();
       setUserList(apiUsers);
-    } catch (error) {
-      if (error instanceof Error) setError(error.message);
-      else setError(t("pages.errors.unexpected"));
+    } catch {
+      setError(t("pages.errors.unexpected"));
     } finally {
       setIsLoading(false);
     }
@@ -78,9 +77,8 @@ function App() {
         if (deleteResponse.isDeleted) removeUserHandler(id);
         return true;
       }
-    } catch (error) {
-      if (error instanceof Error) setError(error.message);
-      else setError(t("pages.errors.unexpected"));
+    } catch {
+      setError(t("pages.errors.unexpected"));
       return false;
     } finally {
       setIsLoading(false);
@@ -99,9 +97,8 @@ function App() {
         return user;
       });
       setUserList(toggleUser);
-    } catch (error) {
-      if (error instanceof Error) setError(error.message);
-      else setError(t("pages.errors.unexpected"));
+    } catch {
+      setError(t("pages.errors.unexpected"));
     } finally {
       setIsLoading(false);
     }
@@ -123,9 +120,8 @@ function App() {
         ),
       );
       return true;
-    } catch (error) {
-      if (error instanceof Error) setError(error.message);
-      else setError(t("pages.errors.unexpected"));
+    } catch {
+      setError(t("pages.errors.unexpected"));
       return false;
     } finally {
       setIsLoading(false);
