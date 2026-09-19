@@ -43,9 +43,8 @@ const EditUserPage = ({
         : await getUserById(Number(userId));
       setClickedUser(user);
       return user;
-    } catch (error) {
-      if (error instanceof Error) setError(error.message);
-      else setError(t("pages.errors.unexpected"));
+    } catch {
+      setError(t("pages.errors.unexpected"));
       return null;
     } finally {
       setIsLoading(false);

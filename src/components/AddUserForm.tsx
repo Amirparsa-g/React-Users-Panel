@@ -122,9 +122,8 @@ const AddUserForm = ({
       const newUser = await addApiUser(formData);
 
       return newUser;
-    } catch (error) {
-      if (error instanceof Error) setError(error.message);
-      else setError(t("pages.errors.unexpected"));
+    } catch {
+      setError(t("pages.errors.unexpected"));
     } finally {
       setIsLoading(false);
     }
