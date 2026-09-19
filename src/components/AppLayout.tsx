@@ -90,7 +90,7 @@ const AppLayout = () => {
               buttonType="primary"
             >
               <span className="sm:hidden text-text-primary">+</span>
-              <span className="hidden sm:inline text-text-primary">
+              <span className="hidden sm:inline text-white">
                 {t("pages.users.usersPageAddUserButton")}
               </span>
             </Buttons>
