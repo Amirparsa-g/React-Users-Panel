@@ -22,7 +22,8 @@
     "userNotFound": "کاربر یافت نشد",
     "sideBarHeader": "مدیریت کاربران",
     "sideBarHeaderIcon": "م",
-    "userRemovingConfirm": "آیا از حذف این کابر اطمینان دارید؟"
+    "userRemovingConfirm": "آیا از حذف این کابر اطمینان دارید؟",
+    "emailNotRegistered": "هیچ ایمیلی ثبت نشده است"
   },
   "form": {
     "fullName": "نام و نام خانوادگی",
@@ -56,6 +57,15 @@
       "addUserError": "نمی‌توانید همان کاربر را دوباره اضافه کنید",
       "addUserSuccess": "کاربر با موفقیت اضافه شد"
     }
+  },
+  "titles": {
+    "dashboard": " داشبورد | مدیریت کاربران",
+    "users": "کاربران | مدیریت کاربران",
+    "addUser": "افزودن کاربر | مدیریت کاربران",
+    "editUser": "ویرایش کاربر | مدیریت کاربران",
+    "about": "درباره | مدیریت کاربران",
+    "userDetails": "جزییات کاربر | مدیریت کاربران",
+    "notFound": "خطای 404 | مدیریت کاربران"
   },
   "pages": {
     "dashboard": {

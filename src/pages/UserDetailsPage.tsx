@@ -71,8 +71,8 @@ const UserDetailsPage = ({
   }, [userId]);
 
   useEffect(() => {
-    document.title = "User Details | User Management";
-  }, []);
+    document.title = t("titles.userDetails");
+  }, [isFa]);
 
   if (isLoading) {
     return (
@@ -191,7 +191,7 @@ const UserDetailsPage = ({
             <div className="p-5 border-b border-gray-100">
               <p className="label-form">{t("form.role")}</p>
               <p className="text-body font-bold break-all capitalize text-text-secondary">
-                {clickedUser.role}
+                {t(`form.roles.${clickedUser.role}`)}
               </p>
             </div>
 

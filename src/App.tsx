@@ -130,10 +130,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    document.title = `User Managment -${UsersList.length} Users`;
-  }, [UsersList.length]);
-
   const { i18n } = useTranslation();
   useEffect(() => {
     const currentLang = i18n.language;

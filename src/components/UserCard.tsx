@@ -61,7 +61,7 @@ const UserCard = ({
                     {user.fullName}
                   </p>
                   <p className="text-small break-all caption">
-                    {user.email ? user.email : "no email registered"}
+                    {user.email ? user.email : t("common.emailNotRegistered")}
                   </p>
                 </Buttons>
               </div>

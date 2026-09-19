@@ -22,7 +22,8 @@
     "userNotFound": "User Not Found",
     "sideBarHeader": "User Management",
     "sideBarHeaderIcon": "U",
-    "userRemovingConfirm": "are you sure you want to remove this use?"
+    "userRemovingConfirm": "are you sure you want to remove this use?",
+    "emailNotRegistered": "no email registered"
   },
   "form": {
     "fullName": "Full Name",
@@ -56,6 +57,15 @@
       "addUserError": "you cant add the same user twice",
       "addUserSuccess": "user Added Successfully"
     }
+  },
+  "titles": {
+    "dashboard": "Dashboard | User Management",
+    "users": "Users | User Management",
+    "addUser": "Add User | User Management",
+    "editUser": "Edit User | User Management",
+    "about": "About | User Management",
+    "userDetails": "User Details | User Management",
+    "notFound": "404 | User Management"
   },
   "pages": {
     "dashboard": {

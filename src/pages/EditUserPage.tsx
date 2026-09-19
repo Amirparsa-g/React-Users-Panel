@@ -68,6 +68,10 @@ const EditUserPage = ({
     void settingUser();
   }, [userId]);
 
+  useEffect(() => {
+    document.title = t("titles.editUser");
+  }, [isFa]);
+
   return (
     <div className="w-full md:w-3/4">
       <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-5">

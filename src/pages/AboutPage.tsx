@@ -3,9 +3,11 @@ import { useTranslation } from "react-i18next";
 
 const AboutPage = () => {
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const isFa = i18n.language === "fa";
   useEffect(() => {
-    document.title = "About | User Management";
-  }, []);
+    document.title = t("titles.about");
+  }, [isFa]);
   return (
     <>
       <h2 className="text-header2 font-bold w-full ">
