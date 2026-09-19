@@ -19,6 +19,8 @@ const UserList = ({
 }) => {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const isFa = i18n.language === "fa";
   const mappedUsers = users.map((user) => (
     <UserCard
       key={user.ID}
@@ -34,10 +36,12 @@ const UserList = ({
   return (
     <div className="w-full md:userStats-card md:p-0 md:overflow-hidden">
       {!isMobile && (
-        <table className="hidden md:table md:w-full md:table-fixed md:border-collapse">
+        <table className="hidden md:table md:w-full md:table-fixed md:border-collapse ">
           <thead>
             <tr className="bg-surface border-b border-gray-200">
-              <th className="w-6/12 text-left px-4 py-3 text-small font-bold uppercase tracking-wide text-text-secondary">
+              <th
+                className={`"w-6/12 text-left px-4 py-3 text-small font-bold uppercase tracking-wide text-text-secondary  ${isFa && "text-right"}`}
+              >
                 {t("pages.userList.tableHeaders.user")}
               </th>
               <th className="text-center px-4 py-3 text-small font-bold uppercase tracking-wide text-text-secondary">
