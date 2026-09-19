@@ -61,7 +61,7 @@ const UserCard = ({
                     {user.fullName}
                   </p>
                   <p className="text-small break-all caption">
-                    {user.email ? user.email : "no email registered"}
+                    {user.email ? user.email : t("common.emailNotRegistered")}
                   </p>
                 </Buttons>
               </div>
@@ -227,7 +227,7 @@ const UserCard = ({
                   className="
                  break-all caption"
                 >
-                  {user.email ? user.email : "no email registered"}
+                  {user.email ? user.email : t("common.emailNotRegistered")}
                 </p>
                 <div className="flex gap-2 mt-3">
                   <p className={user.isActive ? "active-div" : "inactive-div"}>

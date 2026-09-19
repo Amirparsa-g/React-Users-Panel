@@ -49,6 +49,8 @@ const UsersPage = ({
   const [isServer, setIsServer] = useState<boolean>(false);
   const [serverResult, setServerResult] = useState<User[]>([]);
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const isFa = i18n.language === "fa";
   const term = searchedTerm.toLowerCase().trim();
   useEffect(() => {
     if (!isServer) return;
@@ -62,7 +64,7 @@ const UsersPage = ({
       } catch (error) {
         if (error instanceof Error) setError(error.message);
         else {
-          setError("Unexpected Error");
+          setError(t("pages.errors.unexpected"));
         }
       } finally {
         setIsLoading(false);
@@ -88,8 +90,8 @@ const UsersPage = ({
   });
 
   useEffect(() => {
-    document.title = "Users | User Management";
-  }, []);
+    document.title = t("titles.users");
+  }, [isFa]);
 
   let content;
   if (isLoading) {

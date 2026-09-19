@@ -1,6 +1,6 @@
 import type { UserRole } from "../types/user";
 import type { FormError, FormPropType } from "../types/userForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { User } from "../types/user";
 import { useNavigate } from "react-router-dom";
 import { addApiUser } from "../services/userApi";
@@ -35,7 +35,9 @@ const AddUserForm = ({
 }) => {
   const navigate = useNavigate();
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
-
+  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const isFa = i18n.language === "fa";
   const [formData, setFormData] = useState<FormPropType>({
     fullName: user?.fullName ?? "",
     age: user?.age.toString() ?? "",
@@ -49,7 +51,6 @@ const AddUserForm = ({
     roleError: "",
     emailError: "",
   });
-
   const Validation = () => {
     let isValid = true;
     const newError: FormError = {};
@@ -123,12 +124,19 @@ const AddUserForm = ({
       return newUser;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
-      else setError("Unexpected Error");
+      else setError(t("pages.errors.unexpected"));
     } finally {
       setIsLoading(false);
     }
   };
-  const { t } = useTranslation();
+
+  useEffect(() => {
+    const hasError = Object.values(FormError).some((msg) => msg !== "");
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: re-validate so visible error messages re-translate when the language changes
+    if (hasError) Validation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: re-validate only when the language changes
+  }, [isFa]);
+
   if (isLoading)
     return (
       <div>

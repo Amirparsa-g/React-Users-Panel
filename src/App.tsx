@@ -26,12 +26,14 @@ import EditUserPage from "./pages/EditUserPage";
 import ScrollToTop from "./components/ScrollToTop";
 import ThemeProvider from "./Contexts/ThemeProvider";
 import { useTranslation } from "react-i18next";
+
 type StatusFilters = "active" | "inactive" | "all";
 type RoleFilters = "admin" | "operator" | "customer" | "all";
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [UsersList, setUserList] = useState<User[]>([]);
+  const { t } = useTranslation();
   const loadUsers = async () => {
     try {
       setIsLoading(true);
@@ -40,7 +42,7 @@ function App() {
       setUserList(apiUsers);
     } catch (error) {
       if (error instanceof Error) setError(error.message);
-      else setError("Unexpected Error");
+      else setError(t("pages.errors.unexpected"));
     } finally {
       setIsLoading(false);
     }
@@ -55,7 +57,7 @@ function App() {
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<StatusFilters>("all");
   const [role, setRole] = useState<RoleFilters>("all");
-  const { t } = useTranslation();
+
   const addUserHandler = (newUser: User) => {
     const isAvailable = UsersList.find((user) => user.ID === newUser.ID);
     if (isAvailable) alert(t("form.errors.addUserError"));
@@ -78,7 +80,7 @@ function App() {
       }
     } catch (error) {
       if (error instanceof Error) setError(error.message);
-      else setError("Unexpected Error");
+      else setError(t("pages.errors.unexpected"));
       return false;
     } finally {
       setIsLoading(false);
@@ -99,7 +101,7 @@ function App() {
       setUserList(toggleUser);
     } catch (error) {
       if (error instanceof Error) setError(error.message);
-      else setError("Unexpected Error");
+      else setError(t("pages.errors.unexpected"));
     } finally {
       setIsLoading(false);
     }
@@ -123,16 +125,12 @@ function App() {
       return true;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
-      else setError("Unexpected Error");
+      else setError(t("pages.errors.unexpected"));
       return false;
     } finally {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    document.title = `User Managment -${UsersList.length} Users`;
-  }, [UsersList.length]);
 
   const { i18n } = useTranslation();
   useEffect(() => {

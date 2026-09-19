@@ -45,7 +45,7 @@ const EditUserPage = ({
       return user;
     } catch (error) {
       if (error instanceof Error) setError(error.message);
-      else setError("Unexpected Error");
+      else setError(t("pages.errors.unexpected"));
       return null;
     } finally {
       setIsLoading(false);
@@ -67,6 +67,10 @@ const EditUserPage = ({
     };
     void settingUser();
   }, [userId]);
+
+  useEffect(() => {
+    document.title = t("titles.editUser");
+  }, [isFa]);
 
   return (
     <div className="w-full md:w-3/4">
