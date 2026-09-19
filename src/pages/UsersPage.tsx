@@ -147,8 +147,8 @@ const UsersPage = ({
           />
         </div>
         <div className="md:w-4/12">
-          <div className="flex flex-col md:flex-row gap-2">
-            <div className="flex-1">
+          <div className="flex flex-col md:flex-row md:flex-wrap gap-2">
+            <div className="flex-1 md:min-w-[200px]">
               <label htmlFor="selectStatus">
                 <p className="font-bold text-small label-form">
                   {t("pages.filters.status")}
@@ -178,7 +178,7 @@ const UsersPage = ({
               </select>
             </div>
 
-            <div className="flex-1">
+            <div className="flex-1 md:min-w-[150px]">
               <label htmlFor="selectRole">
                 <p className="font-bold text-small label-form">
                   {t("pages.filters.role")}
