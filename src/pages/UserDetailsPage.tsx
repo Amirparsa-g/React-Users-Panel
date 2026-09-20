@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import type { User } from "../types/user";
 import type { FormPropType } from "../types/userForm";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getUserById } from "../services/userApi";
 import Buttons from "../components/Buttons";
 import Loading from "../components/Loading";
@@ -34,7 +34,7 @@ const UserDetailsPage = ({
   const [clickedUser, setClickedUser] = useState<User | undefined>(undefined);
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
 
-  const setUser = async () => {
+  const setUser = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
@@ -50,7 +50,7 @@ const UserDetailsPage = ({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [UsersList, setError, setIsLoading, t, userId]);
 
   useEffect(() => {
     const settingUser = async () => {
@@ -67,11 +67,11 @@ const UserDetailsPage = ({
       }
     };
     void settingUser();
-  }, [userId]);
+  }, [userId, navigate, setUser, t]);
 
   useEffect(() => {
     document.title = t("titles.userDetails");
-  }, [isFa]);
+  }, [t]);
 
   if (isLoading) {
     return (
@@ -105,7 +105,7 @@ const UserDetailsPage = ({
             <span>
               {isFa && (
                 <svg
-                  className="fill-[#1f1f1f] fill-text-secondary"
+                  className=" fill-text-secondary"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"

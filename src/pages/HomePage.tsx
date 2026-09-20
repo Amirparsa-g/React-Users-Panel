@@ -19,7 +19,7 @@ const HomePage = ({
   const isFa = i18n.language === "fa";
   useEffect(() => {
     document.title = t("titles.dashboard");
-  }, [isFa]);
+  }, [t]);
   return (
     <div className="mb-10">
       <h1 className="text-header2 font-header1 text-text-primary">

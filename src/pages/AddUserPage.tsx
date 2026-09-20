@@ -28,7 +28,7 @@ const AddUserPage = ({
   const isFa = i18n.language === "fa";
   useEffect(() => {
     document.title = t("titles.addUser");
-  }, [isFa]);
+  }, [t]);
   return (
     <div className="w-full md:w-3/4">
       <header className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-5">

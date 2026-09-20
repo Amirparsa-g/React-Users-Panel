@@ -3,7 +3,7 @@ import AddUserForm from "../components/AddUserForm";
 import type { User } from "../types/user";
 import type { FormPropType } from "../types/userForm";
 import { getUserById } from "../services/userApi";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Buttons from "../components/Buttons";
 import { useTranslation } from "react-i18next";
 
@@ -33,7 +33,7 @@ const EditUserPage = ({
   const { t } = useTranslation();
   const { i18n } = useTranslation();
   const isFa = i18n.language === "fa";
-  const setUser = async () => {
+  const setUser = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
@@ -49,7 +49,7 @@ const EditUserPage = ({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [UsersList, setError, setIsLoading, t, userId]);
   useEffect(() => {
     const settingUser = async () => {
       const fetchedUser = await setUser();
@@ -65,11 +65,11 @@ const EditUserPage = ({
       }
     };
     void settingUser();
-  }, [userId]);
+  }, [userId, navigate, setUser, t]);
 
   useEffect(() => {
     document.title = t("titles.editUser");
-  }, [isFa]);
+  }, [t]);
 
   return (
     <div className="w-full md:w-3/4">
