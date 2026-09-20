@@ -63,7 +63,7 @@ const HomePage = ({
               {t("pages.home.actions.viewUsers")}
               {!isFa && (
                 <svg
-                  className="fill-[#1f1f1f] fill-text-secondary"
+                  className=" fill-text-secondary"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -94,7 +94,7 @@ const HomePage = ({
               {t("pages.home.actions.addUser")}
               {!isFa && (
                 <svg
-                  className="fill-[#1f1f1f] fill-text-secondary"
+                  className=" fill-text-secondary"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"
@@ -124,7 +124,7 @@ const HomePage = ({
               {t("pages.home.actions.aboutProject")}
               {!isFa && (
                 <svg
-                  className="fill-[#1f1f1f] fill-text-secondary"
+                  className="fill-text-secondary"
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
                   viewBox="0 -960 960 960"

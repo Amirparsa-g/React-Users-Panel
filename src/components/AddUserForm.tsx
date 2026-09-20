@@ -123,7 +123,7 @@ const AddUserForm = ({
 
       return newUser;
     } catch {
-      setError(t("pages.errors.unexpected"));
+      setError("pages.errors.unexpected");
     } finally {
       setIsLoading(false);
     }
@@ -175,7 +175,7 @@ const AddUserForm = ({
       >
         {error && (
           <p className="text-center text-xl m-2 font-semibold text-danger">
-            {error}
+            {t(error)}
           </p>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

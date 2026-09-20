@@ -61,13 +61,13 @@ const UsersPage = ({
           term === "" ? [] : await serverSearch(term);
         setServerResult(serachedServerUsers);
       } catch {
-        setError(t("pages.errors.unexpected"));
+        setError("pages.errors.unexpected");
       } finally {
         setIsLoading(false);
       }
     };
     void fetchServerResult();
-  }, [searchedTerm, isServer, term, setError, setIsLoading, t]);
+  }, [searchedTerm, isServer, term, setError, setIsLoading]);
   const searchedUsers =
     isServer && searchedTerm.trim() !== ""
       ? serverResult
