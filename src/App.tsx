@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import "../src/i18n/index";
 import "./App.css";
-//import UserList from "./components/UserList";
+
 import { type User } from "./types/user";
 
 import HomePage from "./pages/HomePage";
 
-// import users from "./data/users";
-//import EmptyState from "./components/EmptyState";
 import type { FormPropType } from "./types/userForm";
 import { Routes, Route } from "react-router-dom";
 import UsersPage from "./pages/UsersPage";
@@ -42,11 +40,11 @@ function App() {
       const apiUsers = await getUsers();
       setUserList(apiUsers);
     } catch {
-      setError(t("pages.errors.unexpected"));
+      setError("pages.errors.unexpected");
     } finally {
       setIsLoading(false);
     }
-  }, [t]);
+  }, []);
   useEffect(() => {
     const load = async () => {
       await loadUsers();
@@ -80,7 +78,7 @@ function App() {
         return true;
       }
     } catch {
-      setError(t("pages.errors.unexpected"));
+      setError("pages.errors.unexpected");
       return false;
     } finally {
       setIsLoading(false);
@@ -101,7 +99,7 @@ function App() {
       });
       setUserList(toggleUser);
     } catch {
-      setError(t("pages.errors.unexpected"));
+      setError("pages.errors.unexpected");
     } finally {
       setIsLoading(false);
     }
@@ -124,7 +122,7 @@ function App() {
       );
       return true;
     } catch {
-      setError(t("pages.errors.unexpected"));
+      setError("pages.errors.unexpected");
       return false;
     } finally {
       setIsLoading(false);

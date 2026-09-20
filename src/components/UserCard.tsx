@@ -23,7 +23,9 @@ const UserCard = ({
   return (
     <>
       {error && (
-        <p className="text-danger text-xl text-center font-semibold">{error}</p>
+        <p className="text-danger text-xl text-center font-semibold">
+          {t(error)}
+        </p>
       )}
       {!isMobile && (
         <tr

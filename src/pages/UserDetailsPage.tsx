@@ -29,6 +29,7 @@ const UserDetailsPage = ({
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { i18n } = useTranslation();
+  const [Isalert, setAlert] = useState<string | null>(null);
   const isFa = i18n.language === "fa";
 
   const [clickedUser, setClickedUser] = useState<User | undefined>(undefined);
@@ -45,29 +46,31 @@ const UserDetailsPage = ({
       setClickedUser(user);
       return user;
     } catch {
-      setError(t("pages.errors.unexpected"));
+      setError("pages.errors.unexpected");
       return null;
     } finally {
       setIsLoading(false);
     }
-  }, [UsersList, setError, setIsLoading, t, userId]);
+  }, [UsersList, setError, setIsLoading, userId]);
 
   useEffect(() => {
     const settingUser = async () => {
       const id = Number(userId);
       if (!userId || !Number.isInteger(id)) {
-        alert(t("common.invalidId"));
+        setAlert("common.invalidId");
         navigate("/users");
         return;
       }
       const fetchedUser = await setUser();
       if (!fetchedUser) {
-        alert(t("common.userNotFound"));
+        setAlert("common.userNotFound");
         navigate("/users");
       }
     };
     void settingUser();
-  }, [userId, navigate, setUser, t]);
+  }, [userId, navigate, setUser]);
+
+  if (Isalert) alert(t(Isalert));
 
   useEffect(() => {
     document.title = t("titles.userDetails");
@@ -88,8 +91,8 @@ const UserDetailsPage = ({
   return (
     <div className="flex flex-col items-center w-full px-4 overflow-x-hidden box-border pb-10">
       {error && (
-        <h2 className="text-danger text-2xl md:text-3xl font-semibold mb-4 text-center break-words w-full">
-          {error}
+        <h2 className="text-danger text-2xl md:text-3xl font-semibold mb-4 text-center  w-full">
+          {t(error)}
         </h2>
       )}
 

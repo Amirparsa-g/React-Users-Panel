@@ -28,6 +28,7 @@ const EditUserPage = ({
   setError: (value: string | null) => void;
 }) => {
   const [clickedUser, setClickedUser] = useState<User | undefined>(undefined);
+  const [Isalert, setAlert] = useState<string | null>(null);
   const { userId } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -44,12 +45,12 @@ const EditUserPage = ({
       setClickedUser(user);
       return user;
     } catch {
-      setError(t("pages.errors.unexpected"));
+      setError("pages.errors.unexpected");
       return null;
     } finally {
       setIsLoading(false);
     }
-  }, [UsersList, setError, setIsLoading, t, userId]);
+  }, [UsersList, setError, setIsLoading, userId]);
   useEffect(() => {
     const settingUser = async () => {
       const fetchedUser = await setUser();
@@ -57,15 +58,19 @@ const EditUserPage = ({
         const id = Number(userId);
         if (!userId || !Number.isInteger(id)) {
           navigate("/users");
-          alert(t("common.invalidId"));
+          setAlert("common.invalidId");
           return;
         }
-        alert(t("common.userNotFound"));
+        setAlert("common.userNotFound");
         navigate("/users");
       }
     };
     void settingUser();
-  }, [userId, navigate, setUser, t]);
+  }, [userId, navigate, setUser]);
+
+  if (Isalert) {
+    alert(t(Isalert));
+  }
 
   useEffect(() => {
     document.title = t("titles.editUser");

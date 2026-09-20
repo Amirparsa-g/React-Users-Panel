@@ -5,7 +5,7 @@ import ButtomNav from "./ButtomNav";
 import { motion } from "framer-motion";
 import ScrollToTop from "./ScrollToTop";
 import Buttons from "./Buttons";
-//import ThemeProvider from "../Contexts/ThemeProvider";
+
 import ThemeToggleButton from "./ThemeToggleButton";
 import LanguageToggleButton from "./LanguageToggleButton";
 import { useTranslation } from "react-i18next";
