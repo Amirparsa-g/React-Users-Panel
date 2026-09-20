@@ -9,7 +9,7 @@ const NotFoundPage = () => {
   const isFa = i18n.language === "fa";
   useEffect(() => {
     document.title = t("titles.notFound");
-  }, [isFa]);
+  }, [t]);
   return (
     <div className="userStats-card w-full">
       <h2 className="text-[160px] text-center text-gray-400">404</h2>

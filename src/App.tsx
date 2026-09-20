@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "../src/i18n/index";
 import "./App.css";
 //import UserList from "./components/UserList";
@@ -34,7 +34,8 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [UsersList, setUserList] = useState<User[]>([]);
   const { t } = useTranslation();
-  const loadUsers = async () => {
+
+  const loadUsers = useCallback(async () => {
     try {
       setIsLoading(true);
       setError("");
@@ -45,13 +46,13 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [t]);
   useEffect(() => {
     const load = async () => {
       await loadUsers();
     };
     load();
-  }, []);
+  }, [loadUsers]);
 
   const [searchedTerm, setSearchTerm] = useState("");
   const [status, setUserStatus] = useState<StatusFilters>("all");
@@ -72,6 +73,7 @@ function App() {
   const removeApiUser = async (id: number) => {
     try {
       setError(null);
+      setIsLoading(true);
       if (confirm(t("common.userRemovingConfirm"))) {
         const deleteResponse = await deleteApiUser(id);
         if (deleteResponse.isDeleted) removeUserHandler(id);
@@ -87,6 +89,7 @@ function App() {
   const ChangeStatusHandler = async (ediitingUser: User) => {
     try {
       setError(null);
+      setIsLoading(true);
       const editedUser = await editApiUserStatus(ediitingUser);
       const toggleUser = UsersList.map((user) => {
         if (user.ID === editedUser.ID)

@@ -49,8 +49,7 @@ const UsersPage = ({
   const [isServer, setIsServer] = useState<boolean>(false);
   const [serverResult, setServerResult] = useState<User[]>([]);
   const { t } = useTranslation();
-  const { i18n } = useTranslation();
-  const isFa = i18n.language === "fa";
+
   const term = searchedTerm.toLowerCase().trim();
   useEffect(() => {
     if (!isServer) return;
@@ -61,17 +60,14 @@ const UsersPage = ({
         const serachedServerUsers: User[] =
           term === "" ? [] : await serverSearch(term);
         setServerResult(serachedServerUsers);
-      } catch (error) {
-        if (error instanceof Error) setError(error.message);
-        else {
-          setError(t("pages.errors.unexpected"));
-        }
+      } catch {
+        setError(t("pages.errors.unexpected"));
       } finally {
         setIsLoading(false);
       }
     };
     void fetchServerResult();
-  }, [searchedTerm, isServer, term]);
+  }, [searchedTerm, isServer, term, setError, setIsLoading, t]);
   const searchedUsers =
     isServer && searchedTerm.trim() !== ""
       ? serverResult
@@ -91,7 +87,7 @@ const UsersPage = ({
 
   useEffect(() => {
     document.title = t("titles.users");
-  }, [isFa]);
+  }, [t]);
 
   let content;
   if (isLoading) {
