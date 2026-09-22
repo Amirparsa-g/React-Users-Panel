@@ -24,10 +24,7 @@ const AddUserForm = ({
   UsersList: User[];
   user?: User | null;
   onRemove: (id: number) => Promise<boolean | undefined>;
-  editUserHandeler?: (
-    formData: FormPropType,
-    id: number,
-  ) => Promise<boolean | undefined>;
+  editUserHandeler?: (formData: FormPropType, id: number) => Promise<boolean | undefined>;
   setIsLoading: (value: boolean) => void;
   setError: (value: string | null) => void;
   isLoading: boolean;
@@ -173,11 +170,7 @@ const AddUserForm = ({
           navigate("/users");
         }}
       >
-        {error && (
-          <p className="text-center text-xl m-2 font-semibold text-danger">
-            {t(error)}
-          </p>
-        )}
+        {error && <p className="text-center text-xl m-2 font-semibold text-danger">{t(error)}</p>}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <label htmlFor="userFullName" className="label-form">
             {t("form.fullName")}
@@ -199,9 +192,7 @@ const AddUserForm = ({
               }}
               className="w-full border control"
             />
-            {FormError.nameError !== "" && (
-              <p className="text-danger">{FormError.nameError}</p>
-            )}
+            {FormError.nameError !== "" && <p className="text-danger">{FormError.nameError}</p>}
           </label>
           <label htmlFor="userAge" className="label-form">
             {t("form.age")}
@@ -216,9 +207,7 @@ const AddUserForm = ({
               }}
               className="control"
             />
-            {FormError.ageError !== "" && (
-              <p className="text-danger">{FormError.ageError}</p>
-            )}
+            {FormError.ageError !== "" && <p className="text-danger">{FormError.ageError}</p>}
           </label>
           <label htmlFor="userRole" className="label-form">
             {t("form.role")}
@@ -244,9 +233,7 @@ const AddUserForm = ({
               <option value="operator">{t("form.roles.operator")}</option>
               <option value="customer">{t("form.roles.customer")}</option>
             </select>
-            {FormError.roleError !== "" && (
-              <p className="text-danger">{FormError.roleError}</p>
-            )}
+            {FormError.roleError !== "" && <p className="text-danger">{FormError.roleError}</p>}
           </label>
           <div className="label-form ">
             <label htmlFor="activityDiv">
@@ -260,9 +247,7 @@ const AddUserForm = ({
                     type="radio"
                     value={"Active"}
                     checked={formData.isActive}
-                    onChange={() =>
-                      setFormData({ ...formData, isActive: true })
-                    }
+                    onChange={() => setFormData({ ...formData, isActive: true })}
                     className="m-2"
                   />
                 </label>
@@ -273,9 +258,7 @@ const AddUserForm = ({
                     type="radio"
                     value={"inActive"}
                     checked={!formData.isActive}
-                    onChange={() =>
-                      setFormData({ ...formData, isActive: false })
-                    }
+                    onChange={() => setFormData({ ...formData, isActive: false })}
                     className="m-2"
                   />
                   <br />
@@ -297,9 +280,7 @@ const AddUserForm = ({
                 }}
                 className="control"
               />
-              {FormError.emailError !== "" && (
-                <p className="text-danger">{FormError.emailError}</p>
-              )}
+              {FormError.emailError !== "" && <p className="text-danger">{FormError.emailError}</p>}
             </label>
           </div>
         </div>

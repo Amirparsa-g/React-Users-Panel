@@ -22,11 +22,7 @@ const UserCard = ({
   const { t } = useTranslation();
   return (
     <>
-      {error && (
-        <p className="text-danger text-xl text-center font-semibold">
-          {t(error)}
-        </p>
-      )}
+      {error && <p className="text-danger text-xl text-center font-semibold">{t(error)}</p>}
       {!isMobile && (
         <tr
           aria-disabled={isLoading}
@@ -44,9 +40,7 @@ const UserCard = ({
                 }
               >
                 <div>
-                  <p className="text-center text-text-primary">
-                    {user.fullName[0]}
-                  </p>
+                  <p className="text-center text-text-primary">{user.fullName[0]}</p>
                   <span
                     className={`block  absolute end-px bottom-0 size-3 rounded-full ${user.isActive ? "bg-success" : "bg-danger"}`}
                   ></span>
@@ -59,9 +53,7 @@ const UserCard = ({
                   navigation={`/users/${user.ID}`}
                   buttonType="secondary"
                 >
-                  <p className="text-body  font-bold text-text-primary">
-                    {user.fullName}
-                  </p>
+                  <p className="text-body  font-bold text-text-primary">{user.fullName}</p>
                   <p className="text-small break-all caption">
                     {user.email ? user.email : t("common.emailNotRegistered")}
                   </p>
@@ -207,9 +199,7 @@ const UserCard = ({
               }
             >
               <div>
-                <p className="text-center font-bold text-text-primary">
-                  {user.fullName[0]}
-                </p>
+                <p className="text-center font-bold text-text-primary">{user.fullName[0]}</p>
                 <span
                   className={`block md:hidden absolute end-px bottom-0 size-3 rounded-full ${user.isActive ? "bg-success" : "bg-danger"}`}
                 ></span>
@@ -222,9 +212,7 @@ const UserCard = ({
                 more="text-black border-none w-fit shadow-none p-0"
                 buttonType="secondary"
               >
-                <p className="text-body font-bold text-text-primary">
-                  {user.fullName}
-                </p>
+                <p className="text-body font-bold text-text-primary">{user.fullName}</p>
                 <p
                   className="
                  break-all caption"
@@ -233,9 +221,7 @@ const UserCard = ({
                 </p>
                 <div className="flex gap-2 mt-3">
                   <p className={user.isActive ? "active-div" : "inactive-div"}>
-                    {user.isActive
-                      ? t("pages.filters.active")
-                      : t("pages.filters.inactive")}
+                    {user.isActive ? t("pages.filters.active") : t("pages.filters.inactive")}
                   </p>
                   <p
                     className={

@@ -138,9 +138,7 @@ const UserDetailsPage = ({
           <div
             className={`flex justify-center items-center w-20 h-20 rounded-full border shrink-0 ${clickedUser.role === "admin" ? "admin-div" : clickedUser.role === "operator" ? "operator-div" : "customer-div"}`}
           >
-            <p className="text-center text-3xl font-bold uppercase">
-              {clickedUser.fullName[0]}
-            </p>
+            <p className="text-center text-3xl font-bold uppercase">{clickedUser.fullName[0]}</p>
           </div>
 
           <div className="flex flex-col justify-center gap-2 sm:items-start overflow-hidden w-full">
@@ -160,9 +158,7 @@ const UserDetailsPage = ({
               >
                 {t(`form.roles.${clickedUser.role}`)}
               </p>
-              <p
-                className={clickedUser.isActive ? "active-div" : "inactive-div"}
-              >
+              <p className={clickedUser.isActive ? "active-div" : "inactive-div"}>
                 {clickedUser.isActive ? t("form.active") : t("form.inactive")}
               </p>
             </div>
@@ -179,9 +175,7 @@ const UserDetailsPage = ({
             </div>
             <div className="p-5 border-b border-gray-100">
               <p className="label-form">{t("form.age")}</p>
-              <p className="text-body font-bold break-all text-text-secondary">
-                {clickedUser.age}
-              </p>
+              <p className="text-body font-bold break-all text-text-secondary">{clickedUser.age}</p>
             </div>
 
             <div className="p-5 border-b border-gray-100 sm:border-r">
@@ -205,16 +199,12 @@ const UserDetailsPage = ({
                   setUpdatingUserId(clickedUser.ID);
                   await changeStatus(clickedUser);
                   setUpdatingUserId(null);
-                  setClickedUser((prev) =>
-                    prev ? { ...prev, isActive: !prev.isActive } : prev,
-                  );
+                  setClickedUser((prev) => (prev ? { ...prev, isActive: !prev.isActive } : prev));
                 }}
                 buttonType="neutral"
                 more="whitespace-nowrap h-fit w-full md:w-fit text-text-primary flex justify-center items-center"
               >
-                <p className="text-text-primary">
-                  {t("pages.tooltips.changeStatus")}
-                </p>
+                <p className="text-text-primary">{t("pages.tooltips.changeStatus")}</p>
               </Buttons>
               <Buttons
                 comp="link"

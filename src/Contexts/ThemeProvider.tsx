@@ -6,11 +6,7 @@ import { useMediaQuery } from "../hooks/useMediaQuery";
 const getInitialTheme = (): ThemeMode => {
   if (typeof window !== "undefined") {
     const savedTheme = localStorage.getItem("theme");
-    if (
-      savedTheme === "light" ||
-      savedTheme === "dark" ||
-      savedTheme === "system"
-    ) {
+    if (savedTheme === "light" || savedTheme === "dark" || savedTheme === "system") {
       return savedTheme;
     }
   }
@@ -18,9 +14,7 @@ const getInitialTheme = (): ThemeMode => {
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const ThemeContext = createContext<themeContextType | undefined>(
-  undefined,
-);
+export const ThemeContext = createContext<themeContextType | undefined>(undefined);
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
@@ -35,11 +29,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("theme", theme);
   }, [theme, systemIsDark]);
 
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
 };
 
 export default ThemeProvider;

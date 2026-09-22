@@ -7,12 +7,7 @@ const UserError = ({ LoadUser }: { LoadUser: () => void }) => {
     <div className="flex flex-col userStats-card border border-dotted w-full">
       <p className="text-small font-bold">{t("common.error")}</p>
       <p className="caption mb-5">{t("pages.errors.userError")} </p>
-      <Buttons
-        comp="button"
-        onClick={LoadUser}
-        buttonType="neutral"
-        more="dark:text-white"
-      >
+      <Buttons comp="button" onClick={LoadUser} buttonType="neutral" more="dark:text-white">
         {t("common.retry")}
       </Buttons>
     </div>

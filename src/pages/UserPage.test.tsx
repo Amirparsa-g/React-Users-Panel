@@ -25,12 +25,8 @@ vi.mock("../hooks/useMediaQuery", () => ({
 }));
 // 3. ایجاد یک کامپوننت پدرِ شبیه‌سازی‌شده برای مدیریت استیتِ فیلترها در محیط تست
 const UsersPageWrapper = ({ initialUsers }: { initialUsers: User[] }) => {
-  const [status, setUserStatus] = useState<"active" | "inactive" | "all">(
-    "all",
-  );
-  const [role, setRole] = useState<"admin" | "operator" | "customer" | "all">(
-    "all",
-  );
+  const [status, setUserStatus] = useState<"active" | "inactive" | "all">("all");
+  const [role, setRole] = useState<"admin" | "operator" | "customer" | "all">("all");
   const [searchedTerm, setSearchTerm] = useState("");
 
   return (

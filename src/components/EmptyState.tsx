@@ -5,9 +5,7 @@ const EmptyState = () => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col userStats-card border border-dotted w-full">
-      <p className="text-small font-bold text-text-primary">
-        {t("pages.empty.title")}
-      </p>
+      <p className="text-small font-bold text-text-primary">{t("pages.empty.title")}</p>
       <p className="caption mb-5">{t("pages.empty.message")}</p>
       <Buttons
         buttonType="primary"

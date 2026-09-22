@@ -16,18 +16,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 type ButtonOrAnchorRef = HTMLButtonElement | HTMLAnchorElement;
 
 const Buttons = forwardRef<ButtonOrAnchorRef, ButtonProps>(
-  (
-    {
-      comp,
-      buttonType: variant,
-      children,
-      more: classes,
-      navigation,
-      end,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ comp, buttonType: variant, children, more: classes, navigation, end, ...props }, ref) => {
     const buttonClasses = {
       primary: "primary-button",
       neutral: "neutral-button",
@@ -51,10 +40,7 @@ const Buttons = forwardRef<ButtonOrAnchorRef, ButtonProps>(
           to={navigation ?? ""}
           className={combinedClasses}
           ref={ref as Ref<HTMLAnchorElement>} // تنظیم نوع ref برای لینک
-          {...(props as unknown as Omit<
-            React.ComponentProps<typeof Link>,
-            "to"
-          >)}
+          {...(props as unknown as Omit<React.ComponentProps<typeof Link>, "to">)}
         >
           {children}
         </Link>

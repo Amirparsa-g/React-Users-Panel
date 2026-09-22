@@ -4,11 +4,7 @@ import {
   mapUserToApiUser,
   splitFullName,
 } from "../mappers/userMappers";
-import type {
-  ApiUser,
-  DeletedUserResponse,
-  UserApiResponse,
-} from "../types/apiUser";
+import type { ApiUser, DeletedUserResponse, UserApiResponse } from "../types/apiUser";
 import type { CreateUserRequest } from "../types/requests";
 import type { User } from "../types/user";
 import type { FormPropType } from "../types/userForm";
@@ -17,8 +13,7 @@ const API_BASE_URL = "https://dummyjson.com";
 
 export const getUsers = async (): Promise<User[]> => {
   const response = await fetch(`${API_BASE_URL}/users?limit=0`);
-  if (!response.ok)
-    throw new Error(`failed to load users : ${response.status}`);
+  if (!response.ok) throw new Error(`failed to load users : ${response.status}`);
   const rawData: UserApiResponse = await response.json();
   const cleanData = rawData.users.map(mapApiUserToUser);
   return cleanData;
@@ -74,9 +69,7 @@ export const editApiUserStatus = async (user: User): Promise<User> => {
   return editedUser;
 };
 
-export const deleteApiUser = async (
-  id: number,
-): Promise<DeletedUserResponse> => {
+export const deleteApiUser = async (id: number): Promise<DeletedUserResponse> => {
   const response = await fetch(`${API_BASE_URL}/users/${id}`, {
     method: "DELETE",
   });
@@ -107,9 +100,7 @@ export const sendEditedUser = async (FormData: FormPropType, id: number) => {
   return cleanData;
 };
 export const serverSearch = async (searchTerm: string): Promise<User[]> => {
-  const response = await fetch(
-    `${API_BASE_URL}/users/search?q=${encodeURIComponent(searchTerm)}`,
-  );
+  const response = await fetch(`${API_BASE_URL}/users/search?q=${encodeURIComponent(searchTerm)}`);
   if (!response.ok) {
     throw new Error("User Not Found");
   }

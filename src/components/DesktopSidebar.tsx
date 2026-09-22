@@ -29,9 +29,7 @@ const DesktopSidebar = ({
     >
       <div className="flex gap-2  items-center p-2 ">
         <div className="bg-sidebar-2 p-2 rounded-xl w-10 h-10 flex justify-center items-center border border-white">
-          <p className="text-white font-black text-bodyHeader">
-            {t("common.sideBarHeaderIcon")}
-          </p>
+          <p className="text-white font-black text-bodyHeader">{t("common.sideBarHeaderIcon")}</p>
         </div>
         {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
           <h2 className="text-body font-black text-text-sidebar line-clamp-1">
@@ -48,11 +46,8 @@ const DesktopSidebar = ({
         >
           <div className=" wrapper">
             <img src={homeIcon} alt="Home" className="nav-img" />
-            {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && (
-              <p className="font-bold text-text-sidebar">
-                {t("navigation.dashboard")}
-              </p>
+            {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
+              <p className="font-bold text-text-sidebar">{t("navigation.dashboard")}</p>
             )}
           </div>
         </Buttons>
@@ -65,11 +60,8 @@ const DesktopSidebar = ({
         >
           <div className="wrapper">
             <img src={usersIcon} alt="Home" className="nav-img" />
-            {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && (
-              <p className="font-bold text-text-sidebar">
-                {t("navigation.users")}
-              </p>
+            {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
+              <p className="font-bold text-text-sidebar">{t("navigation.users")}</p>
             )}
           </div>
         </Buttons>
@@ -81,11 +73,8 @@ const DesktopSidebar = ({
         >
           <div className="wrapper">
             <img src={addUserIcon} alt="Home" className="nav-img" />
-            {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && (
-              <p className="font-bold text-text-sidebar">
-                {t("navigation.addUser")}
-              </p>
+            {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
+              <p className="font-bold text-text-sidebar">{t("navigation.addUser")}</p>
             )}
           </div>
         </Buttons>
@@ -97,11 +86,8 @@ const DesktopSidebar = ({
         >
           <div className="wrapper">
             <img src={aboutIcon} alt="Home" className="nav-img" />
-            {((!isMobile && (isHover || isClicked)) ||
-              (isMobile && isClicked)) && (
-              <p className="font-bold text-text-sidebar">
-                {t("navigation.about")}
-              </p>
+            {((!isMobile && (isHover || isClicked)) || (isMobile && isClicked)) && (
+              <p className="font-bold text-text-sidebar">{t("navigation.about")}</p>
             )}
           </div>
         </Buttons>

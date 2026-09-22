@@ -6,11 +6,6 @@ import { MemoryRouter } from "react-router-dom";
 import UsersPage from "../pages/UsersPage";
 
 // Mocking i18next
-vi.mock("react-i18next", () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-  }),
-}));
 
 describe("UsersPage - Loading, Error and Retry States", () => {
   // آماده‌سازی Props های پایه برای جلوگیری از ارور تایپ‌اسکریپت
@@ -44,9 +39,7 @@ describe("UsersPage - Loading, Error and Retry States", () => {
     expect(screen.getByText("common.loading")).toBeInTheDocument();
 
     // به جای تایتل صفحه، چک می‌کنیم که هدر جدول کاربران (که نباید در حالت لودینگ باشد) وجود نداشته باشد
-    expect(
-      screen.queryByText("pages.userList.tableHeaders.user"),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText("pages.userList.tableHeaders.user")).not.toBeInTheDocument();
   });
   it("should display the Error component and trigger Retry when clicked", async () => {
     const user = userEvent.setup();
