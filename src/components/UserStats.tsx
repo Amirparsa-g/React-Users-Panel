@@ -22,12 +22,17 @@ const UserStats = ({
           {t("pages.stats.totalUsers")}
         </h2>
         <div className="stats-content">
-          {!isLoading && <h3 className="text-header2 font-black text-text-primary">{allUsers}</h3>}
-          <p className="caption">{t("pages.stats.allUsersDesc")}</p>
+          {!isLoading && (
+            <>
+              <h3 className="text-header2 font-black text-text-primary">{allUsers}</h3>
+              <p className="caption">{t("pages.stats.allUsersDesc")}</p>
+            </>
+          )}
+
           {isLoading && (
             <>
-              <div className="skeleton"></div>
-              <div className="skeleton"></div>
+              <div className="skeleton mb-3"></div>
+              <div className="skeleton mb-3"></div>
             </>
           )}
         </div>
@@ -48,13 +53,16 @@ const UserStats = ({
         </h2>
         <div className="stats-content ">
           {!isLoading && (
-            <h3 className="text-header2 font-black text-text-primary">{activeUsers}</h3>
+            <>
+              <h3 className="text-header2 font-black text-text-primary">{activeUsers}</h3>
+              <p className="caption">{t("pages.stats.activeUsersDesc")}</p>
+            </>
           )}
-          <p className="caption">{t("pages.stats.activeUsersDesc")}</p>
+
           {isLoading && (
             <>
-              <div className="skeleton"></div>
-              <div className="skeleton"></div>
+              <div className="skeleton mb-3"></div>
+              <div className="skeleton mb-3"></div>
             </>
           )}
         </div>
@@ -75,13 +83,16 @@ const UserStats = ({
         </h2>
         <div className="stats-content ">
           {!isLoading && (
-            <h3 className="text-header2 font-black text-text-primary">{inactiveUsers}</h3>
+            <>
+              <h3 className="text-header2 font-black text-text-primary">{inactiveUsers}</h3>
+              <p className="caption">{t("pages.stats.inactiveUsersDesc")}</p>
+            </>
           )}
-          <p className="caption">{t("pages.stats.inactiveUsersDesc")}</p>
+
           {isLoading && (
             <>
-              <div className="skeleton"></div>
-              <div className="skeleton"></div>
+              <div className="skeleton mb-3"></div>
+              <div className="skeleton mb-3"></div>
             </>
           )}
         </div>

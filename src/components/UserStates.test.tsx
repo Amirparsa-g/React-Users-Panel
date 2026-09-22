@@ -6,11 +6,6 @@ import { MemoryRouter } from "react-router-dom";
 import UsersPage from "../pages/UsersPage";
 
 // Mocking i18next
-vi.mock("react-i18next", () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-  }),
-}));
 
 describe("UsersPage - Loading, Error and Retry States", () => {
   // آماده‌سازی Props های پایه برای جلوگیری از ارور تایپ‌اسکریپت
