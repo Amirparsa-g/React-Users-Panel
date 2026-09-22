@@ -44,9 +44,7 @@ describe("UsersPage - Loading, Error and Retry States", () => {
     expect(screen.getByText("common.loading")).toBeInTheDocument();
 
     // به جای تایتل صفحه، چک می‌کنیم که هدر جدول کاربران (که نباید در حالت لودینگ باشد) وجود نداشته باشد
-    expect(
-      screen.queryByText("pages.userList.tableHeaders.user"),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText("pages.userList.tableHeaders.user")).not.toBeInTheDocument();
   });
   it("should display the Error component and trigger Retry when clicked", async () => {
     const user = userEvent.setup();

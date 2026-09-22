@@ -40,10 +40,7 @@ const ThemeToggleButton = () => {
       if (e.key === "Escape") setOpen(false);
     };
     const onPointerDown = (e: MouseEvent) => {
-      if (
-        popoverRef.current &&
-        !popoverRef.current.contains(e.target as Node)
-      ) {
+      if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };

@@ -22,11 +22,7 @@ const UserStats = ({
           {t("pages.stats.totalUsers")}
         </h2>
         <div className="stats-content">
-          {!isLoading && (
-            <h3 className="text-header2 font-black text-text-primary">
-              {allUsers}
-            </h3>
-          )}
+          {!isLoading && <h3 className="text-header2 font-black text-text-primary">{allUsers}</h3>}
           <p className="caption">{t("pages.stats.allUsersDesc")}</p>
           {isLoading && (
             <>
@@ -52,9 +48,7 @@ const UserStats = ({
         </h2>
         <div className="stats-content ">
           {!isLoading && (
-            <h3 className="text-header2 font-black text-text-primary">
-              {activeUsers}
-            </h3>
+            <h3 className="text-header2 font-black text-text-primary">{activeUsers}</h3>
           )}
           <p className="caption">{t("pages.stats.activeUsersDesc")}</p>
           {isLoading && (
@@ -81,9 +75,7 @@ const UserStats = ({
         </h2>
         <div className="stats-content ">
           {!isLoading && (
-            <h3 className="text-header2 font-black text-text-primary">
-              {inactiveUsers}
-            </h3>
+            <h3 className="text-header2 font-black text-text-primary">{inactiveUsers}</h3>
           )}
           <p className="caption">{t("pages.stats.inactiveUsersDesc")}</p>
           {isLoading && (

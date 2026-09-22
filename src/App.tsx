@@ -14,12 +14,7 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import AboutPage from "./pages/AboutPage";
 import AppLayout from "./components/AppLayout";
-import {
-  deleteApiUser,
-  editApiUserStatus,
-  getUsers,
-  sendEditedUser,
-} from "./services/userApi";
+import { deleteApiUser, editApiUserStatus, getUsers, sendEditedUser } from "./services/userApi";
 import EditUserPage from "./pages/EditUserPage";
 import ScrollToTop from "./components/ScrollToTop";
 import ThemeProvider from "./Contexts/ThemeProvider";
@@ -116,9 +111,7 @@ function App() {
       if (role === "") return;
       const updatedUser = await sendEditedUser(formData, id);
       setUserList((currentUsers) =>
-        currentUsers.map((user) =>
-          user.ID === updatedUser.ID ? updatedUser : user,
-        ),
+        currentUsers.map((user) => (user.ID === updatedUser.ID ? updatedUser : user)),
       );
       return true;
     } catch {

@@ -17,10 +17,7 @@ const EditUserPage = ({
   setError,
 }: {
   UsersList: User[];
-  changeInfo: (
-    formData: FormPropType,
-    id: number,
-  ) => Promise<boolean | undefined>;
+  changeInfo: (formData: FormPropType, id: number) => Promise<boolean | undefined>;
   isLoading: boolean;
   error: string | null;
   setIsLoading: (value: boolean) => void;

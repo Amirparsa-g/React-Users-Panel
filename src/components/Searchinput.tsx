@@ -9,22 +9,14 @@ interface SearchBarProps {
   value: string;
 }
 
-const Searchinput = ({
-  onSearchChange,
-  value,
-  setIsServer,
-  isServer,
-}: SearchBarProps) => {
+const Searchinput = ({ onSearchChange, value, setIsServer, isServer }: SearchBarProps) => {
   const [serverValue, setServerValue] = useState<string>("");
   const { t } = useTranslation();
   return (
     <div className="flex justify-center w-full items-center mx-auto">
       <div className="flex flex-col sm:flex-row w-full items-center gap-4 ">
         {!isServer && (
-          <label
-            className="flex flex-col w-full gap-1 label-form "
-            id="searchDiv"
-          >
+          <label className="flex flex-col w-full gap-1 label-form " id="searchDiv">
             {t("pages.search.label")}
             <div className="flex items-center gap-2 control w-full  border border-border-neut bg-surface focus-within:border-primary focus-within:[box-shadow:0_0_0_3px_rgba(96,165,250,0.15)]">
               <svg
@@ -63,10 +55,7 @@ const Searchinput = ({
 
         {isServer && (
           <div className="flex flex-col flex-1 w-full gap-3 px-2">
-            <label
-              className="flex flex-col w-full gap-1 label-form"
-              id="searchDiv"
-            >
+            <label className="flex flex-col w-full gap-1 label-form" id="searchDiv">
               {t("pages.search.label")}
               <div className="flex items-center gap-2 control w-full transition-all border border-border-neut bg-surface focus-within:border-primary focus-within:[box-shadow:0_0_0_3px_rgba(96,165,250,0.15)]">
                 <svg

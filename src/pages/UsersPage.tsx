@@ -57,8 +57,7 @@ const UsersPage = ({
       setIsLoading(true);
       setError(null);
       try {
-        const serachedServerUsers: User[] =
-          term === "" ? [] : await serverSearch(term);
+        const serachedServerUsers: User[] = term === "" ? [] : await serverSearch(term);
         setServerResult(serachedServerUsers);
       } catch {
         setError("pages.errors.unexpected");
@@ -113,9 +112,7 @@ const UsersPage = ({
     <div className="flex flex-col flex-wrap w-full">
       <div className="mb-5 flex justify-between">
         <div>
-          <h2 className="font-bold text-header2 text-text-primary">
-            {t("pages.users.title")}
-          </h2>
+          <h2 className="font-bold text-header2 text-text-primary">{t("pages.users.title")}</h2>
           <p className="caption">{t("pages.users.subtitle")}</p>
         </div>
         <Buttons
@@ -148,9 +145,7 @@ const UsersPage = ({
           <div className="flex flex-col md:flex-row md:flex-wrap gap-2">
             <div className="flex-1 md:min-w-[200px]">
               <label htmlFor="selectStatus">
-                <p className="font-bold text-small label-form">
-                  {t("pages.filters.status")}
-                </p>
+                <p className="font-bold text-small label-form">{t("pages.filters.status")}</p>
               </label>
               <select
                 id="selectStatus"
@@ -161,16 +156,10 @@ const UsersPage = ({
                 }}
                 className="control p-3 w-full bg-surface text-text-secondary"
                 value={
-                  status === "all"
-                    ? "All Statuses"
-                    : status === "active"
-                      ? "Active"
-                      : "Inactive"
+                  status === "all" ? "All Statuses" : status === "active" ? "Active" : "Inactive"
                 }
               >
-                <option value="All Statuses">
-                  {t("pages.filters.allStatuses")}
-                </option>
+                <option value="All Statuses">{t("pages.filters.allStatuses")}</option>
                 <option value="Active">{t("pages.filters.active")}</option>
                 <option value="Inactive">{t("pages.filters.inactive")}</option>
               </select>
@@ -178,9 +167,7 @@ const UsersPage = ({
 
             <div className="flex-1 md:min-w-[150px]">
               <label htmlFor="selectRole">
-                <p className="font-bold text-small label-form">
-                  {t("pages.filters.role")}
-                </p>
+                <p className="font-bold text-small label-form">{t("pages.filters.role")}</p>
               </label>
               <select
                 id="selectRole"

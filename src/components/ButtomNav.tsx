@@ -17,12 +17,7 @@ const ButtomNav = () => {
           <p className="buttomNav-font">{t("navigation.dashboard")}</p>
         </div>
       </Buttons>
-      <Buttons
-        comp="navLink"
-        navigation="/users"
-        end
-        buttonType="buttomNavLink"
-      >
+      <Buttons comp="navLink" navigation="/users" end buttonType="buttomNavLink">
         <div className="flex gap-1 justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -35,11 +30,7 @@ const ButtomNav = () => {
           <p className="buttomNav-font">{t("navigation.users")}</p>
         </div>
       </Buttons>
-      <Buttons
-        comp="navLink"
-        navigation="/users/new"
-        buttonType="buttomNavLink"
-      >
+      <Buttons comp="navLink" navigation="/users/new" buttonType="buttomNavLink">
         <div className="flex gap-1 justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

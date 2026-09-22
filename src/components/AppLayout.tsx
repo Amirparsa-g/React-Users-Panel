@@ -28,16 +28,8 @@ const AppLayout = () => {
         onClick={() => setIsClicked(false)}
       ></div>
       <div>
-        <DesktopSidebar
-          isMobile={true}
-          isClicked={isClicked}
-          setIsClicked={setIsClicked}
-        />
-        <DesktopSidebar
-          isMobile={false}
-          isClicked={isClicked}
-          setIsClicked={setIsClicked}
-        />
+        <DesktopSidebar isMobile={true} isClicked={isClicked} setIsClicked={setIsClicked} />
+        <DesktopSidebar isMobile={false} isClicked={isClicked} setIsClicked={setIsClicked} />
       </div>
       <div className=" flex flex-1 flex-col h-full  ">
         <header
@@ -83,12 +75,7 @@ const AppLayout = () => {
           </h1>
 
           <div className="flex items-center gap-1 sm:gap-2">
-            <Buttons
-              comp="link"
-              navigation={"/users/new"}
-              more="w-fit"
-              buttonType="primary"
-            >
+            <Buttons comp="link" navigation={"/users/new"} more="w-fit" buttonType="primary">
               <span className="sm:hidden text-text-primary">+</span>
               <span className="hidden sm:inline text-white">
                 {t("pages.users.usersPageAddUserButton")}

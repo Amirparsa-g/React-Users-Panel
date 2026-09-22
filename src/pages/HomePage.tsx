@@ -4,13 +4,7 @@ import { useEffect } from "react";
 import Buttons from "../components/Buttons";
 import { useTranslation } from "react-i18next";
 
-const HomePage = ({
-  UsersList,
-  isLoading,
-}: {
-  UsersList: User[];
-  isLoading: boolean;
-}) => {
+const HomePage = ({ UsersList, isLoading }: { UsersList: User[]; isLoading: boolean }) => {
   const allUsers = UsersList;
   const activeUsers = UsersList.filter((user) => user.isActive);
   const inactiveUsers = UsersList.filter((user) => !user.isActive);
@@ -22,9 +16,7 @@ const HomePage = ({
   }, [t]);
   return (
     <div className="mb-10">
-      <h1 className="text-header2 font-header1 text-text-primary">
-        {t("pages.dashboard.title")}
-      </h1>
+      <h1 className="text-header2 font-header1 text-text-primary">{t("pages.dashboard.title")}</h1>
       <p className="caption">{t("pages.dashboard.subtitle")}</p>
 
       <UserStats
@@ -38,9 +30,7 @@ const HomePage = ({
           <h2 className="text-bodyHeader font-black text-text-primary">
             {t("pages.home.projectOverview")}
           </h2>
-          <p className="caption">
-            {t("pages.home.projectOverviewDiscription")}
-          </p>
+          <p className="caption">{t("pages.home.projectOverviewDiscription")}</p>
           <p className="mt-10 nutText">
             {t("pages.home.projectDescription")}
             <br />
@@ -55,11 +45,7 @@ const HomePage = ({
           </h1>
           <p className="caption">{t("pages.home.quickActionsCaption")}</p>
           <div className="flex flex-col gap-2 mt-4">
-            <Buttons
-              comp="link"
-              navigation={"/users"}
-              buttonType="HomePageLink"
-            >
+            <Buttons comp="link" navigation={"/users"} buttonType="HomePageLink">
               {t("pages.home.actions.viewUsers")}
               {!isFa && (
                 <svg
@@ -86,11 +72,7 @@ const HomePage = ({
               )}
             </Buttons>
 
-            <Buttons
-              comp="link"
-              navigation={"/users/new"}
-              buttonType="HomePageLink"
-            >
+            <Buttons comp="link" navigation={"/users/new"} buttonType="HomePageLink">
               {t("pages.home.actions.addUser")}
               {!isFa && (
                 <svg
@@ -116,11 +98,7 @@ const HomePage = ({
                 </svg>
               )}
             </Buttons>
-            <Buttons
-              comp="link"
-              navigation={"/about"}
-              buttonType="HomePageLink"
-            >
+            <Buttons comp="link" navigation={"/about"} buttonType="HomePageLink">
               {t("pages.home.actions.aboutProject")}
               {!isFa && (
                 <svg
