@@ -11,6 +11,6 @@ describe("isValidBame", () => {
   });
 
   it("Accepts names with more than 3 characters", () => {
-    expect(isValidName("parsa")).toBe(true);
+    expect(isValidName("parsa    ")).toBe(true);
   });
 });
