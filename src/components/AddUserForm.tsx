@@ -8,6 +8,7 @@ import Buttons from "./Buttons";
 
 import Loading from "../components/Loading";
 import { useTranslation } from "react-i18next";
+import { isValidName } from "../utils/utils";
 
 const AddUserForm = ({
   addUserHandeler,
@@ -59,7 +60,7 @@ const AddUserForm = ({
     if (nameTrimmed === "") {
       newError.nameError = t("form.errors.nameRequired");
       isValid = false;
-    } else if (nameTrimmed.length < 3) {
+    } else if (!isValidName(nameTrimmed)) {
       newError.nameError = t("form.errors.nameLength");
       isValid = false;
     }
